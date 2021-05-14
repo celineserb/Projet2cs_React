@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import App from "../pages/PrivatePages/VehicleSurveillance/index";
 import {
     Route,
     Switch,
-    Redirect
+    //Redirect
 } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { CrudService } from '../../services'
@@ -36,7 +37,7 @@ export const Routes = () => {
         <Switch>
             <Route path="/">
                 <App />
-          </Route>
+            </Route>
         </Switch>
     )
 }
