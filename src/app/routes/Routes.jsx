@@ -7,6 +7,8 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { CrudService } from '../../services'
 import { actions } from '../../modules'
+import App from '../../App'
+
 export const Routes = () => {
     const [loading, setLoading] = useState(true)
     const dispatch = useDispatch();
@@ -24,20 +26,17 @@ export const Routes = () => {
         /***** Check the current token if valid and get the athentified user ****/
         if (authToken && !user && loading) {
             setLoading(false)
-            dispatch(actions.requestUser("Laoding"))
+            dispatch(actions.requestUser("Loading"))
         }
     }
+
+
+    
     return (
-        <Switch>{
-            isAuthorized ? <>
-                {/* Write all routes need an authentified user */}
-                <Route path="/" component={'auth'} />
-                <Redirect from="*" to="/error" />
-            </> : <>
-                {/* Write all routes for the authentification */}
-                <Route path="/" component={'no-auth'} />
-                <Redirect from="*" to="/error" />
-            </>
-        }</Switch>
+        <Switch>
+            <Route path="/">
+                <App />
+          </Route>
+        </Switch>
     )
 }
