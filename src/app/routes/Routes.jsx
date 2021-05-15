@@ -8,7 +8,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { CrudService } from '../../services'
 import { actions } from '../../modules'
-import App from '../../App'
+
 
 export const Routes = () => {
     const [loading, setLoading] = useState(true)
@@ -30,9 +30,6 @@ export const Routes = () => {
             dispatch(actions.requestUser("Loading"))
         }
     }
-
-
-    
     return (
         <Switch>
             <Route path="/">
