@@ -1,10 +1,27 @@
-import React from 'react'
+import React, { Component } from 'react'
+import {Layout } from 'antd';
+import 'antd/dist/antd.css';
 import './style.scss'
-import {Col} from 'antd';
-function Sidebar() {
-    return (
-        <Col span={6}>
-            <div class="sidebar-wrapper">
+
+const { Sider} = Layout;
+class SideMenu extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {  }
+    }
+    render() { 
+        return ( 
+            <Sider
+            breakpoint="lg"
+            collapsedWidth="0"
+            onBreakpoint={broken => {
+              console.log(broken);
+            }}
+            onCollapse={(collapsed, type) => {
+              console.log(collapsed, type);
+            }}
+          >
+          <div class="sidebar-wrapper">
                 <div class="logo-wrapper">
                     <div class="logo-icon">
                         <img src="media/logo-jaune.png" />
@@ -64,8 +81,9 @@ function Sidebar() {
                     </a>
                 </div>
             </div>
-        </Col>
-    );
+          </Sider>
+         );
+    }
 }
-
-export default Sidebar
+ 
+export default SideMenu;
