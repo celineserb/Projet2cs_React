@@ -8,7 +8,7 @@ import Mappe from './Map/Map';
 
 const { Header, Content, Footer, Sider} = Layout;
 
-class SuiviPage extends Component {
+class   TrackingPage extends Component {
 
     render() { 
         return (  
@@ -36,4 +36,4 @@ class SuiviPage extends Component {
     }
 }
  
-export default SuiviPage;
+export default   TrackingPage;
