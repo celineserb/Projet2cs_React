@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import VehicleState from './Tracking/VehicleState';
 import TenantInfo from './Tracking/TenantInfo';
 import Mappe from './Map/Map';
+import TopBar from './Topbar/Topbar';
 
 const { Header, Content, Footer, Sider} = Layout;
 
@@ -13,9 +14,9 @@ class   TrackingPage extends Component {
     render() { 
         return (  
             <Layout>
-            <Header  style={{ backgroundColor:'white' }} />
             <Content >
-            <div className="site-layout-background" style={{ paddingLeft:24, minHeight: 500 }}>
+            <TopBar></TopBar>
+            <div className="site-layout-background" style={{ paddingTop: 30, paddingLeft:40, paddingBottom: 30, minHeight: 500 }}>
                 <Mappe></Mappe>
             </div>
               <div className="site-layout-background" style={{ minHeight: 240 }}>
