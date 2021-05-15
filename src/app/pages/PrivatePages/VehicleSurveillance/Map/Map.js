@@ -1,63 +1,25 @@
 import React, { Component } from "react"
+import { fetchVehiclePosition, fetchVehicleLatestPosition } from "../../../../../modules/VehiclePosition/vehiclePosition.actions"
 import mapboxgl from "mapbox-gl"
 import './style.scss'
 import { Row, Col } from "antd";
 
 mapboxgl.accessToken="pk.eyJ1IjoieW91Y2Vmb3VhcmFiIiwiYSI6ImNrb2UyajhibzAwbGsycW9nNXpzdm12YnIifQ.iJ9vA18ZaX__1vwZo0iRiA";
 
-var marker = null;
+var marker = null,
 
-/**
- * Ajoute le marqueur du véhicule sur la carte géographique
- * @param {*} map Instance de la carte géographique
- * @param {*} current GeoJSON de la position courante
- */
-function loadMarker(map, current) {
-    var el = document.createElement('div');
-    el.className = 'marker';
-    if (marker) marker.remove();
-    marker = new mapboxgl.Marker(el)
-                .setLngLat(current.data.geometry.coordinates)
-                .addTo(map);
-}
-
-/**
- * Ajoute le trajet du véhicule sur la carte géographique
- * @param {*} map Instance de la carte géographique
- * @param {*} route GeoJSON du trajet
- */
-function loadRoute(map, route) {
-    var mapLayer = map.getLayer('route');
-    if(typeof mapLayer !== 'undefined') {
-        map.removeLayer('route').removeSource('route');
-    }
-    map.addSource('route', route);
-    map.addLayer({
-        'id': 'route',
-        'type': 'line',
-        'source': 'route',
-            'layout': {
-            'line-join': 'round',
-            'line-cap': 'round'
-        },
-        'paint': {
-            'line-color': '#006bff',
-            'line-width': 4
-        }
-    });
-}
-
-var current = {
+current = {
     'type': 'geojson',
     'data': {
         'type': 'Feature',
         'properties': {},
         'geometry': {
             'type': 'LineString',
-            'coordinates': [-122.483696, 37.833818]
+            'coordinates': [-122.483696, 37.833818]//[3.0588, 36.7538]
         }
     }
 }, 
+
 route = {
     'type': 'geojson',
     'data': {
@@ -69,6 +31,7 @@ route = {
         }
     }
 },
+
 sim = [
     [-122.483696, 37.833818],
     [-122.483589, 37.833496],
@@ -111,37 +74,104 @@ sim = [
     [-122.492237, 37.833378],
     [-122.4930095, 37.8335305],
     [-122.493782, 37.833683]
-], pos = 0;
+], 
+
+pos = 0;
+
+/**
+ * Ajoute le marqueur du véhicule sur la carte géographique
+ * @param {*} map Instance de la carte géographique
+ * @param {*} current GeoJSON de la position courante
+ */
+ function loadMarker(map) {
+    var el = document.createElement('div');
+    el.className = 'marker';
+    if (marker) marker.remove();
+    marker = new mapboxgl.Marker(el)
+        .setLngLat(current.data.geometry.coordinates)
+        .addTo(map);
+}
+
+/**
+ * Ajoute le trajet du véhicule sur la carte géographique
+ * @param {*} map Instance de la carte géographique
+ * @param {*} route GeoJSON du trajet
+ */
+function loadRoute(map) {
+    var mapLayer = map.getLayer('route');
+    if(typeof mapLayer !== 'undefined') {
+        map.removeLayer('route')
+           .removeSource('route');
+    }
+    map.addSource('route', route);
+    map.addLayer({
+        'id': 'route',
+        'type': 'line',
+        'source': 'route',
+            'layout': {
+            'line-join': 'round',
+            'line-cap': 'round'
+        },
+        'paint': {
+            'line-color': '#006bff',
+            'line-width': 4
+        }
+    });
+}
+
+/**
+ * 
+ */
+function loadData(_callback) {
+    fetchVehicleLatestPosition({
+        idRental: 1
+    })
+    .then(res => {
+        if (res && res.data && res.data.ok) {
+            current.data.geometry.coordinates = res.data.position;
+            route.data.geometry.coordinates.push(res.data.position);
+            //current.data.geometry.coordinates = sim[pos];
+            //route.data.geometry.coordinates.push(sim[pos]);
+            //pos = (pos + 1) % sim.length;
+            //if (pos === 0) route.data.geometry.coordinates = []
+        }
+    })
+    .catch(err => {
+
+    });
+    _callback();
+}
 
 class Mappe extends Component {
 
-    state = {
-        current: current,
-        route: route
-    }
-
     componentDidMount() {
-        var current = this.state.current;
-        var route = this.state.route;
         const map = new mapboxgl.Map({
             container: this.mapContainer,
             style: 'mapbox://styles/youcefouarab/ckoh092a30cre17p9uxrp8uz6',
             center: current.data.geometry.coordinates,
-            zoom: 15
+            zoom: 8
         });
         map.on('load', function () {
-            loadMarker(map, current);
-            loadRoute(map, route);
-        });
-
-        setInterval(function (){
-            current.data.geometry.coordinates = sim[pos];
-            route.data.geometry.coordinates.push(current.data.geometry.coordinates);
-            loadMarker(map, current);
-            loadRoute(map, route);
-            pos = (pos + 1) % sim.length;
-            if (pos === 0) route.data.geometry.coordinates = [];
-        }, 1000);
+            loadData(function() {
+                loadMarker(map);
+                loadRoute(map);
+                map.flyTo({
+                    center: current.data.geometry.coordinates,
+                    zoom: 15
+                });
+                setInterval(function (){
+                    loadData(function() {
+                        loadMarker(map);
+                        loadRoute(map);
+                        map.flyTo({
+                            center: current.data.geometry.coordinates,
+                            zoom: map.getZoom()
+                        });
+                    });
+                }, 3000);
+            });
+        });  
+         
     }
 
     render() {
