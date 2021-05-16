@@ -1,0 +1,96 @@
+.list-container {
+  width: 1200px;
+  margin: 50px 50px;
+  border: 1px #dfe0eb solid;
+}
+
+.list-container > div {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+  margin-right: 60px;
+  color: var(--primary-text-color);
+  font-weight: 600;
+}
+
+.list-container div:first-child > p:first-child {
+  padding-right: 80px;
+  position: relative;
+}
+
+.list-container div:first-child > p:first-child::before {
+  content: "";
+  background-image: url("../../../../../svg/Vector.svg");
+  height: 16px;
+  width: 33px;
+  position: absolute;
+  left: -25px;
+  top: 5px;
+  background-repeat: no-repeat;
+}
+
+.list-container div:first-child > p:last-child {
+  position: relative;
+}
+
+.list-container div:first-child > p:last-child::before {
+  content: "";
+  background-image: url("../../../../../svg/filter.svg");
+  height: 16px;
+  width: 33px;
+  position: absolute;
+  left: -25px;
+  top: 5px;
+  background-repeat: no-repeat;
+}
+
+.vehicle-list {
+  list-style: none;
+  padding-top: 15px;
+  width: 95%;
+}
+
+.vehicle-list .headers {
+  color: #9fa2b4;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.vehicle-list .headers p:last-child {
+  margin-right: -55px;
+}
+
+/* drawing arrows */
+
+.pagination p {
+  color: #9fa2b4;
+  padding: 0 25px;
+}
+.arrows {
+  display: flex;
+}
+
+.arrows button {
+  border: none;
+  cursor: pointer;
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+.arrow {
+  border: solid #9fa2b4;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.arrows .right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
