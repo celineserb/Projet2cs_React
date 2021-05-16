@@ -1,25 +1,62 @@
 import React, { Component } from 'react'
+
 import { Row, Progress, Col, Divider, Tooltip, Statistic} from 'antd';
 import 'antd/dist/antd.css';
 import ReactSpeedometer from "react-d3-speedometer"
+
+import { fetchVehicleState } from "../../../../../modules/Tracking/tracking.actions"
+
+
+var vehicule ={};
+
 
 class VehicleState extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            availability: "available",
-            kilos: 19999.390,
-            speed : 120,
-            engineTemp: 12,
+            idVehicle:3,
+            kilos: 0,
+            speed : 0,
+            engineTemp: 0,
             fuelTemp: 0,
-            oilPressure: 55, 
-            batteryCharge: 15.5, 
-            brakeFluid: 1, 
-            idRental: 0,
+            oilPressure: 0, 
+            batteryCharge: 0, 
+            brakeFluid: 0, 
             generalHealthIndicator:30,
 
          }
+        
     }
+    
+    componentDidMount(){
+        setInterval(() => {
+            fetchVehicleState({
+                idVehicle: this.state.idVehicle
+            })
+            .then(res => {
+                if (res ) {
+                    vehicule = res.data;
+                    console.log(res.data);
+                    this.setState({
+                        kilos: vehicule.kilos,
+                        speed : vehicule.speed,
+                        engineTemp: vehicule.engineTemp,
+                        fuelLevel: vehicule.fuelLevel,
+                        oilPressure: vehicule.oilPressure, 
+                        batteryCharge: vehicule.batteryCharge, 
+                        brakeFluid: vehicule.brakeFluid  
+                    });
+                    
+                }
+            })
+            .catch(err=> {
+                console.log("No state");
+            });
+        }, 5000);
+        
+        
+    }
+
     render() { 
         return (  
             <Row>
@@ -154,4 +191,8 @@ function brakeFluid(fluid) {
     var num = fluid *100/2;
     return num.toFixed(2);
 }
+
+
+
+
 export default VehicleState;

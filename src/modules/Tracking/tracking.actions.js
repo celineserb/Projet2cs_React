@@ -1,13 +1,19 @@
 import * as trackingRequests from './tracking.crud'
 import {trackingSlice} from './tracking.reducer'
 
-const {actions} = trackingSlice
+//const {actions} = trackingSlice
 
 export const fetchVehicleState = QueryParams =>{
     return trackingRequests
         .fetchVehicleState(QueryParams)
 }
-export const fetchRentalInfo = QueryParams=> dispatch =>{
+
+export const fetchRentalInfo = QueryParams =>{
+    return trackingRequests
+        .fetchRentalInfo(QueryParams)
+}
+
+/*export const fetchRentalInfo = QueryParams=> dispatch =>{
     return trackingRequests
         .fetchRentalInfo(QueryParams)
         .then(res=>{
@@ -20,4 +26,4 @@ export const fetchRentalInfo = QueryParams=> dispatch =>{
         .catch(err=>{
                 //
         })
-}
+}*/

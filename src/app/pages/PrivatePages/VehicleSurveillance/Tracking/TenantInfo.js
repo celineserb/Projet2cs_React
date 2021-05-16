@@ -7,23 +7,34 @@ import { AntDesignOutlined } from '@ant-design/icons';
 import {ReactComponent as MapIcon} from './svg/tabler-icon-map-2.svg';
 import {ReactComponent as CalendarIcon} from './svg/tabler-icon-calendar-event.svg';
 import {ReactComponent as ContactIcon} from './svg/tabler-icon-user.svg';
+import { fetchRentalInfo } from '../../../../../modules/Tracking/tracking.crud';
+
+var rentalInfo={};
 
 class TenantInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: "OUADEH",
-            lastName:"Djamila", 
-            rentalDate: "24 juin 2021", 
-            rentalBorne: "Sidi Akkacha", 
+            firstName: "",
+            lastName:"",
+            rentalDate: "",
+            rentalBorne: "",
             phoneNumber : "",
             adress : ""
           }
     }
+
     componentDidMount(){
-
+        loadData(3);
+        this.setState({
+                firstName: rentalInfo.firstName,
+                lastName:rentalInfo.lastName, 
+                rentalDate: rentalInfo.rentalDate, 
+                rentalBorne: rentalInfo.rentalBorne, 
+                phoneNumber : rentalInfo.phoneNumber,
+                adress : rentalInfo.adress
+        });
     }
-
     render() { 
         return (  
             <Row>
@@ -97,6 +108,21 @@ class TenantInfo extends Component {
     }
 }
  
+
+function loadData(idVehicle) {
+        fetchRentalInfo({
+            idVehicle: idVehicle
+        })
+        .then(res => {
+            if (res ) {
+                rentalInfo= res.data;
+                console.log(res.data); 
+                console.log("rental info");  
+                rentalInfo.firstName="OUDEH";
+            }
+        })
+        .catch(err=> {
+            console.log("No state");
+        });
+}
 export default TenantInfo;
-
-
