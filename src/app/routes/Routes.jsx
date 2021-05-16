@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import App from "../pages/PrivatePages/VehicleSurveillance/index";
-import ManagePage from "../pages/PrivatePages/VehicleManage/ManagePage"
+
+import TrackingPage from "../pages/PrivatePages/VehicleSurveillance/TrackingPage";
+import ManagePage from "../pages/PrivatePages/VehicleManage/ManagePage";
+
 import {
+    BrowserRouter,
     Route,
     Switch,
     //Redirect
@@ -9,6 +12,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { CrudService } from '../../services'
 import { actions } from '../../modules'
+
 
 
 export const Routes = () => {
@@ -31,14 +35,19 @@ export const Routes = () => {
             dispatch(actions.requestUser("Loading"))
         }
     }
+
     return (
+    <BrowserRouter>
         <Switch>
-            <Route path="/manage">
-                <ManagePage/>
+            <Route path="/tracking_info">
+                <TrackingPage />
             </Route>
             <Route path="/">
-                <App />
+                <ManagePage/>
             </Route>
+
+
         </Switch>
+    </BrowserRouter>
     )
 }

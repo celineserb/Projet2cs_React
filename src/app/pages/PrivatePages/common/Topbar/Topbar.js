@@ -13,10 +13,7 @@ class TopBar extends Component {
 
           <div className="topbar-wrapper">
             <div className="back-wrapper">
-                <a className="back-link" href="#">
-                    <div className="back-icon">
-                        <img src="media/back.svg" alt="" />
-                    </div>
+                <a className="back-link" href="#">  
                     <div className="back-text">
                         <label>Gestion des véhicules</label>
                     </div>
