@@ -1,5 +1,5 @@
 import axios from 'axios';
-const URL_ROOT = /*process.env.REACT_APP_URL_APP +*/ 'https://sagebackend.herokuapp.com/api/';
+const URL_ROOT = /*process.env.REACT_APP_URL_APP +*/ 'http://localhost:8001/';
 export const CrudService = {
     Put,
     Get,
