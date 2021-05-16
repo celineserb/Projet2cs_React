@@ -7,23 +7,44 @@ import { AntDesignOutlined } from '@ant-design/icons';
 import {ReactComponent as MapIcon} from './svg/tabler-icon-map-2.svg';
 import {ReactComponent as CalendarIcon} from './svg/tabler-icon-calendar-event.svg';
 import {ReactComponent as ContactIcon} from './svg/tabler-icon-user.svg';
+import { fetchRentalInfo } from '../../../../../modules/Tracking/tracking.crud';
+
+var rental={};
 
 class TenantInfo extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            firstName: "OUADEH",
-            lastName:"Djamila", 
-            rentalDate: "24 juin 2021", 
-            rentalBorne: "Sidi Akkacha", 
-            phoneNumber : "",
-            adress : ""
-          }
+        this.state={
+
+        }
+
     }
     componentDidMount(){
+        fetchRentalInfo({
+            idVehicle: 3
+        })
+        .then(res => {
+            if (res ) {
+                rental= res.data;
+                console.log(rental); 
+                console.log("rental info");  
+                var str = rental.rentaldate;
+                var a = str.substr(0, 10);
 
+                this.setState({
+                    firstName : rental.firstName,
+                    lastName: rental.lastName,
+                    rentalborne : rental.city,
+                    rentaldate: a ,
+                    rentaltime : rental.rentaltime
+                })
+            }
+        })
+        .catch(err=> {
+            console.log("No state");
+        });
+        console.log(rental);
     }
-
     render() { 
         return (  
             <Row>
@@ -63,7 +84,7 @@ class TenantInfo extends Component {
                                     style={{
                                         marginTop: 5,                     
                                     }}>
-                                    {this.state.rentalDate}
+                                    {this.state.rentaldate+" "+this.state.rentaltime}
                                 </h3>
                             </Col>
                         </Row>
@@ -78,7 +99,7 @@ class TenantInfo extends Component {
                                     style={{
                                         marginTop: 5,                     
                                 }}>
-                                {this.state.rentalBorne}
+                                {this.state.rentalborne}
                             </h3>
                             </Col>
                         </Row>
@@ -97,6 +118,14 @@ class TenantInfo extends Component {
     }
 }
  
+
+
+
+
+/*function rentalInfo(id){
+    const {rentalInfo, idVehicle, errors}=rental;
+    return {rentalInfo, idVehicle, errors}
+}*/
+//const connectedClass =connect(rentalInfo,{fetchRentalInfo})(TenantInfo)
+
 export default TenantInfo;
-
-
