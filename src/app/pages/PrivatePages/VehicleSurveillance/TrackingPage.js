@@ -7,7 +7,7 @@ import TenantInfo from './Tracking/TenantInfo';
 import Mappe from './Map/Map';
 import TopBar from './Topbar/Topbar';
 
-const { Header, Content, Footer, Sider} = Layout;
+const { Content, Footer} = Layout;
 
 class   TrackingPage extends Component {
 

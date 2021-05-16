@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { fetchVehiclePosition, fetchVehicleLatestPosition } from "../../../../../modules/VehiclePosition/vehiclePosition.actions"
 import mapboxgl from "mapbox-gl"
 import './style.scss'
-import { Row, Col } from "antd";
+import { Row} from "antd";
 
 mapboxgl.accessToken="pk.eyJ1IjoieW91Y2Vmb3VhcmFiIiwiYSI6ImNrb2UyajhibzAwbGsycW9nNXpzdm12YnIifQ.iJ9vA18ZaX__1vwZo0iRiA";
 
@@ -177,7 +177,7 @@ class Mappe extends Component {
     render() {
         return(
             <Row justify="start">
-                    <div ref={el => this.mapContainer = el} style={{width: "80vw", height: "70vh", 'border-radius': "40px"}}/>
+                    <div ref={el => this.mapContainer = el} style={{width: "80vw", height: "70vh", 'borderRadius': "40px"}}/>
             </Row>
         )
     }

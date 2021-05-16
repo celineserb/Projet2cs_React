@@ -8,3 +8,4 @@ export const fetchVehicleState = (queryParams)=>{
 export const fetchRentalInfo= (queryParams)=>{
     return CrudService.Get(trackingUrls.FETCH_RENTAL_INFO,queryParams)
 }
+

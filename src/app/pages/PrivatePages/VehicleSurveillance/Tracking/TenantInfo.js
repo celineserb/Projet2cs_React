@@ -9,31 +9,41 @@ import {ReactComponent as CalendarIcon} from './svg/tabler-icon-calendar-event.s
 import {ReactComponent as ContactIcon} from './svg/tabler-icon-user.svg';
 import { fetchRentalInfo } from '../../../../../modules/Tracking/tracking.crud';
 
-var rentalInfo={};
+var rental={};
 
 class TenantInfo extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            firstName: "",
-            lastName:"",
-            rentalDate: "",
-            rentalBorne: "",
-            phoneNumber : "",
-            adress : ""
-          }
-    }
+        this.state={
 
+        }
+
+    }
     componentDidMount(){
-        loadData(3);
-        this.setState({
-                firstName: rentalInfo.firstName,
-                lastName:rentalInfo.lastName, 
-                rentalDate: rentalInfo.rentalDate, 
-                rentalBorne: rentalInfo.rentalBorne, 
-                phoneNumber : rentalInfo.phoneNumber,
-                adress : rentalInfo.adress
+        fetchRentalInfo({
+            idVehicle: 3
+        })
+        .then(res => {
+            if (res ) {
+                rental= res.data;
+                console.log(rental); 
+                console.log("rental info");  
+                var str = rental.rentaldate;
+                var a = str.substr(0, 10);
+
+                this.setState({
+                    firstName : rental.firstName,
+                    lastName: rental.lastName,
+                    rentalborne : rental.city,
+                    rentaldate: a ,
+                    rentaltime : rental.rentaltime
+                })
+            }
+        })
+        .catch(err=> {
+            console.log("No state");
         });
+        console.log(rental);
     }
     render() { 
         return (  
@@ -74,7 +84,7 @@ class TenantInfo extends Component {
                                     style={{
                                         marginTop: 5,                     
                                     }}>
-                                    {this.state.rentalDate}
+                                    {this.state.rentaldate+" "+this.state.rentaltime}
                                 </h3>
                             </Col>
                         </Row>
@@ -89,7 +99,7 @@ class TenantInfo extends Component {
                                     style={{
                                         marginTop: 5,                     
                                 }}>
-                                {this.state.rentalBorne}
+                                {this.state.rentalborne}
                             </h3>
                             </Col>
                         </Row>
@@ -109,20 +119,13 @@ class TenantInfo extends Component {
 }
  
 
-function loadData(idVehicle) {
-        fetchRentalInfo({
-            idVehicle: idVehicle
-        })
-        .then(res => {
-            if (res ) {
-                rentalInfo= res.data;
-                console.log(res.data); 
-                console.log("rental info");  
-                rentalInfo.firstName="OUDEH";
-            }
-        })
-        .catch(err=> {
-            console.log("No state");
-        });
-}
+
+
+
+/*function rentalInfo(id){
+    const {rentalInfo, idVehicle, errors}=rental;
+    return {rentalInfo, idVehicle, errors}
+}*/
+//const connectedClass =connect(rentalInfo,{fetchRentalInfo})(TenantInfo)
+
 export default TenantInfo;
