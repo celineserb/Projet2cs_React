@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import App from "../pages/PrivatePages/VehicleSurveillance/index";
+import ManagePage from "../pages/PrivatePages/VehicleManage/ManagePage"
 import {
     Route,
     Switch,
@@ -32,6 +33,9 @@ export const Routes = () => {
     }
     return (
         <Switch>
+            <Route path="/manage">
+                <ManagePage/>
+            </Route>
             <Route path="/">
                 <App />
             </Route>
