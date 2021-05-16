@@ -62,7 +62,7 @@ const ManagePage = () =>{
                 
                 <p>{1 + nbVehiculesPerPage * nbPage}-{nbVehiculesPerPage * (nbPage + 1)} of {nbVehicles}</p>
                 <div className='arrows'>
-                    <button onClick={() => setNbPage(nbPage - 1)} ><i className='arrow left'></i></button>
+                    <button id="#previous-page" onClick={() => setNbPage(nbPage - 1)} ><i className='arrow left'></i></button>
                     <button onClick={() => setNbPage(nbPage + 1)} ><i className='arrow right'></i></button>
                 </div>
             </div>
