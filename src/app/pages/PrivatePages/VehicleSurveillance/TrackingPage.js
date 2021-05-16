@@ -5,33 +5,41 @@ import 'antd/dist/antd.css';
 import VehicleState from './Tracking/VehicleState';
 import TenantInfo from './Tracking/TenantInfo';
 import Mappe from './Map/Map';
+import TopBar from '../common/Topbar/Topbar';
 
-const { Header, Content, Footer, Sider} = Layout;
+import SideBar from '../common/Sidebar/Sidebar'
+
+const { Content, Footer} = Layout;
 
 class   TrackingPage extends Component {
 
     render() { 
         return (  
+          <Layout className="site-layout">
+            <SideBar></SideBar>
             <Layout>
-            <Header  style={{ backgroundColor:'white' }} />
-            <Content >
-            <div className="site-layout-background" style={{ paddingLeft:24, minHeight: 500 }}>
-                <Mappe></Mappe>
-            </div>
-              <div className="site-layout-background" style={{ minHeight: 240 }}>
-                <Row>
-                    <Col  xl={10}  lg={10} md={8} sm={24} xs={24}>
-                     <TenantInfo></TenantInfo>
-                    </Col>  
-                    <Col xl={14} lg={14} md={16} sm={24} xs={24}>
-                      <VehicleState></VehicleState>
-                    </Col>
-                </Row>
-                
+              <Content >
+              <TopBar></TopBar>
+              <div className="site-layout-background" style={{ paddingTop: 30, paddingLeft:40, paddingBottom: 30, minHeight: 500 }}>
+                  <Mappe></Mappe>
               </div>
-            </Content>
-            <Footer style={{ textAlign: 'center' }}>Copyright ©2021</Footer>
+                <div className="site-layout-background" style={{ minHeight: 240 }}>
+                  <Row>
+                      <Col  xl={10}  lg={10} md={8} sm={24} xs={24}>
+                      <TenantInfo></TenantInfo>
+                      </Col>  
+                      <Col xl={14} lg={14} md={16} sm={24} xs={24}>
+                        <VehicleState></VehicleState>
+                        <br></br>
+                      </Col>
+                  </Row>
+                  
+                </div>
+              </Content>
+              <Footer style={{ textAlign: 'center' }}>Copyright ©2021</Footer>
+            </Layout>
           </Layout>
+            
         );
     }
 }

@@ -1,0 +1,99 @@
+.topbar-wrapper {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    background-color: #fff;
+    z-index: 51;
+}
+.back-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+}
+.back-icon {
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    transform: translateY(-50%);
+}
+.back-icon > img {
+    max-width: 42px;
+    max-height: 30px;
+}
+.back-text {
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+}
+.back-link:hover > .back-text > label,
+.profile-link:hover > label {
+    cursor: pointer;
+}
+.profile-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 50%;
+}
+.profile-icon {
+    position: absolute;
+    top: 50%;
+    right: 50px;
+    transform: translateY(-50%);
+}
+.profile-icon > img {
+    border: 2px solid #f9c31b;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    background-size: contain;
+}
+.profile-text {
+    position: absolute;
+    top: 50%;
+    right: 115px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+.profile-link {
+    color: #333;
+    text-decoration: none;
+}
+.vl {
+    border-left: 2px solid #ddd;
+    height: 20px;
+    margin-right: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}	
+.notifs-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px; 
+}
+.notifs-icon {
+    position: relative;
+}
+.notifs-icon > img {
+    height: 23px;
+}
+.notifs-alert-icon {
+    position: absolute;
+    top: -10px;
+    right: 0;
+    display: inline-block;
+}

@@ -7,6 +7,14 @@ import axios from 'axios';
 import VehicleComponent from './VehicleComponent';
 import './style/VehicleList.css';
 
+import { Layout, Row} from 'antd';
+import 'antd/dist/antd.css';
+
+import TopBar from '../common/Topbar/Topbar';
+import SideBar from '../common/Sidebar/Sidebar';
+
+const { Content, Footer} = Layout;
+
 const ManagePage = () =>{
     const [nbPage, setNbPage] = useState(0);
     const [nbOfPages, setNbOfPages] = useState(0);
@@ -27,46 +35,48 @@ const ManagePage = () =>{
      
     }, [nbPage]);
 
-    const previousPage = (nbPage, setNbPage) => {
-        if(nbPage != 0) setNbPage(nbPage - 1);
-        else setNbPage(0);
-    }
-    
-    
-    const nextPage = (nbPage, setNbPage, nbPages) => {
-        if(nbPage < nbPages) setNbPage(nbPage + 1);
-        else setNbPage(nbPages - 1);
-    }
-
     return(
-        <div className='list-container'>
-            <div>
-                <p>Ordonner</p>
-                <p>Filtrer</p>
-            </div>
-            <ul className="vehicle-list">
-                <li className='headers'>
-                    <p>Vehicule</p>
-                    <p>Client</p>
-                    <p>Disponible le</p>
-                    <p>Status</p>
-                </li>
-                {
-                    vehicles.map((vehicle) =>
-                        <VehicleComponent vehicle={vehicle} />
-                    )
-                }
-            </ul>
-            <div className='pagination'>
-                <p>Lignes par page: {nbVehiculesPerPage}</p>
+        <Layout className="site-layout">
+            <SideBar></SideBar>
+            <Layout className="site-layout-background">
+                <Content style={{backgroundColor:'white'}}>
+                <TopBar></TopBar>
+                <Row>
+                <div className='list-container'>
+                        <div>
+                            <p>Ordonner</p>
+                            <p>Filtrer</p>
+                        </div>
+                        <ul className="vehicle-list">
+                            <li className='headers'>
+                                <p>Vehicule</p>
+                                <p>Client</p>
+                                <p>Disponible le</p>
+                                <p>Status</p>
+                            </li>
+                            {
+                                vehicles.map((vehicle) =>
+                                    <VehicleComponent vehicle={vehicle} />
+                                )
+                            }
+                        </ul>
+                        <div className='pagination'>
+                            <p>Lignes par page: {nbVehiculesPerPage}</p>
                 
-                <p>{1 + nbVehiculesPerPage * nbPage}-{nbVehiculesPerPage * (nbPage + 1)} of {nbVehicles}</p>
-                <div className='arrows'>
-                    <button id="#previous-page" onClick={() => setNbPage(nbPage - 1)} ><i className='arrow left'></i></button>
-                    <button onClick={() => setNbPage(nbPage + 1)} ><i className='arrow right'></i></button>
+                            <p>{1 + nbVehiculesPerPage * nbPage}-{nbVehiculesPerPage * (nbPage + 1)} of {nbVehicles}</p>
+                            <div className='arrows'>
+                            <button id="#previous-page" onClick={() => setNbPage(nbPage - 1)} ><i className='arrow left'></i></button>
+                            <button onClick={() => setNbPage(nbPage + 1)} ><i className='arrow right'></i></button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+                </Row>
+                    
+                </Content>
+                <Footer style={{ textAlign: 'center' }}>Copyright ©2021</Footer>
+            </Layout>
+        </Layout>
+        
     );
 }
  export default ManagePage;

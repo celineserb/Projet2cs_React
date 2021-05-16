@@ -1,25 +1,62 @@
 import React, { Component } from 'react'
+
 import { Row, Progress, Col, Divider, Tooltip, Statistic} from 'antd';
 import 'antd/dist/antd.css';
 import ReactSpeedometer from "react-d3-speedometer"
+
+import { fetchVehicleState } from "../../../../../modules/Tracking/tracking.actions"
+
+
+var vehicule ={};
+
 
 class VehicleState extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            availability: "available",
-            kilos: 19999.390,
-            speed : 120,
-            engineTemp: 12,
-            fuelTemp: 0,
-            oilPressure: 55, 
-            batteryCharge: 15.5, 
-            brakeFluid: 1, 
-            idRental: 0,
+            idVehicle:3,
+            kilos: 0,
+            speed : 0,
+            engineTemp: 0,
+            fuelLevel: 0,
+            oilPressure: 0, 
+            batteryCharge: 0, 
+            brakeFluid: 0, 
             generalHealthIndicator:30,
 
          }
+        
     }
+    
+    componentDidMount(){
+        setInterval(() => {
+            fetchVehicleState({
+                idVehicle: this.state.idVehicle
+            })
+            .then(res => {
+                if (res ) {
+                    vehicule = res.data;
+                    console.log(res.data);
+                    this.setState({
+                        kilos: vehicule.kilos,
+                        speed : vehicule.speed,
+                        engineTemp: vehicule.engineTemp,
+                        fuelLevel: vehicule.fuelLevel,
+                        oilPressure: vehicule.oilPressure, 
+                        batteryCharge: vehicule.batteryCharge, 
+                        brakeFluid: vehicule.brakeFluid  
+                    });
+                    
+                }
+            })
+            .catch(err=> {
+                console.log("No state");
+            });
+        }, 5000);
+        
+        
+    }
+
     render() { 
         return (  
             <Row>
@@ -31,11 +68,11 @@ class VehicleState extends Component {
                         segments={3}
                         segmentColors= {["#87d068", "#F9C31B", "#F9431B"]}
                         value={this.state.speed}
-                        currentValueText="Speed: ${value}"
+                        currentValueText="Speed: ${value} Km/h"
                     />
                     <Tooltip title="Kilometres Traveled">
                         <Statistic 
-                            title="Mileage" 
+                            title="Mileage (Km)" 
                             value={this.state.kilos} 
                             
                         />
@@ -67,7 +104,7 @@ class VehicleState extends Component {
                     status="active"
                     />
                 </Tooltip>
-                <Tooltip title="Brake Fluid">
+                <Tooltip title="Fuel Level">
                     <Progress
                     strokeColor={{
                         '0%': '#FD645D',
@@ -76,7 +113,7 @@ class VehicleState extends Component {
                     }}
                     percent={55}
                     status="active"
-                    percent={brakeFluid(this.state.brakeFluid)}
+                    percent={fuelLevel(this.state.fuelLevel)}
                     />
                 </Tooltip>
                 
@@ -144,9 +181,24 @@ function batteryCharge(charge) {
     var num = charge * 34.14 - 429.14;
     var result = 0.0;
     if (charge>12.6) {
-        result = num.toFixed(2)
+        result = num.toFixed(2);
     }
     return result;
+}
+
+
+//calculates the fuel level value according to the minimal value needed to run a car 
+//min value = 
+function fuelLevel(level) {
+    var num = level* 56 /100;
+    var result = 0;
+    if (num<  14) {
+        result = 5;
+    }
+    else{
+        result = num;
+    }
+    return result.toFixed(2);
 }
 
 
@@ -154,4 +206,8 @@ function brakeFluid(fluid) {
     var num = fluid *100/2;
     return num.toFixed(2);
 }
+
+
+
+
 export default VehicleState;
