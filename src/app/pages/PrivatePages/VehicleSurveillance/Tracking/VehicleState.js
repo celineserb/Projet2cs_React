@@ -18,7 +18,7 @@ class VehicleState extends Component {
             kilos: 0,
             speed : 0,
             engineTemp: 0,
-            fuelTemp: 0,
+            fuelLevel: 0,
             oilPressure: 0, 
             batteryCharge: 0, 
             brakeFluid: 0, 
@@ -68,11 +68,11 @@ class VehicleState extends Component {
                         segments={3}
                         segmentColors= {["#87d068", "#F9C31B", "#F9431B"]}
                         value={this.state.speed}
-                        currentValueText="Speed: ${value}"
+                        currentValueText="Speed: ${value} Km/h"
                     />
                     <Tooltip title="Kilometres Traveled">
                         <Statistic 
-                            title="Mileage" 
+                            title="Mileage (Km)" 
                             value={this.state.kilos} 
                             
                         />
@@ -104,7 +104,7 @@ class VehicleState extends Component {
                     status="active"
                     />
                 </Tooltip>
-                <Tooltip title="Brake Fluid">
+                <Tooltip title="Fuel Level">
                     <Progress
                     strokeColor={{
                         '0%': '#FD645D',
@@ -113,7 +113,7 @@ class VehicleState extends Component {
                     }}
                     percent={55}
                     status="active"
-                    percent={brakeFluid(this.state.brakeFluid)}
+                    percent={fuelLevel(this.state.fuelLevel)}
                     />
                 </Tooltip>
                 
@@ -181,9 +181,24 @@ function batteryCharge(charge) {
     var num = charge * 34.14 - 429.14;
     var result = 0.0;
     if (charge>12.6) {
-        result = num.toFixed(2)
+        result = num.toFixed(2);
     }
     return result;
+}
+
+
+//calculates the fuel level value according to the minimal value needed to run a car 
+//min value = 
+function fuelLevel(level) {
+    var num = level* 56 /100;
+    var result = 0;
+    if (num<  14) {
+        result = 5;
+    }
+    else{
+        result = num;
+    }
+    return result.toFixed(2);
 }
 
 
