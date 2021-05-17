@@ -12,6 +12,11 @@
   padding: 20px 0;
 }
 
+.vehicle-elem:hover{
+    background-color: #F5F5F5;
+    cursor: pointer;
+}
+
 .vehicle-elem > div {
   display: flex;
 }
