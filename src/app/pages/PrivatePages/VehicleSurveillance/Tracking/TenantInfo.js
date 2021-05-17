@@ -1,4 +1,6 @@
 import React, {Component } from 'react'
+import { withRouter } from "react-router"
+
 import 'antd/dist/antd.css';
 import { Avatar, Row, Col, Tooltip } from 'antd';
 
@@ -17,11 +19,10 @@ class TenantInfo extends Component {
         this.state={
 
         }
-
     }
     componentDidMount(){
         fetchRentalInfo({
-            idVehicle: 3
+            idVehicle: this.props.match.params.vehicleId
         })
         .then(res => {
             if (res ) {
@@ -128,4 +129,4 @@ class TenantInfo extends Component {
 }*/
 //const connectedClass =connect(rentalInfo,{fetchRentalInfo})(TenantInfo)
 
-export default TenantInfo;
+export default withRouter(TenantInfo);
