@@ -25,7 +25,7 @@ const ManagePage = () =>{
     // fetch data on mount component
     useEffect(() => {
         // just fetch the data inside the vehicles state initially with page = 0
-        axios.get(`http://localhost:8081/vehicle?page=${nbPage}&limit=${nbVehiculesPerPage}`)
+        axios.get(`http://localhost:8000/vehicle?page=${nbPage}&limit=${nbVehiculesPerPage}`)
         .then((response) => response.data)
         .then(({nbVehicles, nbPages, listVehicles}) => {
             setVehicles(listVehicles);
