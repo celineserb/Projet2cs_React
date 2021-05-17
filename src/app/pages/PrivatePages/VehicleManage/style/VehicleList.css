@@ -57,8 +57,12 @@
   justify-content: space-evenly;
 }
 
+.vehicle-list .headers p{
+    margin-left: 40px;
+}
+
 .vehicle-list .headers p:last-child {
-  margin-right: -55px;
+  margin-right: -45px;
 }
 
 /* drawing arrows */

@@ -8,6 +8,27 @@ import './style/VehicleComponent.css'
 
 const VehicleComponent = ({vehicle}) => {
     console.log(vehicle);
+    const renderSwitch = (status) => {
+        switch(status){
+            case 'available':
+                return(
+                    <p className='status available'>Prete</p>
+                );
+            case 'allocated':
+                return(
+                    <p className='status allocated'>En cours</p>
+                );
+            case 'stopped':
+                return(
+                    <p className='status unavailable'>Hors service</p>
+                );
+            default:
+                return(
+                    <p className='status default'>Maintenance</p>
+                )
+                
+        }
+    };
     return(
         <li className='vehicle-elem'>
             <div>
@@ -26,8 +47,7 @@ const VehicleComponent = ({vehicle}) => {
                     <p>{vehicle.availibledate ? vehicle.availibledate.slice(11,19) : '-'}</p>
             </div>
             {
-                vehicle.status ? <p className='status available'>Prete</p> :
-                <p className='status unavailable'>En cours</p>
+                renderSwitch(vehicle.availibility)
             }
             
         </li>

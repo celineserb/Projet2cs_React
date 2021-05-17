@@ -29,6 +29,7 @@
 .custom-elem {
   display: flex;
   flex-direction: column;
+  width: 100px;
 }
 
 .custom-elem p:nth-child(2) {
@@ -55,3 +56,10 @@
   background-color: var(--status-color-unavailable);
 }
 
+.allocated {
+    background-color: var(--status-color-allocated);
+}
+
+.default {
+  background-color: var(--status-color-default);
+}
