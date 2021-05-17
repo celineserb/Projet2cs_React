@@ -4,9 +4,13 @@ import mapboxgl from "mapbox-gl"
 import './style.scss'
 import { Row} from "antd";
 
+import { withRouter } from "react-router";
+
+
 mapboxgl.accessToken="pk.eyJ1IjoieW91Y2Vmb3VhcmFiIiwiYSI6ImNrb2UyajhibzAwbGsycW9nNXpzdm12YnIifQ.iJ9vA18ZaX__1vwZo0iRiA";
 
 var marker = null,
+rentalId= 0,
 
 current = {
     'type': 'geojson',
@@ -76,8 +80,8 @@ sim = [
     [-122.493782, 37.833683]
 ], 
 
-pos = 0;
 
+pos = 0;
 /**
  * Ajoute le marqueur du véhicule sur la carte géographique
  * @param {*} map Instance de la carte géographique
@@ -122,9 +126,9 @@ function loadRoute(map) {
 /**
  * 
  */
-function loadData(_callback) {
+function loadData(_callback, rentalId) {
     fetchVehicleLatestPosition({
-        idRental: 1
+        idRental: rentalId
     })
     .then(res => {
         if (res && res.data && res.data.ok) {
@@ -143,7 +147,11 @@ function loadData(_callback) {
 }
 
 class Mappe extends Component {
-
+    constructor(props){
+        super(props);
+       
+        
+    }
     componentDidMount() {
         const map = new mapboxgl.Map({
             container: this.mapContainer,
@@ -151,8 +159,9 @@ class Mappe extends Component {
             center: current.data.geometry.coordinates,
             zoom: 8
         });
+        rentalId= this.props.match.params.rentalId;
         map.on('load', function () {
-            loadData(function() {
+            loadData(()=> {
                 loadMarker(map);
                 loadRoute(map);
                 map.flyTo({
@@ -160,16 +169,16 @@ class Mappe extends Component {
                     zoom: 15
                 });
                 setInterval(function (){
-                    loadData(function() {
+                    loadData(() => {
                         loadMarker(map);
                         loadRoute(map);
                         map.flyTo({
                             center: current.data.geometry.coordinates,
                             zoom: map.getZoom()
                         });
-                    });
+                    }, rentalId);
                 }, 3000);
-            });
+            }, rentalId);
         });  
          
     }
@@ -184,4 +193,4 @@ class Mappe extends Component {
 
 }
 
-export default Mappe
+export default withRouter(Mappe)
