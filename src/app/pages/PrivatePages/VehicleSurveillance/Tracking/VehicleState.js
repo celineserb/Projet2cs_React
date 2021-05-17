@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Row, Progress, Col, Divider, Tooltip, Statistic} from 'antd';
 import 'antd/dist/antd.css';
 import ReactSpeedometer from "react-d3-speedometer"
-
+import { withRouter } from "react-router";
 import { fetchVehicleState } from "../../../../../modules/Tracking/tracking.actions"
 
 
@@ -13,8 +13,7 @@ var vehicule ={};
 class VehicleState extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            idVehicle:3,
+        this.state = {
             kilos: 0,
             speed : 0,
             engineTemp: 0,
@@ -25,13 +24,14 @@ class VehicleState extends Component {
             generalHealthIndicator:30,
 
          }
+
         
     }
     
     componentDidMount(){
         setInterval(() => {
             fetchVehicleState({
-                idVehicle: this.state.idVehicle
+                idVehicle: this.props.match.params.vehicleId
             })
             .then(res => {
                 if (res ) {
@@ -210,4 +210,4 @@ function brakeFluid(fluid) {
 
 
 
-export default VehicleState;
+export default withRouter(VehicleState);

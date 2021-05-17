@@ -39,14 +39,8 @@ export const Routes = () => {
     return (
     <BrowserRouter>
         <Switch>
-            <Route path="/tracking_info">
-                <TrackingPage />
-            </Route>
-            <Route path="/">
-                <ManagePage/>
-            </Route>
-
-
+            <Route exact path="/tracking_info/:vehicleId/:rentalId" component={TrackingPage} />
+            <Route path="/"  component={ ManagePage }  />
         </Switch>
     </BrowserRouter>
     )
