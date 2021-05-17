@@ -5,7 +5,7 @@ import './style.scss';
 import { Row} from "antd";
 import { withRouter } from 'react-router';
 
-import { withRouter } from "react-router";
+
 
 
 mapboxgl.accessToken="pk.eyJ1IjoieW91Y2Vmb3VhcmFiIiwiYSI6ImNrb2UyajhibzAwbGsycW9nNXpzdm12YnIifQ.iJ9vA18ZaX__1vwZo0iRiA";
