@@ -2,6 +2,8 @@ import React from 'react';
 
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 const Tables = React.lazy(() => import('./views/base/tables/Tables'));
+const UsersTable =React.lazy(()=> import('./views/gestionUtil/compteLocataire'));
+const ValidationForme =React.lazy(()=> import('./views/gestionUtil/validationCompte'));
 
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'));
 const Cards = React.lazy(() => import('./views/base/cards/Cards'));
@@ -45,6 +47,7 @@ const routes = [
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
   { path: '/base', name: 'Base', component: Cards, exact: true },
+  // { path: '/gestionUtil', name: 'gestionUtil', component: Cards, exact: true },
   { path: '/base/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
   { path: '/base/cards', name: 'Cards', component: Cards },
   { path: '/base/carousels', name: 'Carousel', component: Carousels },
@@ -78,7 +81,14 @@ const routes = [
   { path: '/notifications/toaster', name: 'Toaster', component: Toaster },
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/users', exact: true,  name: 'Users', component: Users },
-  { path: '/users/:id', exact: true, name: 'User Details', component: User }
+  { path: '/users/:id', exact: true, name: 'User Details', component: User },
+
+  //---------- new routes : gestion utilisteurs ::
+  { path: '/gestionUtil', name: 'GestionUtil', component: UsersTable, exact: true },
+  // { path: '/gestionUtil', name: 'gestionUtil', component: Cards, exact: true },
+  { path: '/gestionUtil/compteLocataire', name: 'TableLocataire', component: UsersTable },
+  { path: '/gestionUtil/validationCompte', name: 'TableLocataire', component:ValidationForme },
+  { path: '/gestionUtil/validationCompteid/:id', name: 'TableLocataire', component:ValidationForme }
 ];
 
 export default routes;
