@@ -50,19 +50,15 @@ import Login from 'src/views/pages/login/Login';
 
 const TheLayout = React.lazy(() => import('../../../containers/TheLayout'));
 
-const fields = ['username','accountState','idTenant']
+const fields = ['username','accountState']
 // function Red(){
 
 // }
 
 function HandleClick(id){
    console.log(id);
-  //   const history = useHistory();
-  // history.push();
-  //  window.location= "/gestionUtil/validationCompte/:id"
     window.location.href= "/gestionUtil/validationCompte/"+id
-  
-   //`
+ 
  }
    
 
@@ -128,7 +124,7 @@ function HandleClick(id){
       </>
     )
   }
-  //}
+
  
 
 export default UsersTable

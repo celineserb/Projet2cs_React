@@ -1,5 +1,5 @@
 import React ,{ useEffect, useState,useRef } from 'react'
-import permis from '../../../images/doc1.png'
+
 import {
   CButton,
   CCard,
@@ -7,36 +7,17 @@ import {
   CCardFooter,
   CCardHeader,
   CCol,
-  CCollapse,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-  CFade,
   CForm,
   CFormGroup,
-  CFormText,
-  CValidFeedback,
-  CInvalidFeedback,
   CTextarea,
-  CInput,
-  CInputFile,
-  CInputCheckbox,
   CInputRadio,
-  CInputGroup,
-  CInputGroupAppend,
-  CInputGroupPrepend,
-  CDropdown,
-  CInputGroupText,
   CLabel,
-  CSelect,
+ 
   CRow,
-  CSwitch
+
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { DocsLink } from 'src/reusable'
-import {useForm} from 'react-hook-form'
 import axios from 'axios'
-const fields = ['username','accountState','idTenant']
 function ValidationForm ()  {
 
   const [posts,setPosts] = useState(1);
@@ -44,17 +25,15 @@ function ValidationForm ()  {
   
   const [collapsed, setCollapsed] = React.useState(true)
   const [showElements, setShowElements] = React.useState(true)
-  // const { id } = useParams()
-  // console.log("here is id")
+
   let id=window.location.pathname
    const array=id.split("/")
    id=array[3]
-  console.log(id)
+ 
 
   useEffect(()=>{
     axios.get(`http://localhost:8101/get-tenant/${id}`)
     .then(res=>{
-    // console.log(res);
       setPosts(res.data)
     })
     .catch(err=>{
@@ -64,14 +43,30 @@ function ValidationForm ()  {
 
     
   } )
-   const imgpermis="../../.."+posts.permitPicture
-  //  const permis= require(imgpermis)
-  let imagePath = imgpermis;
-
-  const{register,handleSubmit}=useForm();
-
-  const onSubmit = data => console.log(data);
+   const imgpermis="../../../images/"+posts.permitPicture
+  const imgprofil ="../../../images/"+posts.profilePicture
+  console.log("image profil",imgprofil)
+  console.log("image permi",imgpermis)
   
+   const initialInputState={stateMessage:"",accountState:""};
+   const [eachEntry, setEachEntry]=useState(initialInputState);
+   const {stateMessage,accountState}=eachEntry;
+   const handleInputChange= e=>{
+     setEachEntry({...eachEntry,[e.target.name]:e.target.value});
+
+   };
+   const HandleFinalSubmit= e=>{
+   const  data={accountState,stateMessage}   
+   console.log(data)
+    axios.put('http://localhost:8101/update-tenant/1', data)
+  .then(response => {
+    console.log("Status: ", response.status);
+    console.log("Data: ", response.data);
+  }).catch(error => {
+    console.error('Something went wrong!', error);
+  });
+
+  };
   return (
     <>
       
@@ -85,7 +80,7 @@ function ValidationForm ()  {
                Informations d'inscription du locataire
               </CCardHeader>
               <CCardBody>
-                <CForm action="./index.js" method="post" onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data" className="form-horizontal">
+                <CForm action="./index.js" method="post"  encType="multipart/form-data" className="form-horizontal">
                   <CFormGroup row>
                     <CCol md="3">
                       <CLabel>Nom et prénom</CLabel>
@@ -110,7 +105,7 @@ function ValidationForm ()  {
                       <CLabel>Date d'inscription</CLabel>
                     </CCol>
                     <CCol xs="12" md="9">
-                      <p className="form-control-static">10/05/2021</p>
+                      <p className="form-control-static">{posts.dateSignUp}</p>
                     </CCol>
                   </CFormGroup>
                
@@ -120,7 +115,7 @@ function ValidationForm ()  {
                       <CLabel htmlFor="select">Permis de Conduite </CLabel>
                     </CCol>
                     <CCol xs="12" md="9">
-                    <img src={permis} height={100} width={160} />
+                    <img src= {imgpermis} height={140} width={210} />
                     
                     </CCol>
                   </CFormGroup>
@@ -129,7 +124,7 @@ function ValidationForm ()  {
                       <CLabel htmlFor="select">Carte identité</CLabel>
                     </CCol>
                     <CCol xs="12" md="9">
-                    <img src={permis} height={100} width={160} />
+                    <img src= { imgprofil } height={140} width={210} />
                     
                     </CCol>
                   </CFormGroup>
@@ -142,13 +137,12 @@ function ValidationForm ()  {
                     <CCol xs="12" md="9">
                  
                       <CTextarea 
-                      // {...rest}
-                        name="message" 
-                        id="message" 
+                        name="stateMessage" 
+                    
                         rows="9"
                         placeholder="Message à afficher pour le locataire..." 
-                  
-                        ref={register}
+                        value={stateMessage}
+                        onChange={handleInputChange}
                       />
                     </CCol>
                   </CFormGroup>
@@ -161,11 +155,13 @@ function ValidationForm ()  {
                     </CCol>
                     <CCol md="9">
                       <CFormGroup variant="custom-radio" inline>
-                        <CInputRadio custom id="inline-radio1" name="inline-radios" value="validated" />
+                        <CInputRadio custom id="inline-radio1" name="inline-radios" name="accountState" value="Validated" 
+                        onChange={handleInputChange} />
                         <CLabel variant="custom-checkbox" htmlFor="inline-radio1">Oui</CLabel>
                       </CFormGroup>
                       <CFormGroup variant="custom-radio" inline>
-                        <CInputRadio custom id="inline-radio2" name="inline-radios" value="refused" />
+                        <CInputRadio custom id="inline-radio2" name="inline-radios"  name="accountState" value="Refused"
+                        onChange={handleInputChange} />
                         <CLabel variant="custom-checkbox" htmlFor="inline-radio2">Non</CLabel>
                       </CFormGroup>
                      
@@ -177,7 +173,7 @@ function ValidationForm ()  {
                 </CForm>
               </CCardBody>
               <CCardFooter>
-                <CButton type="submit"  size="sm"    color="primary"><CIcon name="cil-scrubber" /> Confirmer</CButton>
+                <CButton type="submit"  size="sm" onClick={HandleFinalSubmit}   color="primary"><CIcon name="cil-scrubber" /> Confirmer</CButton>
               
               </CCardFooter>
             </CCard>
