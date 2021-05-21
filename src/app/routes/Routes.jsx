@@ -13,7 +13,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { CrudService } from '../../services'
 import { actions } from '../../modules'
 
+import { Layout} from 'antd';
+import 'antd/dist/antd.css';
 
+import TopBar from '../pages/PrivatePages/common/Topbar/Topbar';
+import SideBar from '../pages/PrivatePages/common/Sidebar/Sidebar';
+
+const { Content} = Layout;
 
 export const Routes = () => {
     const [loading, setLoading] = useState(true)
@@ -37,11 +43,20 @@ export const Routes = () => {
     }
 
     return (
-    <BrowserRouter>
-        <Switch>
-            <Route exact path="/tracking_info/:vehicleId/:rentalId" component={TrackingPage} />
-            <Route path="/"  component={ ManagePage }  />
-        </Switch>
-    </BrowserRouter>
+        <Layout className="site-layout">
+            <SideBar></SideBar>
+            <Layout className="site-layout-background">
+                <Content style={{backgroundColor:'white'}}>
+                <TopBar></TopBar>
+                        <BrowserRouter>
+                            <Switch>
+                                <Route exact path="/tracking_info/:vehicleId/:rentalId" component={TrackingPage} />
+                                <Route path="/"  component={ ManagePage }  />
+                            </Switch>
+                        </BrowserRouter>
+                </Content>
+            </Layout>
+        </Layout>
+
     )
 }

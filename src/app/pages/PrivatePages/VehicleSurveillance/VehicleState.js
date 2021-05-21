@@ -4,7 +4,7 @@ import { Row, Progress, Col, Divider, Tooltip, Statistic} from 'antd';
 import 'antd/dist/antd.css';
 import ReactSpeedometer from "react-d3-speedometer"
 import { withRouter } from "react-router";
-import { fetchVehicleState } from "../../../../../modules/Tracking/tracking.actions"
+import { fetchVehicleState } from '../../../../modules/Tracking/tracking.actions'
 
 
 var vehicule ={};

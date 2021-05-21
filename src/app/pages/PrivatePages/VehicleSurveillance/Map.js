@@ -1,7 +1,7 @@
 import React, { Component } from "react"
-import { fetchVehiclePosition, fetchVehicleLatestPosition } from "../../../../../modules/VehiclePosition/vehiclePosition.actions"
+import { fetchVehicleLatestPosition } from "../../../../modules/VehiclePosition/vehiclePosition.actions"
 import mapboxgl from "mapbox-gl";
-import './style.scss';
+import './style/style.scss';
 import { Row} from "antd";
 import { withRouter } from 'react-router';
 
