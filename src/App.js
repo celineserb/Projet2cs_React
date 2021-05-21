@@ -5,10 +5,11 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import "./scss/style.scss";
 
-import Login from "./views/pages/login/Login";
-import TheLayout from "./containers/TheLayout";
+import "./assets/scss/style.scss";
+
+import Login from "./app/conponents/pages/login/Login";
+import TheLayout from "./app/containers/TheLayout";
 
 const loading = (
   <div className="pt-3 text-center">
