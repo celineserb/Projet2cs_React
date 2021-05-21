@@ -4,7 +4,7 @@ import { Row, Progress, Col, Divider, Tooltip, Statistic} from 'antd';
 import 'antd/dist/antd.css';
 import ReactSpeedometer from "react-d3-speedometer"
 import { withRouter } from "react-router";
-import { fetchVehicleState } from "../../../../../modules/Tracking/tracking.actions"
+import { fetchVehicleState } from "../../../../modules/Tracking/tracking.actions"
 
 
 var vehicule ={};
@@ -80,7 +80,7 @@ class VehicleState extends Component {
 
                 </Col>
                 <Col push={3}>
-                    <h1>Vehicle Status</h1>
+                    <h1  className="vehicle-status-title" >Vehicle Status</h1>
                 <Tooltip title="Engine Temperture">
                     <Progress
                     strokeColor={{
@@ -131,7 +131,7 @@ class VehicleState extends Component {
                             '0%': '#108ee9',
                             '100%': '#87d068',
                         }}
-                        percent={90}
+                        percent={55.5}
                     />
                 </Tooltip>
                 

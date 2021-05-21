@@ -20,7 +20,7 @@
 
 .list-container div:first-child > p:first-child::before {
   content: "";
-  background-image: url("../../../../../svg/Vector.svg");
+  background-image: url("../../../../../assets/svg/Vector.svg");
   height: 16px;
   width: 33px;
   position: absolute;
@@ -35,7 +35,7 @@
 
 .list-container div:first-child > p:last-child::before {
   content: "";
-  background-image: url("../../../../../svg/filter.svg");
+  background-image: url("../../../../../assets/svg/filter.svg");
   height: 16px;
   width: 33px;
   position: absolute;

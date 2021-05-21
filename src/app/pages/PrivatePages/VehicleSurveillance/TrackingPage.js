@@ -1,25 +1,17 @@
 import React, { Component } from 'react'
-import { Layout,  Row, Col, Divider } from 'antd';
+import { Layout,  Row, Col} from 'antd';
 import 'antd/dist/antd.css';
 
-import VehicleState from './Tracking/VehicleState';
-import TenantInfo from './Tracking/TenantInfo';
-import Mappe from './Map/Map';
-import TopBar from '../common/Topbar/Topbar';
+import VehicleState from './VehicleState';
+import TenantInfo from './TenantInfo';
+import Mappe from './Map';
 
-import SideBar from '../common/Sidebar/Sidebar'
-
-const { Content, Footer} = Layout;
 
 class   TrackingPage extends Component {
 
     render() { 
-        return (  
-          <Layout className="site-layout">
-            <SideBar></SideBar>
+      return (  
             <Layout>
-              <Content >
-              <TopBar></TopBar>
               <div className="site-layout-background" style={{ paddingTop: 30, paddingLeft:40, paddingBottom: 30, minHeight: 500 }}>
                   <Mappe></Mappe>
               </div>
@@ -35,11 +27,7 @@ class   TrackingPage extends Component {
                   </Row>
                   
                 </div>
-              </Content>
-              <Footer style={{ textAlign: 'center' }}>Copyright ©2021</Footer>
             </Layout>
-          </Layout>
-            
         );
     }
 }

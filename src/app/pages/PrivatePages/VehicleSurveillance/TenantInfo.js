@@ -6,10 +6,10 @@ import { Avatar, Row, Col, Tooltip } from 'antd';
 
 import { AntDesignOutlined } from '@ant-design/icons';
 
-import {ReactComponent as MapIcon} from './svg/tabler-icon-map-2.svg';
-import {ReactComponent as CalendarIcon} from './svg/tabler-icon-calendar-event.svg';
-import {ReactComponent as ContactIcon} from './svg/tabler-icon-user.svg';
-import { fetchRentalInfo } from '../../../../../modules/Tracking/tracking.crud';
+import {ReactComponent as MapIcon} from '../../../../assets/svg/tabler-icon-map-2.svg';
+import {ReactComponent as CalendarIcon} from '../../../../assets/svg/tabler-icon-calendar-event.svg';
+import {ReactComponent as ContactIcon} from '../../../../assets/svg/tabler-icon-user.svg';
+import { fetchRentalInfo } from '../../../../modules/Tracking/tracking.crud';
 
 var rental={};
 
@@ -66,10 +66,11 @@ class TenantInfo extends Component {
                                 <ContactIcon></ContactIcon>
                             </Col>
                             <Col >
-                                <h3
+                                <h3 
+                                    className="tenant-name-text"
                                     style={{
                                         marginTop: 5,                     
-                                    }}>
+                                    }}> 
                                     {this.state.firstName+" "+this.state.lastName}
                                 </h3>
                             </Col>

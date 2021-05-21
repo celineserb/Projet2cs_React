@@ -1,12 +1,9 @@
 import React, { Component } from "react"
-import { fetchVehicleLatestPosition } from "../../../../../modules/VehiclePosition/vehiclePosition.actions"
+import { fetchVehiclePosition, fetchVehicleLatestPosition } from "../../../../modules/VehiclePosition/vehiclePosition.actions"
 import mapboxgl from "mapbox-gl";
-import './style.scss';
+import './style/style.scss';
 import { Row} from "antd";
 import { withRouter } from 'react-router';
-
-
-
 
 mapboxgl.accessToken="pk.eyJ1IjoieW91Y2Vmb3VhcmFiIiwiYSI6ImNrb2UyajhibzAwbGsycW9nNXpzdm12YnIifQ.iJ9vA18ZaX__1vwZo0iRiA";
 
@@ -81,8 +78,8 @@ sim = [
     [-122.493782, 37.833683]
 ], 
 
-
 pos = 0;
+
 /**
  * Ajoute le marqueur du véhicule sur la carte géographique
  * @param {*} map Instance de la carte géographique
@@ -135,10 +132,10 @@ function loadData(_callback, props) {
         if (res && res.data && res.data.ok) {
             current.data.geometry.coordinates = res.data.position;
             route.data.geometry.coordinates.push(res.data.position);
-            //current.data.geometry.coordinates = sim[pos];
-            //route.data.geometry.coordinates.push(sim[pos]);
-            //pos = (pos + 1) % sim.length;
-            //if (pos === 0) route.data.geometry.coordinates = []
+           /* current.data.geometry.coordinates = sim[pos];
+            route.data.geometry.coordinates.push(sim[pos]);
+            pos = (pos + 1) % sim.length;
+            if (pos === 0) route.data.geometry.coordinates = []*/
         }
     })
     .catch(err => {
@@ -161,7 +158,7 @@ class Mappe extends Component {
         });
         rentalId = this.props.match.params.rentalId;
         map.on('load', function () {
-            loadData(()=> {
+            loadData(function() {
                 loadMarker(map);
                 loadRoute(map);
                 map.flyTo({
@@ -169,7 +166,7 @@ class Mappe extends Component {
                     zoom: 15
                 });
                 setInterval(function (){
-                    loadData(() => {
+                    loadData(function() {
                         loadMarker(map);
                         loadRoute(map);
                         map.flyTo({
