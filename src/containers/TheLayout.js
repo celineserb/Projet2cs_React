@@ -1,25 +1,21 @@
-import React from 'react'
-import {
-  TheContent,
-  TheSidebar,
-  TheFooter,
-  TheHeader
-} from './index'
+import React from "react";
+import { TheContent, TheSidebar, TheFooter, TheHeader } from "./index";
 
-const TheLayout = () => {
+import { withRouter } from "react-router-dom";
 
+const TheLayout = (props) => {
   return (
     <div className="c-app c-default-layout">
-      <TheSidebar/>
+      <TheSidebar />
       <div className="c-wrapper">
-        <TheHeader/>
+        <TheHeader />
         <div className="c-body">
-          <TheContent/>
+          <TheContent />
         </div>
-        <TheFooter/>
+        <TheFooter />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TheLayout
+export default withRouter(TheLayout);
