@@ -1,42 +1,42 @@
 import React from 'react';
 
-const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
-const Tables = React.lazy(() => import('./views/base/tables/Tables'));
+const Toaster = React.lazy(() => import('./app/conponents/notifications/toaster/Toaster'));
+const Tables = React.lazy(() => import('./app/conponents/base/tables/Tables'));
 
-const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'));
-const Cards = React.lazy(() => import('./views/base/cards/Cards'));
-const Carousels = React.lazy(() => import('./views/base/carousels/Carousels'));
-const Collapses = React.lazy(() => import('./views/base/collapses/Collapses'));
-const BasicForms = React.lazy(() => import('./views/base/forms/BasicForms'));
+const Breadcrumbs = React.lazy(() => import('./app/conponents/base/breadcrumbs/Breadcrumbs'));
+const Cards = React.lazy(() => import('./app/conponents/base/cards/Cards'));
+const Carousels = React.lazy(() => import('./app/conponents/base/carousels/Carousels'));
+const Collapses = React.lazy(() => import('./app/conponents/base/collapses/Collapses'));
+const BasicForms = React.lazy(() => import('./app/conponents/base/forms/BasicForms'));
 
-const Jumbotrons = React.lazy(() => import('./views/base/jumbotrons/Jumbotrons'));
-const ListGroups = React.lazy(() => import('./views/base/list-groups/ListGroups'));
-const Navbars = React.lazy(() => import('./views/base/navbars/Navbars'));
-const Navs = React.lazy(() => import('./views/base/navs/Navs'));
-const Paginations = React.lazy(() => import('./views/base/paginations/Pagnations'));
-const Popovers = React.lazy(() => import('./views/base/popovers/Popovers'));
-const ProgressBar = React.lazy(() => import('./views/base/progress-bar/ProgressBar'));
-const Switches = React.lazy(() => import('./views/base/switches/Switches'));
+const Jumbotrons = React.lazy(() => import('./app/conponents/base/jumbotrons/Jumbotrons'));
+const ListGroups = React.lazy(() => import('./app/conponents/base/list-groups/ListGroups'));
+const Navbars = React.lazy(() => import('./app/conponents/base/navbars/Navbars'));
+const Navs = React.lazy(() => import('./app/conponents/base/navs/Navs'));
+const Paginations = React.lazy(() => import('./app/conponents/base/paginations/Pagnations'));
+const Popovers = React.lazy(() => import('./app/conponents/base/popovers/Popovers'));
+const ProgressBar = React.lazy(() => import('./app/conponents/base/progress-bar/ProgressBar'));
+const Switches = React.lazy(() => import('./app/conponents/base/switches/Switches'));
 
-const Tabs = React.lazy(() => import('./views/base/tabs/Tabs'));
-const Tooltips = React.lazy(() => import('./views/base/tooltips/Tooltips'));
-const BrandButtons = React.lazy(() => import('./views/buttons/brand-buttons/BrandButtons'));
-const ButtonDropdowns = React.lazy(() => import('./views/buttons/button-dropdowns/ButtonDropdowns'));
-const ButtonGroups = React.lazy(() => import('./views/buttons/button-groups/ButtonGroups'));
-const Buttons = React.lazy(() => import('./views/buttons/buttons/Buttons'));
-const Charts = React.lazy(() => import('./views/charts/Charts'));
-const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
-const CoreUIIcons = React.lazy(() => import('./views/icons/coreui-icons/CoreUIIcons'));
-const Flags = React.lazy(() => import('./views/icons/flags/Flags'));
-const Brands = React.lazy(() => import('./views/icons/brands/Brands'));
-const Alerts = React.lazy(() => import('./views/notifications/alerts/Alerts'));
-const Badges = React.lazy(() => import('./views/notifications/badges/Badges'));
-const Modals = React.lazy(() => import('./views/notifications/modals/Modals'));
-const Colors = React.lazy(() => import('./views/theme/colors/Colors'));
-const Typography = React.lazy(() => import('./views/theme/typography/Typography'));
-const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
-const Users = React.lazy(() => import('./views/users/Users'));
-const User = React.lazy(() => import('./views/users/User'));
+const Tabs = React.lazy(() => import('./app/conponents/base/tabs/Tabs'));
+const Tooltips = React.lazy(() => import('./app/conponents/base/tooltips/Tooltips'));
+const BrandButtons = React.lazy(() => import('./app/conponents/buttons/brand-buttons/BrandButtons'));
+const ButtonDropdowns = React.lazy(() => import('./app/conponents/buttons/button-dropdowns/ButtonDropdowns'));
+const ButtonGroups = React.lazy(() => import('./app/conponents/buttons/button-groups/ButtonGroups'));
+const Buttons = React.lazy(() => import('./app/conponents/buttons/buttons/Buttons'));
+const Charts = React.lazy(() => import('./app/conponents/charts/Charts'));
+const Dashboard = React.lazy(() => import('./app/conponents/dashboard/Dashboard'));
+const CoreUIIcons = React.lazy(() => import('./app/conponents/icons/coreui-icons/CoreUIIcons'));
+const Flags = React.lazy(() => import('./app/conponents/icons/flags/Flags'));
+const Brands = React.lazy(() => import('./app/conponents/icons/brands/Brands'));
+const Alerts = React.lazy(() => import('./app/conponents/notifications/alerts/Alerts'));
+const Badges = React.lazy(() => import('./app/conponents/notifications/badges/Badges'));
+const Modals = React.lazy(() => import('./app/conponents/notifications/modals/Modals'));
+const Colors = React.lazy(() => import('./app/conponents/theme/colors/Colors'));
+const Typography = React.lazy(() => import('./app/conponents/theme/typography/Typography'));
+const Widgets = React.lazy(() => import('./app/conponents/widgets/Widgets'));
+const Users = React.lazy(() => import('./app/conponents/users/Users'));
+const User = React.lazy(() => import('./app/conponents/users/User'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
