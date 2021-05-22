@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import TrackingPage from "../pages/PrivatePages/VehicleSurveillance/TrackingPage";
 import ManagePage from "../pages/PrivatePages/VehicleManage/ManagePage";
+import PannesPage from "../pages/PrivatePages/PannesPage/PannesPage";
 
 import {
     BrowserRouter,
@@ -51,6 +52,7 @@ export const Routes = () => {
                         <BrowserRouter>
                             <Switch>
                                 <Route exact path="/tracking_info/:vehicleId/:rentalId" component={TrackingPage} />
+                                <Route exact path="/pannes" component={PannesPage} />
                                 <Route path="/"  component={ ManagePage }  />
                             </Switch>
                         </BrowserRouter>

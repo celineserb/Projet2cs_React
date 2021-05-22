@@ -60,7 +60,7 @@ class SideBar extends Component {
                         </a>
                     </div>
                     <div className="menu-item-wrapper">
-                        <a className="menu-item-link" href="#pannes">
+                        <a className="menu-item-link" href="pannes">
                             <div className="menu-item-icon">
                                 <img src="media/alert-triangle.svg" alt="" />	
                             </div>
