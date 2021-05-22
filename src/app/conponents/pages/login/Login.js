@@ -17,6 +17,8 @@ import {
 import CIcon from "@coreui/icons-react";
 import axios from "axios";
 
+import { login } from "../../../../modules/Auth/auth.crud";
+
 const Login = (props) => {
   const [state, setState] = useState({
     email: "",
@@ -45,8 +47,7 @@ const Login = (props) => {
         email: state.email,
         password: state.password,
       };
-      axios
-        .post("http://localhost:8005/signin", payload)
+      login(state.email, state.password)
         .then(function (response) {
           console.log(response.status);
           if (response.status === 200) {
