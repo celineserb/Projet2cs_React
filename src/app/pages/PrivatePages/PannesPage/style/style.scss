@@ -214,6 +214,9 @@
 .pannes-list-sort > ul > li:hover > input[type="checkbox"]  {
     cursor: pointer;
 }
+.pannes-list-sort > ul > li > input[type="checkbox"]:checked + label {
+    font-weight: bold;
+}
 .hidden {
     display: none;
 }
@@ -229,4 +232,13 @@
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #888; 
+}
+.chevron-right {
+    content: url('../../../../../assets/svg/chevron-right.svg');
+}
+.chevron-bottom {
+    content: url('../../../../../assets/svg/chevron-bottom.svg');
+}
+.sort-svg {
+    content: url('../../../../../assets/svg/sort.svg');
 }
