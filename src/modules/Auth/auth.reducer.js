@@ -9,7 +9,7 @@ const initialAuthState = {
     user:null
 };
 export const Authreducer = persistReducer(
-    { storage, key: "autolibdz", whitelist: ["authToken"] },
+    { storage, key: "autolibdz-auth", whitelist: ["authToken"] },
     (state = initialAuthState, action) => {
         switch (action.type) {
             case actionTypes.Login: {

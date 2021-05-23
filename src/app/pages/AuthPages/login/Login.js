@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import {
   CButton,
   CCard,
@@ -16,13 +15,29 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 
-import { login } from "../../../../modules/Auth/auth.crud";
+import { login } from '../../../../modules/Auth/auth.crud'
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router";
+import { actions } from "../../../../modules";
 
-export const Login = (props) => {
+const Login = () => {
   const [state, setState] = useState({
     email: "",
     password: "",
   });
+
+  const [redirect, setRedirect] = useState(false)
+
+  
+  const token = useSelector(({authState}) => authState.authToken)
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    console.log(token)
+    if (token) {
+      setRedirect(true)
+    }
+  }, [token])
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -32,20 +47,10 @@ export const Login = (props) => {
     }));
   };
 
-  const redirectToHome = () => {
-    console.log("Before push: ", props.history);
-    props.history.push("/dashboard");
-    console.log("After push: ", props.history);
-  };
-
   const sendDetailsToServer = () => {
-    localStorage.removeItem("token");
 
     if (state.email && state.password) {
-      const payload = {
-        email: state.email,
-        password: state.password,
-      };
+
       login(state.email, state.password)
         .then(function (response) {
           console.log(response.status);
@@ -54,9 +59,8 @@ export const Login = (props) => {
               ...prevState,
               successMessage: "Signin successful. Redirecting to home page..",
             }));
-            console.log(payload);
-            localStorage.setItem("token", response.data.token);
-            redirectToHome();
+            dispatch(actions.login(response.data.token))
+
           } else {
             alert("Please enter valid email and password");
           }
@@ -73,6 +77,12 @@ export const Login = (props) => {
     e.preventDefault();
     sendDetailsToServer();
   };
+
+  if (redirect) {
+    return (
+      <Redirect to="/" />
+    )
+  }
 
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
@@ -118,8 +128,6 @@ export const Login = (props) => {
                         <CButton
                           color="primary"
                           className="px-4"
-                          color="link"
-                          className="px-0"
                           active
                           tabIndex={-1}
                           onClick={handleSubmitClick}
@@ -138,3 +146,5 @@ export const Login = (props) => {
     </div>
   );
 };
+
+export default Login;
