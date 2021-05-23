@@ -14,6 +14,8 @@ import { store, persistor } from './config'
 import { BrowserRouter } from 'react-router-dom';
 import { Routes } from './app/routes/Routes';
 
+import "./assets/scss/style.scss";
+
 React.icons = icons
 
 ReactDOM.render(
