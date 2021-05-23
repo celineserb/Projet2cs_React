@@ -27,7 +27,7 @@ import {
 
 const TheHeader = (props) => {
   const dispatch = useDispatch();
-  const sidebarShow = useSelector((state) => state.sidebarShow);
+  const sidebarShow = useSelector(({sliderState}) => sliderState.sidebarShow);
 
   const toggleSidebar = () => {
     const val = [true, "responsive"].includes(sidebarShow)
@@ -66,19 +66,19 @@ const TheHeader = (props) => {
         <CHeaderNavItem className="px-3">
           <CHeaderNavLink to="/users">Utilisateurs</CHeaderNavLink>
         </CHeaderNavItem>
-        {/* <CHeaderNavItem className="px-3">
+        <CHeaderNavItem className="px-3">
           <CHeaderNavLink>Settings</CHeaderNavLink>
-        </CHeaderNavItem> */}
+        </CHeaderNavItem>
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        {/* <TheHeaderDropdownNotif/>
-        <TheHeaderDropdownTasks/> */}
-        {/* <TheHeaderDropdownMssg/> */}
+        <TheHeaderDropdownNotif/>
+        <TheHeaderDropdownTasks/>
+        <TheHeaderDropdownMssg/>
         <TheHeaderDropdown />
       </CHeaderNav>
 
-      {/* <CSubheader className="px-3 justify-content-between">
+      <CSubheader className="px-3 justify-content-between">
         <CBreadcrumbRouter 
           className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
           routes={routes} 
@@ -98,7 +98,7 @@ const TheHeader = (props) => {
               <CIcon name="cil-settings" alt="Settings" />&nbsp;Settings
             </CLink>
           </div>
-      </CSubheader> */}
+      </CSubheader>
     </CHeader>
   );
 };

@@ -9,11 +9,15 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { withRouter } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { actions } from "../../modules";
 
 const TheHeaderDropdown = (props) => {
+
+  const dispatch = useDispatch()
+
   function handleLogout() {
-    localStorage.removeItem("token");
-    props.history.push("/");
+    dispatch(actions.logout())
   }
 
   return (
