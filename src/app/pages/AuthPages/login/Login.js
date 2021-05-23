@@ -29,11 +29,10 @@ const Login = () => {
   const [redirect, setRedirect] = useState(false)
 
   
-  const token = useSelector(({authState}) => authState.authToken)
+  const token = useSelector(({ auth }) => auth.authToken)
   const dispatch = useDispatch()
   
   useEffect(() => {
-    console.log(token)
     if (token) {
       setRedirect(true)
     }
@@ -50,7 +49,6 @@ const Login = () => {
   const sendDetailsToServer = () => {
 
     if (state.email && state.password) {
-
       login(state.email, state.password)
         .then(function (response) {
           console.log(response.status);
@@ -59,7 +57,7 @@ const Login = () => {
               ...prevState,
               successMessage: "Signin successful. Redirecting to home page..",
             }));
-            dispatch(actions.login(response.data.token))
+            dispatch(actions.login(response.data))
 
           } else {
             alert("Please enter valid email and password");

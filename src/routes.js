@@ -1,4 +1,7 @@
 import React from "react";
+import Login from "./app/pages/AuthPages/login/Login";
+import Page404 from "./app/pages/AuthPages/page404/Page404";
+import Page500 from "./app/pages/AuthPages/page500/Page500";
 
 const Toaster = React.lazy(() =>
   import("./app/conponents/notifications/toaster/Toaster")
@@ -142,6 +145,9 @@ const routes = [
   { path: "/widgets", name: "Widgets", component: Widgets },
   { path: "/users", exact: true, name: "Users", component: Users },
   { path: "/users/:id", exact: true, name: "User Details", component: User },
+  { path: "/login", exact: true, name: "Login Page", component: Login },
+  { path: "/p404", name: "Page not found", component: Page404 },
+  { path: "/p500", name: "Page not found", component: Page500 },
 ];
 
 export default routes;

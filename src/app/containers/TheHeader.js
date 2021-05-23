@@ -27,7 +27,7 @@ import {
 
 const TheHeader = (props) => {
   const dispatch = useDispatch();
-  const sidebarShow = useSelector(({sliderState}) => sliderState.sidebarShow);
+  const sidebarShow = useSelector(({ slide }) => slide.sidebarShow);
 
   const toggleSidebar = () => {
     const val = [true, "responsive"].includes(sidebarShow)

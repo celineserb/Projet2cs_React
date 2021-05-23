@@ -19,7 +19,7 @@ import navigation from './_nav'
 
 const TheSidebar = () => {
   const dispatch = useDispatch()
-  const show = useSelector(({sliderState}) => sliderState.sidebarShow)
+  const show = useSelector(({ slide }) => slide.sidebarShow)
 
   return (
     <CSidebar

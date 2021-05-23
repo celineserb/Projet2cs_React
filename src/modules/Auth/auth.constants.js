@@ -6,5 +6,5 @@ export const actionTypes = {
 }
 export const authUrls = {
   LOGIN_URL: "http://localhost:8005/signin",
-  USER_URL: "http://localhost:8100/users"
+  USER_URL: "http://localhost:8100/users/"
 };

@@ -4,21 +4,24 @@ import 'core-js';
 import './polyfill'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { PersistGate } from 'redux-persist/integration/react'
 
 import { icons } from './assets/icons'
 
 import { Provider } from 'react-redux'
-import { store, persistor } from './store'
+import { store, persistor } from './config'
+import { BrowserRouter } from 'react-router-dom';
+import { Routes } from './app/routes/Routes';
 
 React.icons = icons
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <App/>
+    <PersistGate loading={"loading..."} persistor={persistor}>
+      <BrowserRouter basename={"/"}>
+        <Routes />
+      </BrowserRouter>
     </PersistGate>
   </Provider>,
   document.getElementById('root')
