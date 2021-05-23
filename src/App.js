@@ -8,32 +8,32 @@ import {
 
 import "./assets/scss/style.scss";
 
-import Login from "./app/conponents/pages/login/Login";
+import Login from "./app/pages/AuthPages/login/Login";
 import TheLayout from "./app/containers/TheLayout";
+import { useSelector } from "react-redux";
 
-const loading = (
-  <div className="pt-3 text-center">
-    <div className="sk-spinner sk-spinner-pulse"></div>
-  </div>
-);
+const PrivateRoute = ({ children, ...rest }) => {
 
-const PrivateRoute = ({ children, ...rest }) => (
-  <Route
+  const authToken = useSelector(({authState}) => authState.authToken)
+  
+  return (<Route
     {...rest}
     render={({ location }) =>
-      localStorage.getItem("token") ? (
+      authToken ? (
         children
       ) : (
         <Redirect
           to={{
-            pathname: "/",
+            pathname: "/login",
             state: { from: location },
           }}
         />
       )
     }
   />
-);
+  );
+}
+
 
 class App extends Component {
   render() {
@@ -43,11 +43,11 @@ class App extends Component {
           <Switch>
             <Route
               exact
-              path="/"
+              path="/login"
               name="Login Page"
               render={(props) => <Login {...props} />}
             />
-            <PrivateRoute path="/dashboard">
+            <PrivateRoute path="/">
               <TheLayout />
             </PrivateRoute>
           </Switch>

@@ -1,17 +1,18 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
+import { persistStore } from 'redux-persist'
+import createSagaMiddleware from 'redux-saga'
+import { Authreducer, Slidereducer,saga } from './modules'
 
-const initialState = {
-  sidebarShow: 'responsive'
-}
+const sagaMiddleware = createSagaMiddleware()
 
-const changeState = (state = initialState, { type, ...rest }) => {
-  switch (type) {
-    case 'set':
-      return {...state, ...rest }
-    default:
-      return state
-  }
-}
+export const store = createStore(
+  combineReducers({
+    authState: Authreducer, 
+    sliderState: Slidereducer
+  }),
+  applyMiddleware(sagaMiddleware)
+)
 
-const store = createStore(changeState)
-export default store
+sagaMiddleware.run(saga)
+
+export const persistor = persistStore(store);

@@ -15,11 +15,10 @@ import {
   CRow,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import axios from "axios";
 
 import { login } from "../../../../modules/Auth/auth.crud";
 
-const Login = (props) => {
+export const Login = (props) => {
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -139,5 +138,3 @@ const Login = (props) => {
     </div>
   );
 };
-
-export default Login;
