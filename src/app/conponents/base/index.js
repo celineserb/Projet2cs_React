@@ -12,9 +12,10 @@ import Popovers from './Popovers';
 import ProgressBar from './ProgressBar';
 import Switches from './Switches';
 import Tabs from './Tabs';
+import LocataireTables from './Tables/gestion_compte_locataire';
 import Tooltips from './Tooltips';
 
 export {
-  Breadcrumbs, Cards, Carousels, Collapses, Dropdowns, Jumbotrons, ListGroups, Navbars, Navs, Popovers, ProgressBar, Switches, Tabs, Tooltips, Paginations,
+  Breadcrumbs, Cards, Carousels, Collapses, Dropdowns, Jumbotrons, ListGroups, Navbars, Navs, Popovers, ProgressBar, Switches, Tabs, LocataireTables,Tooltips, Paginations,
 };
 

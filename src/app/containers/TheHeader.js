@@ -1,5 +1,5 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   CHeader,
   CToggler,
@@ -9,33 +9,39 @@ import {
   CHeaderNavLink,
   CSubheader,
   CBreadcrumbRouter,
-  CLink
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
+  CLink,
+} from "@coreui/react";
+import CIcon from "@coreui/icons-react";
+
+import { withRouter } from "react-router-dom";
 
 // routes config
-import routes from '../../routes'
+import routes from "../../routes";
 
-import { 
+import {
   TheHeaderDropdown,
   TheHeaderDropdownMssg,
   TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks
-}  from './index'
+  TheHeaderDropdownTasks,
+} from "./index";
 
-const TheHeader = () => {
-  const dispatch = useDispatch()
-  const sidebarShow = useSelector(state => state.sidebarShow)
+const TheHeader = (props) => {
+  const dispatch = useDispatch();
+  const sidebarShow = useSelector((state) => state.sidebarShow);
 
   const toggleSidebar = () => {
-    const val = [true, 'responsive'].includes(sidebarShow) ? false : 'responsive'
-    dispatch({type: 'set', sidebarShow: val})
-  }
+    const val = [true, "responsive"].includes(sidebarShow)
+      ? false
+      : "responsive";
+    dispatch({ type: "set", sidebarShow: val });
+  };
 
   const toggleSidebarMobile = () => {
-    const val = [false, 'responsive'].includes(sidebarShow) ? true : 'responsive'
-    dispatch({type: 'set', sidebarShow: val})
-  }
+    const val = [false, "responsive"].includes(sidebarShow)
+      ? true
+      : "responsive";
+    dispatch({ type: "set", sidebarShow: val });
+  };
 
   return (
     <CHeader withSubheader>
@@ -50,14 +56,14 @@ const TheHeader = () => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <CIcon name="logo" height="48" alt="Logo"/>
+        <CIcon name="logo" height="48" alt="Logo" />
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
-        <CHeaderNavItem className="px-3" >
+        <CHeaderNavItem className="px-3">
           <CHeaderNavLink to="/dashboard">Tableau de bord</CHeaderNavLink>
         </CHeaderNavItem>
-        <CHeaderNavItem  className="px-3">
+        <CHeaderNavItem className="px-3">
           <CHeaderNavLink to="/users">Utilisateurs</CHeaderNavLink>
         </CHeaderNavItem>
         {/* <CHeaderNavItem className="px-3">
@@ -69,7 +75,7 @@ const TheHeader = () => {
         {/* <TheHeaderDropdownNotif/>
         <TheHeaderDropdownTasks/> */}
         {/* <TheHeaderDropdownMssg/> */}
-        <TheHeaderDropdown/>
+        <TheHeaderDropdown />
       </CHeaderNav>
 
       {/* <CSubheader className="px-3 justify-content-between">
@@ -94,7 +100,7 @@ const TheHeader = () => {
           </div>
       </CSubheader> */}
     </CHeader>
-  )
-}
+  );
+};
 
-export default TheHeader
+export default withRouter(TheHeader);
