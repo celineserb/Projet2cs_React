@@ -7,10 +7,10 @@ import { actionTypes } from "./auth.constants";
 const initialAuthState = {
     authToken: "",
     user:null,
-    id: 3
+    id: 0
 };
 export const Authreducer = persistReducer(
-    { storage, key: "autolibdz-auth", whitelist: ["authToken"] },
+    { storage, key: "autolibdz-auth", whitelist: ["authToken", "id"] },
     (state = initialAuthState, action) => {
         switch (action.type) {
             case actionTypes.Login: {
@@ -48,5 +48,6 @@ export function* saga() {
         const id = yield select(({ auth }) => auth.id)
         const { data: user } = yield getUserById(id);
         yield put(actions.fulfillUser(user));
+        
     });
 }
