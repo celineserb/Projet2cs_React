@@ -19,7 +19,11 @@ import navigation from './_nav'
 
 const TheSidebar = () => {
   const dispatch = useDispatch()
+<<<<<<< HEAD
   const show = useSelector(state => state.sidebarShow)
+=======
+  const show = useSelector(({ slide }) => slide.sidebarShow)
+>>>>>>> a494ef317d4f95c159a04b702c24a5001c7c8566
 
   return (
     <CSidebar

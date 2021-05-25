@@ -18,7 +18,10 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import axios from 'axios'
+<<<<<<< HEAD
 
+=======
+>>>>>>> a494ef317d4f95c159a04b702c24a5001c7c8566
 function ValidationForm ()  {
 
   const [posts,setPosts] = useState(1);
@@ -44,6 +47,7 @@ function ValidationForm ()  {
 
     
   } )
+<<<<<<< HEAD
  
   
    const imgpermis ="../../../../assets/images/"+posts.permitPicture
@@ -57,6 +61,12 @@ function ValidationForm ()  {
 // adding dynamic paths
 // let imgpermis = "../../../../assets/images"+posts.permitPicture
 console.log("image permi",imgpermis)
+=======
+   const imgpermis="../../../images/"+posts.permitPicture
+  const imgprofil ="../../../images/"+posts.profilePicture
+  console.log("image profil",imgprofil)
+  console.log("image permi",imgpermis)
+>>>>>>> a494ef317d4f95c159a04b702c24a5001c7c8566
   
    const initialInputState={stateMessage:"",accountState:""};
    const [eachEntry, setEachEntry]=useState(initialInputState);
@@ -125,7 +135,11 @@ console.log("image permi",imgpermis)
                       <CLabel htmlFor="select">Permis de Conduite </CLabel>
                     </CCol>
                     <CCol xs="12" md="9">
+<<<<<<< HEAD
                     <img src={imgpermis} height={140} width={210} ></img>
+=======
+                    <img src= {imgpermis} height={140} width={210} />
+>>>>>>> a494ef317d4f95c159a04b702c24a5001c7c8566
                     
                     </CCol>
                   </CFormGroup>
