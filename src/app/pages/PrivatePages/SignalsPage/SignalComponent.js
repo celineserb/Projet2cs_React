@@ -20,166 +20,167 @@ class SignalComponent extends Component {
           visible : value
         });
     }
+    
     render() { 
         return (  
-                    <Card  
-                        hoverable={true} 
-                        className="signal-list-item"
-                        >
-                        <Row  justify='start'>
-                            <Col >
+                <Card  
+                    hoverable={true} 
+                    className="signal-list-item"
+                    >
+                    <Row  justify='start'>
+                        <Col >
 
-                            <Avatar 
-                                size={48} 
-                                icon={<EllipseIcon />}
-                            ></Avatar> 
-                            </Col>
+                        <Avatar 
+                            size={48} 
+                            icon={<EllipseIcon />}
+                        ></Avatar> 
+                        </Col>
 
-                            <Col
-                                style={{
-                                   marginTop:8,
-                                   marginLeft:8
-                                }} 
-                                span={6}><h3>Signalement N°{this.state.item.name}</h3> </Col>
-                                
-                            <Col span={3} offset={10}  >
-                                May 29, 2020 12:00AM
-                            </Col>
-                            <Col  >
-                                <Button
-                                        onClick={() => this.setVisible (true)}
-                                        shape = 'round'
-                                        size ='middle'
-                                        style={{
-                                            backgroundColor: '#F9C31B', 
-                                            borderColor: 'white', 
-                                            color: 'black',
-                                            paddingLeft: 30, 
-                                            paddingRight: 30
-                                        }}
-                                        >
-                                        Details
-                                </Button>   
-                                
-                                <Modal
-                                    title={"Signalement N °"+this.state.item.name}
-                                    centered
-                                    visible={this.state.visible}
-                                    onOk={() => {this.setVisible(false)}}
-                                    onCancel={() => this.setVisible(false)}
-                                    width={700}
-                                    footer={[
-                                        <Button 
-                                        key="back" 
-                                        onClick={() => this.setVisible(false)}
-                                        shape='round'
-                                        size ='middle'
-                                        style={{
-                                        marginRight: '40%', 
+                        <Col
+                            style={{
+                                marginTop:8,
+                                marginLeft:8
+                            }} 
+                            span={6}><h3>Signalement N°{this.state.item.idSignal}</h3> </Col>
+                            
+                        <Col span={3} offset={10}  >
+                            May 29, 2020 12:00AM
+                        </Col>
+                        <Col  >
+                            <Button
+                                    onClick={() => this.setVisible (true)}
+                                    shape = 'round'
+                                    size ='middle'
+                                    style={{
                                         backgroundColor: '#F9C31B', 
-                                            paddingRight: 60,
-                                            paddingLeft: 60,
-                                            borderColor: 'white', 
-                                            color: 'black',      
-                                        }}>
-                                        OK
-                                        </Button>,  
-                                        ]}
-                                        >
-                                        <h2>Informations Vehicules</h2> <hr className="hr-modal" />
-                                        <Row>
-                                            <div className="info-container">
-                                                <Col><h3 className="info-title">Matricule:</h3></Col>
-                                                <Col push={2}> <span className="info-box"> 3542-3987-12-26</span></Col>  
-                                            </div>
-                                        </Row>
-                                
-                                        <Row>
-                                            <div className="info-container">
-                                                <Col><h3 className="info-title">Modèle:</h3></Col>
-                                                <Col push={3}> <span className="info-box">Volkswagen</span></Col>  
-                                            </div>
-                                        </Row>
-                                
-                                        <Row>
-                                            <div className="info-container">
-                                                <Col><h3 className="info-title">Marque:</h3></Col>
-                                                <Col push={3}> <span className="info-box">Caddy</span></Col>  
-                                            </div>
-                                        </Row>
-                                
-                                        <Row>
-                                            <div className="info-container">
-                                                <Col><h3 className="info-title">Couleur:</h3></Col>
-                                                <Col push={3}> <span className="info-box">Noir</span></Col>  
-                                            </div>
-                                        </Row>
-                                            
-                                
-                                        <h2>Dernière location</h2> <hr className="hr-modal" />  
-                                
-                                        <Row>
-                                            <div className="info-container">
-                                                <Col style={{marginRight:5, }}><h3 className="info-title">Date Début:</h3></Col>
-                                                <Col push={4}> <span className="info-box">26/06/2021</span></Col>  
-                                            </div>
-                                        </Row>
-                                
-                                        <Row>
-                                            <div className="info-container">
-                                                <Col style={{marginRight:9, }}  ><h3 className="info-title">Heure Début:</h3></Col>
-                                                <Col push={3}> <span className="info-box">12:15</span></Col>  
-                                            </div>
-                                        </Row>
-                                
-                                        <Row>
-                                            <div className="info-container">
-                                                <Col><h3 className="info-title">Date de fin prévue:</h3></Col>
-                                                <Col push={1}> <span className="info-box">28/06/2021</span></Col>  
-                                            </div>
-                                        </Row>
-                                
-                                        <Row>
-                                            <div className="info-container">
-                                                <Col><h3 className="info-title">Borne de départ:</h3></Col>
-                                                <Col push={2}> <span className="info-box">Alger, Zone 3</span></Col>  
-                                            </div>
-                                        </Row>
-                                
-                                        <Row>
-                                            <div className="info-container">
-                                                <Col style={{marginRight:5, }}><h3 className="info-title">Borne destination:</h3></Col>
-                                                <Col push={1}> <span className="info-box">Alger, Zone 8</span></Col>  
-                                            </div>
-                                        </Row>
-                                
-                                
-                                        <h2>Dernier locataire</h2> <hr className="hr-modal" />
-                                        <Row>
-                                            <div className="info-container">
-                                                <Col style={{marginRight:11, }}><h3 className="info-title">Nom et Prénom :</h3></Col>
-                                                <Col push={1}> <span className="info-box">Rihani Safi</span></Col>  
-                                            </div>
-                                        </Row>
-                                
-                                        <Row>
-                                            <div className="info-container">
-                                                <Col style={{marginRight:1, }}><h3 className="info-title">telephone: </h3></Col>
-                                                <Col push={5}> <span className="info-box">0655595959</span></Col>  
-                                            </div>
-                                        </Row>
-                                
-                                        <Row>
-                                            <div className="info-container">
-                                                <Col style={{marginRight:5, }}><h3 className="info-title">Adresse: </h3></Col>
-                                                <Col push={6}> <span className="info-box">Meryama, numéro 28</span></Col>  
-                                            </div>
-                                        </Row>
-                                
-                                    </Modal>
-                            </Col>
-                        </Row>
-                    </Card>
+                                        borderColor: 'white', 
+                                        color: 'black',
+                                        paddingLeft: 30, 
+                                        paddingRight: 30
+                                    }}
+                                    >
+                                    Details
+                            </Button>   
+                            
+                            <Modal
+                                title={"Signalement N °"+this.state.item.idSignal}
+                                centered
+                                visible={this.state.visible}
+                                onOk={() => {this.setVisible(false)}}
+                                onCancel={() => this.setVisible(false)}
+                                width={700}
+                                footer={[
+                                    <Button 
+                                    key="back" 
+                                    onClick={() => this.setVisible(false)}
+                                    shape='round'
+                                    size ='middle'
+                                    style={{
+                                    marginRight: '40%', 
+                                    backgroundColor: '#F9C31B', 
+                                        paddingRight: 60,
+                                        paddingLeft: 60,
+                                        borderColor: 'white', 
+                                        color: 'black',      
+                                    }}>
+                                    OK
+                                    </Button>,  
+                                    ]}
+                                    >
+                                    <h2>Informations Vehicules</h2> <hr className="hr-modal" />
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col><h3 className="info-title">Matricule:</h3></Col>
+                                            <Col push={5} style={{marginRight:55}}> <span className="info-box"> {this.state.item.registrationNumber}</span></Col>  
+                                        </div>
+                                    </Row>
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col><h3 className="info-title">Modèle:</h3></Col>
+                                            <Col push={7}> <span className="info-box">{this.state.item.vehiclemodel}</span></Col>  
+                                        </div>
+                                    </Row>
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col><h3 className="info-title">Marque:</h3></Col>
+                                            <Col push={6} style={{marginRight:45}}> <span className="info-box">{this.state.item.vehiclebrand}</span></Col>  
+                                        </div>
+                                    </Row>
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col><h3 className="info-title">Couleur:</h3></Col>
+                                            <Col push={6} style={{marginRight:40}}> <span className="info-box">{this.state.item.vehicleColor} </span></Col>  
+                                        </div>
+                                    </Row>
+                                        
+                            
+                                    <h2>Dernière location</h2> <hr className="hr-modal" />  
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col style={{marginRight:5, }}><h3 className="info-title">Date Début:</h3></Col>
+                                            <Col push={4}> <span className="info-box">26/06/2021</span></Col>  
+                                        </div>
+                                    </Row>
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col style={{marginRight:11, }}  ><h3 className="info-title">Heure Début:</h3></Col>
+                                            <Col push={3}> <span className="info-box">12:15</span></Col>  
+                                        </div>
+                                    </Row>
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col><h3 className="info-title">Date de fin prévue:</h3></Col>
+                                            <Col push={1}> <span className="info-box">{this.state.item.restitutionDate.slice(0,10)} </span></Col>  
+                                        </div>
+                                    </Row>
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col><h3 className="info-title">Borne de départ:</h3></Col>
+                                            <Col push={2}> <span className="info-box">Alger, Zone 4 </span></Col>  
+                                        </div>
+                                    </Row>
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col style={{marginRight:5, }}><h3 className="info-title">Borne destination:</h3></Col>
+                                            <Col push={1}> <span className="info-box">Alger, Zone 8</span></Col>  
+                                        </div>
+                                    </Row>
+                            
+                            
+                                    <h2>Dernier locataire</h2> <hr className="hr-modal" />
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col style={{marginRight:19, }}><h3 className="info-title">Nom et Prénom :</h3></Col>
+                                            <Col push={1}> <span className="info-box"> {this.state.item.lastName+" "+this.state.item.firstName} </span></Col>  
+                                        </div>
+                                    </Row>
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col style={{marginRight:8, }}><h3 className="info-title">telephone: </h3></Col>
+                                            <Col push={5}> <span className="info-box">0{this.state.item.phoneNumber}</span></Col>  
+                                        </div>
+                                    </Row>
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col style={{marginRight:9, }}><h3 className="info-title">Adresse: </h3></Col>
+                                            <Col push={6}> <span className="info-box">Meryama, numéro 28</span></Col>  
+                                        </div>
+                                    </Row>
+                            
+                                </Modal>
+                        </Col>
+                    </Row>
+                </Card>
          );
     }
 }

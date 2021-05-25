@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Layout, Row} from 'antd'
+import {Layout, Row, Button} from 'antd'
 import axios from 'axios';
 import SignalComponent from './SignalComponent';
 
@@ -11,31 +11,44 @@ class SignalsPage extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            signals:[]
+            treatedSignals:[], 
+            untreatedSignals:[]
          }
     }
     componentDidMount(){
-        axios.get(`someurlhna`)
+        axios.get(`http://localhost:8111/theft_signals`)
         .then(res => {
-          const signals= res.data;
-          this.setState({ signals });
+          const treatedSignals = res.data.signlasTreated;
+          const untreatedSignals = res.data.signalsNotTreated;
+          this.setState({ 
+              treatedSignals : treatedSignals,
+              untreatedSignals : untreatedSignals
+            });
         })
     }
     render() { 
         return ( 
             <Layout style={{ backgroundColor:'white'}}>
               <Row style={{}}>
-                    <div className="pannes-list-header">
-                        <label className="pannes-list-title">Enlèvements</label>
-                        <button className="pannes-list-sort-btn" onClick={() => {
-                            const sort = document.getElementsByClassName("pannes-list-sort")[0];
-                            if (sort.classList.contains("hidden")) {
-                                sort.classList.remove("hidden");
-                            } else {
-                                sort.classList.add("hidden");
-                            }
-                        }}><img className="sort-svg" alt="" /> Ordonner</button>
-                        <div className="pannes-list-sort hidden">
+                    <div className="signals-list-header">
+                        <label className="signals-list-title">Enlèvements</label>
+                        <button 
+                            className="signals-list-sort-btn" 
+                            onClick={() => {
+                                const sort = document.getElementsByClassName("signals-list-sort")[0];
+                                if (sort.classList.contains("hidden")) {
+                                    sort.classList.remove("hidden");
+                                } else {
+                                    sort.classList.add("hidden");
+                                }
+                                console.log("Treated signals");
+                                console.log(this.state.treatedSignals);
+                                console.log("untreated signals");
+                                console.log(this.state.untreatedSignals);
+                             }}
+                        >
+                        <img className="sort-svg" alt="" /> Ordonner</button>
+                        <div className="signals-list-sort hidden">
                             <ul>
                                 <li><input type="checkbox" id="sort-latest" /><label for="sort-latest">Plus récents</label></li>
                                 <li><input type="checkbox" id="sort-unseen" /><label for="sort-unseen">Non vues</label></li>
@@ -46,11 +59,13 @@ class SignalsPage extends Component {
                 </Row>
                 <div className="signals-list-body">
                     {
-                        data.map( (item, index) =>{
+                        this.state.untreatedSignals.map( (item, index) =>{
                             return (<SignalComponent index={index} item={item}></SignalComponent>)
                         })
                     }
+                    
                 </div>
+                
             </Layout>
          );
     }
