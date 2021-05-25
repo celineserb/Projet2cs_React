@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import TheContent from './TheContent'
 import TheFooter from './TheFooter'
 import TheHeader from './TheHeader'
@@ -20,26 +19,3 @@ export {
   TheLayout,
   TheSidebar
 }
-=======
-import TheContent from './TheContent'
-import TheFooter from './TheFooter'
-import TheHeader from './TheHeader'
-import TheHeaderDropdown from './TheHeaderDropdown'
-import TheHeaderDropdownMssg from './TheHeaderDropdownMssg'
-import TheHeaderDropdownNotif from './TheHeaderDropdownNotif'
-import TheHeaderDropdownTasks from './TheHeaderDropdownTasks'
-import TheLayout from './TheLayout'
-import TheSidebar from './TheSidebar'
-
-export {
-  TheContent,
-  TheFooter,
-  TheHeader,
-  TheHeaderDropdown,
-  TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks,
-  TheLayout,
-  TheSidebar
-}
->>>>>>> a494ef317d4f95c159a04b702c24a5001c7c8566
