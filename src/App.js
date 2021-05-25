@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch ,Link } from 'react-router-dom';
-import './scss/style.scss';
+import './assets/scss/style.scss';
 // import { Link } from 'react-router-dom';
 
 const loading = (
@@ -10,13 +10,13 @@ const loading = (
 )
 
 // Containers
-const TheLayout = React.lazy(() => import('./containers/TheLayout'));
+const TheLayout = React.lazy(() => import('./app/containers/TheLayout'));
 
 // Pages
-const Login = React.lazy(() => import('./views/pages/login/Login'));
-const Register = React.lazy(() => import('./views/pages/register/Register'));
-const Page404 = React.lazy(() => import('./views/pages/page404/Page404'));
-const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
+const Login = React.lazy(() => import('./app/conponents/pages/login/Login'));
+const Register = React.lazy(() => import('./app/conponents/pages/register/Register'));
+const Page404 = React.lazy(() => import('./app/conponents/pages/page404/Page404'));
+const Page500 = React.lazy(() => import('./app/conponents/pages/page500/Page500'));
 
 const isAuthenticated = () => {
   //write your condition here
