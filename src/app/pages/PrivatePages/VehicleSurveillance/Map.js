@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { fetchVehiclePosition, fetchVehicleLatestPosition } from "../../../../modules/VehiclePosition/vehiclePosition.actions"
+import { fetchVehicleLatestPosition } from "../../../../modules/VehiclePosition/vehiclePosition.actions"
 import mapboxgl from "mapbox-gl";
 import './style/style.scss';
 import { Row} from "antd";
@@ -132,10 +132,6 @@ function loadData(_callback, props) {
         if (res && res.data && res.data.ok) {
             current.data.geometry.coordinates = res.data.position;
             route.data.geometry.coordinates.push(res.data.position);
-           /* current.data.geometry.coordinates = sim[pos];
-            route.data.geometry.coordinates.push(sim[pos]);
-            pos = (pos + 1) % sim.length;
-            if (pos === 0) route.data.geometry.coordinates = []*/
         }
     })
     .catch(err => {

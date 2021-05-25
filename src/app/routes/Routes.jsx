@@ -22,6 +22,10 @@ import { Layout} from 'antd';
 import 'antd/dist/antd.css';
 
 
+import TopBar from '../pages/PrivatePages/common/Topbar/Topbar';
+import SideBar from '../pages/PrivatePages/common/Sidebar/Sidebar';
+
+const { Content} = Layout;
 
 const { Content} = Layout;
 

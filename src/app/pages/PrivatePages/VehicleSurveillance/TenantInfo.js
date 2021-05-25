@@ -66,11 +66,10 @@ class TenantInfo extends Component {
                                 <ContactIcon></ContactIcon>
                             </Col>
                             <Col >
-                                <h3 
-                                    className="tenant-name-text"
+                                <h3
                                     style={{
                                         marginTop: 5,                     
-                                    }}> 
+                                    }}>
                                     {this.state.firstName+" "+this.state.lastName}
                                 </h3>
                             </Col>
@@ -120,14 +119,5 @@ class TenantInfo extends Component {
     }
 }
  
-
-
-
-
-/*function rentalInfo(id){
-    const {rentalInfo, idVehicle, errors}=rental;
-    return {rentalInfo, idVehicle, errors}
-}*/
-//const connectedClass =connect(rentalInfo,{fetchRentalInfo})(TenantInfo)
 
 export default withRouter(TenantInfo);
