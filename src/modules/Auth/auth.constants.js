@@ -5,6 +5,6 @@ export const actionTypes = {
   UserLoaded: "[Load User] Check API"
 }
 export const authUrls = {
-  LOGIN_URL: "http://localhost:8005/signin",
-  USER_URL: "http://localhost:8100/users/"
+  LOGIN_URL: "http://localhost:8005",
+  USER_URL: "http://localhost:8100"
 };
