@@ -2,9 +2,11 @@ import React, { useState } from "react";
 
 import TopBar from '../pages/PrivatePages/common/Topbar/Topbar';
 import SideBar from '../pages/PrivatePages/common/Sidebar/Sidebar';
-import SignalsPage from "../pages/PrivatePages/SignalsPage/SignalsPage";
+
 import TrackingPage from "../pages/PrivatePages/VehicleSurveillance/TrackingPage";
 import ManagePage from "../pages/PrivatePages/VehicleManage/ManagePage";
+import PannesPage from "../pages/PrivatePages/PannesPage/PannesPage";
+import SignalsPage from "../pages/PrivatePages/SignalsPage/SignalsPage";
 
 import {
     BrowserRouter,
@@ -52,9 +54,10 @@ export const Routes = () => {
                 <TopBar></TopBar>
                         <BrowserRouter>
                             <Switch>
-                                <Route path="/signals"  component={ SignalsPage }  />
                                 <Route exact path="/tracking_info/:vehicleId/:rentalId" component={TrackingPage} />
-                                <Route path="/"  component={ ManagePage }  />            
+                                <Route exact path="/pannes" component={PannesPage} />
+                                <Route exact path="/enlevements" component={SignalsPage} />
+                                <Route path="/"  component={ ManagePage }  />         
                             </Switch>
                         </BrowserRouter>
                 </Content>

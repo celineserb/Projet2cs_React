@@ -11,7 +11,7 @@ class SignalComponent extends Component {
         super(props);
         this.state = { 
             visible : props.visible,
-            key: props.key, 
+            key: props.index, 
             item: props.item
          }
     }
@@ -32,9 +32,7 @@ class SignalComponent extends Component {
                             <Avatar 
                                 size={48} 
                                 icon={<EllipseIcon />}
-                                style={{
-                                   
-                                }}></Avatar> 
+                            ></Avatar> 
                             </Col>
 
                             <Col
@@ -64,7 +62,7 @@ class SignalComponent extends Component {
                                 </Button>   
                                 
                                 <Modal
-                                    title="Signalement N °1225"
+                                    title={"Signalement N °"+this.state.item.name}
                                     centered
                                     visible={this.state.visible}
                                     onOk={() => {this.setVisible(false)}}
