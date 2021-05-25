@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 
+import TopBar from '../pages/PrivatePages/common/Topbar/Topbar';
+import SideBar from '../pages/PrivatePages/common/Sidebar/Sidebar';
+
 import TrackingPage from "../pages/PrivatePages/VehicleSurveillance/TrackingPage";
 import ManagePage from "../pages/PrivatePages/VehicleManage/ManagePage";
 import PannesPage from "../pages/PrivatePages/PannesPage/PannesPage";
+import SignalsPage from "../pages/PrivatePages/SignalsPage/SignalsPage";
 
 import {
     BrowserRouter,
@@ -17,8 +21,11 @@ import { actions } from '../../modules'
 import { Layout} from 'antd';
 import 'antd/dist/antd.css';
 
+
 import TopBar from '../pages/PrivatePages/common/Topbar/Topbar';
 import SideBar from '../pages/PrivatePages/common/Sidebar/Sidebar';
+
+const { Content} = Layout;
 
 const { Content} = Layout;
 
@@ -53,7 +60,8 @@ export const Routes = () => {
                             <Switch>
                                 <Route exact path="/tracking_info/:vehicleId/:rentalId" component={TrackingPage} />
                                 <Route exact path="/pannes" component={PannesPage} />
-                                <Route path="/"  component={ ManagePage }  />
+                                <Route exact path="/enlevements" component={SignalsPage} />
+                                <Route path="/"  component={ ManagePage }  />         
                             </Switch>
                         </BrowserRouter>
                 </Content>

@@ -10,7 +10,7 @@
 .pannes-list-header {
     position: relative;
     width: 100%;
-    height: 50px;
+    height: 40px;
     background-color: #fff;
 }
 .pannes-list-title {
@@ -50,7 +50,7 @@
 .pannes-list-body {
     position: relative;
     width: 100%;
-    padding-top: 40px;
+    padding-top: 30px;
     height: 100%;
     overflow-y: auto;
     background-color: #fff;
@@ -93,7 +93,8 @@
 .panne-notif-seen > div {
     background-color: #ddd; 
 }
-.panne-notif-unseen > div {
+
+.panne-notif-unseen  {
     background-color: #F9431B; 
 }
 .panne-notif-body {
@@ -152,10 +153,7 @@
 }
 .panne-notif-more {
     position: relative;
-    width: 5%;
-    height: 100%;
     display: inline-block;
-    padding-bottom: 100px;
     vertical-align: top;
 }
 .panne-notif-more > button {
@@ -241,4 +239,10 @@
 }
 .sort-svg {
     content: url('../../../../../assets/svg/sort.svg');
+}
+.pannes-list-item{
+    border-radius: 35px; 
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 10px;
 }

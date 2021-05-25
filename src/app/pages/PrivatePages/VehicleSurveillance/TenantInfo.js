@@ -120,13 +120,4 @@ class TenantInfo extends Component {
 }
  
 
-
-
-
-/*function rentalInfo(id){
-    const {rentalInfo, idVehicle, errors}=rental;
-    return {rentalInfo, idVehicle, errors}
-}*/
-//const connectedClass =connect(rentalInfo,{fetchRentalInfo})(TenantInfo)
-
 export default withRouter(TenantInfo);
