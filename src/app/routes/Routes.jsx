@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import TopBar from '../pages/PrivatePages/common/Topbar/Topbar';
-import SideBar from '../pages/PrivatePages/common/Sidebar/Sidebar';
 
 import TrackingPage from "../pages/PrivatePages/VehicleSurveillance/TrackingPage";
 import ManagePage from "../pages/PrivatePages/VehicleManage/ManagePage";
@@ -24,8 +22,6 @@ import 'antd/dist/antd.css';
 
 import TopBar from '../pages/PrivatePages/common/Topbar/Topbar';
 import SideBar from '../pages/PrivatePages/common/Sidebar/Sidebar';
-
-const { Content} = Layout;
 
 const { Content} = Layout;
 
