@@ -37,13 +37,13 @@
 }
 
 
-.pannes-list-header {
+.signals-list-header {
   position: relative;
   width: 100%;
   height: 40px;
   background-color: #fff;
 }
-.pannes-list-title {
+.signals-list-title {
   font-size: 14px;
   font-weight: bold;
   color: #9FA2B4;
@@ -51,7 +51,7 @@
   bottom: 12px;
   left: 40px;
 }
-.pannes-list-sort-btn {
+.signals-list-sort-btn {
   cursor: pointer;
   background: none;
   border: none;
@@ -63,7 +63,7 @@
   vertical-align: middle;
   color: #333;
 }
-.pannes-list-sort-btn > img {
+.signals-list-sort-btn > img {
   vertical-align: middle;
   height: 12px;
   padding-right: 5px;
@@ -84,4 +84,34 @@
   height: 100%;
   overflow-y: auto;
   background-color: #fff;
+}
+
+.signals-list-sort {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  background-color: #fff;
+  border-radius: 20px;
+  z-index: 51;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+}
+.signals-list-sort > ul {
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+}
+.signals-list-sort > ul > li,
+.signals-list-sort > ul > li > label,
+.signals-list-sort > ul > li > input[type="checkbox"] {
+  margin: 5px;
+  vertical-align: middle;
+  font-size: 14px;
+}
+.signals-list-sort > ul > li:hover,
+.signals-list-sort > ul > li:hover > label,
+.signals-list-sort > ul > li:hover > input[type="checkbox"]  {
+  cursor: pointer;
+}
+.signals-list-sort > ul > li > input[type="checkbox"]:checked + label {
+  font-weight: bold;
 }
