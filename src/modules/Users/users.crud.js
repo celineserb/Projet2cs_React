@@ -9,3 +9,7 @@ export function getTenantById(id) {
     return axios.get(Services.USER_URL + "/locataires/" + id)
 }
 
+export function updateTenantStatus(id, data) {
+    return axios.put(Services.USER_URL + `/locataires/${id}`, data)
+}
+

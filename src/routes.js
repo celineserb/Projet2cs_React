@@ -4,7 +4,6 @@ const Toaster = React.lazy(() => import('./app/conponents/notifications/toaster/
 const Tables = React.lazy(() => import('./app/conponents/base/tables/Tables'));
 
 const UsersTable =React.lazy(()=> import('./app/conponents/gestionUtil/compteLocataire'));
-const ValidationForme =React.lazy(()=> import('./app/conponents/gestionUtil/validationCompte'));
 
 const Breadcrumbs = React.lazy(() => import('./app/conponents/base/breadcrumbs/Breadcrumbs'));
 const Cards = React.lazy(() => import('./app/conponents/base/cards/Cards'));
@@ -92,8 +91,6 @@ const routes = [
   { path: '/gestionUtil', name: 'GestionUtil', component: UsersTable, exact: true },
   // { path: '/gestionUtil', name: 'gestionUtil', component: Cards, exact: true },
   { path: '/gestionUtil/compteLocataire', name: 'TableLocataire', component: UsersTable },
-  { path: '/gestionUtil/validationCompte', name: 'TableLocataire', component:ValidationForme },
-  { path: '/gestionUtil/validationCompteid/:id', name: 'TableLocataire', component:ValidationForme },
 
   { path: "/login", exact: true, name: "Login Page", component: Login },
   { path: "/p404", name: "Page not found", component: Page404 },

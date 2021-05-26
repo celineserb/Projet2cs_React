@@ -24,11 +24,6 @@ const _nav =  [
         name: 'Comptes',
         to: '/gestionUtil/compteLocataire',
       },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Forme de Validation',
-        to: '/gestionUtil/validationCompte',
-      },
       
     ],
   },
