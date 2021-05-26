@@ -1,17 +1,11 @@
-import React ,{ useEffect, useState } from 'react'
+import React from 'react'
 
 import {
   CButton,
   CCard,
   CCardBody,
   CCardFooter,
-  CCardHeader,
   CCol,
-  CForm,
-  CFormGroup,
-  CTextarea,
-  CInputRadio,
-  CLabel,
   CButtonGroup,
   CProgress,
   CRow,
@@ -19,7 +13,6 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { getStyle, hexToRgba } from '@coreui/utils'
-import MainChartExample from '../../../conponents/charts/MainChartExample'
 import { CChartLine } from '@coreui/react-chartjs'
 
 const brandSuccess = getStyle('success') || '#4dbd74'
