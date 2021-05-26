@@ -94,6 +94,7 @@
   border-radius: 20px;
   z-index: 51;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+  padding: 15px;
 }
 .signals-list-sort > ul {
   margin: 0;
