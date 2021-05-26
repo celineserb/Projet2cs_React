@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { fetchVehicleLatestPosition } from "../../../../modules/VehiclePosition/vehiclePosition.actions"
+import { fetchVehicleLatestPosition, fetchVehiclePosition } from "../../../../modules/VehiclePosition/vehiclePosition.actions"
 import mapboxgl from "mapbox-gl";
 import './style/style.scss';
 import { Row} from "antd";
@@ -17,7 +17,7 @@ current = {
         'properties': {},
         'geometry': {
             'type': 'LineString',
-            'coordinates': [-122.483696, 37.833818]//[3.0588, 36.7538]
+            'coordinates': [3.0588, 36.7]
         }
     }
 }, 
@@ -124,8 +124,8 @@ function loadRoute(map) {
 /**
  * 
  */
-function loadData(_callback, props) {
-    fetchVehicleLatestPosition({
+async function loadData(_callback, props) {
+    await fetchVehicleLatestPosition({
         idRental: rentalId
     })
     .then(res => {
@@ -138,6 +138,27 @@ function loadData(_callback, props) {
 
     });
     _callback();
+}
+
+function loadFullRoute(map) {
+    fetchVehiclePosition({
+        idRental: rentalId
+    })
+    .then(res => {
+        if (res && res.data && res.data.ok) {
+            route.data.geometry.coordinates = [];
+            res.data.route.sort((e1, e2) => {
+                return e1.idTrack - e2.idTrack
+            });
+            res.data.route.forEach(function(e){
+                route.data.geometry.coordinates.push([e.longitude, e.latitude]);
+            });
+            loadRoute(map);
+        }
+    })
+    .catch(err => {
+
+    });
 }
 
 class Mappe extends Component {
@@ -172,14 +193,18 @@ class Mappe extends Component {
                     }, rentalId);
                 }, 3000);
             }, rentalId);
-        },);  
+        });  
+        document.getElementById("full-route-btn").addEventListener("click", function(){
+            loadFullRoute(map);
+        });
          
     }
 
     render() {
         return(
             <Row justify="start">
-                    <div ref={el => this.mapContainer = el} style={{width: "80vw", height: "70vh", 'borderRadius': "40px"}}/>
+                <button id="full-route-btn" style={{position: "absolute", zIndex:51}}>Afficher trajet complet</button>
+                <div ref={el => this.mapContainer = el} style={{width: "80vw", height: "70vh", 'borderRadius': "20px"}}/>
             </Row>
         )
     }
