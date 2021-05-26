@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from "react";
-import permis from "../../../images/doc1.png";
+
 import axios from "axios";
-import useAxios from "axios-hooks";
-import Home from "src/routes";
-import {
-  Redirect,
-  Route,
-  Link,
-  BrowserRouter as Router,
-  useHistory,
-} from "react-router-dom";
-import { useRoutes } from "hookrouter";
-import { browserHistory } from "react-router";
+
+
+
+
 import {
   CBadge,
   CDataTable,
@@ -46,15 +39,7 @@ import {
   CRow,
   CSwitch,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import { DocsLink } from "src/reusable";
 
-import usersData from "../../users/UsersData";
-import { render } from "enzyme/build";
-import Login from "src/views/pages/login/Login";
-// import routes from 'src/routes';
-
-const TheLayout = React.lazy(() => import("../../../containers/TheLayout"));
 
 const fields = ["username", "accountState"];
 // function Red(){
