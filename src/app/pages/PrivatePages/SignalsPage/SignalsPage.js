@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Layout, Row, Button} from 'antd'
+import {Layout, Row, Button, Col, Checkbox} from 'antd'
 import axios from 'axios';
 import SignalComponent from './SignalComponent';
 
@@ -11,9 +11,11 @@ class SignalsPage extends Component {
     constructor(props) {
         super(props);
         this.state = { 
+            data: [],
             treatedSignals:[], 
             untreatedSignals:[]
          }
+         this.onSelect = this.onSelect.bind(this)
     }
     componentDidMount(){
         axios.get(`http://localhost:8111/theft_signals`)
@@ -22,9 +24,47 @@ class SignalsPage extends Component {
           const untreatedSignals = res.data.signalsNotTreated;
           this.setState({ 
               treatedSignals : treatedSignals,
-              untreatedSignals : untreatedSignals
+              untreatedSignals : untreatedSignals,
+              data : treatedSignals.concat(untreatedSignals)
             });
         })
+    }
+    onSelect(changedValues, ){
+        console.log(changedValues);
+        var treated =false;
+        var untreated = false ;
+        changedValues.forEach(element => {
+            if (element=="T"){
+                console.log("treated true");
+                treated = true;
+            }
+            if (element=="U") {
+                untreated = true;
+            }
+        });
+        const treatedSignals = [...this.state.treatedSignals];
+        const untreatedSignals  = [...this.state.untreatedSignals];
+        if (treated && untreated) {
+            this.setState({
+                data : treatedSignals.concat(untreatedSignals)
+            })
+        }
+        if (treated && !untreated) {
+            console.log("treated");
+            this.setState({
+                data : treatedSignals
+            })
+        }
+        if (!treated && untreated) {
+            this.setState({
+                data : untreatedSignals
+            })
+        }
+        if (!treated && !untreated) {
+            this.setState({
+                data : treatedSignals.concat(untreatedSignals)
+            })
+        }
     }
     render() { 
         return ( 
@@ -41,29 +81,33 @@ class SignalsPage extends Component {
                                 } else {
                                     sort.classList.add("hidden");
                                 }
-                                console.log("Treated signals");
-                                console.log(this.state.treatedSignals);
-                                console.log("untreated signals");
-                                console.log(this.state.untreatedSignals);
+                                console.log(this.state.data);
                              }}
                         >
-                        <img className="sort-svg" alt="" /> Ordonner</button>
+                        <img className="sort-svg" alt="" /> Filtrer</button>
                         <div className="signals-list-sort hidden">
-                            <ul>
-                                <li><input type="checkbox" id="sort-latest" /><label for="sort-latest">Plus récents</label></li>
-                                <li><input type="checkbox" id="sort-unseen" /><label for="sort-unseen">Non vues</label></li>
-                            </ul>
+                        <Checkbox.Group style={{ width: '100%' }} onChange={this.onSelect}>
+                                <Row>
+                                    <Col >
+                                        <Checkbox value="T">Traité</Checkbox>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col >
+                                        <Checkbox value="U">Non Traité</Checkbox>
+                                    </Col>
+                                </Row>
+                        </Checkbox.Group>
                         </div>
                         <div className="hl"></div>
                     </div>
                 </Row>
                 <div className="signals-list-body">
-                    {
-                        this.state.untreatedSignals.map( (item, index) =>{
+                    {                
+                        this.state.data.map( (item, index) =>{
                             return (<SignalComponent index={index} item={item}></SignalComponent>)
                         })
                     }
-                    
                 </div>
                 
             </Layout>

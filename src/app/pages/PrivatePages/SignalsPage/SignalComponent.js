@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import { Card, Row , Col, Button, Modal, Avatar} from "antd";
 import { ReactComponent as EllipseIcon } from '../../../../assets/svg/ellipse.svg';
+import { ReactComponent as EllipseGreyIcon } from '../../../../assets/svg/ellipse-gris.svg';
 import './style/style.css'
 
 
@@ -12,7 +13,8 @@ class SignalComponent extends Component {
         this.state = { 
             visible : props.visible,
             key: props.index, 
-            item: props.item
+            item: props.item, 
+            changed: false 
          }
     }
     setVisible(value){
@@ -20,7 +22,15 @@ class SignalComponent extends Component {
           visible : value
         });
     }
-    
+    treatSignal(){
+        axios.put(`http://localhost:8111/signals_treated?idSignal=${this.state.item.idSignal}`)
+        .then(res => {
+            console.log("done with request");
+          this.setState({
+              changed:true
+          })
+        })
+    }
     render() { 
         return (  
                 <Card  
@@ -29,28 +39,52 @@ class SignalComponent extends Component {
                     >
                     <Row  justify='start'>
                         <Col >
+                        {
+                            this.state.item.treated?
+                                    <Avatar 
+                                        size={48} 
+                                        icon={<EllipseGreyIcon />}>
+                                    </Avatar>
+                            :
+                                    <Avatar 
+                                        size={48} 
+                                        icon={<EllipseIcon />}>
+                                    </Avatar>           
 
-                        <Avatar 
-                            size={48} 
-                            icon={<EllipseIcon />}
-                        ></Avatar> 
+                        }
+                         
                         </Col>
+
 
                         <Col
                             style={{
                                 marginTop:8,
                                 marginLeft:8
                             }} 
-                            span={6}><h3>Signalement N°{this.state.item.idSignal}</h3> </Col>
-                            
-                        <Col span={3} offset={10}  >
-                            May 29, 2020 12:00AM
+                            span={6}><h3>Signalement N°{this.state.item.idSignal}</h3> 
                         </Col>
-                        <Col  >
+
+                        <Col offset={5}  >
+                        Source:  {this.state.item.sourceType}
+                        </Col>
+
+                            
+                        <Col span={3} offset={1}  >
+                        {this.state.item.sent_at.slice(0,10)+" "+this.state.item.sent_at.slice(11, 16)}
+                        </Col>
+                        <Col>
+                            <Button
+                                shape='round'
+                                style={{marginRight:5}}
+                                onClick={()=> this.treatSignal()}>
+                                Traiter
+                            </Button>
+                        </Col>
+
+                        <Col >
                             <Button
                                     onClick={() => this.setVisible (true)}
                                     shape = 'round'
-                                    size ='middle'
                                     style={{
                                         backgroundColor: '#F9C31B', 
                                         borderColor: 'white', 
@@ -108,7 +142,7 @@ class SignalComponent extends Component {
                                             <Col push={6} style={{marginRight:45}}> <span className="info-box">{this.state.item.vehiclebrand}</span></Col>  
                                         </div>
                                     </Row>
-                            
+                                    
                                     <Row>
                                         <div className="info-container">
                                             <Col><h3 className="info-title">Couleur:</h3></Col>
@@ -122,14 +156,14 @@ class SignalComponent extends Component {
                                     <Row>
                                         <div className="info-container">
                                             <Col style={{marginRight:5, }}><h3 className="info-title">Date Début:</h3></Col>
-                                            <Col push={4}> <span className="info-box">26/06/2021</span></Col>  
+                                            <Col push={4}> <span className="info-box"> {this.state.item.rentaldate.slice(0,10)} </span></Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
                                             <Col style={{marginRight:11, }}  ><h3 className="info-title">Heure Début:</h3></Col>
-                                            <Col push={3}> <span className="info-box">12:15</span></Col>  
+                                            <Col push={3}> <span className="info-box"> {this.state.item.rentaltime} </span></Col>  
                                         </div>
                                     </Row>
                             
@@ -143,14 +177,14 @@ class SignalComponent extends Component {
                                     <Row>
                                         <div className="info-container">
                                             <Col><h3 className="info-title">Borne de départ:</h3></Col>
-                                            <Col push={2}> <span className="info-box">Alger, Zone 4 </span></Col>  
+                                            <Col push={2}> <span className="info-box"> {this.state.item.depatBorne} </span></Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
                                             <Col style={{marginRight:5, }}><h3 className="info-title">Borne destination:</h3></Col>
-                                            <Col push={1}> <span className="info-box">Alger, Zone 8</span></Col>  
+                                            <Col push={1}> <span className="info-box"> {this.state.item.destBorne} </span></Col>  
                                         </div>
                                     </Row>
                             
@@ -173,7 +207,7 @@ class SignalComponent extends Component {
                                     <Row>
                                         <div className="info-container">
                                             <Col style={{marginRight:9, }}><h3 className="info-title">Adresse: </h3></Col>
-                                            <Col push={6}> <span className="info-box">Meryama, numéro 28</span></Col>  
+                                            <Col push={6}> <span className="info-box"> {this.state.item.address} </span></Col>  
                                         </div>
                                     </Row>
                             
