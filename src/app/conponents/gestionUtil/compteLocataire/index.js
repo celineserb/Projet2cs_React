@@ -1,50 +1,15 @@
 import React, { useEffect, useState } from "react";
-
-import axios from "axios";
-
-
-
-
 import {
-  CBadge,
   CDataTable,
-  CButton,
   CCard,
   CCardBody,
-  CCardFooter,
   CCardHeader,
   CCol,
-  CCollapse,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-  CFade,
-  CForm,
-  CFormGroup,
-  CFormText,
-  CValidFeedback,
-  CInvalidFeedback,
-  CTextarea,
-  CInput,
-  CInputFile,
-  CInputCheckbox,
-  CInputRadio,
-  CInputGroup,
-  CInputGroupAppend,
-  CInputGroupPrepend,
-  CDropdown,
-  CInputGroupText,
-  CLabel,
-  CSelect,
   CRow,
-  CSwitch,
 } from "@coreui/react";
-
+import { getLocataires } from "../../../../modules/Users/users.crud";
 
 const fields = ["username", "accountState"];
-// function Red(){
-
-// }
 
 function HandleClick(id) {
   console.log(id);
@@ -53,29 +18,22 @@ function HandleClick(id) {
 
 function UsersTable() {
   const [posts, setPosts] = useState([]);
-  const [id, setId] = useState(1);
-  const [idFromButtonClick, setIdFromButtonClick] = useState(1);
   const rowEvents = {
     onclick: (e, row) => {
       console.log(row);
     },
   };
 
-  // } handleClick(){
-
-  // }
   useEffect(() => {
-    axios
-      .get("http://localhost:8101/get-tenant")
-      .then((res) => {
-        // console.log(res);
+    getLocataires().then((res) => {
+        console.log(res.data);
         setPosts(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  });
-  let idTenant = 0;
+  }, []);
+
   return (
     <>
       <CRow>
@@ -92,7 +50,6 @@ function UsersTable() {
                 size="sm"
                 itemsPerPage={10}
                 pagination
-                clickEvent={(post) => (idTenant = post.idTenant)}
                 rowEvents={rowEvents}
                 clickableRows
                 onRowClick={(post) => HandleClick(post.idTenant)}

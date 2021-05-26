@@ -1,3 +1,5 @@
+import { Services } from '../../services/crud.services'
+
 export const actionTypes = {
   Login: "[Login] Action",
   Logout: "[Logout] Action",
@@ -5,6 +7,6 @@ export const actionTypes = {
   UserLoaded: "[Load User] Check API"
 }
 export const authUrls = {
-  LOGIN_URL: "http://localhost:8005",
-  USER_URL: "http://localhost:8100"
+  LOGIN_URL: Services.AUTH_URL,
+  USER_URL: Services.USER_URL
 };

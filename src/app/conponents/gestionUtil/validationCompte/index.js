@@ -18,13 +18,10 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import axios from 'axios'
+import { getTenantById } from '../../../../modules/Users/users.crud';
 function ValidationForm ()  {
 
   const [posts,setPosts] = useState(1);
-
-  
-  const [collapsed, setCollapsed] = React.useState(true)
-  const [showElements, setShowElements] = React.useState(true)
 
   let id=window.location.pathname
    const array=id.split("/")
@@ -32,8 +29,7 @@ function ValidationForm ()  {
  
 
   useEffect(()=>{
-    axios.get(`http://localhost:8101/get-tenant/${id}`)
-    .then(res=>{
+    getTenantById(id).then(res=>{
       setPosts(res.data)
     })
     .catch(err=>{
