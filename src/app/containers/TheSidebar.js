@@ -10,7 +10,6 @@ import {
   CSidebarMinimizer,
   CSidebarNavDropdown,
   CSidebarNavItem,
-  CNavbarText,
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
