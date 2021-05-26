@@ -33,7 +33,7 @@ class PanneComponent extends Component {
                 <Card hoverable={true}  className="pannes-list-item">
                 <Row justify='start'>
                     {
-                        this.state.item.seen? 
+                        this.state.item.treated? 
                             <Col span={1}>  
                                 <Avatar 
                                     size={48} 
@@ -63,13 +63,15 @@ class PanneComponent extends Component {
                         </div>    
                     </Col>
 
-                    <Col span={4} offset={8}>
-                        {this.state.item.vehicle}<br/>
-                        {this.state.item.source}
+                    <Col span={4} offset={8} className="truncated"> 
+                        {this.state.item.vehiclebrand}<br/>
+                        {this.state.item.sourceType==="Auto"? "Automatique"
+                        : (this.state.item.sourceType==="Agent"||this.state.item.sourceType==="Tenant")? this.state.item.firstName+" "+this.state.item.lastName
+                        : "Source inconnue"}
                     </Col>
                     <Col span={3} >
-                        {this.state.item.date}<br/>
-                        {this.state.item.time}
+                        {this.state.item.sent_at.slice(0, 10)}<br/>
+                        {this.state.item.sent_at.slice(11, 19)}
                     </Col>
                     <Col offset={1} >
                         <div className="panne-notif-more">
