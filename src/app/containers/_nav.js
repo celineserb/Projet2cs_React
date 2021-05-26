@@ -29,6 +29,11 @@ const _nav =  [
         name: 'Forme de Validation',
         to: '/gestionUtil/validationCompte',
       },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Graphe de Location",
+        to: "/decideur/GrapheLocation"
+      }
       
     ],
   },
@@ -213,7 +218,7 @@ const _nav =  [
   //       _tag: 'CSidebarNavItem',
   //       name: 'Alerts',
   //       to: '/notifications/alerts',
-  //     },
+  //     }, 
   //     {
   //       _tag: 'CSidebarNavItem',
   //       name: 'Badges',

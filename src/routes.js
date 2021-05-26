@@ -1,7 +1,4 @@
 import React from "react";
-import Login from "./app/pages/AuthPages/login/Login";
-import Page404 from "./app/pages/AuthPages/page404/Page404";
-import Page500 from "./app/pages/AuthPages/page500/Page500";
 
 const Toaster = React.lazy(() =>
   import("./app/conponents/notifications/toaster/Toaster")
@@ -86,6 +83,10 @@ const Typography = React.lazy(() =>
 const Widgets = React.lazy(() => import("./app/conponents/widgets/Widgets"));
 const Users = React.lazy(() => import("./app/conponents/users/Users"));
 const User = React.lazy(() => import("./app/conponents/users/User"));
+const Login = React.lazy(() => import("./app/pages/AuthPages/login/Login"));
+const Page404 = React.lazy(() => import("./app/pages/AuthPages/page404/Page404"));
+const Page500 = React.lazy(() => import("./app/pages/AuthPages/page500/Page500"));
+const GrapheLocation = React.lazy(() => import("./app/pages/PrivatePages/GraphDeLocation"));
 
 const routes = [
   { path: "/", exact: true, name: "Home" },
@@ -148,6 +149,8 @@ const routes = [
   { path: "/login", exact: true, name: "Login Page", component: Login },
   { path: "/p404", name: "Page not found", component: Page404 },
   { path: "/p500", name: "Page not found", component: Page500 },
+
+  { path: "/decideur/GrapheLocation", name: "Graphe de location", component: GrapheLocation}
 ];
 
 export default routes;
