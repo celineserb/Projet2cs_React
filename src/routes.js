@@ -40,9 +40,9 @@ const Typography = React.lazy(() => import('./app/conponents/theme/typography/Ty
 const Widgets = React.lazy(() => import('./app/conponents/widgets/Widgets'));
 const Users = React.lazy(() => import('./app/conponents/users/Users'));
 const User = React.lazy(() => import('./app/conponents/users/User'));
-const Login = React.lazy(() => import('./app/pages/AuthPages/login'))
-const Page404 = React.lazy(() => import('./app/pages/AuthPages/page404'))
-const Page500 = React.lazy(() => import('./app/pages/AuthPages/page500'))
+const Login = React.lazy(() => import('./app/pages/AuthPages/login/Login'))
+const Page404 = React.lazy(() => import('./app/pages/AuthPages/page404/Page404'))
+const Page500 = React.lazy(() => import('./app/pages/AuthPages/page500/Page500'))
 const GrapheLocation = React.lazy(() => import('./app/pages/PrivatePages/GraphDeLocation'))
 
 
