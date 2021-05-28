@@ -1,96 +1,40 @@
 import React, { useEffect, useState } from "react";
-import permis from "../../../images/doc1.png";
-import axios from "axios";
-import useAxios from "axios-hooks";
-import Home from "src/routes";
 import {
-  Redirect,
-  Route,
-  Link,
-  BrowserRouter as Router,
-  useHistory,
-} from "react-router-dom";
-import { useRoutes } from "hookrouter";
-import { browserHistory } from "react-router";
-import {
-  CBadge,
   CDataTable,
-  CButton,
   CCard,
   CCardBody,
-  CCardFooter,
   CCardHeader,
   CCol,
-  CCollapse,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-  CFade,
-  CForm,
-  CFormGroup,
-  CFormText,
-  CValidFeedback,
-  CInvalidFeedback,
-  CTextarea,
-  CInput,
-  CInputFile,
-  CInputCheckbox,
-  CInputRadio,
-  CInputGroup,
-  CInputGroupAppend,
-  CInputGroupPrepend,
-  CDropdown,
-  CInputGroupText,
-  CLabel,
-  CSelect,
   CRow,
-  CSwitch,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import { DocsLink } from "src/reusable";
+import { getLocataires } from "../../../../modules/Users/users.crud";
+import ValidationForm from "../validationCompte";
 
-import usersData from "../../users/UsersData";
-import { render } from "enzyme/build";
-import Login from "src/views/pages/login/Login";
-// import routes from 'src/routes';
-
-const TheLayout = React.lazy(() => import("../../../containers/TheLayout"));
-
-const fields = ["username", "accountState"];
-// function Red(){
-
-// }
-
-function HandleClick(id) {
-  console.log(id);
-  window.location.href = "/gestionUtil/validationCompte/" + id;
-}
+const fields = ["idUser", "accountState"];
 
 function UsersTable() {
-  const [posts, setPosts] = useState([]);
-  const [id, setId] = useState(1);
-  const [idFromButtonClick, setIdFromButtonClick] = useState(1);
-  const rowEvents = {
-    onclick: (e, row) => {
-      console.log(row);
-    },
-  };
+  const [locataires, setLocataires] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false)
+  const [selectedLocataire, setSelectedLocataire] = useState({})
 
-  // } handleClick(){
-
-  // }
   useEffect(() => {
-    axios
-      .get("http://localhost:8101/get-tenant")
-      .then((res) => {
-        // console.log(res);
-        setPosts(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-  let idTenant = 0;
+    getLocataires()
+    .then((res) => {
+      console.log(res.data);
+      setLocataires(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, []);
+
+  function HandleClick(locataire) {
+    if (locataire.accountState !== "validated") {
+      setSelectedLocataire(locataire)
+      setModalVisible(true)
+    }
+  }
+
   return (
     <>
       <CRow>
@@ -99,23 +43,22 @@ function UsersTable() {
             <CCardHeader>Liste des Locataires inscrits</CCardHeader>
             <CCardBody>
               <CDataTable
-                items={posts}
+                items={locataires}
                 fields={fields}
                 hover
                 striped
                 bordered
-                size="sm"
+                size="md"
                 itemsPerPage={10}
                 pagination
-                clickEvent={(post) => (idTenant = post.idTenant)}
-                rowEvents={rowEvents}
                 clickableRows
-                onRowClick={(post) => HandleClick(post.idTenant)}
+                onRowClick={(locataire) => HandleClick(locataire)}
               />
             </CCardBody>
           </CCard>
         </CCol>
       </CRow>
+      <ValidationForm visible={modalVisible} setVisible={setModalVisible} locataire={selectedLocataire} />
     </>
   );
 }

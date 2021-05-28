@@ -15,9 +15,9 @@ export const Routes = () => {
     const [loading, setLoading] = useState(true)
     const dispatch = useDispatch();
     /*** To ensure authentication the token must be verified before access to the private routes */
-    const { isAuthorized, user, authToken, id } = useSelector(
+    const { isAuthorized, user, authToken } = useSelector(
         ({ auth }) => ({
-                isAuthorized: auth.authToken && auth.id !== 0 && auth.user && typeof auth.user === "object",
+                isAuthorized: auth.authToken && auth.user && typeof auth.user === "object",
                 authToken: auth.authToken,
                 user: auth.user,
                 id: auth.id
@@ -27,7 +27,7 @@ export const Routes = () => {
         CrudService.setAuthHeader(authToken)
     } else {
         /***** Check the current token if valid and get the athentified user ****/
-        if (authToken && id !== 0 && !user && loading) {
+        if (authToken && !user && loading) {
             setLoading(false)
             dispatch(actions.requestUser("Laoding"))
         }
@@ -43,7 +43,7 @@ export const Routes = () => {
                 {user.userType === "agent_admin" && <Route path="/" component={TheLayout} />}
                 {user.userType === "account_admin" && <Route path="/" component={TheLayout} />}
                 {user.userType === "technical_admin" && <Route path="/" component={TheLayout} />}
-                {user.userType === "Tenant" && <Route path="/" component={TheLayout} />}
+                {user.userType === "tenant" && <Route path="/" component={TheLayout} />}
                 {user.userType === "agent" && <Route path="/" component={TheLayout} />}
             </> : <>
                 {/* Write all routes for the authentification */}

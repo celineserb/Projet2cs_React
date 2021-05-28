@@ -1,5 +1,11 @@
 import axios from 'axios';
-const URL_ROOT = /*process.env.REACT_APP_URL_APP +*/ 'https://sagebackend.herokuapp.com/api/';
+const URL_ROOT="http://localhost";
+
+export const Services = {
+    AUTH_URL: `${URL_ROOT}:8005`,
+    USER_URL: `${URL_ROOT}:8100`
+}
+
 export const CrudService = {
     Put,
     Get,
@@ -19,7 +25,7 @@ function setAuthHeader(authToken) {
     axios.interceptors.request.use(
         config => {
             if (authToken) {
-                config.headers.Authorization = `Bearer ${authToken}`;
+                config.headers.auth = authToken;
             }
             return config;
         },
@@ -36,8 +42,8 @@ function setAuthHeader(authToken) {
 
 ****************************************/
 
-function Get(url,params={},headers={}) {
-    return axios.get(`${URL_ROOT}${url}`, {
+function Get(service, url,params={},headers={}) {
+    return axios.get(`${service}${url}`, {
         headers: headers,
         params: params
     })
@@ -50,25 +56,25 @@ function Get(url,params={},headers={}) {
     * @return Axios reqeust with the given configuration
 **/
 
-function Put(url, data, headers) {
-    return axios.put(`${URL_ROOT}${url}`, data, {
+function Put(service, url, data, headers) {
+    return axios.put(`${service}${url}`, data, {
         headers: headers
     })
 }
-function Post(url, data, headers) {
-    return axios.post(`${URL_ROOT}${url}`, data, {
+function Post(service, url, data, headers) {
+    return axios.post(`${service}${url}`, data, {
         headers: headers
     })
 }
-function Patch(url, data, headers) {
-    return axios.patch(`${URL_ROOT}${url}`, data, {
+function Patch(service, url, data, headers) {
+    return axios.patch(`${service}${url}`, data, {
         headers: headers
     })
 }
-function Delete(url, data, headers) {
+function Delete(service, url, data, headers) {
     var config = {
         method: 'delete',
-        url: `${URL_ROOT}${url}`,
+        url: `${service}${url}`,
         headers: headers,
         data: data
     };

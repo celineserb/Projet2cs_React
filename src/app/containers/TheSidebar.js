@@ -25,6 +25,9 @@ const TheSidebar = () => {
     <CSidebar
       show={show}
       onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
+      style={{
+        background: "#333"
+      }}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
         <CIcon
@@ -51,6 +54,11 @@ const TheSidebar = () => {
           }}
         />
       </CSidebarNav>
+      <CSidebarNavItem 
+        to="/parameters"
+        name="Parameters"
+      >
+      </CSidebarNavItem>
       <CSidebarMinimizer className="c-d-md-down-none"/>
     </CSidebar>
   )
