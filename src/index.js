@@ -4,17 +4,16 @@ import 'core-js';
 import './polyfill'
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
+import { Routes } from "./app/routes";
+import { persistor, store } from "./config";
+import './index.scss'
+
 import * as serviceWorker from './serviceWorker';
-import { PersistGate } from 'redux-persist/integration/react'
-
 import { icons } from './assets/icons'
-
-import { Provider } from 'react-redux'
-import { store, persistor } from './config'
-import { BrowserRouter } from 'react-router-dom';
-import { Routes } from './app/routes/Routes';
-
-import "./assets/scss/style.scss";
+//import "./assets/scss/style.scss";
 
 React.icons = icons
 

@@ -3,7 +3,9 @@ const URL_ROOT="http://localhost";
 
 export const Services = {
     AUTH_URL: `${URL_ROOT}:8005`,
-    USER_URL: `${URL_ROOT}:8100`
+    USER_URL: `${URL_ROOT}:8100`,
+    TRACKING_URL: `${URL_ROOT}:8001`,
+    GEOLOC_URL: `${URL_ROOT}:8002`
 }
 
 export const CrudService = {
