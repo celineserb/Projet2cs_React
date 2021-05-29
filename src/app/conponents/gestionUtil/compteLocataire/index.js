@@ -6,11 +6,21 @@ import {
   CCardHeader,
   CCol,
   CRow,
+  CBadge,
 } from "@coreui/react";
 import { getLocataires } from "../../../../modules/Users/users.crud";
 import ValidationForm from "../validationCompte";
 
 const fields = ["idUser", "accountState"];
+
+function getBadge(status) {
+  switch(status) {
+    case "validated": return "success"
+    case "refused": return "danger"
+    case "pending": return "info"
+    default: return "warning"
+  }
+}
 
 function UsersTable() {
   const [locataires, setLocataires] = useState([]);
@@ -53,6 +63,16 @@ function UsersTable() {
                 pagination
                 clickableRows
                 onRowClick={(locataire) => HandleClick(locataire)}
+                scopedSlots = {{
+                  'accountState':
+                    (item)=>(
+                      <td>
+                        <CBadge color={getBadge(item.accountState)}>
+                          {item.accountState}
+                        </CBadge>
+                      </td>
+                    )
+                }}
               />
             </CCardBody>
           </CCard>
