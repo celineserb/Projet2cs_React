@@ -24,7 +24,7 @@ import {
 
 const TheHeader = (props) => {
   const dispatch = useDispatch();
-  const sidebarShow = useSelector(({ slide }) => slide.sidebarShow);
+  const [sidebarShow, user] = useSelector(({ slide, auth }) => [slide.sidebarShow, auth.user.userName]);
 
   const toggleSidebar = () => {
     const val = [true, "responsive"].includes(sidebarShow)
@@ -67,6 +67,7 @@ const TheHeader = (props) => {
       <CHeaderNav className="px-3">
         <TheHeaderDropdownMssg/>
         <TheHeaderDropdownNotif/>
+        <p>{user}</p>
         <TheHeaderDropdown />
       </CHeaderNav>
 
