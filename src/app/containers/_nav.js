@@ -28,6 +28,11 @@ const _nav =  [
     ],
   },
   {
+    _tag: 'CSidebarNavItem',
+    name: 'Locations',
+    to: '/decideur/GrapheLocation'
+  },
+  {
     _tag: 'CSidebarNavTitle',
     _children: ['Theme']
   },

@@ -3,6 +3,8 @@ import createSagaMiddleware from "redux-saga";
 import { persistStore } from "redux-persist";
 import { rootReducer, rootSaga } from "./rootReducer";
 import logger from 'redux-logger'
+
+
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [
     ...getDefaultMiddleware({

@@ -115,7 +115,7 @@ const Login = () => {
         <CRow className="h-100 justify-content-end align-items-end">
           <CCol sm="5" className="mb-5">
             <CCardGroup>
-              <CCard className="p-4">
+              <CCard className="login-card p-4">
                 <CCardBody>
                   <CForm className="d-flex h-100 flex-column justify-content-between">
                     <CRow className="justify-content-center">

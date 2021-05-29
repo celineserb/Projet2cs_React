@@ -14,7 +14,11 @@ import {
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
+<<<<<<< HEAD
 import logos from "../../assets/images/logo_yellow.png";
+=======
+import logos from "../../assets/images/logo-jaune.png";
+>>>>>>> 13d6cc7e3ba5b47997683a953f5c4f70539ce052
 // sidebar nav config
 import navigation from './_nav'
 
