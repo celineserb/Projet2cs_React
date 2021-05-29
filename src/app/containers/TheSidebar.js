@@ -31,7 +31,9 @@ const TheSidebar = () => {
         color: "#A4A6B3",
       }}
     >
-      <CSidebarBrand className="d-md-down-none" to="/">
+      <CSidebarBrand className="d-md-down-none" to="/"  style={{
+        backgroundColor: "#333"
+      }}>
         <CRow className="c-sidebar-brand-full">
           <CIcon
             name="logo-negative"
@@ -47,7 +49,7 @@ const TheSidebar = () => {
           height={35}
         />
       </CSidebarBrand>
-      <CSidebarNav>
+      <CSidebarNav className="mt-4">
 
         <CCreateElement
           items={navigation}
