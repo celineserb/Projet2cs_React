@@ -10,6 +10,7 @@ import {
   CSidebarMinimizer,
   CSidebarNavDropdown,
   CSidebarNavItem,
+  CRow,
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
@@ -26,23 +27,29 @@ const TheSidebar = () => {
       show={show}
       onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
       style={{
-        background: "#333"
+        background: "#333",
+        color: "#A4A6B3",
       }}
     >
-      <CSidebarBrand className="d-md-down-none" to="/">
-        <CIcon
-          className="c-sidebar-brand-full"
-          name="logo-negative"
-          src={logos}
-          height={35}
-        />
+      <CSidebarBrand className="d-md-down-none" to="/"  style={{
+        backgroundColor: "#333"
+      }}>
+        <CRow className="c-sidebar-brand-full">
+          <CIcon
+            name="logo-negative"
+            src={logos}
+            height={35}
+          />
+          <p className="m-2">AutoLib Dz</p>
+        </CRow>
         <CIcon
           className="c-sidebar-brand-minimized"
           name="sygnet"
+          src={logos}
           height={35}
         />
       </CSidebarBrand>
-      <CSidebarNav>
+      <CSidebarNav className="mt-4">
 
         <CCreateElement
           items={navigation}

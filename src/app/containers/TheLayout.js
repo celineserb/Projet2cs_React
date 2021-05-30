@@ -9,7 +9,9 @@ const TheLayout = (props) => {
       <TheSidebar />
       <div className="c-wrapper">
         <TheHeader />
-        <div className="c-body">
+        <div className="c-body" style={{
+          backgroundColor: "#fff"
+        }}>
           <TheContent />
         </div>
         <TheFooter />
