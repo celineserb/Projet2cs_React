@@ -24,7 +24,7 @@ import Logo from "../../../../assets/images/logo_yellow.png"
 import Logo2 from "../../../../assets/images/logo_gris.png"
 import User from '../../../../assets/images/user.png'
 import Lock from '../../../../assets/icons/lock.png'
-import "../../../../assets/scss/login.css"
+import "../../../../assets/scss/login.scss"
 
 const Login = () => {
   const [state, setState] = useState({

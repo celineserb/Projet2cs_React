@@ -9,11 +9,11 @@ import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { Routes } from "./app/routes";
 import { persistor, store } from "./config";
+import "./assets/scss/style.scss";
 import './index.scss'
 
 import * as serviceWorker from './serviceWorker';
 import { icons } from './assets/icons'
-//import "./assets/scss/style.scss";
 
 React.icons = icons
 
