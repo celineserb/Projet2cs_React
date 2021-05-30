@@ -1,19 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCardFooter,
-  CCol,
-  CButtonGroup,
-  CProgress,
-  CRow,
-
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
 import { getStyle, hexToRgba } from '@coreui/utils'
-import { CChartLine } from '@coreui/react-chartjs'
+import StyledChart from '../../../conponents/charts/StyledChart'
+import { CCard, CCardBody, CCardHeader, CCol, CListGroup, CListGroupItem, CRow } from '@coreui/react'
+import { getBornes, getVehicles } from '../../../../modules/Vehicle/vehicle.crud'
+import { getVehicleUsagePerDay } from '../../../../modules/Stats/stats.crud'
 
 const brandSuccess = getStyle('success') || '#4dbd74'
 const brandInfo = getStyle('info') || '#20a8d8'
@@ -21,6 +12,66 @@ const brandDanger = getStyle('danger') || '#f86c6b'
 
 
 export default function GrapheLocation ()  {
+
+  const [vehicles, setVehicles] = useState([])
+  const [activeVehicules, setActiveVehicules] = useState({})
+  const [vehiculeDatasets, setVehiculeDatasets] = useState()
+  const [bornes, setBornes] = useState([])
+  const [activeBornes, setActiveBornes] = useState({})
+
+  useEffect(() => {
+    getVehicles()
+    .then(({data}) => {
+      setVehicles(data)
+      console.log(data)
+    })
+    .catch(e => {
+      console.log(e)
+    })
+
+    getBornes()
+    .then(({data}) => {
+      setBornes(data)
+      console.log(data)
+    })
+  }, [])
+
+  useEffect(() => {
+    async function getChartData() {
+      const date = new Date()
+      let day = date.getDate()
+      const month = date.getMonth()
+      const year = date.getFullYear()
+      
+      let datasets = []
+      for (let j in activeVehicules) {
+        if (!activeVehicules[j])
+        continue;
+        
+        let dataset = []
+        let days = day
+        while (days > 0) {
+          const { data } = await getVehicleUsagePerDay(j, year, month, days)
+          dataset.push(parseInt(data.TotalRents))
+          days--
+        }
+        datasets.push({
+          label: 'Vehicule ' + j,
+          backgroundColor: hexToRgba(brandInfo, 10),
+          borderColor: brandInfo,
+          pointHoverBackgroundColor: brandInfo,
+          borderWidth: 2,
+          data: dataset
+        })
+      }
+      setVehiculeDatasets(datasets)
+    }
+    getChartData()
+  }, [activeVehicules])
+
+  function selectVehicule(i) {
+    setActiveVehicules({...activeVehicules, [i]: !activeVehicules[i]})
+  }
 
     const random = (min, max)=>{
         return Math.floor(Math.random() * (max - min + 1) + min)
@@ -103,181 +154,43 @@ export default function GrapheLocation ()  {
 
   return (
     <>
-      <CCard>
-        <CCardBody>
-          <CRow>
-            <CCol sm="5">
-              <h4 id="traffic" className="card-title mb-0">Graphe de location par borne</h4>
-              <div className="small text-muted">Mais 2021</div>
-            </CCol>
-            <CCol sm="7" className="d-none d-md-block">
-              <CButton color="primary" className="float-right">
-                <CIcon name="cil-cloud-download"/>
-              </CButton>
-              <CButtonGroup className="float-right mr-3">
-                {
-                  ['Jour', 'Mois', 'Année'].map(value => (
-                    <CButton
-                      color="outline-secondary"
-                      key={value}
-                      className="mx-0"
-                      active={value === 'Mois'}
-                    >
-                      {value}
-                    </CButton>
-                  ))
-                }
-              </CButtonGroup>
-            </CCol>
-          </CRow>
-          <CChartLine 
-            datasets={defaultDatasets}
-            options={defaultOptions}
-            labels={['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']}
-            style={{height: '300px', marginTop: '40px'}}/>
-        </CCardBody>
-        <CCardFooter>
-          <CRow className="text-center">
-            <CCol md sm="12" className="mb-sm-2 mb-0">
-              <div className="text-muted">Visits</div>
-              <strong>29.703 Users (40%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="success"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0 d-md-down-none">
-              <div className="text-muted">Unique</div>
-              <strong>24.093 Users (20%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="info"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0">
-              <div className="text-muted">Pageviews</div>
-              <strong>78.706 Views (60%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="warning"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0">
-              <div className="text-muted">New Users</div>
-              <strong>22.123 Users (80%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="danger"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0 d-md-down-none">
-              <div className="text-muted">Bounce Rate</div>
-              <strong>Average Rate (40.15%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                value={40}
-              />
-            </CCol>
-          </CRow>
-        </CCardFooter>
-      </CCard>
+      <CRow>
+        <CCol sm="12" xl="6">
+          <CCard>
+            <CCardHeader>
+              Liste des bornes
+            </CCardHeader>
+            <CCardBody>
+              <CListGroup>
+                {bornes.map((e, i) => (
+                  <CListGroupItem key={i} action active={activeBornes[i]} onClick={() => setActiveBornes({...activeBornes, [i]: !activeBornes[i]})}>{`${e.idBorne}: ${e.city}`}</CListGroupItem>
+                ))}
+              </CListGroup>
+            </CCardBody>
+          </CCard>
 
-      <CCard>
-        <CCardBody>
-          <CRow>
-            <CCol sm="5">
-              <h4 id="traffic" className="card-title mb-0">Graphe de location par Vehicule</h4>
-              <div className="small text-muted">Mais 2021</div>
-            </CCol>
-            <CCol sm="7" className="d-none d-md-block">
-              <CButton color="primary" className="float-right">
-                <CIcon name="cil-cloud-download"/>
-              </CButton>
-              <CButtonGroup className="float-right mr-3">
-                {
-                  ['Jour', 'Mois', 'Année'].map(value => (
-                    <CButton
-                      color="outline-secondary"
-                      key={value}
-                      className="mx-0"
-                      active={value === 'Mois'}
-                    >
-                      {value}
-                    </CButton>
-                  ))
-                }
-              </CButtonGroup>
-            </CCol>
-          </CRow>
-          <CChartLine 
-            datasets={defaultDatasets}
-            options={defaultOptions}
-            labels={['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']}
-            style={{height: '300px', marginTop: '40px'}}/>
-        </CCardBody>
-        <CCardFooter>
-          <CRow className="text-center">
-            <CCol md sm="12" className="mb-sm-2 mb-0">
-              <div className="text-muted">Visits</div>
-              <strong>29.703 Users (40%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="success"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0 d-md-down-none">
-              <div className="text-muted">Unique</div>
-              <strong>24.093 Users (20%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="info"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0">
-              <div className="text-muted">Pageviews</div>
-              <strong>78.706 Views (60%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="warning"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0">
-              <div className="text-muted">New Users</div>
-              <strong>22.123 Users (80%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="danger"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0 d-md-down-none">
-              <div className="text-muted">Bounce Rate</div>
-              <strong>Average Rate (40.15%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                value={40}
-              />
-            </CCol>
-          </CRow>
-        </CCardFooter>
-      </CCard>
+        </CCol>
+      </CRow>
+      <StyledChart dataset={defaultDatasets} options={defaultOptions} />
+
+      <CRow>
+        <CCol sm="12" xl="6">
+          <CCard>
+            <CCardHeader>
+              Liste des vehicules
+            </CCardHeader>
+            <CCardBody>
+              <CListGroup>
+                {vehicles.map((e, i) => (
+                  <CListGroupItem key={i} action active={activeVehicules[e.idVehicle]} onClick={() => selectVehicule(e.idVehicle)}>{`${e.vehiclebrand}: ${e.vehiclemodel}`}</CListGroupItem>
+                ))}
+              </CListGroup>
+            </CCardBody>
+          </CCard>
+
+        </CCol>
+      </CRow>
+      <StyledChart dataset={vehiculeDatasets} options={defaultOptions} />
     </>
   )
 

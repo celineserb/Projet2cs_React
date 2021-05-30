@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "Mulish";
+  src: url("./assets/fonts/Mulish-Regular.woff") format("woff"),
+    url("./assets/fonts/Mulish-Regular.ttf") format("truetype");
+}
+
+:root {
+  --primary-text-color: #252733;
+  --secondary-text-color: #c5c7cd;
+  --status-color-available: #59cd97;
+  --status-color-unavailable: #f24a2c;
+  --status-color-allocated: blue;
+  --status-color-default: orange;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Mulish", Helvetica, sans-serif;
+}
