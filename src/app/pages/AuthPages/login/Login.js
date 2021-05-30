@@ -15,7 +15,7 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 
-import { login } from '../../../../modules/Auth/auth.crud'
+import { login } from "../../../../modules/Auth/auth.crud";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
 import { actions } from "../../../../modules";
@@ -26,17 +26,16 @@ const Login = () => {
     password: "",
   });
 
-  const [redirect, setRedirect] = useState(false)
+  const [redirect, setRedirect] = useState(false);
 
-  
-  const token = useSelector(({ auth }) => auth.authToken)
-  const dispatch = useDispatch()
-  
+  const token = useSelector(({ auth }) => auth.authToken);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (token) {
-      setRedirect(true)
+      setRedirect(true);
     }
-  }, [token])
+  }, [token]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -47,18 +46,15 @@ const Login = () => {
   };
 
   const sendDetailsToServer = () => {
-
     if (state.email && state.password) {
       login(state.email, state.password)
         .then(function (response) {
-          console.log(response.status);
           if (response.status === 200) {
             setState((prevState) => ({
               ...prevState,
               successMessage: "Signin successful. Redirecting to home page..",
             }));
-            dispatch(actions.login(response.data))
-
+            dispatch(actions.login(response.data));
           } else {
             alert("Please enter valid email and password");
           }
@@ -77,9 +73,7 @@ const Login = () => {
   };
 
   if (redirect) {
-    return (
-      <Redirect to="/" />
-    )
+    return <Redirect to="/" />;
   }
 
   return (
