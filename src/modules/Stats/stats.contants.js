@@ -17,5 +17,5 @@ export const fetchPaths = {
         }
         return `/borne/${id}/f/${year}-${month}-01/${year}-${month}-${day}`
     },
-    BORNE_DAY: (id, year, month, day) => `/borne/${id}/f/${year}-${month}-${day}/${year}-${month}-${day+1}`,
+    BORNE_DAY: (id, year, month, day) => `/borne/${id}/f/${year}-${month}-${day} 00:00:00/${year}-${month}-${day} 23:59:00`,
 }
