@@ -30,7 +30,7 @@ function ValidationForm ({visible, setVisible, locataire})  {
       
       Promise.all([user, tenant]).then(([user, tenant]) => {
         let payload = {...user.data, ...tenant.data}
-        console.log(payload)
+    
         setUser(payload)
         setLoading(false)
       }).catch(err => {
@@ -46,7 +46,7 @@ function ValidationForm ({visible, setVisible, locataire})  {
   const handleValidate= e=>{
     if (!loading) {
       let d = new Date()
-      updateTenantStatus(user.idUser, {...locataire, ...entries, accountState: "validated", validationDate: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0]})
+      updateTenantStatus(locataire.idTenant, {...locataire, ...entries, accountState: "validated", validationDate: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0]})
       .then(e => setVisible(false))
       .catch(e => {
         alert(e.message)
@@ -56,7 +56,7 @@ function ValidationForm ({visible, setVisible, locataire})  {
 
   const handleRefused = () => {
     if (!loading) {
-      updateTenantStatus(user.idUser, {...locataire, ...entries, accountState: "refused"})
+      updateTenantStatus(user.idTenant, {...locataire, ...entries, accountState: "refused"})
       .then(e => setVisible(false))
       .catch(e => {
         alert(e.message)
