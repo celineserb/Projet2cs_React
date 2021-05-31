@@ -39,7 +39,6 @@ export const Routes = () => {
                 isAuthorized: auth.authToken && auth.user && typeof auth.user === "object",
                 authToken: auth.authToken,
                 user: auth.user,
-                id: auth.id
             })
     );
     if (isAuthorized) {
