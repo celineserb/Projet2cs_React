@@ -56,7 +56,7 @@ function ValidationForm ({visible, setVisible, locataire})  {
 
   const handleRefused = () => {
     if (!loading) {
-      updateTenantStatus(user.idTenant, {...locataire, ...entries, accountState: "refused"})
+      updateTenantStatus(locataire.idTenant, {...locataire, ...entries, accountState: "refused"})
       .then(e => setVisible(false))
       .catch(e => {
         alert(e.message)
