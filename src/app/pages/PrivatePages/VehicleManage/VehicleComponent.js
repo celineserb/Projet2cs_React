@@ -22,7 +22,7 @@ const VehicleComponent = ({ vehicle }) => {
   };
   let link;
   vehicle.idrental
-    ? (link = `/tracking_info/${vehicle.idVehicle}/${vehicle.idrental}`)
+    ? (link = `/tracking/${vehicle.idVehicle}/${vehicle.idrental}`)
     : (link = null);
   console.log(link);
   return (
