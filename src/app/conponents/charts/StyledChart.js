@@ -1,5 +1,5 @@
 import CIcon from "@coreui/icons-react";
-import { CButton, CButtonGroup, CCard, CCardBody, CCardFooter, CCol, CProgress, CRow } from "@coreui/react";
+import { CButton, CButtonGroup, CCard, CCardBody, CCol, CRow } from "@coreui/react";
 import { CChartLine } from "@coreui/react-chartjs";
 
 
