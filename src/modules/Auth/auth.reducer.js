@@ -46,9 +46,9 @@ export function* saga() {
     yield takeLatest(actionTypes.UserRequested, function* userRequested() {
         try {
             const token = yield select(({ auth }) => auth.authToken)
-            const {data: {
+            const {
                 user: {id}
-            }} = yield getIdByToken(token);
+            } = getIdByToken(token);
             
             const { data: user } = yield getUserById(id);
 
@@ -57,6 +57,7 @@ export function* saga() {
             yield put(actions.fulfillUser(user));
 
         } catch (e) {
+            console.error(e.message)
             yield put(actions.logout())
         }
         
