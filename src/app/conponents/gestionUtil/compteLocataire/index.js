@@ -30,13 +30,12 @@ function UsersTable() {
   useEffect(() => {
     getLocataires()
     .then((res) => {
-      console.log(res.data);
       setLocataires(res.data);
     })
     .catch((err) => {
       console.log(err);
     });
-  }, []);
+  }, [modalVisible]);
 
   function HandleClick(locataire) {
     if (locataire.accountState !== "validated") {

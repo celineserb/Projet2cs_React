@@ -7,7 +7,6 @@ import PannesPage from "../pages/PrivatePages/PannesPage/PannesPage";
 import SignalsPage from "../pages/PrivatePages/SignalsPage/SignalsPage";
 
 import {
-    BrowserRouter,
     Route,
     Switch,
     Redirect
@@ -18,6 +17,8 @@ import { actions } from '../../modules'
 
 import Login from "../pages/AuthPages/login/Login";
 import { TheLayout } from "../containers";
+import { TheLayout as DecideurLayout } from '../containers/decideur'
+import { TheLayout as AccountLayout } from '../containers/adminCompte'
 import Page404 from "../pages/AuthPages/page404/Page404";
 import Page500 from "../pages/AuthPages/page500/Page500";
 
@@ -38,16 +39,16 @@ export const Routes = () => {
     /*** To ensure authentication the token must be verified before access to the private routes */
     const { isAuthorized, user, authToken } = useSelector(
         ({ auth }) => ({
-                isAuthorized: auth.authToken && auth.user && typeof auth.user === "object",
+                isAuthorized: auth.authToken && auth.user !== null && typeof auth.user === "object",
                 authToken: auth.authToken,
                 user: auth.user,
-                id: auth.id
             })
     );
     if (isAuthorized) {
         CrudService.setAuthHeader(authToken)
     } else {
-        /***** Check the current token if valid and get the athentified user ****/
+        /***** Check the current token if va
+         * lid and get the athentified user ****/
         if (authToken && !user && loading) {
             setLoading(false)
             dispatch(actions.requestUser("Loading"))
@@ -61,9 +62,9 @@ export const Routes = () => {
             {
             isAuthorized ? <>
                 {/* Write all routes need an authentified user */}
-                {user.userType === "decision_maker" && <Route path="/" component={TheLayout} />}
+                {user.userType === "decision_maker" && <Route path="/" component={DecideurLayout} />}
                 {user.userType === "agent_admin" && <Route path="/" component={TheLayout} />}
-                {user.userType === "account_admin" && <Route path="/" component={TheLayout} />}
+                {user.userType === "account_admin" && <Route path="/" component={AccountLayout} />}
                 {
                    user.userType === "technical_admin" &&
                    <Layout>
