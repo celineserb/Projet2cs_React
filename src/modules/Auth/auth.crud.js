@@ -8,9 +8,5 @@ export function getUserById(id) {
 }
 
 export function getIdByToken(token) {
-  return axios.get(authUrls.LOGIN_URL + "/user", {
-    headers: {
-      auth: token
-    }
-  })
+  return JSON.parse(atob(token.split(".")[1]))
 }
