@@ -68,7 +68,7 @@ class SignalComponent extends Component {
                                 marginTop:8,
                                 marginLeft:8
                             }} 
-                            span={6}><h3>Signalement N°{this.state.item.idSignal}</h3> 
+                            span={6}><h3 className="item-title"> Signalement N°{this.state.item.idSignal}</h3> 
                         </Col>
 
                         <Col offset={5}  >
@@ -99,6 +99,7 @@ class SignalComponent extends Component {
                                         paddingLeft: 30, 
                                         paddingRight: 30
                                     }}
+                                    className="details-btn"
                                     >
                                     Details
                             </Button>   
