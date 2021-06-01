@@ -4,6 +4,16 @@
     url("./assets/fonts/Mulish-Regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/fonts/Montserrat-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Montserrat-bold";
+  src: url("./assets/fonts/Montserrat-Bold.ttf");
+}
+
 :root {
   --primary-text-color: #252733;
   --secondary-text-color: #c5c7cd;

@@ -5,6 +5,7 @@ import TrackingPage from "../pages/PrivatePages/VehicleSurveillance/TrackingPage
 import ManagePage from "../pages/PrivatePages/VehicleManage/ManagePage";
 import PannesPage from "../pages/PrivatePages/PannesPage/PannesPage";
 import SignalsPage from "../pages/PrivatePages/SignalsPage/SignalsPage";
+import MaintenancePage from "../pages/PrivatePages/Maintenance/pages/dashboard/dashboard"
 
 import {
     Route,
@@ -61,7 +62,7 @@ export const Routes = () => {
             isAuthorized ? <>
                 {/* Write all routes need an authentified user */}
                 {user.userType === "decision_maker" && <Route path="/" component={DecideurLayout} />}
-                {user.userType === "agent_admin" && <Route path="/" component={TheLayout} />}
+                {user.userType === "agent_admin" && <Route path="/" component={MaintenancePage} />}
                 {user.userType === "account_admin" && <Route path="/" component={AccountLayout} />}
                 {
                    user.userType === "technical_admin" &&
