@@ -15,9 +15,12 @@ export const CrudService = {
     * @return axios configured to use the given token for the authentication of all requests
 **/
 
-function setAuthHeader(authToken) {
+function setAuthHeader(store) {
     axios.interceptors.request.use(
         config => {
+            const {
+                auth: { authToken }
+            } = store.getState();
             if (authToken) {
                 config.headers.Authorization = `Bearer ${authToken}`;
             }

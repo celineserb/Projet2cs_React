@@ -6,6 +6,9 @@ const Tables = React.lazy(() => import('./app/conponents/base/tables/Tables'));
 const UsersTable =React.lazy(()=> import('./app/conponents/gestionUtil/compteLocataire'));
 const ValidationForme =React.lazy(()=> import('./app/conponents/gestionUtil/validationCompte'));
 
+const AgentStat =React.lazy(()=> import('./app/conponents/statistique/agent'));
+
+
 const Breadcrumbs = React.lazy(() => import('./app/conponents/base/breadcrumbs/Breadcrumbs'));
 const Cards = React.lazy(() => import('./app/conponents/base/cards/Cards'));
 const Carousels = React.lazy(() => import('./app/conponents/base/carousels/Carousels'));
@@ -85,10 +88,11 @@ const routes = [
    //----------------- Gestion utilisateur routes:
      //---------- new routes : gestion utilisteurs ::
   { path: '/gestionUtil', name: 'GestionUtil', component: UsersTable, exact: true },
-  // { path: '/gestionUtil', name: 'gestionUtil', component: Cards, exact: true },
   { path: '/gestionUtil/compteLocataire', name: 'TableLocataire', component: UsersTable },
   { path: '/gestionUtil/validationCompte', name: 'TableLocataire', component:ValidationForme },
-  { path: '/gestionUtil/validationCompteid/:id', name: 'TableLocataire', component:ValidationForme }
+  { path: '/gestionUtil/validationCompteid/:id', name: 'TableLocataire', component:ValidationForme },
+  { path: '/statistique', name: 'Statistique', component: AgentStat, exact: true },
+  { path: '/statistique/agent', name: 'AgentStat', component:AgentStat }
 
 ];
 

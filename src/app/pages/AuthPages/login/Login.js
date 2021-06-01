@@ -18,6 +18,7 @@ import CIcon from "@coreui/icons-react";
 import { login } from '../../../../modules/Auth/auth.crud'
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
+import { Link } from 'react-router-dom'
 import { actions } from "../../../../modules";
 
 const Login = () => {
@@ -68,6 +69,9 @@ const Login = () => {
         });
     } else {
       alert("Please enter valid email and password");
+
+ 
+      
     }
   };
 
@@ -123,15 +127,16 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
+                      <Link to="/">
                         <CButton
                           color="primary"
                           className="px-4"
                           active
                           tabIndex={-1}
-                          onClick={handleSubmitClick}
+                          // onClick={handleSubmitClick}
                         >
                           Login
-                        </CButton>
+                        </CButton>  </Link>
                       </CCol>
                     </CRow>
                   </CForm>

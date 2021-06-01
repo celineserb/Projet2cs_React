@@ -18,6 +18,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import axios from 'axios'
+
 function ValidationForm ()  {
 
   const [posts,setPosts] = useState(1);
@@ -43,12 +44,10 @@ function ValidationForm ()  {
 
     
   } )
-   const imgpermis="../../../images/"+posts.permitPicture
-  const imgprofil ="../../../images/"+posts.profilePicture
-  console.log("image profil",imgprofil)
-  console.log("image permi",imgpermis)
-  
-   const initialInputState={stateMessage:"",accountState:""};
+ 
+     const imgpermis ="../../../../assets/images/"+posts.permitPicture
+  const imgprofil ="../../../../assets/images/"+posts.profilePicture
+ const initialInputState={stateMessage:"",accountState:""};
    const [eachEntry, setEachEntry]=useState(initialInputState);
    const {stateMessage,accountState}=eachEntry;
    const handleInputChange= e=>{
@@ -115,7 +114,7 @@ function ValidationForm ()  {
                       <CLabel htmlFor="select">Permis de Conduite </CLabel>
                     </CCol>
                     <CCol xs="12" md="9">
-                    <img src= {imgpermis} height={140} width={210} />
+                    <img src={imgpermis} height={140} width={210} ></img>
                     
                     </CCol>
                   </CFormGroup>

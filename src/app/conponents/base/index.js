@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Breadcrumbs from './Breadcrumbs';
 import Cards from './Cards';
 import Carousels from './Carousels';
@@ -19,26 +18,3 @@ export {
   Breadcrumbs, Cards, Carousels, Collapses, Dropdowns, Jumbotrons, ListGroups, Navbars, Navs, Popovers, ProgressBar, Switches, Tabs, Tooltips, Paginations,
 };
 
-=======
-import Breadcrumbs from './Breadcrumbs';
-import Cards from './Cards';
-import Carousels from './Carousels';
-import Collapses from './Collapses';
-import Dropdowns from './Dropdowns';
-import Jumbotrons from './Jumbotrons';
-import ListGroups from './ListGroups';
-import Navbars from './Navbars';
-import Navs from './Navs';
-import Paginations from './Paginations';
-import Popovers from './Popovers';
-import ProgressBar from './ProgressBar';
-import Switches from './Switches';
-import Tabs from './Tabs';
-import LocataireTables from './Tables/gestion_compte_locataire';
-import Tooltips from './Tooltips';
-
-export {
-  Breadcrumbs, Cards, Carousels, Collapses, Dropdowns, Jumbotrons, ListGroups, Navbars, Navs, Popovers, ProgressBar, Switches, Tabs, LocataireTables,Tooltips, Paginations,
-};
-
->>>>>>> a494ef317d4f95c159a04b702c24a5001c7c8566

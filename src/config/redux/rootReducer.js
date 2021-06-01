@@ -1,10 +1,9 @@
 import { all } from "redux-saga/effects";
 import { combineReducers } from "redux";
-import { Authreducer, Slidereducer, saga } from "../../modules";
+import { Authreducer, saga } from "../../modules";
 
 export const rootReducer = combineReducers({
-  auth: Authreducer,
-  slide: Slidereducer
+  auth: Authreducer
 });
 
 export function* rootSaga() {

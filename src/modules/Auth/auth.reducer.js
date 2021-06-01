@@ -1,15 +1,15 @@
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { put, takeLatest, select } from "redux-saga/effects";
-import { getUserById, getIdByToken } from "./auth.crud";
+import { put, takeLatest } from "redux-saga/effects";
+import { getUserByToken } from "./auth.crud";
 import { actionTypes } from "./auth.constants";
 
 const initialAuthState = {
     authToken: "",
-    user:null,
+    user:null
 };
 export const Authreducer = persistReducer(
-    { storage, key: "autolibdz-auth", whitelist: ["authToken"] },
+    { storage, key: "autolibdz", whitelist: ["authToken"] },
     (state = initialAuthState, action) => {
         switch (action.type) {
             case actionTypes.Login: {
@@ -30,7 +30,7 @@ export const Authreducer = persistReducer(
 );
 
 export const actions = {
-    login: (data) => ({ type: actionTypes.Login, payload: { authToken: data.token } }),
+    login: (authToken) => ({ type: actionTypes.Login, payload: { authToken } }),
     logout: () => ({ type: actionTypes.Logout }),
     requestUser: (user) => ({
         type: actionTypes.UserRequested,
@@ -44,21 +44,7 @@ export function* saga() {
         yield put(actions.requestUser());
     });
     yield takeLatest(actionTypes.UserRequested, function* userRequested() {
-        try {
-            const token = yield select(({ auth }) => auth.authToken)
-            const {data: {
-                user: {id}
-            }} = yield getIdByToken(token);
-            
-            const { data: user } = yield getUserById(id);
-
-            if (user === "" || user === undefined)
-                throw new Error("invalid user id");
-            yield put(actions.fulfillUser(user));
-
-        } catch (e) {
-            yield put(actions.logout())
-        }
-        
+        const { data: user } = yield getUserByToken();
+        yield put(actions.fulfillUser(user));
     });
 }

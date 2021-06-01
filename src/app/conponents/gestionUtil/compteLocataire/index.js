@@ -1,108 +1,92 @@
-import React, { useEffect, useState } from "react";
-
-import axios from "axios";
-
-
-
-
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import {
-  CBadge,
-  CDataTable,
-  CButton,
+
+   CDataTable,
+
   CCard,
   CCardBody,
-  CCardFooter,
+
   CCardHeader,
   CCol,
-  CCollapse,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-  CFade,
-  CForm,
-  CFormGroup,
-  CFormText,
-  CValidFeedback,
-  CInvalidFeedback,
-  CTextarea,
-  CInput,
-  CInputFile,
-  CInputCheckbox,
-  CInputRadio,
-  CInputGroup,
-  CInputGroupAppend,
-  CInputGroupPrepend,
-  CDropdown,
-  CInputGroupText,
-  CLabel,
-  CSelect,
+ 
+
   CRow,
-  CSwitch,
-} from "@coreui/react";
+
+} from '@coreui/react'
 
 
-const fields = ["username", "accountState"];
-// function Red(){
+const TheLayout = React.lazy(() => import('../../../containers/TheLayout'));
+const fields = ['username','accountState']
 
-// }
+function HandleClick(id){
+   console.log(id);
+    window.location.href= "/gestionUtil/validationCompte/"+id
+ 
+ }
+   
 
-function HandleClick(id) {
-  console.log(id);
-  window.location.href = "/gestionUtil/validationCompte/" + id;
-}
+  function UsersTable(){
+    const [posts,setPosts] = useState([]);
+    const [id,setId]=useState(1);
+    const [idFromButtonClick,setIdFromButtonClick]=useState(1);
+    const rowEvents= {
+      onclick:(e,row)=>{
 
-function UsersTable() {
-  const [posts, setPosts] = useState([]);
-  const [id, setId] = useState(1);
-  const [idFromButtonClick, setIdFromButtonClick] = useState(1);
-  const rowEvents = {
-    onclick: (e, row) => {
-      console.log(row);
-    },
-  };
+        console.log(row)
+      },
+    };
+      
 
-  // } handleClick(){
-
-  // }
-  useEffect(() => {
-    axios
-      .get("http://localhost:8101/get-tenant")
-      .then((res) => {
-        // console.log(res);
-        setPosts(res.data);
+    useEffect(()=>{
+      axios.get('http://localhost:8101/get-tenant')
+      .then(res=>{
+       // console.log(res);
+        setPosts(res.data)
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-  let idTenant = 0;
-  return (
-    <>
-      <CRow>
-        <CCol>
-          <CCard>
-            <CCardHeader>Liste des Locataires inscrits</CCardHeader>
-            <CCardBody>
+      .catch(err=>{
+        console.log(err)
+      }
+        )
+  
+      
+    } )
+    let idTenant=0
+    return (
+      <>
+       
+         <CRow>
+          <CCol>
+            <CCard>
+              <CCardHeader>
+               Liste des Locataires inscrits
+              </CCardHeader>
+              <CCardBody>
               <CDataTable
                 items={posts}
                 fields={fields}
                 hover
                 striped
                 bordered
+              
                 size="sm"
                 itemsPerPage={10}
                 pagination
-                clickEvent={(post) => (idTenant = post.idTenant)}
+                clickEvent={post=>idTenant=post.idTenant}
                 rowEvents={rowEvents}
                 clickableRows
-                onRowClick={(post) => HandleClick(post.idTenant)}
+                 onRowClick={post=>  HandleClick(post.idTenant) }
+         
               />
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
-    </>
-  );
-}
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
+       
+      </>
+    )
+  }
 
-export default UsersTable;
+ 
+
+export default UsersTable
