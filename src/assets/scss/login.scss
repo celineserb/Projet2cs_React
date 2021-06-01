@@ -6,13 +6,17 @@
     background-color: #333 !important;
     border-radius: 30px !important;
     border: #333 !important;
-    height: 700px;
+    height: 75vh;
     text-align: center;
     color: #fff;
 }
 
 .login-card h1 {
     color: #fff;
+}
+
+.login-card input:focus {
+    outline: unset !important;
 }
 
 .input-group {
