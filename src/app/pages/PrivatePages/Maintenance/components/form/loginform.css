@@ -1,0 +1,42 @@
+.contact-form{
+    padding: 20px;
+    background-color: #333;
+    border-radius: 15px;
+    text-align: center;
+    min-width: 50%;
+}
+
+.main-logo{
+    width: 30%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.contact-title{
+    font-family: 'Montserrat';
+    font-size: 1.5em;
+    margin: 4px;
+    font-weight: bolder;
+    color: #FFF;
+}
+
+.contact-text{
+    text-decoration: none;
+    font-family: 'Montserrat';
+    font-size: 1.1em;
+    color: #333;
+}
+
+.form-input{
+    outline: none;
+    background-color: #666;
+    color: #FFF;
+    font-family: 'Montserrat';
+    border-radius: 1000px;
+    border-width: 0px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    width: 90%;
+}
