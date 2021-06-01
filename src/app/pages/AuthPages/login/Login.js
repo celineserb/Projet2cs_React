@@ -122,7 +122,7 @@ const Login = () => {
                       <CIcon className="align-self-center" src={Logo} height={100} />
                     </CRow>
                       <h1>Se connecter a votre compte</h1>
-                    <CInputGroup className="mb-3 p-2">
+                    <CInputGroup className="inputs mb-3 p-2">
                       <CInputGroupPrepend>
                         <CInputGroupText>
                           <CIcon src={User} height={25} />
@@ -136,7 +136,7 @@ const Login = () => {
                         onChange={handleChange}
                       />
                     </CInputGroup>
-                    <CInputGroup className="mb-4 p-2">
+                    <CInputGroup className="inputs mb-4 p-2">
                       <CInputGroupPrepend>
                         <CInputGroupText>
                           <CIcon src={Lock} height={25} />

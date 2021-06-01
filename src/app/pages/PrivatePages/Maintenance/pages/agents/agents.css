@@ -30,12 +30,13 @@
 
 
 
-.agent-search{
+input.thex-agent-search{
     width: 33%;
     outline: none;
-    background-color: #EEE;
+    background-color: rgba(34, 34, 34, 0.219);
     border-radius: 1000px;
     font-family: 'Montserrat';
+    color: #333;
     border: 0px;
     padding-left: 15px;
     padding-right: 15px;

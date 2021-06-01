@@ -19,12 +19,12 @@
     outline: none !important;
 }
 
-.input-group {
+.input-group.inputs {
     background-color: #6d6d6d;
     border-radius: 50px;
 }
 
-.input-group-text, input {
+.inputs .input-group-text, .inputs input {
     background-color: unset !important;
     border: unset !important;
     height: 100%;

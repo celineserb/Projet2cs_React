@@ -81,7 +81,7 @@ export default function agents(props) {
           name="agnet-list-search"
           id="agent-list-search"
           placeholder="rechercher des agents"
-          className="agent-search"
+          className="thex-agent-search"
           value={query}
           onChange={search}
         />
