@@ -7,7 +7,6 @@ import PannesPage from "../pages/PrivatePages/PannesPage/PannesPage";
 import SignalsPage from "../pages/PrivatePages/SignalsPage/SignalsPage";
 
 import {
-    BrowserRouter,
     Route,
     Switch,
     Redirect
@@ -39,7 +38,6 @@ export const Routes = () => {
                 isAuthorized: auth.authToken && auth.user && typeof auth.user === "object",
                 authToken: auth.authToken,
                 user: auth.user,
-                id: auth.id
             })
     );
     if (isAuthorized) {
