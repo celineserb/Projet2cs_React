@@ -29,7 +29,7 @@ class SideBar extends Component {
                     backgroundColor: "#333",
                     overflow: 'auto',
                     height: '100vh',
-                    //position: "fixed"  //uncomment this when you fix the other stuff
+                   // position: "fixed"  //uncomment this when you fix the other stuff
                 }}
             >
             <div className="sidebar-wrapper">
@@ -49,13 +49,13 @@ class SideBar extends Component {
                 </div>
                 <div className="menu-wrapper">
                 {
-                    this.state.menu.map((item) => {
+                    this.state.menu.map((item, key) => {
                         return (
-                            <div className="menu-item-wrapper">
+                            <div className="menu-item-wrapper " >
                                 <Link className="menu-item-link" to={item.link}>
                                     <img className="menu-item-icon" src={item.icon} alt={item.alt} />
                                     <label className="menu-item-text truncated">{item.title}</label>
-                                </Link>
+                                </Link> 
                             </div>
                         );   
                     })

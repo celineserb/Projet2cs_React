@@ -17,6 +17,13 @@ class SignalComponent extends Component {
             changed: false 
          }
     }
+    componentWillReceiveProps(nextProps) {
+        this.setState({ 
+            key: nextProps.index, 
+            item: nextProps.item 
+        });  
+      }
+
     setVisible(value){
         this.setState({
           visible : value

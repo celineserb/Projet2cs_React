@@ -6,6 +6,7 @@ import React from "react";
 import Truncate from "./helpers/Truncate";
 import { Link } from "react-router-dom";
 import "./style/VehicleComponent.css";
+import {Row} from 'antd'
 
 const VehicleComponent = ({ vehicle }) => {
   const renderSwitch = (status) => {
@@ -27,6 +28,7 @@ const VehicleComponent = ({ vehicle }) => {
   console.log(link);
   return (
     <>
+
       {link ? (
         <Link to={link} className="">
           <li className="vehicle-elem">
@@ -98,6 +100,7 @@ const VehicleComponent = ({ vehicle }) => {
           {renderSwitch(vehicle.availibility)}
         </li>
       )}
+
     </>
   );
 };
