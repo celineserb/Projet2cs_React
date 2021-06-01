@@ -8,7 +8,7 @@ export const Services = {
   GEOLOC_URL: `${URL_ROOT}:8002`,
   VEHICLE_URL: `${URL_ROOT}:8200`,
   STAT_URL: `${URL_ROOT}:8089`,
-  CAR_URL: `${URL_ROOT}:8000`,
+  CAR_URL: `${URL_ROOT}:8200`,
 };
 
 export const CrudService = {
