@@ -68,7 +68,7 @@ export default function GrapheLocation ()  {
           let dom = dayOfMonth
           for (let k = 0; k < 31; k++) {
             let mois = month + 1, days;
-            if (day - k < 0) {
+            if (day - k <= 0) {
               mois = month
               days = day - k + months[month - 1]
             } else {
@@ -143,7 +143,7 @@ export default function GrapheLocation ()  {
           let dom = dayOfMonth
           for (let k = 0; k < 31; k++) {
             let mois = month + 1, days;
-            if (day - k < 0) {
+            if (day - k <= 0) {
               mois = month
               days = day - k + months[month - 1]
             } else {
