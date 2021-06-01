@@ -1,23 +1,15 @@
-import React, { lazy } from 'react'
+import React from 'react'
 import {
-  CBadge,
   CButton,
   CButtonGroup,
   CCard,
   CCardBody,
-  CCardFooter,
-  CCardHeader,
   CCol,
-  CProgress,
   CRow,
-  CCallout
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
 import MainChartExample from '../charts/MainChartExample.js'
-
-const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
-const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
 
 const Dashboard = () => {
   return (
@@ -52,6 +44,7 @@ const Dashboard = () => {
           </CRow>
           <MainChartExample style={{height: '300px', marginTop: '40px'}}/>
         </CCardBody>
+<<<<<<< HEAD
         <CCardFooter>
           <CRow className="text-center">
             <CCol md sm="12" className="mb-sm-2 mb-0">
@@ -550,6 +543,9 @@ const Dashboard = () => {
           </CCard>
         </CCol>
       </CRow>
+=======
+      </CCard>
+>>>>>>> 29399402f9cabe37454440b81627148b441f7e3e
     </>
   )
 }

@@ -9,8 +9,13 @@ const TheFooter = () => {
         <span className="ml-1">&copy; 2020 creativeLabs.</span>
       </div>
       <div className="mfs-auto">
+<<<<<<< HEAD
         <span className="mr-1">Powered by</span>
         <a href="https://coreui.io/react" target="_blank" rel="noopener noreferrer">CoreUI for React</a>
+=======
+        {/* <span className="mr-1">Powered by</span> */}
+        <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">AutoLibDZ</a>
+>>>>>>> 29399402f9cabe37454440b81627148b441f7e3e
       </div>
     </CFooter>
   )

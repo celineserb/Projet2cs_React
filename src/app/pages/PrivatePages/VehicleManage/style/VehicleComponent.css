@@ -1,0 +1,70 @@
+#vehicle-img {
+  width: 5rem;
+  height: 4rem;
+}
+
+.vehicle-elem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border-top: 1px #dfe0eb solid;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.vehicle-elem:hover{
+    background-color: #F5F5F5;
+    cursor: pointer;
+}
+
+.vehicle-elem > div {
+  display: flex;
+}
+
+.vehicle-elem p {
+  color: var(--primary-text-color);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.vehicle-type {
+  margin-left: 20px;
+}
+
+.custom-elem {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+}
+
+.custom-elem p:nth-child(2) {
+  color: var(--secondary-text-color);
+}
+
+.status {
+  text-transform: uppercase;
+  border-radius: 20px;
+  width: 125px;
+  height: 30px;
+  padding: 5px;
+  margin-top: 10px;
+  margin-right: -60px;
+  text-align: center;
+  color: white !important;
+}
+
+.available {
+  background-color: var(--status-color-available);
+}
+
+.unavailable {
+  background-color: var(--status-color-unavailable);
+}
+
+.allocated {
+    background-color: var(--status-color-allocated);
+}
+
+.default {
+  background-color: var(--status-color-default);
+}

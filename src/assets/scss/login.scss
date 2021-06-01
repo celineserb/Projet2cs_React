@@ -1,0 +1,74 @@
+::placeholder {
+    color: #fff !important;
+}
+
+.card.login-card {
+    background-color: #333 !important;
+    border-radius: 30px !important;
+    border: #333 !important;
+    height: 75vh;
+    text-align: center;
+    color: #fff;
+}
+
+.login-card h1 {
+    color: #fff;
+}
+
+.login-card input:focus {
+    outline: unset !important;
+}
+
+.input-group {
+    background-color: #c6c6c6;
+    border-radius: 50px;
+}
+
+.input-group-text, input {
+    background-color: unset !important;
+    border: unset !important;
+    height: 100%;
+    color: #fff !important;
+    font-size: 18px !important;
+}
+
+.login {
+    border-radius: 50px !important;
+    padding: 10px 30px !important;
+    background-color: #F9C319 !important;
+    color: #333 !important;
+    font-size: 22px !important;
+    border: unset !important;
+}
+
+.fixed-top {
+    height: 87%;
+    width: 82% !important;
+    background: #F9C319;
+    z-index: 0 !important;
+
+}
+
+.big {
+    flex: 2;
+    color: #fff;
+}
+
+.small {
+    flex: 1;
+}
+
+.small p {
+    font-size: 15px;
+    color: #333;
+}
+
+.small button {
+    background-color: #333;
+    font-size: 20px;
+    font-family: montserrat;
+    padding: 10px 35px;
+    border: unset;
+    border-radius: 20px;
+    font-weight: 600;
+}
