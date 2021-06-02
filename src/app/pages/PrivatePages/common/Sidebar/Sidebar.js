@@ -29,7 +29,7 @@ class SideBar extends Component {
                     backgroundColor: "#333",
                     overflow: 'auto',
                     height: '100vh',
-                   // position: "fixed"  //uncomment this when you fix the other stuff
+                    position: "fixed"  //uncomment this when you fix the other stuff
                 }}
             >
             <div className="sidebar-wrapper">

@@ -52,7 +52,7 @@ class PanneComponent extends Component {
                         this.state.item.treated? 
                             <Col span={1} >  
                                 <Avatar 
-                                    size={45} 
+                                    size={42} 
                                     icon={<EllipseGreyIcon />}
                                     style={{
                                     
@@ -61,7 +61,7 @@ class PanneComponent extends Component {
                             </Col>    
                         :   <Col span={1} >  
                                 <Avatar 
-                                    size={45} 
+                                    size={42} 
                                     icon={<EllipseIcon />}
                                     style={{
                                     
@@ -75,7 +75,7 @@ class PanneComponent extends Component {
                                    marginLeft:18
                                 }} >
                         <div id ={"item_message"+this.state.key} className="truncated" >
-                            <h3 className={"item-message-content"+this.state.key} >{this.state.item.message}</h3>
+                            <h5 className={"item-message-content"+this.state.key} >{this.state.item.message}</h5>
                         </div>    
                     </Col>
 

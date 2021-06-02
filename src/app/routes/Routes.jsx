@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 
 
@@ -22,7 +23,7 @@ import { TheLayout as DecideurLayout } from '../containers/decideur'
 import { TheLayout as AccountLayout } from '../containers/adminCompte'
 import Page404 from "../pages/AuthPages/page404/Page404";
 import Page500 from "../pages/AuthPages/page500/Page500";
-
+import SurveillanceSidebar from './SurveillanceSidebar'
 
 import { Layout} from 'antd';
 import 'antd/dist/antd.css';
@@ -30,8 +31,6 @@ import 'antd/dist/antd.css';
 
 import TopBar from '../pages/PrivatePages/common/Topbar/Topbar';
 import SideBar from '../pages/PrivatePages/common/Sidebar/Sidebar';
-import SurveillanceSideBar from './SurveillanceSidebar';
-import { CCard, CCardBody, CCardHeader, CCol, CListGroup, CListGroupItem, CRow } from '@coreui/react'
 
 const { Content} = Layout;
 export const Routes = () => {
@@ -69,28 +68,29 @@ export const Routes = () => {
                 {
                    user.userType === "technical_admin" &&
                    <Layout>
-                        <SideBar items={SurveillanceSideBar}></SideBar>
-                            <Content style={{backgroundColor:'white'}}>
-                                <TopBar></TopBar>
-                                <Switch>
-                                    <Route exact path="/tracking/:vehicleId/:rentalId" component={TrackingPage} />
-                                    <Route exact path="/pannes" component={PannesPage} />
-                                    <Route exact path="/enlevements" component={SignalsPage} />
-                                    <Route path="/"  component={ ManagePage }  />         
-                                </Switch>
-                            </Content>
-                        
+                    <SideBar items={SurveillanceSidebar}></SideBar>
+                    <Layout style={{marginLeft:200}}>
+                        <Content style={{backgroundColor:'white'}}>
+                        <TopBar user={user}></TopBar>
+                                    <Switch>
+                                        <Route exact path="/tracking/:vehicleId/:rentalId" component={TrackingPage} />
+                                        <Route exact path="/pannes" component={PannesPage} />
+                                        <Route exact path="/enlevements" component={SignalsPage} />
+                                        <Route path="/"  component={ ManagePage }  />         
+                                    </Switch>
+                        </Content>
                     </Layout>
+                </Layout>
                    
                 }
                 {user.userType === "tenant" && <Route path="/" component={TheLayout} />}
                 {user.userType === "agent" && <Route path="/" component={TheLayout} />}
             </> : <>
                 {/* Write all routes for the authentification */}
-                <Route path="/" component={Login} />
-                
-               
+                <Route path="/login" component={Login} />
+
             </>
         }</Switch>
     )
 }
+

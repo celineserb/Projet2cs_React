@@ -49,12 +49,12 @@ class SignalComponent extends Component {
                         {
                             this.state.item.treated?
                                     <Avatar 
-                                        size={48} 
+                                        size={42} 
                                         icon={<EllipseGreyIcon />}>
                                     </Avatar>
                             :
                                     <Avatar 
-                                        size={48} 
+                                        size={42} 
                                         icon={<EllipseIcon />}>
                                     </Avatar>           
 
@@ -68,7 +68,7 @@ class SignalComponent extends Component {
                                 marginTop:8,
                                 marginLeft:8
                             }} 
-                            span={6}><h3 className="item-title"> Signalement N°{this.state.item.idSignal}</h3> 
+                            span={6}><h5 className="item-title"> Signalement N°{this.state.item.idSignal}</h5> 
                         </Col>
 
                         <Col offset={5}  >
@@ -129,10 +129,10 @@ class SignalComponent extends Component {
                                     </Button>,  
                                     ]}
                                     >
-                                    <h2>Informations Vehicules</h2> <hr className="hr-modal" />
+                                    <h3>Informations Vehicules</h3> <hr className="hr-modal" />
                                     <Row>
                                         <div className="info-container">
-                                            <Col><h3 className="info-title">Matricule:</h3></Col>
+                                            <Col><h5 className="info-title">Matricule:</h5></Col>
                                             <Col push={5} style={{marginRight:55}}> <span className="info-box"> {this.state.item.registrationNumber}</span></Col>  
                                         </div>
                                     </Row>
