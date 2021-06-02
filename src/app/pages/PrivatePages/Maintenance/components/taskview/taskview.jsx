@@ -28,7 +28,7 @@ export default function taskView(props) {
           },
           content: {
             width: "50%",
-            height: "40%",
+            height: "50%",
             minHeight: "fit-content",
             marginLeft: "auto",
             marginRight: "auto",
@@ -37,14 +37,15 @@ export default function taskView(props) {
             borderRadius: "15px",
             display: "grid",
             alignContent: "center",
-            justifyContent: "center"
+            justifyContent: "center",
+            overflow: "hidden"
           },
         }}>
           <div className="task-modal">
             <p className="task-modal-title">{props.task.taskTitle}</p><br />
             <p className="task-modal-subtitle">{props.task.description}</p><br />
             <p className="task-modal-text">{new Date(props.task.assignmentDate).toISOString().slice(0, 10)}</p><br />
-            <div className={(taskState === 1? "progress": (taskState === 2? "affected" : "ended")) + " task-state"}>
+            <div className={(taskState === 1? "thex-progress": (taskState === 2? "affected" : "ended")) + " task-state"}>
               {taskState === 1 ? "En cours" : (taskState === 2 ? "Affecté" : "Terminé")}
             </div><br /><br />
             <Button text="confirmer" mode="light_mode" onClick={()=>{closeModal()}}/>

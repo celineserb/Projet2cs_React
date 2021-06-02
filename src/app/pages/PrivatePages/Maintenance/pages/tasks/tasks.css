@@ -20,3 +20,11 @@
     color: #CCC;
     margin-right: 40%;
 }
+
+.task-header-actions{
+    width: 98%;
+    display: grid;
+    justify-content: right;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
