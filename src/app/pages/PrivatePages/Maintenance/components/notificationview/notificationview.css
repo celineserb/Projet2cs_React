@@ -4,6 +4,7 @@
     display: inline-flex;
     flex-direction: row;
     align-items: center;
+    color: #333
 }
 
 .notification-view-container:hover{
@@ -19,8 +20,8 @@
 }
 
 .notification-title{
-    font-family: "Montserrat";
-    font-size: 0.9em;
+    font-family: "Montserrat-bold";
+    font-size: 1.1em;
     margin: 2px;
     width: 50%;
 }

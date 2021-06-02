@@ -18,43 +18,43 @@ export default function agents(props) {
     },
     {
         id: "2",
-        name: "friri",
-        surename: "nerostarx",
+        name: "muhammed",
+        surename: "klili",
         currentTask: "this is a task",
         taskDate: "20-20-2020"
     },
     {
         id: "3",
-        name: "seroui",
-        surename: "nerostarx",
+        name: "amine",
+        surename: "ferui",
         currentTask: "this is a task",
         taskDate: "20-20-2020"
     },
     {
         id: "4",
-        name: "qeen",
-        surename: "nerostarx",
+        name: "lamine",
+        surename: "slimani",
         currentTask: "this is a task",
         taskDate: "20-20-2020"
     },
     {
         id: "5",
-        name: "aaaron",
-        surename: "nerostarx",
+        name: "karim",
+        surename: "boulahi",
         currentTask: "this is a task",
         taskDate: "20-20-2020"
     },
     {
         id: "6",
-        name: "serious",
-        surename: "nerostarx",
+        name: "mouh",
+        surename: "cappuchinou",
         currentTask: "this is a task",
         taskDate: "20-20-2020"
     },
     {
         id: "7",
-        name: "tririr",
-        surename: "nerostarx",
+        name: "riad",
+        surename: "flouzi",
         currentTask: "this is a task",
         taskDate: "20-20-2020"
     },
@@ -81,7 +81,7 @@ export default function agents(props) {
           name="agnet-list-search"
           id="agent-list-search"
           placeholder="rechercher des agents"
-          className="agent-search"
+          className="thex-agent-search"
           value={query}
           onChange={search}
         />
