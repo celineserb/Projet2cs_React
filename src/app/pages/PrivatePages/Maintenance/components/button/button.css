@@ -1,5 +1,6 @@
-.button{
+.xbutton{
     width: fit-content;
+    outline: none !important;
     padding-top: 12px;
     padding-bottom: 12px;
     padding-right: 16px;
