@@ -5,6 +5,7 @@
     flex-direction: row;
     align-items: center;
     transition: 200ms ease-in-out;
+    color: #333;
 }
 
 .vehicule-grid-container{
@@ -13,6 +14,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    color: #333;
 }
 
 .vehicule-view-container:hover{
