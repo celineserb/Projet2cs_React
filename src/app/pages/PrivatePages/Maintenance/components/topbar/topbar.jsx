@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import {NavLink} from 'react-router-dom'
 import Modal from 'react-modal'
 import Button from '../button/button'
+import { useDispatch} from 'react-redux'
+import {actions} from '../../../../../../modules'
 
 import profilePic from '../../assets/profile_pic.png'
 import notificationIcon from '../../assets/notification_icon.png'
@@ -12,6 +14,12 @@ import './topbar.css'
 Modal.setAppElement("#root")
 export default function topBar(props){
     const [isProfileModalOpen,setProfileModal] = useState(false)
+
+    const dispatch = useDispatch()
+
+    function logout(){
+        dispatch(actions.logout())
+    }
 
     function openCloseModal(){
         setProfileModal(!isProfileModalOpen)
@@ -35,7 +43,7 @@ export default function topBar(props){
                     className="Modal"
                     overlayClassName="Overlay"
                     closeTimeoutMS={150}>
-                    <Button text="Déconnecter" mode="dark_mode" onClick={()=>props.onDisconnect}/>
+                    <Button text="Déconnecter" mode="dark_mode" onClick={logout}/>
                 </Modal>
             </div>
         </div>

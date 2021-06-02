@@ -86,8 +86,8 @@ export const Routes = () => {
                 {user.userType === "agent" && <Route path="/" component={TheLayout} />}
             </> : <>
                 {/* Write all routes for the authentification */}
-                <Route path="/" component={MaintenancePage} />
-                <Redirect  from="*" to = "/" ></Redirect>
+                <Route path="/login" component={Login} />
+                <Redirect  from="*" to = "/login" ></Redirect>
 
             </>
         }</Switch>

@@ -6,9 +6,32 @@
     background-color: #333 !important;
     border-radius: 30px !important;
     border: #333 !important;
-    height: 75vh;
+    min-height: 90%;
     text-align: center;
     color: #fff;
+}
+
+.savoir-button{
+    border-radius: 1000px !important;
+    background-color: #333 !important;
+    transition: 200ms ease-in-out;
+}
+
+.savoir-button:hover{
+    background-color: #222 !important;
+}
+
+.align-self-center{
+    width: 20%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.login-titlex{
+    font-family: "Montserrat";
+    font-size: 1.5em;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .login-card h1 {
@@ -20,7 +43,7 @@
 }
 
 .input-group.inputs {
-    background-color: #6d6d6d;
+    background-color: #6d6d6dc4;
     border-radius: 50px;
 }
 
@@ -32,13 +55,25 @@
     font-size: 18px !important;
 }
 
+.s-input{
+    outline: none;
+    border: none;
+    padding-left: 10px;
+}
+
 .login {
+    font-family: "Montserrat";
     border-radius: 50px !important;
     padding: 10px 30px !important;
     background-color: #F9C319 !important;
     color: #333 !important;
-    font-size: 22px !important;
+    font-size: 18px !important;
     border: unset !important;
+    transition: 200ms ease-in-out;
+}
+
+.login:hover{
+    background-color: #ebac00 !important;
 }
 
 .fixed-top {
