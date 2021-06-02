@@ -18,22 +18,22 @@ export default function topBar(props){
     }
 
     return(
-        <div className="topbar-wrapper">
-            <div className="thex-topbar-container">
-                <p className="thex-view-name">{props.viewTitle}</p>
+        <div className="wrapper">
+            <div className="topbar-container">
+                <p className="view-name">{props.viewTitle}</p>
                 <NavLink to={props.route.path}>
                     <img src={notificationIcon} 
                             alt="notifications" 
-                            className="thex-notification-icon"/>
+                            className="notification-icon"/>
                 </NavLink>
-                <p className="thex-profile-name">{props.profileName}</p>
-                <img src={profilePic} alt="profile" className="thex-topbar-picture" onClick={()=>{openCloseModal()}}/>
+                <p className="profile-name">{props.profileName}</p>
+                <img src={profilePic} alt="profile" className="topbar-picture" onClick={()=>{setProfileModal(!isProfileModalOpen)}}/>
                 <Modal
                     isOpen={isProfileModalOpen}
                     contentLabel="Profile options"
                     onRequestClose={openCloseModal}
-                    className="thex-Modal"
-                    overlayClassName="thex-Overlay"
+                    className="Modal"
+                    overlayClassName="Overlay"
                     closeTimeoutMS={150}>
                     <Button text="Déconnecter" mode="dark_mode" onClick={()=>props.onDisconnect}/>
                 </Modal>
