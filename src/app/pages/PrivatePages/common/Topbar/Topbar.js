@@ -11,6 +11,7 @@ import {ReactComponent as UserIcon } from '../../../../../assets/svg/user.svg'
 
 
 import {actions} from '../../../../../modules'
+import { useLocation } from 'react-router';
 
 
 
@@ -64,16 +65,19 @@ export default function TopBar(props) {
 
     function logout(){
         dispatch(actions.logout());
-        console.log(props.user);
     }
-
+    const location = useLocation()
     return ( 
 
         <div className="topbar-wrapper">
         <div className="back-wrapper">
             <a className="back-link" href="#">  
                 <div className="back-text">
-                    <label>Gestion des véhicules</label>
+                { 
+                        location.pathname.includes('/enlevements')? <label>Enlèvements</label>:
+                            location.pathname.includes('/pannes')? <label>Pannes</label>: <label>Gestion des véhicules</label> 
+                }
+                    
                 </div>
             </a>
         </div>
