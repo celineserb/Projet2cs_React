@@ -20,10 +20,25 @@
 }
 
 .notification-title{
-    font-family: "Montserrat-bold";
     font-size: 1.1em;
     margin: 2px;
     width: 50%;
+}
+
+.bold-title{
+    font-family: "Montserrat-bold";
+}
+
+.fine-title{
+    font-family: "Montserrat";
+}
+
+.true-panne{
+    background-color: rgb(51, 196, 51);
+}
+
+.false-panne{
+    background-color: rgb(255, 106, 106);
 }
 
 .notification-subtitle{

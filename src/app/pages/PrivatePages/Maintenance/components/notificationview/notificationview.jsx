@@ -7,9 +7,14 @@ export default function notificationView(props){
     const panne = props.panne
     return(
         <div className="notification-view-container">
-            <div className="notification-indicator"></div>
-            <p className="notification-title">{panne.message}</p>
-            <p className="notification-subtitle">{new Date(panne.sent_at).toISOString().slice(0, 10)}</p>
+            <div className={props.isSolved+"-panne notification-indicator"}></div>
+            <p className={(props.isSolved ? "fine-title" : "bold-title") 
+                        + " notification-title" }>
+                {panne.message}
+            </p>
+            <p className="notification-subtitle">
+                {new Date(panne.sent_at).toISOString().slice(0, 10)}
+            </p>
             <Button text="Détails" mode="light_mode"/>
         </div>
     )

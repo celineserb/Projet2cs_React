@@ -23,10 +23,10 @@ export default function notifications(props){
                 <p className="notification-header-text">Notifications</p>
             </div>
             {pannes?.map(panne => (
-                <NotificationView key={panne.idSignal} panne={panne}/>
+                <NotificationView key={panne.idSignal} panne={panne} isSolved={false}/>
             ))}
             {solvedPannes?.map(panne => (
-                <NotificationView key={panne.idSignal} panne={panne}/>
+                <NotificationView key={panne.idSignal} panne={panne} isSolved={true}/>
             ))}
         </div>
     )
