@@ -17,6 +17,13 @@ class SignalComponent extends Component {
             changed: false 
          }
     }
+    componentWillReceiveProps(nextProps) {
+        this.setState({ 
+            key: nextProps.index, 
+            item: nextProps.item 
+        });  
+      }
+
     setVisible(value){
         this.setState({
           visible : value
@@ -42,12 +49,12 @@ class SignalComponent extends Component {
                         {
                             this.state.item.treated?
                                     <Avatar 
-                                        size={48} 
+                                        size={42} 
                                         icon={<EllipseGreyIcon />}>
                                     </Avatar>
                             :
                                     <Avatar 
-                                        size={48} 
+                                        size={42} 
                                         icon={<EllipseIcon />}>
                                     </Avatar>           
 
@@ -61,7 +68,7 @@ class SignalComponent extends Component {
                                 marginTop:8,
                                 marginLeft:8
                             }} 
-                            span={6}><h3>Signalement N°{this.state.item.idSignal}</h3> 
+                            span={6}><h5 className="item-title"> Signalement N°{this.state.item.idSignal}</h5> 
                         </Col>
 
                         <Col offset={5}  >
@@ -92,6 +99,7 @@ class SignalComponent extends Component {
                                         paddingLeft: 30, 
                                         paddingRight: 30
                                     }}
+                                    className="details-btn"
                                     >
                                     Details
                             </Button>   
@@ -121,92 +129,92 @@ class SignalComponent extends Component {
                                     </Button>,  
                                     ]}
                                     >
-                                    <h2>Informations Vehicules</h2> <hr className="hr-modal" />
+                                    <h4>Informations Vehicules</h4> <hr className="hr-modal" />
                                     <Row>
                                         <div className="info-container">
-                                            <Col><h3 className="info-title">Matricule:</h3></Col>
-                                            <Col push={5} style={{marginRight:55}}> <span className="info-box"> {this.state.item.registrationNumber}</span></Col>  
+                                            <Col><h5 className="info-title">Matricule:</h5></Col>
+                                            <Col push={5} style={{marginRight:45}}> <span className="info-box"> {this.state.item.registrationNumber}</span></Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col><h3 className="info-title">Modèle:</h3></Col>
+                                            <Col><h5 className="info-title">Modèle:</h5></Col>
                                             <Col push={7}> <span className="info-box">{this.state.item.vehiclemodel}</span></Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col><h3 className="info-title">Marque:</h3></Col>
+                                            <Col><h5 className="info-title">Marque:</h5></Col>
                                             <Col push={6} style={{marginRight:45}}> <span className="info-box">{this.state.item.vehiclebrand}</span></Col>  
                                         </div>
                                     </Row>
                                     
                                     <Row>
                                         <div className="info-container">
-                                            <Col><h3 className="info-title">Couleur:</h3></Col>
+                                            <Col><h5 className="info-title">Couleur:</h5></Col>
                                             <Col push={6} style={{marginRight:40}}> <span className="info-box">{this.state.item.vehicleColor} </span></Col>  
                                         </div>
                                     </Row>
                                         
                             
-                                    <h2>Dernière location</h2> <hr className="hr-modal" />  
+                                    <h4>Dernière location</h4> <hr className="hr-modal" />  
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col style={{marginRight:5, }}><h3 className="info-title">Date Début:</h3></Col>
+                                            <Col style={{marginRight:5, }}><h5 className="info-title">Date Début:</h5></Col>
                                             <Col push={4}> <span className="info-box"> {this.state.item.rentaldate.slice(0,10)} </span></Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col style={{marginRight:11, }}  ><h3 className="info-title">Heure Début:</h3></Col>
+                                            <Col style={{marginRight:9, }}  ><h5 className="info-title">Heure Début:</h5></Col>
                                             <Col push={3}> <span className="info-box"> {this.state.item.rentaltime} </span></Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col><h3 className="info-title">Date de fin prévue:</h3></Col>
-                                            <Col push={1}> <span className="info-box">{this.state.item.restitutionDate.slice(0,10)} </span></Col>  
+                                            <Col  ><h5 className="info-title">Date fin prévue:</h5></Col>
+                                            <Col push={2} style={{marginLeft:3, }}> <span className="info-box">{this.state.item.restitutionDate.slice(0,10)} </span></Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col><h3 className="info-title">Borne de départ:</h3></Col>
-                                            <Col push={2}> <span className="info-box"> {this.state.item.depatBorne} </span></Col>  
+                                            <Col><h5  className="info-title">Borne de départ:</h5></Col>
+                                            <Col push={1} style={{marginLeft:12, }}> <span className="info-box"> {this.state.item.depatBorne} </span></Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col style={{marginRight:5, }}><h3 className="info-title">Borne destination:</h3></Col>
-                                            <Col push={1}> <span className="info-box"> {this.state.item.destBorne} </span></Col>  
+                                            <Col style={{marginRight:5, }}><h5 className="info-title">Borne destination:</h5></Col>
+                                            <Col  style={{marginLeft:15, }}> <span className="info-box"> {this.state.item.destBorne} </span></Col>  
                                         </div>
                                     </Row>
                             
                             
-                                    <h2>Dernier locataire</h2> <hr className="hr-modal" />
+                                    <h4>Dernier locataire</h4> <hr className="hr-modal" />
                                     <Row>
                                         <div className="info-container">
-                                            <Col style={{marginRight:19, }}><h3 className="info-title">Nom et Prénom :</h3></Col>
+                                            <Col style={{marginRight:15, }}><h5 className="info-title">Nom et Prénom :</h5></Col>
                                             <Col push={1}> <span className="info-box"> {this.state.item.lastName+" "+this.state.item.firstName} </span></Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col style={{marginRight:8, }}><h3 className="info-title">telephone: </h3></Col>
+                                            <Col style={{marginRight:7, }}><h5 className="info-title">telephone: </h5></Col>
                                             <Col push={5}> <span className="info-box">0{this.state.item.phoneNumber}</span></Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col style={{marginRight:9, }}><h3 className="info-title">Adresse: </h3></Col>
+                                            <Col style={{marginRight:9, }}><h5 className="info-title">Adresse: </h5></Col>
                                             <Col push={6}> <span className="info-box"> {this.state.item.address} </span></Col>  
                                         </div>
                                     </Row>

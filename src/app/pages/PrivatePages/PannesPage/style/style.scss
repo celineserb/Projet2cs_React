@@ -21,7 +21,8 @@
     bottom: 12px;
     left: 40px;
 }
-.pannes-list-sort-btn {
+.pannes-list-sort-btn,
+.pannes-list-filter-btn {
     cursor: pointer;
     background: none;
     border: none;
@@ -29,14 +30,66 @@
     font-weight: bold;
     position: absolute;
     bottom: 15px;
-    right: 60px;
     vertical-align: middle;
     color: #333;
 }
+.pannes-list-sort-btn {
+    right: 180px;
+}
+.pannes-list-filter-btn {
+    right: 60px;
+}
+.pannes-list-sort-btn > img,
 .pannes-list-sort-btn > img {
     vertical-align: middle;
     height: 12px;
     padding-right: 5px;
+}
+.pannes-list-sort,
+.pannes-list-filter {
+    position: absolute;
+    top: 40px;
+    background-color: #fff;
+    border-radius: 20px;
+    z-index: 51;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+}
+.pannes-list-sort {
+    right: 180px;
+}
+.pannes-list-filter {
+    right: 50px;
+}
+.pannes-list-sort > ul,
+.pannes-list-filter > ul {
+    margin: 0;
+    padding: 10px;
+    list-style: none;
+}
+.pannes-list-sort > ul > li,
+.pannes-list-filter > ul > li,
+.pannes-list-sort > ul > li > label,
+.pannes-list-filter > ul > li > label,
+.pannes-list-sort > ul > li > input[type="radio"],
+.pannes-list-filter > ul > li > input[type="radio"] {
+    margin: 5px;
+    vertical-align: middle;
+    font-size: 14px;
+}
+.pannes-list-sort > ul > li:hover,
+.pannes-list-filter > ul > li:hover,
+.pannes-list-sort > ul > li:hover > label,
+.pannes-list-filter > ul > li:hover > label,
+.pannes-list-sort > ul > li:hover > input[type="radio"],
+.pannes-list-filter > ul > li:hover > input[type="radio"] {
+    cursor: pointer;
+}
+.pannes-list-sort > ul > li > input[type="radio"]:checked + label,
+.pannes-list-filter > ul > li > input[type="radio"]:checked + label {
+    font-weight: bold;
+}
+.hidden {
+    display: none;
 }
 .hl {
     position: absolute;
@@ -186,38 +239,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.pannes-list-sort {
-    position: absolute;
-    top: 50px;
-    right: 50px;
-    background-color: #fff;
-    border-radius: 20px;
-    z-index: 51;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
-}
-.pannes-list-sort > ul {
-    margin: 0;
-    padding: 10px;
-    list-style: none;
-}
-.pannes-list-sort > ul > li,
-.pannes-list-sort > ul > li > label,
-.pannes-list-sort > ul > li > input[type="checkbox"] {
-    margin: 5px;
-    vertical-align: middle;
-    font-size: 14px;
-}
-.pannes-list-sort > ul > li:hover,
-.pannes-list-sort > ul > li:hover > label,
-.pannes-list-sort > ul > li:hover > input[type="checkbox"]  {
-    cursor: pointer;
-}
-.pannes-list-sort > ul > li > input[type="checkbox"]:checked + label {
-    font-weight: bold;
-}
-.hidden {
-    display: none;
-}
 ::-webkit-scrollbar {
 	width: 8px;
 }
@@ -239,6 +260,9 @@
 }
 .sort-svg {
     content: url('../../../../../assets/svg/sort.svg');
+}
+.filter-svg {
+    content: url('../../../../../assets/svg/filter.svg');
 }
 .pannes-list-item{
     border-radius: 35px; 
