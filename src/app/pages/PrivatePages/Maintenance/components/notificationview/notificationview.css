@@ -48,3 +48,31 @@
     margin: 2px;
     width: 30%;
 }
+
+.notif-modal-wrapper{
+    height: 100%;
+    width: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.notif-modal-title{
+    font-family: "Montserrat-bold";
+    font-size: 1.5em;
+}
+
+.notif-modal-text{
+    font-family: "Montserrat";
+    font-size: 1.3em;
+}
+
+.notif-buttons-wrapper{
+    width: 100%;
+}
+
+.notif-buttons-wrapper Button{
+    margin: 20px;
+}

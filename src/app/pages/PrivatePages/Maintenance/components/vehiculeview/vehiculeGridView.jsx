@@ -2,7 +2,7 @@ import React from 'react'
 import image from '../../assets/car_model.png'
 import './vehiculView.css'
 
-export default function vehiculeGridView(props){
+export default function VehiculeGridView(props){
     const vehicule = props.vehicule
     return(
         <div className="vehicule-grid-container">
