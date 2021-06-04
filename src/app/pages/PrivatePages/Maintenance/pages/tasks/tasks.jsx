@@ -4,10 +4,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import TaskView from "../../components/taskview/taskview";
 import Button from "../../components/button/button"
+import Modal from "react-modal"
 import "./tasks.css";
 
 const Tasks = (props) => {
   const [tasks, setTasks] = useState([]);
+  const [isAddModalOpen, setAddModalOpen] = useState(false);
 
   useEffect(async () => {
     const result = await axios("https://service-tasks.herokuapp.com/task");
@@ -41,8 +43,37 @@ const Tasks = (props) => {
     tasks && (
       <div className="tasks-container">
         <div className="task-header-actions">
-          <Button text="Ajouter tache" mode="light_mode" onClick={addTask}/>
+          <Button text="Ajouter tache" mode="light_mode" 
+          onClick={()=>{setAddModalOpen(!isAddModalOpen)}}/>
         </div>
+        <Modal 
+            isOpen={isAddModalOpen}
+            contentLabel="Task details"
+            closeTimeoutMS={150}
+            style={{
+              overlay: {
+                backgroundColor: "rgba(1,1,1,0.5)",
+                display: "grid",
+                gridAutoColumns: "auto",
+                justifyContent: "center",
+              },
+              content: {
+                width: "60%",
+                height: "80%",
+                minHeight: "fit-content",
+                marginLeft: "auto",
+                marginRight: "auto",
+                marginTop: "auto",
+                marginBottom: "auto",
+                borderRadius: "15px",
+                display: "grid",
+                alignContent: "center",
+                justifyContent: "center",
+                overflow: "hidden"
+              },
+            }}>
+
+      </Modal>
         <div className="tasks-header">
           <p className="task-header-text">taches</p>
           <p className="task-header-text">date</p>

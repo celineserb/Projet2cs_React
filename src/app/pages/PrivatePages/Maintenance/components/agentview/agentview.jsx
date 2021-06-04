@@ -1,11 +1,43 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './agentview.css'
 import image from '../../assets/profile_pic.png'
+import Modal from 'react-modal';
 
+
+Modal.setAppElement("#root");
 export default function AgentView(props){
-    console.log(props.agent)
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return(
-        <div className="agent-view-container">
+        <div className="agent-view-container" onClick={()=>{setIsModalOpen(!isModalOpen)}}>
+            <Modal 
+            isOpen={isModalOpen}
+            contentLabel="Task details"
+            closeTimeoutMS={150}
+            style={{
+              overlay: {
+                backgroundColor: "rgba(1,1,1,0.5)",
+                display: "grid",
+                gridAutoColumns: "auto",
+                justifyContent: "center",
+              },
+              content: {
+                width: "60%",
+                height: "80%",
+                minHeight: "fit-content",
+                marginLeft: "auto",
+                marginRight: "auto",
+                marginTop: "auto",
+                marginBottom: "auto",
+                borderRadius: "15px",
+                display: "grid",
+                alignContent: "center",
+                justifyContent: "center",
+                overflow: "hidden"
+              },
+            }}>
+
+            </Modal>
             <div className="agent-info">
                 <img src={image} alt="agent" className="agent-image"/>
                 <div className="agent-divider">
