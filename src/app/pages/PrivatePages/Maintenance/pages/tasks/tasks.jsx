@@ -9,6 +9,7 @@ import "./tasks.css";
 
 const Tasks = (props) => {
   const [tasks, setTasks] = useState([]);
+  const [vehicules,setVehicules] = useState([])
   const [isAddModalOpen, setAddModalOpen] = useState(false);
 
   useEffect(async () => {
@@ -16,9 +17,15 @@ const Tasks = (props) => {
     setTasks(result);
     return result;
   }, []);
+
+  useEffect(async ()=>{
+    const result = await axios("http://localhost:8000/vehicle");
+    setVehicules(result.data.listVehicles);
+    return result;
+  },[])
   
   async function addTask(){
-      const result = await axios
+      /*const result = await axios
       .post("https://service-tasks.herokuapp.com/task"
       ,{
         "idAgent": 1,
@@ -36,7 +43,7 @@ const Tasks = (props) => {
           "taskUUID": "282d4458-aaeb-4e92-a674-12320b1de46a"
         }
       })
-      console.log(result)
+      console.log(result)*/
   }
 
   return (
@@ -60,20 +67,47 @@ const Tasks = (props) => {
               content: {
                 width: "60%",
                 height: "80%",
-                minHeight: "fit-content",
-                marginLeft: "auto",
-                marginRight: "auto",
-                marginTop: "auto",
-                marginBottom: "auto",
+                margin: "auto",
                 borderRadius: "15px",
-                display: "grid",
-                alignContent: "center",
-                justifyContent: "center",
                 overflow: "hidden"
-              },
-            }}>
-
-      </Modal>
+              },}}>
+          <div className="add-task-modal">
+            <p className="task-modal-title">Ajouter une tache</p><br />
+            <input  className="modal-form-input" 
+                    type="text" name="task-title" 
+                    id="task-title" 
+                    placeholder="Titre de tache" />
+            <br />
+            <input  className="modal-form-input" 
+                    type="text" name="task-description" 
+                    id="task-description" 
+                    placeholder="Description" />
+            <br />
+            <select className="modal-form-input" 
+                    name="select-agent" 
+                    id="select-agent" 
+                    placeholder="Agent">
+              {vehicules?.map(vehicule => (
+                <option key={vehicule.idVehicle} value={vehicule.vehiclebrand}>
+                    {vehicule.vehiclebrand}
+                </option>
+              ))}
+            </select>
+            <br />
+            <select className="modal-form-input" 
+                      name="select-vehicule" 
+                      id="select-vehicule" 
+                      placeholder="Véhicule">
+              
+            </select>
+            <br />
+            <br />
+            <div className="modal-buttons-holder">
+              <Button text="Annuler" mode="dark_mode" onClick={()=>{setAddModalOpen(false)}}/>
+              <Button text="Confirmer" mode="light_mode" onClick={()=>{addTask()}}/>
+            </div>
+          </div>  
+        </Modal>
         <div className="tasks-header">
           <p className="task-header-text">taches</p>
           <p className="task-header-text">date</p>

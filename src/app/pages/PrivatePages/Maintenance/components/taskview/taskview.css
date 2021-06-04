@@ -62,13 +62,14 @@
 .task-title {
   font-family: "Montserrat";
   font-size: 0.9em;
+  color: #333;
   margin: 2px;
   width: 40%;
 }
 
 .task-subtitle {
   font-family: "Montserrat";
-  font-size: 0.6em;
+  font-size: 0.9em;
   color: #ccc;
   margin: 2px;
   width: 40%;
