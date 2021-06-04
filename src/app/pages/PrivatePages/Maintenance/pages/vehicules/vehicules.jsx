@@ -19,14 +19,9 @@ export default function vehicules(props){
     return(
         <div className="vehicule-list-container">
             <div className="vehicule-header-promo">
-                <VehiculeGridView />
-                <VehiculeGridView />
-                <VehiculeGridView />
-                <VehiculeGridView />
-                <VehiculeGridView />
-                <VehiculeGridView />
-                <VehiculeGridView />
-                <VehiculeGridView />
+            {vehicules?.map(vehicule=>(
+                <VehiculeGridView key={vehicule.idVehicle} vehicule={vehicule}/>
+            ))}
             </div>
             <div className="vehicule-header-container">
                 <p className="vehicule-header-title">Véhicule</p>
