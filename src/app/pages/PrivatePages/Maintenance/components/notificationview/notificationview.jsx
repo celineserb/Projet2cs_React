@@ -26,7 +26,7 @@ export default function NotificationView(props){
             ,{
                 "idAgent": 100,
                 "idVehicle": panne.idVehicle,
-                "taskTitle": panne.signalType,
+                "taskTitle": panne.signalType+ " : "+panne.message,
                 "description": panne.message,
                 "idTaskState": 2,
                 "endDate": null,
