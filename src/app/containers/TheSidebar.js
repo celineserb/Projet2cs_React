@@ -32,15 +32,18 @@ const TheSidebar = () => {
       }}
     >
       <CSidebarBrand className="d-md-down-none" to="/"  style={{
+        paddingTop: 25,
         backgroundColor: "#333"
       }}>
         <CRow className="c-sidebar-brand-full">
           <CIcon
             name="logo-negative"
             src={logos}
-            height={35}
+            height={45}
           />
-          <p className="m-2">AutoLib Dz</p>
+          <p className="m-2" style={{
+            fontSize: 22
+          }}>AutoLib Dz</p>
         </CRow>
         <CIcon
           className="c-sidebar-brand-minimized"
@@ -60,12 +63,15 @@ const TheSidebar = () => {
             CSidebarNavTitle
           }}
         />
+        <CSidebarNavDivider style={{
+          flex: 1
+        }} />
+        <CSidebarNavItem 
+          to="/parameters"
+          name="Parameters"
+          icon="cil-settings"
+        />
       </CSidebarNav>
-      <CSidebarNavItem 
-        to="/parameters"
-        name="Parameters"
-      >
-      </CSidebarNavItem>
       <CSidebarMinimizer className="c-d-md-down-none"/>
     </CSidebar>
   )

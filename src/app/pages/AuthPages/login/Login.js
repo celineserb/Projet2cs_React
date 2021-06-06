@@ -85,7 +85,7 @@ const Login = () => {
   return (
     <div className="c-app c-default-layout flex-row align-items-stretch">
       <CContainer className="mr-md-5">
-        <CCol className="d-flex flex-column fixed-top pl-5">
+        <CCol className="d-flex flex-column fixed-top">
           <CLink className="small" to="/">
             <CRow className="d-flex pt-md-5 align-items-center">
               <CIcon src={Logo2} height={40} />
@@ -106,8 +106,8 @@ const Login = () => {
           </div>
 
         </CCol>
-        <CRow className="h-100 justify-content-end align-items-end">
-          <CCol sm="5" className="mb-5">
+        <CRow className="h-100 justify-content-end align-items-center">
+          <CCol sm="5">
             <CCardGroup>
               <CCard className="login-card p-4">
                 <CCardBody>

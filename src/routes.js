@@ -162,30 +162,16 @@ const routes = [
   { path: "/users/:id", exact: true, name: "User Details", component: User },
   //----------------- Gestion utilisateur routes:
   //---------- new routes : gestion utilisteurs ::
-  {
-    path: "/gestionUtil",
-    name: "GestionUtil",
-    component: UsersTable,
-    exact: true,
-  },
+  { path: "/comptes", name: "GestionUtil", component: UsersTable, exact: true },
   // { path: '/gestionUtil', name: 'gestionUtil', component: Cards, exact: true },
-  {
-    path: "/gestionUtil/compteLocataire",
-    name: "TableLocataire",
-    component: UsersTable,
-  },
-  //----------------- Stats routes:
-  {
-    path: "/stats/locataire",
-    name: "SatatsLocataire",
-    component: LocatairesTable,
-  },
+  { path: "/compteLocataire", name: "TableLocataire", component: UsersTable },
+
   { path: "/login", exact: true, name: "Login Page", component: Login },
   { path: "/p404", name: "Page not found", component: Page404 },
   { path: "/p500", name: "Page not found", component: Page500 },
 
   {
-    path: "/decideur/GrapheLocation",
+    path: "/GrapheLocation",
     name: "Graphe de location",
     component: GrapheLocation,
   },

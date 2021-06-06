@@ -1,6 +1,9 @@
 export const fetchPaths = {
-    VEHICLE: id => `/v/${id}`,
-    VEHICULE_YEAR: (id, year) => `/v/${id}/d/${year}`,
-    VEHICULE_MONTH: (id, year, month) => `/v/${id}/d/${year}/${month}`,
-    VEHICULE_DAY: (id, year, month, day) => `/v/${id}/d/${year}/${month}/${day}`,
+    VEHICULE_YEAR: (id) => `/vr/y/${id}`,
+    VEHICULE_MONTH: (id) => `/vr/m/${id}`,
+    VEHICULE_DAY: (id) => `/vr/d/${id}`,
+
+    BORNE_YEAR: (id, year) => `/br/y/${id}`,
+    BORNE_MONTH: (id, year, month) => `/br/m/${id}`,
+    BORNE_DAY: (id, year, month, day) => `/br/d/${id}`,
 }

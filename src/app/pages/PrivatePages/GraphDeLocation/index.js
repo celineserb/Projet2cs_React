@@ -4,26 +4,37 @@ import { getStyle, hexToRgba } from '@coreui/utils'
 import StyledChart from '../../../conponents/charts/StyledChart'
 import { CCard, CCardBody, CCardHeader, CCol, CListGroup, CListGroupItem, CRow } from '@coreui/react'
 import { getBornes, getVehicles } from '../../../../modules/Vehicle/vehicle.crud'
-import { getVehicleUsagePerDay } from '../../../../modules/Stats/stats.crud'
+import { getBorneUsagePerDay, getBorneUsagePerMonth, getBorneUsagePerYear, getVehicleUsagePerDay, getVehicleUsagePerMonth, getVehicleUsagePerYear } from '../../../../modules/Stats/stats.crud'
 
-const brandSuccess = getStyle('success') || '#4dbd74'
+import "../../../../assets/scss/graphLocation.scss"
+
+// const brandSuccess = getStyle('success') || '#4dbd74'
 const brandInfo = getStyle('info') || '#20a8d8'
-const brandDanger = getStyle('danger') || '#f86c6b'
+// const brandDanger = getStyle('danger') || '#f86c6b'
 
 
 export default function GrapheLocation ()  {
 
   const [vehicles, setVehicles] = useState([])
   const [activeVehicules, setActiveVehicules] = useState({})
-  const [vehiculeDatasets, setVehiculeDatasets] = useState()
+  const [vehiculeDatasets, setVehiculeDatasets] = useState({
+    labels: [],
+    datasets: []
+  })
+  const [vehiculePeriod, setVehiculePeriod] = useState("Jour")
+
   const [bornes, setBornes] = useState([])
   const [activeBornes, setActiveBornes] = useState({})
+  const [borneDatasets, setBorneDatasets] = useState({
+    labels: [],
+    datasets: []
+  })
+  const [bornePeriod, setBornePeriod] = useState("Jour")
 
   useEffect(() => {
     getVehicles()
     .then(({data}) => {
       setVehicles(data)
-      console.log(data)
     })
     .catch(e => {
       console.log(e)
@@ -32,28 +43,47 @@ export default function GrapheLocation ()  {
     getBornes()
     .then(({data}) => {
       setBornes(data)
-      console.log(data)
     })
   }, [])
 
   useEffect(() => {
-    async function getChartData() {
-      const date = new Date()
-      let day = date.getDate()
-      const month = date.getMonth()
-      const year = date.getFullYear()
+    async function getVehiculeData() {
+      // reset
+      setVehiculeDatasets(state => ({...state, datasets: []}))
       
+      let period = []
       let datasets = []
+      let isSet = false
       for (let j in activeVehicules) {
         if (!activeVehicules[j])
-        continue;
+          continue;
         
         let dataset = []
-        let days = day
-        while (days > 0) {
-          const { data } = await getVehicleUsagePerDay(j, year, month, days)
-          dataset.push(parseInt(data.TotalRents))
-          days--
+        if (vehiculePeriod === "Jour") {
+          const periods = ["Dim", "Lun", "Mar", "Mer", "Je", "Ven", "Sa"]
+          const { data } = await getVehicleUsagePerDay(j)
+          let days = data.slice(-31)
+          for (let i of days) {
+            const date = new Date(i.day.split('T')[0])
+            dataset.push(parseInt(i.rents))
+            if (!isSet)
+              period.push(periods[date.getDay()])
+          }
+        } else if (vehiculePeriod === "Mois") {
+          const { data } = await getVehicleUsagePerMonth(j)
+
+          for (let i of data) {
+            dataset.push(parseInt(i.rents))
+            if (!isSet)
+              period.push(i.month)
+          }
+        } else if (vehiculePeriod === "Année") {
+          const { data } = await getVehicleUsagePerYear(j)
+          for (let i of data) {
+            dataset.push(parseInt(i.rents))
+            if (!isSet)
+              period.push(i.year)
+          }
         }
         datasets.push({
           label: 'Vehicule ' + j,
@@ -63,94 +93,76 @@ export default function GrapheLocation ()  {
           borderWidth: 2,
           data: dataset
         })
+        isSet = true
       }
-      setVehiculeDatasets(datasets)
+      setVehiculeDatasets({labels: period, datasets})
     }
-    getChartData()
-  }, [activeVehicules])
+    getVehiculeData()
+  }, [activeVehicules, vehiculePeriod])
+
+  useEffect(() => {
+    async function getBorneData() {
+      // reset
+      setBorneDatasets(state => ({...state, datasets: []}))
+      
+      let period = []
+      let datasets = []
+      let isSet = false
+      for (let j in activeBornes) {
+        if (!activeBornes[j])
+          continue;
+        
+        let dataset = []
+        if (bornePeriod === "Jour") {
+          const periods = ["Dim", "Lun", "Mar", "Mer", "Je", "Ven", "Sa"]
+          const { data } = await getBorneUsagePerDay(j)
+          let days = data.slice(-31)
+          for (let i of days) {
+            const date = new Date(i.day.split('T')[0])
+            dataset.push(parseInt(i.rents))
+            if (!isSet)
+              period.push(periods[date.getDay()])
+          }
+        } else if (bornePeriod === "Mois") {
+          const { data } = await getBorneUsagePerMonth(j)
+
+          for (let i of data) {
+            dataset.push(parseInt(i.rents))
+            if (!isSet)
+              period.push(i.month)
+          }
+        } else if (bornePeriod === "Année") {
+          const { data } = await getBorneUsagePerYear(j)
+
+          for (let i of data) {
+            dataset.push(parseInt(i.rents))
+            if (!isSet)
+              period.push(i.year)
+          }
+        }
+        datasets.push({
+          label: 'Borne ' + j,
+          backgroundColor: hexToRgba(brandInfo, 10),
+          borderColor: brandInfo,
+          pointHoverBackgroundColor: brandInfo,
+          borderWidth: 2,
+          data: dataset
+        })
+        isSet = true
+      }
+      setBorneDatasets({labels: period, datasets})
+    }
+
+    getBorneData()
+  }, [activeBornes, bornePeriod])
 
   function selectVehicule(i) {
     setActiveVehicules({...activeVehicules, [i]: !activeVehicules[i]})
   }
 
-    const random = (min, max)=>{
-        return Math.floor(Math.random() * (max - min + 1) + min)
-      }
-
-    const defaultDatasets = (()=>{
-        let elements = 27
-        const data1 = []
-        const data2 = []
-        const data3 = []
-        for (let i = 0; i <= elements; i++) {
-          data1.push(random(50, 200))
-          data2.push(random(80, 100))
-          data3.push(65)
-        }
-        return [
-          {
-            label: 'My First dataset',
-            backgroundColor: hexToRgba(brandInfo, 10),
-            borderColor: brandInfo,
-            pointHoverBackgroundColor: brandInfo,
-            borderWidth: 2,
-            data: data1
-          },
-          {
-            label: 'My Second dataset',
-            backgroundColor: 'transparent',
-            borderColor: brandSuccess,
-            pointHoverBackgroundColor: brandSuccess,
-            borderWidth: 2,
-            data: data2
-          },
-          {
-            label: 'My Third dataset',
-            backgroundColor: 'transparent',
-            borderColor: brandDanger,
-            pointHoverBackgroundColor: brandDanger,
-            borderWidth: 1,
-            borderDash: [8, 5],
-            data: data3
-          }
-        ]
-      })()
-    
-      const defaultOptions = (()=>{
-        return {
-            maintainAspectRatio: false,
-            legend: {
-              display: false
-            },
-            scales: {
-              xAxes: [{
-                gridLines: {
-                  drawOnChartArea: false
-                }
-              }],
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true,
-                  maxTicksLimit: 5,
-                  stepSize: Math.ceil(250 / 5),
-                  max: 250
-                },
-                gridLines: {
-                  display: true
-                }
-              }]
-            },
-            elements: {
-              point: {
-                radius: 0,
-                hitRadius: 10,
-                hoverRadius: 4,
-                hoverBorderWidth: 3
-              }
-            }
-          }
-        }
-      )()
+  function selectBorne(i) {
+    setActiveBornes({...activeBornes, [i]: !activeBornes[i]})
+  }
 
   return (
     <>
@@ -163,7 +175,7 @@ export default function GrapheLocation ()  {
             <CCardBody>
               <CListGroup>
                 {bornes.map((e, i) => (
-                  <CListGroupItem key={i} action active={activeBornes[i]} onClick={() => setActiveBornes({...activeBornes, [i]: !activeBornes[i]})}>{`${e.idBorne}: ${e.city}`}</CListGroupItem>
+                  <CListGroupItem key={i} action active={activeBornes[e.idBorne]} onClick={() => selectBorne(e.idBorne)}>{`${e.idBorne}: ${e.city}`}</CListGroupItem>
                 ))}
               </CListGroup>
             </CCardBody>
@@ -171,7 +183,7 @@ export default function GrapheLocation ()  {
 
         </CCol>
       </CRow>
-      <StyledChart dataset={defaultDatasets} options={defaultOptions} />
+      <StyledChart dataset={borneDatasets} period={bornePeriod} setPeriod={setBornePeriod} />
 
       <CRow>
         <CCol sm="12" xl="6">
@@ -190,7 +202,7 @@ export default function GrapheLocation ()  {
 
         </CCol>
       </CRow>
-      <StyledChart dataset={vehiculeDatasets} options={defaultOptions} />
+      <StyledChart dataset={vehiculeDatasets} period={vehiculePeriod} setPeriod={setVehiculePeriod} />
     </>
   )
 

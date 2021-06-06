@@ -1,11 +1,44 @@
 import CIcon from "@coreui/icons-react";
-import { CButton, CButtonGroup, CCard, CCardBody, CCardFooter, CCol, CProgress, CRow } from "@coreui/react";
+import { CButton, CButtonGroup, CCard, CCardBody, CCol, CRow } from "@coreui/react";
 import { CChartLine } from "@coreui/react-chartjs";
 
 
+const defaultOptions = {
+  maintainAspectRatio: false,
+  legend: {
+    display: false
+  },
+  scales: {
+    xAxes: [{
+      gridLines: {
+        drawOnChartArea: false
+      }
+    }],
+    yAxes: [{
+      ticks: {
+        beginAtZero: true,
+        maxTicksLimit: 20,
+        // stepSize: 1,
+        // max: 10
+      },
+      gridLines: {
+        display: true
+      }
+    }]
+  },
+  elements: {
+    point: {
+      radius: 0,
+      hitRadius: 10,
+      hoverRadius: 4,
+      hoverBorderWidth: 3
+    }
+  }
+}
+
 export default function StyledChart(props) {
 
-    const { dataset, options } = props;
+    const { dataset, period, setPeriod } = props;
 
     return (
         <CCard style={{
@@ -16,11 +49,11 @@ export default function StyledChart(props) {
           <CRow>
             <CCol sm="5">
               <h4 id="traffic" className="card-title mb-0">Graphe de location par borne</h4>
-              <div className="small text-muted">Mais 2021</div>
+              <div className="small text-muted">Par {period}</div>
             </CCol>
             <CCol sm="7" className="d-none d-md-block">
-              <CButton color="primary" className="float-right">
-                <CIcon name="cil-cloud-download"/>
+              <CButton color="warning" className="float-right">
+                <CIcon name="cil-cloud-download" />
               </CButton>
               <CButtonGroup className="float-right mr-3">
                 {
@@ -29,7 +62,8 @@ export default function StyledChart(props) {
                       color="outline-secondary"
                       key={value}
                       className="mx-0"
-                      active={value === 'Mois'}
+                      active={value === period}
+                      onClick={() => setPeriod(value)}
                     >
                       {value}
                     </CButton>
@@ -39,64 +73,11 @@ export default function StyledChart(props) {
             </CCol>
           </CRow>
           <CChartLine 
-            datasets={dataset}
-            options={options}
-            labels={['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']}
+            datasets={dataset.datasets}
+            options={defaultOptions}
+            labels={dataset.labels}
             style={{height: '300px', marginTop: '40px'}}/>
         </CCardBody>
-        {/* <CCardFooter>
-          <CRow className="text-center">
-            <CCol md sm="12" className="mb-sm-2 mb-0">
-              <div className="text-muted">Visits</div>
-              <strong>29.703 Users (40%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="success"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0 d-md-down-none">
-              <div className="text-muted">Unique</div>
-              <strong>24.093 Users (20%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="info"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0">
-              <div className="text-muted">Pageviews</div>
-              <strong>78.706 Views (60%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="warning"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0">
-              <div className="text-muted">New Users</div>
-              <strong>22.123 Users (80%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                color="danger"
-                value={40}
-              />
-            </CCol>
-            <CCol md sm="12" className="mb-sm-2 mb-0 d-md-down-none">
-              <div className="text-muted">Bounce Rate</div>
-              <strong>Average Rate (40.15%)</strong>
-              <CProgress
-                className="progress-xs mt-2"
-                precision={1}
-                value={40}
-              />
-            </CCol>
-          </CRow>
-        </CCardFooter> */}
       </CCard>
 
     )

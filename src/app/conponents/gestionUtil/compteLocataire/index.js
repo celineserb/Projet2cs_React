@@ -14,7 +14,7 @@ import ValidationForm from "../validationCompte";
 const fields = ["idUser", "accountState"];
 
 function getBadge(status) {
-  switch(status) {
+  switch(status?.toLowerCase()) {
     case "validated": return "success"
     case "refused": return "danger"
     case "pending": return "info"
@@ -30,16 +30,15 @@ function UsersTable() {
   useEffect(() => {
     getLocataires()
     .then((res) => {
-      console.log(res.data);
       setLocataires(res.data);
     })
     .catch((err) => {
       console.log(err);
     });
-  }, []);
+  }, [modalVisible]);
 
   function HandleClick(locataire) {
-    if (locataire.accountState !== "validated") {
+    if (locataire.accountState?.toLowerCase() !== "validated") {
       setSelectedLocataire(locataire)
       setModalVisible(true)
     }
