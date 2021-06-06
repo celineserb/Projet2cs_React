@@ -50,9 +50,6 @@ export default function GrapheLocation ()  {
     async function getVehiculeData() {
       // reset
       setVehiculeDatasets(state => ({...state, datasets: []}))
-
-      const date = new Date()
-      const [dayOfMonth, day, month, year] = [date.getDay(), date.getDate(), date.getMonth(), date.getFullYear()]
       
       let period = []
       let datasets = []
@@ -64,46 +61,28 @@ export default function GrapheLocation ()  {
         let dataset = []
         if (vehiculePeriod === "Jour") {
           const periods = ["Dim", "Lun", "Mar", "Mer", "Je", "Ven", "Sa"]
-          const months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-          let dom = dayOfMonth
-          for (let k = 0; k < 31; k++) {
-            let mois = month + 1, days;
-            if (day - k <= 0) {
-              mois = month
-              days = day - k + months[month - 1]
-            } else {
-              days = day - k
-            }
-            const { data } = await getVehicleUsagePerDay(j, year, mois, days)
-            dataset.push(parseInt(data.TotalRents))
-            const per = dom % periods.length
-            if (!isSet) 
-              period.unshift(periods[per < 0? per + periods.length: per])
-            
-            dom--
+          const { data } = await getVehicleUsagePerDay(j)
+          let days = data.slice(-31)
+          for (let i of days) {
+            const date = new Date(i.day.split('T')[0])
+            dataset.push(parseInt(i.rents))
+            if (!isSet)
+              period.push(periods[date.getDay()])
           }
         } else if (vehiculePeriod === "Mois") {
-          const periods = ["Jan", "Fev", "Mar", "Avr", "Mai", "Jun", "Jul", "Aou", "Sep", "Oct", "Nov", "Dec"]
-          for (let k = 0; k < 12; k++) {
-            let mois = month - k
-            let annee = year
-            if (mois < 0) {
-              break;
-            }
-            const { data } = await getVehicleUsagePerMonth(j, annee, mois + 1)
-            dataset.push(parseInt(data.TotalRents))
-            const per = mois % periods.length
-            if (!isSet) 
-              period.unshift(periods[per < 0? per + periods.length: per])
+          const { data } = await getVehicleUsagePerMonth(j)
+
+          for (let i of data) {
+            dataset.push(parseInt(i.rents))
+            if (!isSet)
+              period.push(i.month)
           }
         } else if (vehiculePeriod === "Année") {
-          let annee = year
-          while (annee > 2017) {
-            const { data } = await getVehicleUsagePerYear(j, annee)
-            dataset.push(parseInt(data.TotalRents))
+          const { data } = await getVehicleUsagePerYear(j)
+          for (let i of data) {
+            dataset.push(parseInt(i.rents))
             if (!isSet)
-              period.unshift(annee.toString())
-            annee--
+              period.push(i.year)
           }
         }
         datasets.push({
@@ -125,9 +104,6 @@ export default function GrapheLocation ()  {
     async function getBorneData() {
       // reset
       setBorneDatasets(state => ({...state, datasets: []}))
-
-      const date = new Date()
-      const [dayOfMonth, day, month, year] = [date.getDay(), date.getDate(), date.getMonth(), date.getFullYear()]
       
       let period = []
       let datasets = []
@@ -139,46 +115,29 @@ export default function GrapheLocation ()  {
         let dataset = []
         if (bornePeriod === "Jour") {
           const periods = ["Dim", "Lun", "Mar", "Mer", "Je", "Ven", "Sa"]
-          const months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-          let dom = dayOfMonth
-          for (let k = 0; k < 31; k++) {
-            let mois = month + 1, days;
-            if (day - k <= 0) {
-              mois = month
-              days = day - k + months[month - 1]
-            } else {
-              days = day - k
-            }
-            const { data } = await getBorneUsagePerDay(j, year, mois, days)
-            dataset.push(parseInt(data.TotalRents))
-            const per = dom % periods.length
-            if (!isSet) 
-              period.unshift(periods[per < 0? per + periods.length: per])
-            
-            dom--
+          const { data } = await getBorneUsagePerDay(j)
+          let days = data.slice(-31)
+          for (let i of days) {
+            const date = new Date(i.day.split('T')[0])
+            dataset.push(parseInt(i.rents))
+            if (!isSet)
+              period.push(periods[date.getDay()])
           }
         } else if (bornePeriod === "Mois") {
-          const periods = ["Jan", "Fev", "Mar", "Avr", "Mai", "Jun", "Jul", "Aou", "Sep", "Oct", "Nov", "Dec"]
-          for (let k = 0; k < 12; k++) {
-            let mois = month - k
-            let annee = year
-            if (mois < 0) {
-              break;
-            }
-            const { data } = await getBorneUsagePerMonth(j, annee, mois + 1)
-            dataset.push(parseInt(data.TotalRents))
-            const per = mois % periods.length
-            if (!isSet) 
-              period.unshift(periods[per < 0? per + periods.length: per])
+          const { data } = await getBorneUsagePerMonth(j)
+
+          for (let i of data) {
+            dataset.push(parseInt(i.rents))
+            if (!isSet)
+              period.push(i.month)
           }
         } else if (bornePeriod === "Année") {
-          let annee = year
-          while (annee > 2017) {
-            const { data } = await getBorneUsagePerYear(j, annee)
-            dataset.push(parseInt(data.TotalRents))
+          const { data } = await getBorneUsagePerYear(j)
+
+          for (let i of data) {
+            dataset.push(parseInt(i.rents))
             if (!isSet)
-              period.unshift(annee.toString())
-            annee--
+              period.push(i.year)
           }
         }
         datasets.push({
