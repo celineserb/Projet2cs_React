@@ -22,17 +22,10 @@ export default function AgentView(props){
                 justifyContent: "center",
               },
               content: {
-                width: "60%",
-                height: "80%",
-                minHeight: "fit-content",
-                marginLeft: "auto",
-                marginRight: "auto",
-                marginTop: "auto",
-                marginBottom: "auto",
+                width: "50%",
+                height: "70%",
+                margin: "auto",
                 borderRadius: "15px",
-                display: "grid",
-                alignContent: "center",
-                justifyContent: "center",
                 overflow: "hidden"
               },
             }}>
@@ -45,10 +38,7 @@ export default function AgentView(props){
                     <p className="agent-subtitle">updated 10mins ago</p>
                 </div>
             </div>
-            <div className="agent-divider">
-                <p className="agent-title">Netoyer véhicule N200</p>
-                <p className="agent-subtitle">20 mars 2021</p>
-            </div>
+            
         </div>
     )
 }

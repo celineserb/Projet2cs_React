@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react"
 import AgentView from "../../components/agentview/agentview"
-import Button from "../../components/button/button"
 import Fuse from 'fuse.js'
 import Modal from 'react-modal'
 import "./agents.css"
@@ -62,11 +61,18 @@ export default function agents(props) {
   ]
 
   const [query, setQuery] = useState('')
-  const [isAgentModalOpen, setIsAgentModalOpen] = useState(false)
-  const fusy = new Fuse(Agents, {keys: ['name']})
+  const [agentsList,setAgentList] = useState(Agents)
+
+  /*useEffect(async ()=>{
+    const result = await axios("get agent list")
+    setAgentList(result?.data)
+  },[])*/
+
+
+  const fusy = new Fuse(agentsList, {keys: ['name','surename']})
 
   const results = fusy.search(query)
-  const agentList = query ? results.map(result => result.item): Agents
+  const agentList = query ? results.map(result => result.item): agentsList
 
   function search({ currentTarget= {}}){
     const {value} = currentTarget;
@@ -85,39 +91,11 @@ export default function agents(props) {
           value={query}
           onChange={search}
         />
-        <Button text="Ajouter agent" mode="light_mode" onClick={()=>{setIsAgentModalOpen(!isAgentModalOpen)}}/>
+        {/*<Button text="Ajouter agent" mode="light_mode" onClick={()=>{setIsAgentModalOpen(!isAgentModalOpen)}}/>*/}
       </div>
-      <Modal 
-            isOpen={isAgentModalOpen}
-            contentLabel="Task details"
-            closeTimeoutMS={150}
-            style={{
-              overlay: {
-                backgroundColor: "rgba(1,1,1,0.5)",
-                display: "grid",
-                gridAutoColumns: "auto",
-                justifyContent: "center",
-              },
-              content: {
-                width: "60%",
-                height: "80%",
-                minHeight: "fit-content",
-                marginLeft: "auto",
-                marginRight: "auto",
-                marginTop: "auto",
-                marginBottom: "auto",
-                borderRadius: "15px",
-                display: "grid",
-                alignContent: "center",
-                justifyContent: "center",
-                overflow: "hidden"
-              },
-            }}>
-
-      </Modal>
+      
       <div className="agent-header-container">
         <p className="header-title">informations d'agent</p>
-        <p className="header-title">Tache courante</p>
       </div>
       
       {agentList.map(item => <AgentView key={item.id} agent={item}/>)}
