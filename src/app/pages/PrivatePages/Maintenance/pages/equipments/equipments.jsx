@@ -21,16 +21,18 @@ export default function Equipments(props){
 
     async function addEquipment(){
         if(equipmentName !== '' && equipmentCategory !== '' && equipmentPrice !== 0){
+            const pendingEquipment = {
+                "equipmentName": equipmentName,
+                "unitPrice": equipmentPrice,
+                "category": equipmentCategory
+            }
             const result = await axios
                 .post("https://service-equipment.herokuapp.com/equipment",
-                {
-                    "equipmentName": equipmentName,
-                    "unitPrice": equipmentPrice,
-                    "category": equipmentCategory
-                }) 
+                pendingEquipment) 
             
             if(result.status === 200){
                 setEquipmentModalOpen(false)
+                setEquipments(equipments.push(pendingEquipment))
                 setEquipmentName('')
                 setEquipmentPrice(0)
                 setEquipmentCat('')
