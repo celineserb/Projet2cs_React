@@ -95,7 +95,7 @@ export default function NotificationView(props){
 
                     </select>
                     <div className="notif-buttons-wrapper">
-                        <Button text="Confirmer" mode="dark_mode" onClick={()=>{setModalOpen(false)}}/>
+                        <Button text="Annuler" mode="dark_mode" onClick={()=>{setModalOpen(false)}}/>
                         <Button text="Importer comme tache" mode="light_mode" onClick={()=>{importNotif()}}/>
                     </div>
                 </div>
