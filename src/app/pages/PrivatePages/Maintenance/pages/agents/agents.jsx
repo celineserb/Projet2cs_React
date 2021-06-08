@@ -1,13 +1,19 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+<<<<<<< HEAD
 import React, { useState } from "react";
 import AgentView from "../../components/agentview/agentview";
 //import Button from "../../components/button/button";
 import {Button} from 'antd'
+=======
+import React, { useState } from "react"
+import AgentView from "../../components/agentview/agentview"
+>>>>>>> upstream/master
 import Fuse from 'fuse.js'
-import "./agents.css";
+import Modal from 'react-modal'
+import "./agents.css"
 
 
-
+Modal.setAppElement("#root");
 export default function agents(props) {
   const Agents = [
     {
@@ -61,13 +67,19 @@ export default function agents(props) {
     },
   ]
 
-  
   const [query, setQuery] = useState('')
+  const [agentsList,setAgentList] = useState(Agents)
 
-  const fusy = new Fuse(Agents, {keys: ['name']})
+  /*useEffect(async ()=>{
+    const result = await axios("get agent list")
+    setAgentList(result?.data)
+  },[])*/
+
+
+  const fusy = new Fuse(agentsList, {keys: ['name','surename']})
 
   const results = fusy.search(query)
-  const agentList = query ? results.map(result => result.item): Agents
+  const agentList = query ? results.map(result => result.item): agentsList
 
   function search({ currentTarget= {}}){
     const {value} = currentTarget;
@@ -86,13 +98,17 @@ export default function agents(props) {
           value={query}
           onChange={search}
         />
+<<<<<<< HEAD
         <Button
           shape='round'
           style={{marginRight:5, backgroundColor: '#F9C31B', color:'white'}}>Ajouter Agent</Button>
+=======
+        {/*<Button text="Ajouter agent" mode="light_mode" onClick={()=>{setIsAgentModalOpen(!isAgentModalOpen)}}/>*/}
+>>>>>>> upstream/master
       </div>
+      
       <div className="agent-header-container">
         <p className="header-title">informations d'agent</p>
-        <p className="header-title">Tache courante</p>
       </div>
       
       {agentList.map(item => <AgentView key={item.id} agent={item}/>)}

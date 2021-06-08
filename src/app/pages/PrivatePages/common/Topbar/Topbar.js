@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React  from 'react'
 import { useDispatch} from 'react-redux'
 
-import {Button, Dropdown, Menu, Avatar} from 'antd';
-import { AntDesignOutlined } from '@ant-design/icons';
+import {Button, Dropdown, Menu, Avatar, List} from 'antd';
 import 'antd/dist/antd.css';
 import './style.scss'
 
@@ -10,24 +9,70 @@ import {ReactComponent as BellIcon } from '../../../../../assets/svg/bell.svg'
 import {ReactComponent as UserIcon } from '../../../../../assets/svg/user.svg'
 
 
+
+
+
 import {actions} from '../../../../../modules'
 import { useLocation } from 'react-router';
 
+const notifications = [
+    {
+        title : "first notiifications that came something about something you know",
+        key : 0
+    },
+    {
+        title : "second notiifications that came",
+        key : 1
+    },
+    {
+        title : "third notiifications that came",
+        key : 2
+    },
+    {
+        title : "fourth notiifications that came",
+        key : 3
+    }
 
+]
 
 export default function TopBar(props) {
 
     const menu = (
         <Menu>
-          <Menu.Item key="0">
-              1st  item
-          </Menu.Item>
-          <Menu.Item key="1">
-              2nd  item
-          </Menu.Item>
-          <Menu.Item key="3" >
-            3rd item
-          </Menu.Item>
+            {
+                notifications.map((item, key) =>{
+                    return(
+                        <Menu.Item key={key}
+                        style={{
+                            maxWidth:250,
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis"
+                        }}>
+                            <Avatar 
+                                  size={{
+                                    xs:8,
+                                    sm: 8,
+                                    md: 12,
+                                    lg: 12,
+                                    xl: 12,
+                                    xxl: 12,
+                                }}
+                                style={{
+                                    backgroundColor:"red"
+                                }}
+                             />
+                           {"   "+item.title} 
+                           
+                        </Menu.Item>
+                    )
+                }
+               
+            )}
+           
+
+          
+         
         </Menu>
       );
      
@@ -91,14 +136,7 @@ export default function TopBar(props) {
                         >
                             <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                             <Avatar
-                                size={{
-                                xs: 24,
-                                sm: 32,
-                                md: 40,
-                                lg: 40,
-                                xl: 40,
-                                xxl: 40,
-                                }}
+                                size= {40}
                                 icon={<UserIcon />}
                             />
                             </a>
@@ -111,6 +149,7 @@ export default function TopBar(props) {
                         <Dropdown 
                             overlay={menu}
                             placement="bottomRight"
+                            arrow='true'
                         >
                             <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                                 <BellIcon />
