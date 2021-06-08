@@ -101,3 +101,15 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.ant-layout-sider-zero-width-trigger {
+    background: #333;
+    z-index: 101;
+}
+
+.marginleft {
+    margin-left: 200px;
+}
+.nomarginleft {
+    margin-left: 0;
+}
