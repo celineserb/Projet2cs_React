@@ -1,13 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-<<<<<<< HEAD
-import React, { useState } from "react";
-import AgentView from "../../components/agentview/agentview";
-//import Button from "../../components/button/button";
-import {Button} from 'antd'
-=======
 import React, { useState } from "react"
 import AgentView from "../../components/agentview/agentview"
->>>>>>> upstream/master
 import Fuse from 'fuse.js'
 import Modal from 'react-modal'
 import "./agents.css"
@@ -98,13 +91,7 @@ export default function agents(props) {
           value={query}
           onChange={search}
         />
-<<<<<<< HEAD
-        <Button
-          shape='round'
-          style={{marginRight:5, backgroundColor: '#F9C31B', color:'white'}}>Ajouter Agent</Button>
-=======
         {/*<Button text="Ajouter agent" mode="light_mode" onClick={()=>{setIsAgentModalOpen(!isAgentModalOpen)}}/>*/}
->>>>>>> upstream/master
       </div>
       
       <div className="agent-header-container">
