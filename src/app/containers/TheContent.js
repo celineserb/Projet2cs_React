@@ -35,7 +35,7 @@ const TheContent = () => {
                   )} />
               )
             })}
-            <Redirect from="/" to="/dashboard" />
+            <Redirect from="/" to="/decideur/GrapheLocation" />
           </Switch>
         </Suspense>
       </CContainer>

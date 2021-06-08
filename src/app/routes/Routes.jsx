@@ -5,6 +5,7 @@ import TrackingPage from "../pages/PrivatePages/VehicleSurveillance/TrackingPage
 import ManagePage from "../pages/PrivatePages/VehicleManage/ManagePage";
 import PannesPage from "../pages/PrivatePages/PannesPage/PannesPage";
 import SignalsPage from "../pages/PrivatePages/SignalsPage/SignalsPage";
+import MaintenancePage from "../pages/PrivatePages/Maintenance/pages/dashboard/dashboard"
 
 import {
     Route,
@@ -14,11 +15,11 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { CrudService } from '../../services'
 import { actions } from '../../modules'
-<<<<<<< HEAD
-=======
 
 import Login from "../pages/AuthPages/login/Login";
 import { TheLayout } from "../containers";
+import { TheLayout as DecideurLayout } from '../containers/decideur'
+import { TheLayout as AccountLayout } from '../containers/adminCompte'
 import Page404 from "../pages/AuthPages/page404/Page404";
 import Page500 from "../pages/AuthPages/page500/Page500";
 
@@ -31,29 +32,22 @@ import TopBar from '../pages/PrivatePages/common/Topbar/Topbar';
 import SideBar from '../pages/PrivatePages/common/Sidebar/Sidebar';
 
 const { Content} = Layout;
->>>>>>> 29399402f9cabe37454440b81627148b441f7e3e
 export const Routes = () => {
     const [loading, setLoading] = useState(true)
     const dispatch = useDispatch();
     /*** To ensure authentication the token must be verified before access to the private routes */
     const { isAuthorized, user, authToken } = useSelector(
         ({ auth }) => ({
-<<<<<<< HEAD
-            isAuthorized: auth.authToken && auth.user && typeof auth.user === "object",
-            authToken: auth.authToken,
-            user: auth.user
-        })
-=======
-                isAuthorized: auth.authToken && auth.user && typeof auth.user === "object",
+                isAuthorized: auth.authToken && auth.user !== null && typeof auth.user === "object",
                 authToken: auth.authToken,
                 user: auth.user,
             })
->>>>>>> 29399402f9cabe37454440b81627148b441f7e3e
     );
     if (isAuthorized) {
-        CrudService.setAuthHeader(isAuthorized)
+        CrudService.setAuthHeader(authToken)
     } else {
-        /***** Check the current token if valid and get the athentified user ****/
+        /***** Check the current token if va
+         * lid and get the athentified user ****/
         if (authToken && !user && loading) {
             setLoading(false)
             dispatch(actions.requestUser("Loading"))
@@ -61,20 +55,15 @@ export const Routes = () => {
     }
 
     return (
-        <Switch>{
+        <Switch>
+            <Route path="/404" component={Page404} />
+            <Route path="/500" component={Page500} />
+            {
             isAuthorized ? <>
                 {/* Write all routes need an authentified user */}
-<<<<<<< HEAD
-                <Route path="/" component={'auth'} />
-                <Redirect from="*" to="/error" />
-            </> : <>
-                {/* Write all routes for the authentification */}
-                <Route path="/" component={'no-auth'} />
-                <Redirect from="*" to="/error" />
-=======
-                {user.userType === "decision_maker" && <Route path="/" component={TheLayout} />}
-                {user.userType === "agent_admin" && <Route path="/" component={TheLayout} />}
-                {user.userType === "account_admin" && <Route path="/" component={TheLayout} />}
+                {user.userType === "decision_maker" && <Route path="/" component={DecideurLayout} />}
+                {user.userType === "agent_admin" && <Route path="/" component={MaintenancePage} />}
+                {user.userType === "account_admin" && <Route path="/" component={AccountLayout} />}
                 {
                    user.userType === "technical_admin" &&
                    <Layout>
@@ -100,7 +89,6 @@ export const Routes = () => {
                 <Route path="/login" component={Login} />
                 <Redirect  from="*" to = "/login" ></Redirect>
 
->>>>>>> 29399402f9cabe37454440b81627148b441f7e3e
             </>
         }</Switch>
     )

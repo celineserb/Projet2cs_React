@@ -1,0 +1,30 @@
+.button{
+    width: fit-content;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 16px;
+    padding-left: 16px;
+    font-family: 'Montserrat';
+    border-radius: 1000px;
+    transition: 300ms ease-in-out;
+    border-width: 0px;
+}
+
+.light_mode{
+    background-color: #F9C31B;
+    color: #333;
+}
+
+.light_mode:hover{
+    background-color: #f0b209;
+}
+
+.dark_mode{
+    background-color: #333333;
+    color: #FFFFFF;
+}
+
+.dark_mode:hover{
+    background-color: #111111;
+}
+

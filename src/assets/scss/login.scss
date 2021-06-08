@@ -15,12 +15,12 @@
     color: #fff;
 }
 
-.login-card input:focus {
-    outline: unset !important;
+.login-card input {
+    outline: none !important;
 }
 
 .input-group {
-    background-color: #c6c6c6;
+    background-color: #6d6d6d;
     border-radius: 50px;
 }
 
@@ -46,7 +46,21 @@
     width: 82% !important;
     background: #F9C319;
     z-index: 0 !important;
+    padding-left: 6em !important;
+}
 
+.fixed-top h1 {
+    color: #fff;
+    font-size: 55px;
+}
+
+.fixed-top h3 {
+    color: #fff;
+    font-size: 45px;
+}
+
+.fixed-top p {
+    font-size: 25px;
 }
 
 .big {

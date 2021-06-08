@@ -1,0 +1,76 @@
+.topbar-wrapper{
+    width: 100%;
+    display: grid;
+    justify-content: end;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.thex-topbar-container{
+    height: 60px;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+}
+
+.thex-topbar-picture{
+    height: 40px;
+    width: 40px;
+    border-radius: 1000px;
+    border-color: #AAA;
+    border-style: double;
+    border-width: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
+    transition: 200ms ease-in-out;
+}
+
+.thex-topbar-picture:hover{
+    border-color: #F9C31B;
+}
+
+.thex-profile-name{
+    font-family: 'Montserrat';
+    font-size: 1em;
+    color: #333;
+    margin: 0px;
+}
+
+.thex-notification-icon{
+    height: 25px;
+    width: 25px;
+    margin-right: 20px;
+    border-right: solid 1px #CCC;
+}
+
+.thex-view-name{
+    font-family: 'Montserrat-bold';
+    font-size: 1.5em;
+    color: #333;
+    margin: 0px;
+    font-weight: bolder;
+    margin-right: auto;
+    position: absolute;
+    left: 10px;
+}
+
+.thex-Modal{
+    position: absolute;
+    right: 23px;
+    top: 65px;
+    width: 150px;
+    outline: none;
+    background-color: white;
+    border-radius: 15px;
+    border: 1px solid #CCC;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Montserrat';
+    font-size: 0.9em;
+}
+
+.thex-Overlay{
+    background-color: transparent;
+}
