@@ -108,44 +108,46 @@ const Login = () => {
             </div>
           </div>
           <div className="small">
-            <CButton color="primary">Savoir plus</CButton>
+            <CButton color="primary" className="savoir-button">Savoir plus</CButton>
           </div>
 
         </CCol>
         <CRow className="h-100 justify-content-end align-items-center">
-          <CCol sm="5">
+          <CCol sm="4.5">
             <CCardGroup>
               <CCard className="login-card p-4">
                 <CCardBody>
                   <CForm className="d-flex h-100 flex-column justify-content-between">
                     <CRow className="justify-content-center">
-                      <CIcon className="align-self-center" src={Logo} height={100} />
+                      <CIcon className="align-self-center" src={Logo} />
                     </CRow>
-                      <h1>Se connecter a votre compte</h1>
-                    <CInputGroup className="mb-3 p-2">
+                      <p className="login-titlex">Se connecter a votre compte</p>
+                    <CInputGroup className="inputs mb-3 p-2">
                       <CInputGroupPrepend>
                         <CInputGroupText>
                           <CIcon src={User} height={25} />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput
+                      <input
                         type="email"
                         id="email"
                         placeholder="Email"
+                        className="s-input"
                         value={state.email}
                         onChange={handleChange}
                       />
                     </CInputGroup>
-                    <CInputGroup className="mb-4 p-2">
+                    <CInputGroup className="inputs mb-4 p-2">
                       <CInputGroupPrepend>
                         <CInputGroupText>
                           <CIcon src={Lock} height={25} />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput
+                      <input
                         id="password"
                         type="password"
                         placeholder="Password"
+                        lassName="s-input"
                         value={state.password}
                         onChange={handleChange}
                       />

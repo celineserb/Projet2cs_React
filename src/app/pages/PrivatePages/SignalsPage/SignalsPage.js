@@ -17,6 +17,7 @@ class SignalsPage extends Component {
          }
          this.onSelect = this.onSelect.bind(this)
     }
+ 
     componentDidMount(){
         axios.get(`http://localhost:8111/theft_signals`)
         .then(res => {

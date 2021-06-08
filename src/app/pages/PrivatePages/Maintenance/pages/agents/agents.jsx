@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from "react";
-import AgentView from "../../components/agentview/agentview";
-import Button from "../../components/button/button";
+import React, { useState } from "react"
+import AgentView from "../../components/agentview/agentview"
 import Fuse from 'fuse.js'
-import "./agents.css";
+import Modal from 'react-modal'
+import "./agents.css"
 
 
-
+Modal.setAppElement("#root");
 export default function agents(props) {
   const Agents = [
     {
@@ -18,55 +18,61 @@ export default function agents(props) {
     },
     {
         id: "2",
-        name: "friri",
-        surename: "nerostarx",
+        name: "muhammed",
+        surename: "klili",
         currentTask: "this is a task",
         taskDate: "20-20-2020"
     },
     {
         id: "3",
-        name: "seroui",
-        surename: "nerostarx",
+        name: "amine",
+        surename: "ferui",
         currentTask: "this is a task",
         taskDate: "20-20-2020"
     },
     {
         id: "4",
-        name: "qeen",
-        surename: "nerostarx",
+        name: "lamine",
+        surename: "slimani",
         currentTask: "this is a task",
         taskDate: "20-20-2020"
     },
     {
         id: "5",
-        name: "aaaron",
-        surename: "nerostarx",
+        name: "karim",
+        surename: "boulahi",
         currentTask: "this is a task",
         taskDate: "20-20-2020"
     },
     {
         id: "6",
-        name: "serious",
-        surename: "nerostarx",
+        name: "mouh",
+        surename: "cappuchinou",
         currentTask: "this is a task",
         taskDate: "20-20-2020"
     },
     {
         id: "7",
-        name: "tririr",
-        surename: "nerostarx",
+        name: "riad",
+        surename: "flouzi",
         currentTask: "this is a task",
         taskDate: "20-20-2020"
     },
   ]
 
-  
   const [query, setQuery] = useState('')
+  const [agentsList,setAgentList] = useState(Agents)
 
-  const fusy = new Fuse(Agents, {keys: ['name']})
+  /*useEffect(async ()=>{
+    const result = await axios("get agent list")
+    setAgentList(result?.data)
+  },[])*/
+
+
+  const fusy = new Fuse(agentsList, {keys: ['name','surename']})
 
   const results = fusy.search(query)
-  const agentList = query ? results.map(result => result.item): Agents
+  const agentList = query ? results.map(result => result.item): agentsList
 
   function search({ currentTarget= {}}){
     const {value} = currentTarget;
@@ -81,15 +87,15 @@ export default function agents(props) {
           name="agnet-list-search"
           id="agent-list-search"
           placeholder="rechercher des agents"
-          className="agent-search"
+          className="thex-agent-search"
           value={query}
           onChange={search}
         />
-        <Button text="Ajouter agent" mode="light_mode" />
+        {/*<Button text="Ajouter agent" mode="light_mode" onClick={()=>{setIsAgentModalOpen(!isAgentModalOpen)}}/>*/}
       </div>
+      
       <div className="agent-header-container">
         <p className="header-title">informations d'agent</p>
-        <p className="header-title">Tache courante</p>
       </div>
       
       {agentList.map(item => <AgentView key={item.id} agent={item}/>)}
