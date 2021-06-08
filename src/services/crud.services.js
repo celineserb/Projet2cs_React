@@ -1,5 +1,5 @@
 import axios from 'axios';
-const URL_ROOT="http://192.168.43.222";
+const URL_ROOT="http://127.0.0.1";
 
 export const Services = {
     AUTH_URL: `${URL_ROOT}:8005`,

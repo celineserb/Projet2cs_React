@@ -20,10 +20,25 @@
 }
 
 .notification-title{
-    font-family: "Montserrat-bold";
     font-size: 1.1em;
     margin: 2px;
     width: 50%;
+}
+
+.bold-title{
+    font-family: "Montserrat-bold";
+}
+
+.fine-title{
+    font-family: "Montserrat";
+}
+
+.true-panne{
+    background-color: rgb(51, 196, 51);
+}
+
+.false-panne{
+    background-color: rgb(255, 106, 106);
 }
 
 .notification-subtitle{
@@ -32,4 +47,32 @@
     color: #CCC;
     margin: 2px;
     width: 30%;
+}
+
+.notif-modal-wrapper{
+    height: 100%;
+    width: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.notif-modal-title{
+    font-family: "Montserrat-bold";
+    font-size: 1.5em;
+}
+
+.notif-modal-text{
+    font-family: "Montserrat";
+    font-size: 1.3em;
+}
+
+.notif-buttons-wrapper{
+    width: 100%;
+}
+
+.notif-buttons-wrapper Button{
+    margin: 20px;
 }
