@@ -1,30 +1,28 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import { Card, Row , Col, Button, Modal, Avatar, Badge, Input, Tooltip, Dropdown, } from "antd";
+import { Card, Row , Col, Button, Modal, Avatar, Badge, Input,} from "antd";
 import { InfoCircleOutlined, MailOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-
 import './style/style.css'
-const {confirm } = Modal;
-var changed = false;
+
 class SignalComponent extends Component {
     constructor(props) {
         super(props);
         this.state = { 
             visible1 : props.visible,
             visible2: props.visible2,
+            treating: props.treating,
             key: props.index, 
             item: props.item, 
             changed: false 
          }
-         this.treatSignal = this.treatSignal.bind(this)
+
         }
     componentWillReceiveProps(nextProps) {
         this.setState({ 
             key: nextProps.index, 
             item: nextProps.item, 
-            
-
         });  
+        this.render()
       }
     setVisibleUntreated(value){
         this.setState({
@@ -34,6 +32,11 @@ class SignalComponent extends Component {
     setVisibleTreated(value){
         this.setState({
             visible2 : value
+          });
+    }
+    setVisibleTreating(value){
+        this.setState({
+            treating : value
           });
     }
     treatSignal(){
@@ -52,29 +55,6 @@ class SignalComponent extends Component {
         this.setVisibleTreated(true);
 
     }
-    onTreated(){
-        if (changed) {
-            this.treatSignal();
-        }
-    }
-     info() {
-        confirm({
-            title: 'Do you Want to delete these items?',
-            icon: <ExclamationCircleOutlined />,
-            content: (
-                <Input placeholder={this.state.item.idSignal} bordered={false}  style={{ width:200}}  />
-            ),
-            onOk() {
-              changed = true;
-
-            },
-            onCancel() {
-              console.log('Cancel');
-            },
-
-          });
-      }
-
      render() { 
         return (  
                 <Card  
@@ -159,15 +139,43 @@ class SignalComponent extends Component {
                                 style={{ backgroundColor: "#52c41a", margin:10 }}
                             />
                             :
+                            <div>
                             <Button
                                 shape='round'
-                                onClick={() => {
-                                    this.info();
-                                    this.forceUpdate();
-                                    }}>
+                                onClick={
+                                () => {
+                                    this.setVisibleTreating(true)
+                                }}>
                                 
                                Traiter
                             </Button>
+                            <Modal 
+                                title={"Signalement N °"+this.state.item.idSignal}
+                                centered
+                                visible={this.state.treating}
+                                onOk={() => {this.setVisibleTreating(false)}}
+                                onCancel={() => this.setVisibleTreating(false)}
+                                width={700}
+                                footer={[
+                                    <Button 
+                                    key="back" 
+                                    onClick={() => this.setVisibleTreating(false)}
+                                    shape='round'
+                                    size ='middle'
+                                    style={{
+                                        backgroundColor: '#F9C31B', 
+                                        borderColor: 'white', 
+                                        color: 'black',      
+                                    }}>
+                                    OK
+                                    </Button>,  
+                                    ]}
+                                    >
+
+                            </Modal>
+                            </div>
+                           
+                            
                            
                         }
                             
@@ -196,8 +204,9 @@ class SignalComponent extends Component {
                                     visible={this.state.visible1}
                                     onOk={() => {this.setVisibleUntreated(false)}}
                                     onCancel={() => this.setVisibleUntreated(false)}
-                                    width={700}
+                                    width={100}
                                         >
+                                        something to say
 
                                     </Modal>
                                 </>
@@ -231,28 +240,28 @@ class SignalComponent extends Component {
                                     <Row>
                                         <div className="info-container">
                                             <Col><h5 className="info-title">Matricule:</h5></Col>
-                                            <Col push={5} style={{marginRight:45}}> <span className="info-box"> {this.state.item.registrationNumber}</span></Col>  
+                                            <Col push={5} style={{marginRight:45}}> {this.state.item.registrationNumber}</Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
                                             <Col><h5 className="info-title">Modèle:</h5></Col>
-                                            <Col push={7}> <span className="info-box">{this.state.item.vehiclemodel}</span></Col>  
+                                            <Col push={7}> {this.state.item.vehiclemodel}</Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
                                             <Col><h5 className="info-title">Marque:</h5></Col>
-                                            <Col push={6} style={{marginRight:45}}> <span className="info-box">{this.state.item.vehiclebrand}</span></Col>  
+                                            <Col push={6} style={{marginRight:45}}> {this.state.item.vehiclebrand}</Col>  
                                         </div>
                                     </Row>
                                     
                                     <Row>
                                         <div className="info-container">
                                             <Col><h5 className="info-title">Couleur:</h5></Col>
-                                            <Col push={6} style={{marginRight:40}}> <span className="info-box">{this.state.item.vehicleColor} </span></Col>  
+                                            <Col push={6} style={{marginRight:40}}> {this.state.item.vehicleColor}</Col>  
                                         </div>
                                     </Row>
                                         
@@ -262,35 +271,35 @@ class SignalComponent extends Component {
                                     <Row>
                                         <div className="info-container">
                                             <Col style={{marginRight:5, }}><h5 className="info-title">Date Début:</h5></Col>
-                                            <Col push={4}> <span className="info-box"> {this.state.item.rentaldate.slice(0,10)} </span></Col>  
+                                            <Col push={4}> {this.state.item.rentaldate.slice(0,10)} </Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
                                             <Col style={{marginRight:9, }}  ><h5 className="info-title">Heure Début:</h5></Col>
-                                            <Col push={3}> <span className="info-box"> {this.state.item.rentaltime} </span></Col>  
+                                            <Col push={3}> {this.state.item.rentaltime} </Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
                                             <Col  ><h5 className="info-title">Date fin prévue:</h5></Col>
-                                            <Col push={2} style={{marginLeft:3, }}> <span className="info-box">{this.state.item.restitutionDate.slice(0,10)} </span></Col>  
+                                            <Col push={2} style={{marginLeft:3, }}> {this.state.item.restitutionDate.slice(0,10)} </Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
                                             <Col><h5  className="info-title">Borne de départ:</h5></Col>
-                                            <Col push={1} style={{marginLeft:12, }}> <span className="info-box"> {this.state.item.depatBorne} </span></Col>  
+                                            <Col push={1} style={{marginLeft:12, }}>  {this.state.item.depatBorne} </Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
                                             <Col style={{marginRight:5, }}><h5 className="info-title">Borne destination:</h5></Col>
-                                            <Col  style={{marginLeft:15, }}> <span className="info-box"> {this.state.item.destBorne} </span></Col>  
+                                            <Col  style={{marginLeft:15, }}>  {this.state.item.destBorne} </Col>  
                                         </div>
                                     </Row>
                             
@@ -299,21 +308,21 @@ class SignalComponent extends Component {
                                     <Row>
                                         <div className="info-container">
                                             <Col style={{marginRight:15, }}><h5 className="info-title">Nom et Prénom :</h5></Col>
-                                            <Col push={1}> <span className="info-box"> {this.state.item.lastName+" "+this.state.item.firstName} </span></Col>  
+                                            <Col push={1}> {this.state.item.lastName+" "+this.state.item.firstName}</Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
                                             <Col style={{marginRight:7, }}><h5 className="info-title">telephone: </h5></Col>
-                                            <Col push={5}> <span className="info-box">0{this.state.item.phoneNumber}</span></Col>  
+                                            <Col push={5}> 0{this.state.item.phoneNumber}</Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col style={{marginRight:9, }}><h5 className="info-title">Adresse: </h5></Col>
-                                            <Col push={6}> <span className="info-box"> {this.state.item.address} </span></Col>  
+                                            <Col style={{fontSize:17 }}>Adresse: </Col>
+                                            <Col  span={16} style={{fontSize:15}}> {this.state.item.address} </Col>  
                                         </div>
                                     </Row>
                             
