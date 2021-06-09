@@ -24,12 +24,6 @@ const _nav =  [
     to: '/decideur/GrapheLocation',
     icon: 'cil-graph'
   },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Statistique Agent',
-    to:  '/agent/AgentStat',
-    icon: 'cil-graph'
-  },
 ]
 
 export default _nav

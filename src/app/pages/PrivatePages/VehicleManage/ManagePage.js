@@ -32,8 +32,8 @@ const ManagePage = () =>{
     }, [nbPage]);
 
     return(
-        <Row>
-            <div className='list-container'>
+        <Row justify='start'>
+            <div className='list-container' >
                     <div>
                         <p>Ordonner</p>
                         <p>Filtrer</p>
@@ -46,8 +46,8 @@ const ManagePage = () =>{
                             <p>Status</p>
                         </li>
                         {
-                            vehicles.map((vehicle) =>
-                                <VehicleComponent vehicle={vehicle} />
+                            vehicles.map((vehicle, key) =>
+                                <VehicleComponent vehicle={vehicle} key={key} />
                             )
                         }
                     </ul>

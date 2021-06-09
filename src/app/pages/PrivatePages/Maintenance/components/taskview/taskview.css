@@ -62,13 +62,14 @@
 .task-title {
   font-family: "Montserrat";
   font-size: 0.9em;
+  color: #333;
   margin: 2px;
   width: 40%;
 }
 
 .task-subtitle {
   font-family: "Montserrat";
-  font-size: 0.6em;
+  font-size: 0.9em;
   color: #ccc;
   margin: 2px;
   width: 40%;
@@ -89,8 +90,11 @@
 }
 
 .task-modal{
+  width: 100%;
+  height: 100%;
   display: inline-flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   text-align: center;
 }
@@ -98,19 +102,18 @@
 .task-modal-title{
   font-family: "Montserrat-bold";
   color: #333;
-  font-size: 1.2em;
-  margin: 2px;
-}
-
-.task-modal-subtitle{
   font-family: "Montserrat";
-  font-size: 1em;
+  font-size: 1.3em;
   margin: 2px;
 }
 
 .task-modal-text{
   font-family: "Montserrat";
-  font-size: 0.9em;
+  font-size: 1em;
   margin: 2px;
   color: #ccc;
+}
+
+.task-modal-agent{
+  width: 100% !important;
 }

@@ -5,6 +5,7 @@
     flex-direction: row;
     align-items: center;
     transition: 200ms ease-in-out;
+    color: #333;
 }
 
 .vehicule-grid-container{
@@ -13,6 +14,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    color: #333;
 }
 
 .vehicule-view-container:hover{
@@ -49,29 +51,17 @@
 }
 
 .vehicule-divider-info{
-    margin-right: 8%;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.vehicule-divider-client{
-    margin-right: 15%;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.vehicule-divider-dispo{
-    margin-right: 18%;
+    width: 61%;
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
 .state-item{
-    background-color: red;
+    width: 10%;
+    background-color: #999;
     font-family: 'Montserrat';
+    text-align: center;
     color: white;
     border-radius: 1000px;
     padding-top: 5px;
@@ -84,6 +74,18 @@
     font-size: 0.7em;
     margin: 0px;
     padding: 0px;
+}
+
+.allocated{
+    background-color: red;
+}
+
+.maintained{
+    background-color: #f0b209;
+}
+
+.available{
+    background-color: rgb(51, 196, 51);
 }
 
 
