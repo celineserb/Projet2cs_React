@@ -1,6 +1,6 @@
 //utiliser ce template pour personnaliser le sidebar dans votre volet
 //envoyer la liste telle qu'elle est comme prop (items) dans le sidebar component
-export default
+export default 
 [
     //premier objet: titre du volet
     {
@@ -9,18 +9,19 @@ export default
         title: "Surveillance", //titre
     },
     //deuxieme objet: parametres (ou autre, peut differer d'un volet a un autre)
+    //laisser champs vides pour ne pas afficher
     {
-        icon: "./media/settings.svg",
-        alt: "icon",
-        title: "Paramètres",
-        link: "/parametres", //lien vers page
+        icon: "",
+        alt: "",
+        title: "",
+        link: "",
     },
     //reste des objets: elements du menu
     {
         icon: "./media/car.svg",
         alt: "icon",
         title: "Véhicules",
-        link: "/",
+        link: "/", //lien vers page
     },
     {
         icon: "./media/alien.svg",
