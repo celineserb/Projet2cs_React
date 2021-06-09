@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import { Card, Row , Col, Button, Modal, Avatar, Badge, Input,} from "antd";
+import { Card, Row , Col, Button, Modal, Avatar, Badge, Input, Divider,} from "antd";
 import { InfoCircleOutlined, MailOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import './style/style.css'
 
@@ -199,13 +199,28 @@ class SignalComponent extends Component {
                                 this.state.item.treated?
                                 <>
                                     <Modal
-                                     title={"Signalement N °"+this.state.item.idSignal}
-                                    centered
-                                    visible={this.state.visible1}
-                                    onOk={() => {this.setVisibleUntreated(false)}}
-                                    onCancel={() => this.setVisibleUntreated(false)}
-                                    width={100}
-                                        >
+                                        title={"Signalement N °"+this.state.item.idSignal}
+                                        centered
+                                        visible={this.state.visible1}
+                                        onOk={() => {this.setVisibleUntreated(false)}}
+                                        onCancel={() => this.setVisibleUntreated(false)}
+                                        footer={[
+                                        <Button 
+                                        key="back" 
+                                        onClick={() => this.setVisibleUntreated(false)}
+                                        shape='round'
+                                        size ='middle'
+                                        style={{
+                                        marginRight: '35%', 
+                                        backgroundColor: '#F9C31B', 
+                                            paddingRight: 60,
+                                            paddingLeft: 60,
+                                            borderColor: 'white', 
+                                            color: 'black',      
+                                        }}>
+                                    OK
+                                    </Button>,  
+                                    ]}>
                                         something to say
 
                                     </Modal>
@@ -217,7 +232,7 @@ class SignalComponent extends Component {
                                 visible={this.state.visible1}
                                 onOk={() => {this.setVisibleUntreated(false)}}
                                 onCancel={() => this.setVisibleUntreated(false)}
-                                width={700}
+                                width={650}
                                 footer={[
                                     <Button 
                                     key="back" 
@@ -236,93 +251,126 @@ class SignalComponent extends Component {
                                     </Button>,  
                                     ]}
                                     >
-                                    <h4>Informations Vehicules</h4> <hr className="hr-modal" />
+                                    <Divider orientation="left"><h5>Informations Vehicules</h5> </Divider>
                                     <Row>
                                         <div className="info-container">
-                                            <Col><h5 className="info-title">Matricule:</h5></Col>
-                                            <Col push={5} style={{marginRight:45}}> {this.state.item.registrationNumber}</Col>  
+                                            <Col>
+                                                <label className="info-title">Matricule:</label> 
+                                                <span className="info">{this.state.item.registrationNumber}</span>
+                                            </Col>
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col><h5 className="info-title">Modèle:</h5></Col>
-                                            <Col push={7}> {this.state.item.vehiclemodel}</Col>  
+                                            <Col>
+                                                <label className="info-title">Modèle:</label>
+                                                <span className="info">{this.state.item.vehiclemodel}</span>
+                                            </Col>
+                                            
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col><h5 className="info-title">Marque:</h5></Col>
-                                            <Col push={6} style={{marginRight:45}}> {this.state.item.vehiclebrand}</Col>  
+                                            <Col>
+                                                <label className="info-title">Marque:</label>
+                                                <span className="info">{this.state.item.vehiclebrand}</span>
+                                            </Col>
+                                            
                                         </div>
                                     </Row>
                                     
                                     <Row>
                                         <div className="info-container">
-                                            <Col><h5 className="info-title">Couleur:</h5></Col>
-                                            <Col push={6} style={{marginRight:40}}> {this.state.item.vehicleColor}</Col>  
+                                            <Col>
+                                                <label className="info-title">Couleur:</label>
+                                                <span className="info">{this.state.item.vehicleColor}</span>
+                                            </Col>
+                                          
                                         </div>
                                     </Row>
                                         
                             
-                                    <h4>Dernière location</h4> <hr className="hr-modal" />  
+                                    <Divider orientation="left"> <h5>Dernière location</h5> </Divider>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col style={{marginRight:5, }}><h5 className="info-title">Date Début:</h5></Col>
-                                            <Col push={4}> {this.state.item.rentaldate.slice(0,10)} </Col>  
+                                            <Col>
+                                                <label className="info-title">Date Début:</label>
+                                                <span className="info">{this.state.item.rentaldate.slice(0,10)} </span>
+                                            </Col>
+                                           
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col style={{marginRight:9, }}  ><h5 className="info-title">Heure Début:</h5></Col>
-                                            <Col push={3}> {this.state.item.rentaltime} </Col>  
+                                            <Col>
+                                                <label className="info-title">Heure Début:</label>
+                                                <span className="info">{this.state.item.rentaltime} </span>
+                                             </Col>
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col  ><h5 className="info-title">Date fin prévue:</h5></Col>
-                                            <Col push={2} style={{marginLeft:3, }}> {this.state.item.restitutionDate.slice(0,10)} </Col>  
+                                            <Col>
+                                                <label className="info-title">Date fin prévue:</label>
+                                                <span className="info">{this.state.item.restitutionDate.slice(0,10)} </span>
+
+                                            </Col>
+                                            
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col><h5  className="info-title">Borne de départ:</h5></Col>
-                                            <Col push={1} style={{marginLeft:12, }}>  {this.state.item.depatBorne} </Col>  
+                                            <Col>
+                                                <label  className="info-title">Borne de départ:</label>
+                                                <span className="info">{this.state.item.depatBorne} </span>
+                                            </Col>  
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col style={{marginRight:5, }}><h5 className="info-title">Borne destination:</h5></Col>
-                                            <Col  style={{marginLeft:15, }}>  {this.state.item.destBorne} </Col>  
+                                            <Col>
+                                                <label className="info-title">Borne destination:</label>
+                                                <span className="info">{this.state.item.destBorne}</span>
+                                            </Col>
+                    
                                         </div>
                                     </Row>
                             
                             
-                                    <h4>Dernier locataire</h4> <hr className="hr-modal" />
+                                    <Divider orientation="left"> <h5>Dernier locataire</h5> </Divider>
                                     <Row>
                                         <div className="info-container">
-                                            <Col style={{marginRight:15, }}><h5 className="info-title">Nom et Prénom :</h5></Col>
-                                            <Col push={1}> {this.state.item.lastName+" "+this.state.item.firstName}</Col>  
+                                            <Col>
+                                                <label className="info-title">Nom et Prénom :</label>
+                                                <span className="info">{this.state.item.lastName+" "+this.state.item.firstName}</span>
+                                            </Col>
+                                        
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col style={{marginRight:7, }}><h5 className="info-title">telephone: </h5></Col>
-                                            <Col push={5}> 0{this.state.item.phoneNumber}</Col>  
+                                            <Col>
+                                                <label className="info-title">telephone: </label>
+                                                <span className="info">0{this.state.item.phoneNumber}</span>
+                                            </Col>
                                         </div>
                                     </Row>
                             
                                     <Row>
                                         <div className="info-container">
-                                            <Col style={{fontSize:17 }}>Adresse: </Col>
-                                            <Col  span={16} style={{fontSize:15}}> {this.state.item.address} </Col>  
+                                            <Col>
+                                                <label className="info-title">Adresse:</label>
+                                                <span className="info">{this.state.item.address}</span>
+                                            </Col>
+                                           
                                         </div>
                                     </Row>
                             
