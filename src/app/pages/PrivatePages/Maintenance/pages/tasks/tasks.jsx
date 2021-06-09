@@ -2,8 +2,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import TaskView from "../../components/taskview/taskview";
-import Button from "../../components/button/button"
+import TaskView from "../../../../../conponents/taskview/taskview";
+import Button from "../../../../../conponents/button/button"
 import Modal from "react-modal"
 import "./tasks.css";
 
