@@ -1,62 +1,118 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import { Card, Row , Col, Button, Modal, Avatar} from "antd";
-import { ReactComponent as EllipseIcon } from '../../../../assets/svg/ellipse.svg';
-import { ReactComponent as EllipseGreyIcon } from '../../../../assets/svg/ellipse-gris.svg';
+import { Card, Row , Col, Button, Modal, Avatar, Badge, Input, Tooltip, Dropdown, } from "antd";
+import { InfoCircleOutlined, MailOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+
 import './style/style.css'
-
-
-
+const {confirm } = Modal;
+var changed = false;
 class SignalComponent extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            visible : props.visible,
+            visible1 : props.visible,
+            visible2: props.visible2,
             key: props.index, 
             item: props.item, 
             changed: false 
          }
-    }
+         this.treatSignal = this.treatSignal.bind(this)
+        }
     componentWillReceiveProps(nextProps) {
         this.setState({ 
             key: nextProps.index, 
-            item: nextProps.item 
+            item: nextProps.item, 
+            
+
         });  
       }
-
-    setVisible(value){
+    setVisibleUntreated(value){
         this.setState({
-          visible : value
+          visible1 : value
         });
     }
-    treatSignal(){
-        axios.put(`http://localhost:8111/signals_treated?idSignal=${this.state.item.idSignal}`)
-        .then(res => {
-            console.log("done with request");
-          this.setState({
-              changed:true
-          })
-        })
+    setVisibleTreated(value){
+        this.setState({
+            visible2 : value
+          });
     }
-    render() { 
+    treatSignal(){
+       axios.put(`http://localhost:8111/signals_treated?idSignal=${this.state.item.idSignal}`)
+       .then((response) => 
+        {
+            console.log(response.signal);
+            this.setState({
+                changed:true,
+                item: response.signal,
+                key:response.signal.idSignal
+            })
+        }
+          
+        );
+        this.setVisibleTreated(true);
+
+    }
+    onTreated(){
+        if (changed) {
+            this.treatSignal();
+        }
+    }
+     info() {
+        confirm({
+            title: 'Do you Want to delete these items?',
+            icon: <ExclamationCircleOutlined />,
+            content: (
+                <Input placeholder={this.state.item.idSignal} bordered={false}  style={{ width:200}}  />
+            ),
+            onOk() {
+              changed = true;
+
+            },
+            onCancel() {
+              console.log('Cancel');
+            },
+
+          });
+      }
+
+     render() { 
         return (  
                 <Card  
                     hoverable={true} 
                     className="signal-list-item"
                     >
                     <Row  justify='start'>
-                        <Col >
+                        <Col xs={3} lg={1} xl={1} sm={2} md={1}>
                         {
                             this.state.item.treated?
-                                    <Avatar 
-                                        size={42} 
-                                        icon={<EllipseGreyIcon />}>
-                                    </Avatar>
+                                <Avatar 
+                                    size={{
+                                        xs:28,
+                                        sm: 28,
+                                        md: 28,
+                                        lg: 30,
+                                        xl: 42,
+                                        xxl: 42,
+                                    }}
+                                    style={{
+                                        backgroundColor:"#C5C7CD"
+                                    }}
+                                />
                             :
-                                    <Avatar 
-                                        size={42} 
-                                        icon={<EllipseIcon />}>
-                                    </Avatar>           
+                                <Avatar 
+                                        size={{
+                                            xs:28,
+                                            sm: 28,
+                                            md: 28,
+                                            lg: 30,
+                                            xl: 42,
+                                            xxl: 42,
+                                        }}
+                                        style={{
+                                            backgroundColor:"red"
+                                        }}
+                                    />   
+                                          
 
                         }
                          
@@ -68,53 +124,95 @@ class SignalComponent extends Component {
                                 marginTop:8,
                                 marginLeft:8
                             }} 
-                            span={6}><h5 className="item-title"> Signalement N°{this.state.item.idSignal}</h5> 
+                            xs={21}
+                            xl={8}
+                            lg={8}
+                            md={8}
+                            sm={16}
+                            >
+                            <h5 className="item-title"> Signalement N°{this.state.item.idSignal}</h5> 
                         </Col>
 
-                        <Col offset={5}  >
+                        <Col  
+                        style={{
+                                marginTop:8,
+                                marginLeft:8
+                            }} 
+                        xl={4}
+                        lg={4}
+                        md={4}
+                        xs={24}
+                        sm={8}
+                        >
                         Source:  {this.state.item.sourceType}
                         </Col>
 
                             
-                        <Col span={3} offset={1}  >
+                        <Col xs={24} lg={3}  md={3} xl={3} sm={5} offset={1}  >
                         {this.state.item.sent_at.slice(0,10)+" "+this.state.item.sent_at.slice(11, 16)}
                         </Col>
-                        <Col>
+                        <Col xl={3} lg={3} md={3} xs={24} sm={16}>
+                        {
+                            this.state.item.treated?
+                            <Badge
+                                count= "Treated" 
+                                style={{ backgroundColor: "#52c41a", margin:10 }}
+                            />
+                            :
                             <Button
                                 shape='round'
-                                style={{marginRight:5}}
-                                onClick={()=> this.treatSignal()}>
-                                Traiter
+                                onClick={() => {
+                                    this.info();
+                                    this.forceUpdate();
+                                    }}>
+                                
+                               Traiter
                             </Button>
+                           
+                        }
+                            
                         </Col>
 
-                        <Col >
+                        <Col xl={3} lg={3} md={3}  sm={16} xs={24}>
                             <Button
-                                    onClick={() => this.setVisible (true)}
+                                    block
+                                    onClick={() => this.setVisibleUntreated(true)}
                                     shape = 'round'
                                     style={{
                                         backgroundColor: '#F9C31B', 
                                         borderColor: 'white', 
                                         color: 'black',
-                                        paddingLeft: 30, 
-                                        paddingRight: 30
                                     }}
                                     className="details-btn"
                                     >
                                     Details
                             </Button>   
-                            
-                            <Modal
+                            {
+                                this.state.item.treated?
+                                <>
+                                    <Modal
+                                     title={"Signalement N °"+this.state.item.idSignal}
+                                    centered
+                                    visible={this.state.visible1}
+                                    onOk={() => {this.setVisibleUntreated(false)}}
+                                    onCancel={() => this.setVisibleUntreated(false)}
+                                    width={700}
+                                        >
+
+                                    </Modal>
+                                </>
+                                :
+                                <Modal
                                 title={"Signalement N °"+this.state.item.idSignal}
                                 centered
-                                visible={this.state.visible}
-                                onOk={() => {this.setVisible(false)}}
-                                onCancel={() => this.setVisible(false)}
+                                visible={this.state.visible1}
+                                onOk={() => {this.setVisibleUntreated(false)}}
+                                onCancel={() => this.setVisibleUntreated(false)}
                                 width={700}
                                 footer={[
                                     <Button 
                                     key="back" 
-                                    onClick={() => this.setVisible(false)}
+                                    onClick={() => this.setVisibleUntreated(false)}
                                     shape='round'
                                     size ='middle'
                                     style={{
@@ -220,6 +318,12 @@ class SignalComponent extends Component {
                                     </Row>
                             
                                 </Modal>
+                                
+                            }
+                            
+
+
+
                         </Col>
                     </Row>
                 </Card>

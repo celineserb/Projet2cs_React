@@ -1,4 +1,4 @@
-import React  from 'react'
+import React , {useState} from 'react'
 import { useDispatch} from 'react-redux'
 
 import {Button, Dropdown, Menu, Avatar, List} from 'antd';
@@ -36,6 +36,8 @@ const notifications = [
 ]
 
 export default function TopBar(props) {
+
+    const [show, setShow] = useState(true)
 
     const menu = (
         <Menu>
