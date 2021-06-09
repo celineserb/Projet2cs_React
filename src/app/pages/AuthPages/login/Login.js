@@ -147,7 +147,7 @@ const Login = () => {
                         id="password"
                         type="password"
                         placeholder="Password"
-                        lassName="s-input"
+                        className="s-input"
                         value={state.password}
                         onChange={handleChange}
                       />

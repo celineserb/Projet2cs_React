@@ -43,7 +43,7 @@ const Login = React.lazy(() => import('./app/pages/AuthPages/login/Login'))
 const Page404 = React.lazy(() => import('./app/pages/AuthPages/page404/Page404'))
 const Page500 = React.lazy(() => import('./app/pages/AuthPages/page500/Page500'))
 const GrapheLocation = React.lazy(() => import('./app/pages/PrivatePages/GraphDeLocation'))
-
+const AgentStat = React.lazy(() => import('./app/pages/PrivatePages/GraphDAgent'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -96,7 +96,8 @@ const routes = [
   { path: "/p404", name: "Page not found", component: Page404 },
   { path: "/p500", name: "Page not found", component: Page500 },
 
-  { path: "/GrapheLocation", name: "Graphe de location", component: GrapheLocation}
+  { path: "/GrapheLocation", name: "Graphe de location", component: GrapheLocation},
+  { path: "/GrapheAgent", name: "Statistiques Agent", component: AgentStat}
 
 ];
 
