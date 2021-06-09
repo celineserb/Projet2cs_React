@@ -4,6 +4,7 @@ import { Card, Row , Col, Button, Modal, Avatar, Badge, Input, Divider,} from "a
 import { InfoCircleOutlined, MailOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import './style/style.css'
 
+const { TextArea } = Input;
 class SignalComponent extends Component {
     constructor(props) {
         super(props);
@@ -22,7 +23,6 @@ class SignalComponent extends Component {
             key: nextProps.index, 
             item: nextProps.item, 
         });  
-        this.render()
       }
     setVisibleUntreated(value){
         this.setState({
@@ -40,20 +40,22 @@ class SignalComponent extends Component {
           });
     }
     treatSignal(){
-       axios.put(`http://localhost:8111/signals_treated?idSignal=${this.state.item.idSignal}`)
+       this.setVisibleUntreated(false);
+       const description = document.getElementById("treatment-input").value;
+       console.log(description);
+       axios.put(`http://localhost:8111/signals_treated?idSignal=${this.state.item.idSignal}&description=${description}`)
        .then((response) => 
         {
-            console.log(response.signal);
+            console.log(response.data);
             this.setState({
                 changed:true,
-                item: response.signal,
-                key:response.signal.idSignal
+                item: response.data
             })
         }
           
         );
-        this.setVisibleTreated(true);
-
+   
+        
     }
      render() { 
         return (  
@@ -155,23 +157,26 @@ class SignalComponent extends Component {
                                 visible={this.state.treating}
                                 onOk={() => {this.setVisibleTreating(false)}}
                                 onCancel={() => this.setVisibleTreating(false)}
-                                width={700}
                                 footer={[
-                                    <Button 
-                                    key="back" 
-                                    onClick={() => this.setVisibleTreating(false)}
-                                    shape='round'
-                                    size ='middle'
-                                    style={{
+                                        <Button 
+                                        key="back" 
+                                        onClick={() => this.treatSignal()}
+                                        shape='round'
+                                        size ='middle'
+                                        style={{
+                                        marginRight: '35%', 
                                         backgroundColor: '#F9C31B', 
-                                        borderColor: 'white', 
-                                        color: 'black',      
-                                    }}>
-                                    OK
-                                    </Button>,  
+                                            paddingRight: 60,
+                                            paddingLeft: 60,
+                                            borderColor: 'white', 
+                                            color: 'black',      
+                                        }}>
+                                        Valider
+                                        </Button>,  
                                     ]}
                                     >
-
+                                    <label>Plus de details:</label>
+                                    <TextArea id="treatment-input" showCount maxLength={256}   />
                             </Modal>
                             </div>
                            
@@ -218,11 +223,29 @@ class SignalComponent extends Component {
                                             borderColor: 'white', 
                                             color: 'black',      
                                         }}>
-                                    OK
-                                    </Button>,  
+                                        OK
+                                        </Button>,  
                                     ]}>
-                                        something to say
-
+                                        
+                                            <Row>
+                                            <div className="info-container">
+                                                <Col>
+                                                    <label className="info-title">Date de Traitement:</label> 
+                                                    <span className="info">{this.state.item.treatmentDate.slice(0,10)+" "+ this.state.item.treatmentDate.slice(12,16)}</span>
+                                                </Col>
+                                            </div>
+                                        </Row>
+                                
+                                        <Row>
+                                            <div className="info-container">
+                                                <Col>
+                                                    <label className="info-title">Details:</label>
+                                                    <span className="info">{this.state.item.treatmentDescription}</span>
+                                                </Col>
+                                                
+                                            </div>
+                                        </Row>
+                            
                                     </Modal>
                                 </>
                                 :
