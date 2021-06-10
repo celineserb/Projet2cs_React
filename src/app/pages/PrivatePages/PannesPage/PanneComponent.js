@@ -1,105 +1,377 @@
 import React, { Component } from 'react'
-
-import {Row, Layout, Card, Col, Avatar   } from 'antd'
-import { ReactComponent as EllipseIcon } from '../../../../assets/svg/ellipse.svg';
-import { ReactComponent as EllipseGreyIcon } from '../../../../assets/svg/ellipse-gris.svg';
 import axios from 'axios';
+import { Card, Row , Col, Button, Modal, Avatar, Badge, Input, Divider,} from "antd";
+import './style/style.scss'
 
 class PanneComponent extends Component {
-
     constructor(props) {
         super(props);
-        this.state = {
+        this.state = { 
+            visible1 : props.visible,
+            visible2: props.visible2,
+            treating: props.treating,
             key: props.index, 
-            item: props.item
+            item: props.item, 
+            changed: false 
          }
-         this.treatSignal = this.treatSignal.bind(this)
 
-    }
-    showMore() {
-        var msg = document.getElementById("item_message"+this.state.key);
-        var btn = document.getElementById("more"+this.state.key);
-        if (msg.classList.contains("truncated")) {
-            msg.classList.remove("truncated");
-            btn.innerHTML = '<img class="chevron-bottom" alt="" />';
-        } else {
-            msg.classList.add("truncated");
-            btn.innerHTML = '<img class="chevron-right" alt="" />';
         }
-    }
-
-    treatSignal(){
-        if (this.state.item.treated == false) {
-            axios.put(`http://localhost:8111/signals_treated?idSignal=${this.state.item.idSignal}`)
-            .then(res => {
-                
-            })
-        }   
-    }
-
     componentWillReceiveProps(nextProps) {
         this.setState({ 
             key: nextProps.index, 
-            item: nextProps.item 
+            item: nextProps.item, 
         });  
       }
+    setVisibleUntreated(value){
+        this.setState({
+          visible1 : value
+        });
+    }
+    setVisibleTreated(value){
+        this.setState({
+            visible2 : value
+          });
+    }
 
-    render() { 
+     render() { 
         return (  
-                <Card hoverable={true}  className="pannes-list-item" onClick={() => {this.showMore(); this.treatSignal()}}>
-                <Row justify='start'>
-                    {
-                        this.state.item.treated? 
-                            <Col span={1} >  
+                <Card  
+                    hoverable={true} 
+                    className="signal-list-item"
+                    >
+                    <Row  justify='start'>
+                        <Col xs={3} lg={1} xl={1} sm={2} md={1}>
+                        {
+                            
                                 <Avatar 
-                                    size={42} 
-                                    icon={<EllipseGreyIcon />}
+                                    size={{
+                                        xs: 40,
+                                        sm: 40,
+                                        md: 40,
+                                        lg: 40,
+                                        xl: 40,
+                                        xxl: 40,
+                                    }}
                                     style={{
-                                    
-                                    }}>
-                                </Avatar> 
-                            </Col>    
-                        :   <Col span={1} >  
-                                <Avatar 
-                                    size={42} 
-                                    icon={<EllipseIcon />}
-                                    style={{
-                                    
-                                    }}>
-                                </Avatar> 
-                            </Col>    
-                    }
-                    <Col span={6}
-                         style={{
-                                   marginTop:8,
-                                   marginLeft:18
-                                }} >
-                        <div id ={"item_message"+this.state.key} className="truncated" >
-                            <h5 className={"item-message-content"+this.state.key} >{this.state.item.message}</h5>
-                        </div>    
-                    </Col>
+                                        backgroundColor:"#F9C31B"
+                                    }}
+                                /> 
+                                          
 
-                    <Col span={4} offset={8} className="truncated"> 
-                        {this.state.item.vehiclebrand}<br/>
-                        {this.state.item.sourceType==="Auto"? "Automatique"
-                        : (this.state.item.sourceType==="Agent"||this.state.item.sourceType==="Tenant")? this.state.item.firstName+" "+this.state.item.lastName
-                        : "Source inconnue"}
-                        { this.state.item.sourceType==="Agent"? " (Agent)"
-                        : this.state.item.sourceType==="Tenant"? " (Locataire)"
-                        : "" }
-                    </Col>
-                    <Col span={3} >
-                        {this.state.item.sent_at.slice(0, 10)}<br/>
-                        {this.state.item.sent_at.slice(11, 19)}
-                    </Col>
-                    <Col offset={1} >
-                        <div className="panne-notif-more">
-                            <button id={"more"+this.state.key} ><img className="chevron-right" alt="" /></button>
-                        </div>
-                    </Col>
-                </Row>
-            </Card>
-        );
+                        }
+                         
+                        </Col>
+
+
+                        <Col
+                            style={{
+                                marginTop:12,
+                                marginLeft:12
+                            }} 
+                            xs={16}
+                            xl={8}
+                            lg={8}
+                            md={8}
+                            sm={16}
+                            >
+                            <h5 className="item-title bolde">{"Panne N°"+this.state.item.idPanne}</h5> 
+                        </Col>
+
+                        <Col  
+                  
+                        xl={4}
+                        lg={4}
+                        md={4}
+                        xs={24}
+                        sm={8}
+                        >
+                            <Row>
+                        Source :  {this.state.item.sourceType == "Tenant"? "Locataire" : this.state.item.sourceType}
+                        </Row>
+                   <Row>
+                        {
+                            this.state.item.sourceType != "Auto" ? 
+                            this.state.item.firstName + " " + this.state.item.lastName
+                            : ""
+                        }
+                        </Row>
+                        </Col>
+
+                            
+                        <Col  
+                  
+                        xl={4}
+                        lg={4}
+                        md={4}
+                        xs={24}
+                        sm={8}
+                        >
+                        <Row>{this.state.item.sent_at.slice(0,10)}</Row> <Row>{this.state.item.sent_at.slice(11, 19)}</Row>
+                        </Col>
+                        <Col xl={3} lg={3} md={3} xs={24} sm={16}>
+                        {
+                            this.state.item.treated?
+                            <Badge
+                                count= "Réparée" 
+                                style={{ backgroundColor: "#52c41a", marginTop: 15 }}
+                            />
+                            : ""
+                        }
+                            
+                        </Col>
+
+                        <Col xl={3} lg={3} md={3}  sm={16} xs={24}>
+                            <Button
+                                    block
+                                    onClick={() => this.setVisibleUntreated(true)}
+                                    shape = 'round'
+                                    style={{
+                                        marginTop:8,
+                                        backgroundColor: '#F9C31B', 
+                                        borderColor: 'white', 
+                                        color: 'black',
+                                    }}
+                                    className="details-btn"
+                                    >
+                                    Details
+                            </Button>   
+                            {
+                            
+                                <Modal
+                                title={"Panne N°"+this.state.item.idPanne}
+                               
+                                centered
+                                style={{margin:"40px 0"}}
+                                visible={this.state.visible1}
+                                onOk={() => {this.setVisibleUntreated(false)}}
+                                onCancel={() => this.setVisibleUntreated(false)}
+                                width={650}
+                                footer={[
+                                    <Button 
+                                    key="back" 
+                                    onClick={() => this.setVisibleUntreated(false)}
+                                    shape='round'
+                                    size ='middle'
+                                    style={{
+                                    marginRight: '40%', 
+                                    backgroundColor: '#F9C31B', 
+                                        paddingRight: 60,
+                                        paddingLeft: 60,
+                                        borderColor: 'white', 
+                                        color: 'black',      
+                                    }}>
+                                    OK
+                                    </Button>,  
+                                    ]}
+                                    >
+
+                                    <Divider orientation="left" className="info-divider"><h5 className="bolde">Informations du véhicule</h5> </Divider>
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Matricule :</label> 
+                                                <span className="info truncated">{this.state.item.registrationNumber}</span>
+                                            </Col>
+                                        </div>
+                                    </Row>
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Modèle :</label>
+                                                <span className="info">{this.state.item.vehiclemodel}</span>
+                                            </Col>
+                                            
+                                        </div>
+                                    </Row>
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Marque :</label>
+                                                <span className="info">{this.state.item.vehiclebrand}</span>
+                                            </Col>
+                                            
+                                        </div>
+                                    </Row>
+                                    
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Couleur :</label>
+                                                <span className="info">{this.state.item.vehicleColor}</span>
+                                            </Col>
+                                          
+                                        </div>
+                                    </Row>
+
+                                    <Divider orientation="left" className="info-divider"><h5 className="bolde">Informations de la panne</h5> </Divider>
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Numéro :</label> 
+                                                <span className="info">{this.state.item.idPanne}</span>
+                                            </Col>
+                                        </div>
+                                    </Row>
+
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Description :</label> 
+                                                <span className="info">{this.state.item.description}</span>
+                                            </Col>
+                                        </div>
+                                    </Row>
+
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Sévérité :</label> 
+                                                <span className="info">{this.state.item.severityLevel}</span>
+                                            </Col>
+                                        </div>
+                                    </Row>
+
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Etat :</label> 
+                                                <span className="info">{this.state.item.treated? "Traitée" : "Non traitée"}</span>
+                                            </Col>
+                                        </div>
+                                    </Row>
+                                        
+                                    <Divider orientation="left" className="info-divider"> <h5 className="bolde">Signalement par</h5> </Divider>
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Source :</label>
+                                                <span className="info">{this.state.item.sourceType == "Tenant"? "Locataire" : this.state.item.sourceType}</span>
+                                            </Col>
+                                        
+                                        </div>
+                                    </Row>
+                                    {this.state.item.sourceType!="Auto"? 
+                                    <>
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Nom et Prénom :</label>
+                                                <span className="info">{this.state.item.lastName+" "+this.state.item.firstName}</span>
+                                            </Col>
+                                        
+                                        </div>
+                                    </Row>
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Telephone : </label>
+                                                <span className="info">0{this.state.item.phoneNumber}</span>
+                                            </Col>
+                                        </div>
+                                    </Row>
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Adresse :</label>
+                                                <span className="info">{this.state.item.address}</span>
+                                            </Col>
+                                           
+                                        </div>
+                                    </Row>
+
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Message :</label> 
+                                                <span className="info">{this.state.item.message}</span>
+                                            </Col>
+                                           
+                                        </div>
+                                    </Row>
+                                    </>
+                                    : ""}
+
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Signalée le :</label> 
+                                                <span className="info">{this.state.item.sent_at.slice(0,10)+" "+this.state.item.sent_at.slice(11, 19)}</span>
+                                            </Col>
+                                           
+                                        </div>
+                                    </Row>
+                                    
+                                    <Divider orientation="left" className="info-divider"> <h5 className="bolde">Vérification par</h5> </Divider>
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Nom et Prénom :</label>
+                                                <span className="info">{this.state.item.agentSentNotif.nom+" "+this.state.item.agentSentNotif.prenom}</span>
+                                            </Col>
+                                        
+                                        </div>
+                                    </Row>
+
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Vérifiée le :</label> 
+                                                <span className="info">{this.state.item.dateNotifPanne.slice(0,10)}</span>
+                                            </Col>
+                                           
+                                        </div>
+                                    </Row>
+
+                                    {this.state.item.treated?
+                                    <>
+                                    <Divider orientation="left" className="info-divider"> <h5 className="bolde">Réparation par :</h5> </Divider>
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Nom et Prénom :</label>
+                                                <span className="info">{this.state.item.agentTreatPanne.nom+" "+this.state.item.agentTreatPanne.prenom}</span>
+                                            </Col>
+                                        
+                                        </div>
+                                    </Row>
+                            
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Réparée le :</label>
+                                                <span className="info">{this.state.item.dateReparationPanne.slice(0,10)}</span>
+                                            </Col>
+                                           
+                                        </div>
+                                    </Row>
+                                    <Row>
+                                        <div className="info-container">
+                                            <Col>
+                                                <label className="info-title">Description :</label> 
+                                                <span className="info">{this.state.item.treatmentDescription}</span>
+                                            </Col>
+                                        </div>
+                                    </Row>
+                                    </>
+                                    : ""
+                                    
+                                    }
+                            
+                                    
+                            
+                                </Modal>
+                                
+                            }
+
+                        </Col>
+                    </Row>
+                </Card>
+         );
     }
 }
  

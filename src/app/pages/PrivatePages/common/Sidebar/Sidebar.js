@@ -30,7 +30,8 @@ export default function SideBar(props) {
                 backgroundColor: "#333",
                 //overflow: 'auto',   //if you uncomment this, the sider zero width trigger won't show
                 height: '100vh',
-                position: "fixed"
+                position: "fixed",
+                zIndex: 101
             }}
         >
       
