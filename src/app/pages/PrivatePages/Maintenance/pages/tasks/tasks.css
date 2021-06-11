@@ -1,70 +1,94 @@
-.tasks-container{
-    width: 100%;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
+.tasks-container {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.tasks-header{
-    width: 96%;
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 10px;
-    margin-left: 30px;
+.tasks-header {
+  width: 96%;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px;
+  margin-left: 30px;
 }
 
-.task-header-text{
-    font-family: 'Montserrat';
-    font-size: 0.9em;
-    color: #CCC;
-    margin-right: 40%;
+.task-header-text {
+  font-family: "Montserrat";
+  font-size: 0.9em;
+  color: #ccc;
+  margin-right: 40%;
 }
 
-.task-header-actions{
-    width: 99%;
-    display: grid;
-    justify-content: right;
-    margin-top: 15px;
-    margin-bottom: 15px;
+.task-header-actions {
+  width: 99%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
-.add-task-modal{
-    width: 100%;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+.task-header-actions .light_mode:first-child {
+  margin-right: 8px;
+  border: 1px solid #f9c31b;
+  background-color: white;
 }
 
-.task-modal-title{
-    font-family: "Montserrat-bold";
-    font-size: 1.5em;
-    margin: 2px;
-    width: 40%;
-    color: #333;
+.task-header-actions .light_mode:first-child:hover {
+  border: 1px solid white;
+  background-color: #f9c31b;
 }
 
-.modal-form-input{
-    outline: none;
-    background-color: rgb(221, 221, 221);
-    color: #333;
-    font-family: 'Montserrat';
-    border-radius: 1000px;
-    border-width: 0px;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 13px;
-    padding-bottom: 13px;
-    width: 90%;
+.add-task-modal {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-.modal-buttons-holder{
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
+.task-modal-title {
+  font-family: "Montserrat-bold";
+  font-size: 1.5em;
+  margin: 2px;
+  width: 40%;
+  color: #333;
 }
 
-.modal-buttons-holder Button{
-    margin: 20px;
+.modal-form-input {
+  outline: none;
+  background-color: rgb(221, 221, 221);
+  color: #333;
+  font-family: "Montserrat";
+  border-radius: 1000px;
+  border-width: 0px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  width: 90%;
+}
+
+.modal-form-input::placeholder {
+  color: rgb(95, 95, 95) !important;
+}
+
+.modal-buttons-holder {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.modal-buttons-holder Button {
+  margin: 20px;
+}
+
+.steps-container {
+  display: flex;
+  width: 90%;
+}
+
+.steps-container .modal-form-input {
+  margin-right: 8px;
 }
