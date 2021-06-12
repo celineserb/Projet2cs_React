@@ -37,6 +37,12 @@ const _nav = [
     to: "/decideur/GrapheLocation",
     icon: "cil-graph",
   },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Liste Véhicules",
+    to: "/decideur/VehiculesLocation",
+    icon: "cil-car",
+  },
 ];
 
 export default _nav;

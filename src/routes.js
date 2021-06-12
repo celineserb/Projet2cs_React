@@ -9,10 +9,6 @@ const UsersTable = React.lazy(() =>
   import("./app/conponents/gestionUtil/compteLocataire")
 );
 
-const LocatairesTable = React.lazy(() =>
-  import("./app/conponents/statsLocataire")
-);
-
 const Breadcrumbs = React.lazy(() =>
   import("./app/conponents/base/breadcrumbs/Breadcrumbs")
 );
@@ -101,6 +97,9 @@ const Page500 = React.lazy(() =>
 const GrapheLocation = React.lazy(() =>
   import("./app/pages/PrivatePages/GraphDeLocation")
 );
+const StatsTables = React.lazy(() =>
+  import("./app/pages/PrivatePages/StatsLocataire")
+);
 
 const routes = [
   { path: "/", exact: true, name: "Home" },
@@ -174,6 +173,11 @@ const routes = [
     path: "/GrapheLocation",
     name: "Graphe de location",
     component: GrapheLocation,
+  },
+  {
+    path: "/VehiculesLocation",
+    name: "Liste véhicules",
+    component: StatsTables,
   },
 ];
 
