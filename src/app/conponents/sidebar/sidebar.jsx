@@ -1,6 +1,6 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import Logo from '../../assets/sidebar_logo.png'
+import Logo from '../../../assets/icons/sidebar_logo.png'
 import './sidebar.css'
 
 export default function sidebar(props){
