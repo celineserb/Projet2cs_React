@@ -9,6 +9,7 @@ import { AntDesignOutlined } from '@ant-design/icons';
 import {ReactComponent as MapIcon} from '../../../../assets/svg/tabler-icon-map-2.svg';
 import {ReactComponent as CalendarIcon} from '../../../../assets/svg/tabler-icon-calendar-event.svg';
 import {ReactComponent as ContactIcon} from '../../../../assets/svg/tabler-icon-user.svg';
+import {ReactComponent as UserIcon} from '../../../../assets/svg/m5.svg';
 import { fetchRentalInfo } from '../../../../modules/Tracking/tracking.crud';
 
 var rental={};
@@ -54,8 +55,8 @@ class TenantInfo extends Component {
                         <Row>
                             <Col push={5}>
                             <Avatar
-                                size={{ xs: 64, sm: 64, md: 64, lg: 64, xl: 80,xxl: 100,}}
-                                icon={<AntDesignOutlined />}
+                                size={{ xs: 56, sm: 56, md: 56, lg: 56, xl: 70,xxl: 100,}}
+                                icon={<UserIcon />}
                             />
                             </Col>
                         </Row>
@@ -66,12 +67,12 @@ class TenantInfo extends Component {
                                 <ContactIcon></ContactIcon>
                             </Col>
                             <Col >
-                                <h3 className="tenant-name-text"
+                                <h4 className="tenant-name-text"
                                     style={{
                                         marginTop: 5,                     
                                     }}>
                                     {this.state.firstName+" "+this.state.lastName}
-                                </h3>
+                                </h4>
                             </Col>
                         </Row>
                         </Tooltip>
@@ -81,12 +82,12 @@ class TenantInfo extends Component {
                                 <CalendarIcon ></CalendarIcon>
                             </Col>
                             <Col >
-                                <h3
+                                <h4
                                     style={{
                                         marginTop: 5,                     
                                     }}>
                                     {this.state.rentaldate+" "+this.state.rentaltime}
-                                </h3>
+                                </h4>
                             </Col>
                         </Row>
                         </Tooltip>
@@ -96,12 +97,12 @@ class TenantInfo extends Component {
                                 <MapIcon></MapIcon>
                             </Col>
                             <Col>
-                                <h3
+                                <h4
                                     style={{
                                         marginTop: 5,                     
                                 }}>
                                 {this.state.rentalborne}
-                            </h3>
+                            </h4>
                             </Col>
                         </Row>
                         </Tooltip>

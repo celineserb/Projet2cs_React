@@ -1,4 +1,7 @@
 import React from "react";
+import PannesPage from "./app/pages/PrivatePages/PannesPage/PannesPage";
+import SignalsPage from "./app/pages/PrivatePages/SignalsPage/SignalsPage";
+import TrackingPage from "./app/pages/PrivatePages/VehicleSurveillance/TrackingPage";
 
 const Toaster = React.lazy(() => import('./app/conponents/notifications/toaster/Toaster'));
 const Tables = React.lazy(() => import('./app/conponents/base/tables/Tables'));
@@ -96,8 +99,11 @@ const routes = [
   { path: "/p404", name: "Page not found", component: Page404 },
   { path: "/p500", name: "Page not found", component: Page500 },
 
-  { path: "/GrapheLocation", name: "Graphe de location", component: GrapheLocation}
+  { path: "/GrapheLocation", name: "Graphe de location", component: GrapheLocation},
 
+  { path: "/tracking/:vehicleId/:rentalId", name: "Gestion des Vehicules", component: TrackingPage},
+  { path: "/enlevements", name: "Gestion des Vehicules", component: SignalsPage},
+  { path: "/pannes", name: "Gestion des Vehicules", component: PannesPage}
 ];
 
 export default routes;
