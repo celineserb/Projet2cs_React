@@ -101,7 +101,7 @@ export const Routes = () => {
             </> : <>
                 {/* Write all routes for the authentification */}
                 <Route path="/login" component={Login} />
-                <Redirect from="*" to="/login"></Redirect>
+                <Redirect from="*" to="/login" />
 
             </>
         }</Switch>

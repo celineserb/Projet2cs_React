@@ -4,18 +4,18 @@ import {Switch
     , useRouteMatch,
     Redirect} from 'react-router-dom'
 
-import SideBar from '../../components/sidebar/sidebar'
+import SideBar from '../../../../../conponents/sidebar/sidebar'
 import AgentView from '../agents/agents'
 import TaskView from '../tasks/tasks'
 import VehiculeView from '../vehicules/vehicules'
 import NotificationView from '../notifications/notifications'
 import EquipmentView from '../equipments/equipments'
-import TopBar from '../../components/topbar/topbar'
+import TopBar from '../../../../../conponents/topbar/topbar'
 
-import TaskIcon from '../../assets/task.svg'
-import AgentIcon from '../../assets/agent.svg'
-import CarIcon from '../../assets/car.svg'
-import toolIcon from '../../../../../../assets/icons/menu_tools.svg'
+import TaskIcon from '../../../../../../assets/icons/task.svg'
+import AgentIcon from '../../../../../../assets/icons/agent.svg'
+import CarIcon from '../../../../../../assets/icons/car.svg'
+import toolIcon from  '../../../../../../assets/icons/menu_tools.svg'
 import './dashboard.css'
 
 export default function MaintaintDashboard(props){

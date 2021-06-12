@@ -3,7 +3,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import NotificationView from '../../components/notificationview/notificationview'
+import NotificationView from '../../../../../conponents/notificationview/notificationview'
 import './notifications.css'
 
 

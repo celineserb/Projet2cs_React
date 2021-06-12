@@ -1,6 +1,6 @@
 import React from 'react'
 import './vehiculView.css'
-import image from '../../assets/car_model.png'
+import image from '../../../assets/icons/car_model.png'
 
 export default function VehiculeListView(props){
     const vehicule = props.vehicule
