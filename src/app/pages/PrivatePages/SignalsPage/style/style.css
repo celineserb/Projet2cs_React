@@ -13,6 +13,10 @@
     font-size: medium;
   
   }
+  .info-description{
+    display: inline;
+
+  }
   .info-box{
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -28,6 +32,7 @@
   
   .info-container{
     display: inline;
+    font-size: medium;
 
       
   }

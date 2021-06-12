@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import VehiculeView from '../../components/vehiculeview/vehiculeListView'
-import VehiculeGridView from '../../components/vehiculeview/vehiculeGridView'
+import VehiculeView from '../../../../../conponents/vehiculeview/vehiculeListView'
+import VehiculeGridView from '../../../../../conponents/vehiculeview/vehiculeGridView'
 import './vehicules.css'
 import axios from 'axios'
 

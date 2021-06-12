@@ -240,7 +240,7 @@ class SignalComponent extends Component {
                                             <div className="info-container">
                                                 <Col>
                                                     <label className="info-title">Details:</label>
-                                                    <span className="info">{this.state.item.treatmentDescription}</span>
+                                                    <span className="info-description" >{this.state.item.treatmentDescription}</span>
                                                 </Col>
                                                 
                                             </div>

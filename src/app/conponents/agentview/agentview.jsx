@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import './agentview.css'
-import image from '../../assets/profile_pic.png'
+import image from '../../../assets/icons/profile_pic.png'
 import Modal from 'react-modal';
 
 
