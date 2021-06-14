@@ -48,21 +48,21 @@ const ManagePage = () => {
         <div>
           <p>Ordonner</p>
           <div className={show ? "filter-modal show" : "filter-modal hide"}>
-            <div className="filter-state" id="prete">
+            <div className="filter-state" id="ready">
               <input
                 onClick={(e) => handleChange(e, "available")}
                 type="checkbox"
               />
               Prete
             </div>
-            <div className="filter-state" id="en_attente">
+            <div className="filter-state" id="waiting">
               <input
                 onClick={(e) => handleChange(e, "maintained")}
                 type="checkbox"
               />
               En attente
             </div>
-            <div className="filter-state" id="en_cours">
+            <div className="filter-state" id="in-progress">
               <input
                 onClick={(e) => handleChange(e, "allocated")}
                 type="checkbox"
