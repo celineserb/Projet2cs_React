@@ -1,4 +1,5 @@
-import React , {useState} from 'react'
+import React, { Component, useState, useEffect } from 'react'
+import axios from 'axios';
 import { useDispatch} from 'react-redux'
 
 import {Button, Dropdown, Menu, Avatar, List} from 'antd';
@@ -14,35 +15,18 @@ import {ReactComponent as UserIcon } from '../../../../../assets/svg/user.svg'
 
 import {actions} from '../../../../../modules'
 import { useLocation } from 'react-router';
-
-const notifications = [
-    {
-        title : "first notiifications that came something about something you know",
-        key : 0
-    },
-    {
-        title : "second notiifications that came",
-        key : 1
-    },
-    {
-        title : "third notiifications that came",
-        key : 2
-    },
-    {
-        title : "fourth notiifications that came",
-        key : 3
-    }
-
-]
+import Notifications, {notify} from 'react-notify-toast';
+import socketIOClient from "socket.io-client";
 
 export default function TopBar(props) {
+    const [notifications, setNotifications] = useState();
 
     const [show, setShow] = useState(true)
 
     const menu = (
         <Menu>
             {
-                notifications.map((item, key) =>{
+                notifications?.map((item, key) =>{
                     return(
                         <Menu.Item key={key}
                         style={{
@@ -64,19 +48,34 @@ export default function TopBar(props) {
                                     backgroundColor:"red"
                                 }}
                              />
-                           {"   "+item.title} 
-                           
+                           {"   "+item.read} 
                         </Menu.Item>
                     )
                 }
                
             )}
-           
-
-          
-         
         </Menu>
       );
+
+
+    useEffect(() =>{
+        axios.get('http://localhost:8004/breakdown')
+            .then((res) => {
+                console.log(res);
+                const unreadNotif = res.data.filter((notification) => notification.read == false);
+                console.log(unreadNotif);
+                setNotifications(unreadNotif);
+            });
+
+        // listen to notifications events
+
+        const socket = socketIOClient("http://localhost:8004");
+        socket.on("messageSent", (message) => {
+            notify.show(message.message, "success", 5000);
+        });
+
+    }, []);
+
      
     
     const disconnect =(
@@ -110,6 +109,10 @@ export default function TopBar(props) {
     
     const dispatch = useDispatch()
 
+    // waiting for any notification
+    // change the notification url (usually the port)
+
+
     function logout(){
         dispatch(actions.logout());
     }
@@ -118,6 +121,7 @@ export default function TopBar(props) {
 
         <div className="topbar-wrapper">
         <div className="back-wrapper">
+            <Notifications />
             <a className="back-link" href="#">  
                 <div className="back-text">
                 { 
@@ -149,7 +153,7 @@ export default function TopBar(props) {
                     <div className="notifs-wrapper">
                         <div className="notifs-icon">
                         <Dropdown 
-                            overlay={menu}
+                        overlay={menu}
                             placement="bottomRight"
                             arrow='true'
                         >
