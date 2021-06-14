@@ -122,7 +122,8 @@ export default function TopBar(props) {
                 <div className="back-text">
                 { 
                         location.pathname.includes('/enlevements')? <label>Enlèvements</label>:
-                            location.pathname.includes('/pannes')? <label>Pannes</label>: <label>Gestion des véhicules</label> 
+                            location.pathname.includes('/pannes')? <label>Pannes</label>: 
+                                location.pathname.includes('/tracking/')? <label>Tracking</label>: <label>Gestion des véhicules</label> 
                 }
                     
                 </div>

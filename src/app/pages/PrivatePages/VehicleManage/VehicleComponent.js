@@ -22,8 +22,8 @@ const VehicleComponent = ({ vehicle }) => {
     }
   };
   let link;
-  vehicle.idrental
-    ? (link = `/tracking/${vehicle.idVehicle}/${vehicle.idrental}`)
+  vehicle.idRental
+    ? (link = `/tracking/${vehicle.idVehicle}/${vehicle.idRental}`)
     : (link = null);
   console.log(link);
   return (
@@ -48,20 +48,20 @@ const VehicleComponent = ({ vehicle }) => {
               </div>
             </div>
             <div className="custom-elem">
-              <p>{vehicle.firstname ? vehicle.firstname : "-"}</p>
+              <p>{vehicle.firstName ? vehicle.firstName : "-"}</p>
               <p>
                 {vehicle.rentaldate ? vehicle.rentaldate.slice(0, 10) : "-"}
               </p>
             </div>
             <div className="custom-elem">
               <p>
-                {vehicle.availibledate
-                  ? vehicle.availibledate.slice(0, 10)
+                {vehicle.plannedrestitutiondate
+                  ? vehicle.plannedrestitutiondate.slice(0, 10)
                   : "-"}
               </p>
               <p>
-                {vehicle.availibledate
-                  ? vehicle.availibledate.slice(11, 19)
+                {vehicle.plannedrestitutiondate
+                  ? vehicle.plannedrestitutiondate.slice(11, 19)
                   : "-"}
               </p>
             </div>
@@ -84,16 +84,16 @@ const VehicleComponent = ({ vehicle }) => {
             </div>
           </div>
           <div className="custom-elem">
-            <p>{vehicle.firstname ? vehicle.firstname : "-"}</p>
+            <p>{vehicle.firstName ? vehicle.firstName : "-"}</p>
             <p>{vehicle.rentaldate ? vehicle.rentaldate.slice(0, 10) : "-"}</p>
           </div>
           <div className="custom-elem">
             <p>
-              {vehicle.availibledate ? vehicle.availibledate.slice(0, 10) : "-"}
+              {vehicle.plannedrestitutiondate ? vehicle.plannedrestitutiondate.slice(0, 10) : "-"}
             </p>
             <p>
-              {vehicle.availibledate
-                ? vehicle.availibledate.slice(11, 19)
+              {vehicle.plannedrestitutiondate
+                ? vehicle.plannedrestitutiondate.slice(11, 19)
                 : "-"}
             </p>
           </div>
