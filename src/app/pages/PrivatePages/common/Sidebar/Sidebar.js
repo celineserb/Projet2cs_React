@@ -2,85 +2,69 @@ import React, { Component } from 'react'
 import {Layout } from 'antd';
 import 'antd/dist/antd.css';
 import './style.scss'
+import { Link } from 'react-router-dom';
 
 const { Sider} = Layout;
 class SideBar extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = { 
+            section: props.items[0],
+            settings: props.items[1],
+            menu: props.items.slice(2)
+        }
     }
     render() { 
         return ( 
             <Sider
-            breakpoint="lg"
-            collapsedWidth="0"
-            onBreakpoint={broken => {
-              console.log(broken);
-            }}
-            onCollapse={(collapsed, type) => {
-              console.log(collapsed, type);
-            }}
-          >
-          <div className="sidebar-wrapper">
+                breakpoint="lg"
+                collapsedWidth="0"
+                onBreakpoint={broken => {
+                    console.log(broken);
+                }}
+                onCollapse={(collapsed, type) => {
+                    console.log(collapsed, type);
+                }}
+                style={{
+                    backgroundColor: "#333",
+                    overflow: 'auto',
+                    height: '100vh',
+                    position: "fixed"  //uncomment this when you fix the other stuff
+                }}
+            >
+            <div className="sidebar-wrapper">
                 <div className="logo-wrapper">
-                    <div className="logo-icon">
-                        <img src="media/logo-jaune.png" />
-                    </div>
-                    <div className="logo-text">
-                        <label>AutoLibDZ</label>
-                    </div>
+                    <img className="logo-icon" src="media/logo-jaune.png" alt="logo" />
+                    <label className="logo-text">AutoLibDZ</label>
                 </div>
                 <div className="section-title-wrapper">
-                    <div className="section-title-icon">
-                        <img src="media/device-cctv.svg" alt="" />	
-                    </div>
-                    <div className="section-title-text">
-                        <label>Surveillance</label>
-                    </div>
-                </div>
-                <div className="menu-wrapper">
-                    <div className="menu-item-wrapper">
-                        <a className="menu-item-link" href="#vehicules">
-                            <div className="menu-item-icon">
-                                <img src="media/car.svg" alt="" />	
-                            </div>
-                            <div className="menu-item-text">
-                                <label>Véhicules</label>		
-                            </div>
-                        </a>
-                    </div>
-                    <div className="menu-item-wrapper">
-                        <a className="menu-item-link" href="enlevements">
-                            <div className="menu-item-icon">
-                                <img src="media/alien.svg" alt="" />	
-                            </div>
-                            <div className="menu-item-text">
-                                <label>Enlèvements</label>		
-                            </div>
-                        </a>
-                    </div>
-                    <div className="menu-item-wrapper">
-                        <a className="menu-item-link" href="pannes">
-                            <div className="menu-item-icon">
-                                <img src="media/alert-triangle.svg" alt="" />	
-                            </div>
-                            <div className="menu-item-text">
-                                <label>Pannes</label>		
-                            </div>
-                        </a>
-                    </div>
+                    <img className="section-title-icon" src={this.state.section.icon} alt={this.state.section.alt} />	
+                    <label className="section-title-text truncated">{this.state.section.title}</label>
                 </div>
                 <div className="settings-wrapper">
-                    <a className="settings-link" href="#parametres">
-                        <div className="settings-icon">
-                            <img src="media/settings.svg" />
-                        </div>
-                        <div className="settings-text">
-                            <label>Paramètres</label>
-                        </div>
-                    </a>
+                    <Link className="settings-link" to={this.state.settings.link}>
+                        <img className="settings-icon" src={this.state.settings.icon} alt={this.state.settings.alt} />
+                        <label className="settings-text truncated">{this.state.settings.title}</label>
+                    </Link>
+                </div>
+                <div className="menu-wrapper">
+                {
+                    this.state.menu.map((item, key) => {
+                        return (
+                            <div className="menu-item-wrapper " >
+                                <Link className="menu-item-link" to={item.link}>
+                                    <img className="menu-item-icon" src={item.icon} alt={item.alt} />
+                                    <label className="menu-item-text truncated">{item.title}</label>
+                                </Link> 
+                            </div>
+                        );   
+                    })
+                }
                 </div>
             </div>
+                
+                    
+        
           </Sider>
          );
     }

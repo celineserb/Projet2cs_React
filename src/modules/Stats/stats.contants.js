@@ -6,4 +6,10 @@ export const fetchPaths = {
     BORNE_YEAR: (id, year) => `/br/y/${id}`,
     BORNE_MONTH: (id, year, month) => `/br/m/${id}`,
     BORNE_DAY: (id, year, month, day) => `/br/d/${id}`,
+
+    AGENT_YEAR: (id) => `/ar/y/${id}`,
+    AGENT_MONTH: (id) => `/ar/m/${id}`,
+    AGENT_DAY: (id) => `/ar/d/${id}`,
+    AGENT_WEAK: (id) => `/ar/w/${id}`
+
 }

@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 
 
@@ -22,7 +23,7 @@ import { TheLayout as DecideurLayout } from '../containers/decideur'
 import { TheLayout as AccountLayout } from '../containers/adminCompte'
 import Page404 from "../pages/AuthPages/page404/Page404";
 import Page500 from "../pages/AuthPages/page500/Page500";
-
+import SurveillanceSidebar from './SurveillanceSidebar'
 
 import { Layout} from 'antd';
 import 'antd/dist/antd.css';
@@ -67,8 +68,8 @@ export const Routes = () => {
                 {
                    user.userType === "technical_admin" &&
                    <Layout>
-                    <SideBar></SideBar>
-                    <Layout>
+                    <SideBar items={SurveillanceSidebar}></SideBar>
+                    <Layout style={{marginLeft:200}}>
                         <Content style={{backgroundColor:'white'}}>
                         <TopBar user={user}></TopBar>
                                     <Switch>
@@ -87,9 +88,9 @@ export const Routes = () => {
             </> : <>
                 {/* Write all routes for the authentification */}
                 <Route path="/login" component={Login} />
-                <Redirect  from="*" to = "/login" ></Redirect>
-
+                <Redirect from="*" to="/login"  />
             </>
         }</Switch>
     )
 }
+

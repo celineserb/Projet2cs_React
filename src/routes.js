@@ -100,6 +100,8 @@ const GrapheLocation = React.lazy(() =>
 const StatsTables = React.lazy(() =>
   import("./app/pages/PrivatePages/StatsLocataire")
 );
+const AgentStat = React.lazy(() => import('./app/pages/PrivatePages/GraphDAgent'))
+
 
 const routes = [
   { path: "/", exact: true, name: "Home" },
@@ -179,6 +181,8 @@ const routes = [
     name: "Liste véhicules",
     component: StatsTables,
   },
+  { path: "/GrapheAgent", name: "Statistiques Agent", component: AgentStat}
+
 ];
 
 export default routes;
