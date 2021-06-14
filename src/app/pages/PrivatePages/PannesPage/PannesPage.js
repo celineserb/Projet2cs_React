@@ -37,9 +37,9 @@ class PannesPage extends Component {
 
     onFilter() {
         var data = [];
-        if (document.getElementById("filter-unseen").checked) {
+        if (document.getElementById("filter-untreated").checked) {
             data = this.state.untreatedSignals;
-        } else if (document.getElementById("filter-seen").checked) {
+        } else if (document.getElementById("filter-treated").checked) {
             data = this.state.treatedSignals;
         } else {
             data = this.state.untreatedSignals.concat(this.state.treatedSignals);
@@ -92,8 +92,8 @@ class PannesPage extends Component {
                             <div className="pannes-list-filter hidden">
                                 <ul onChange={this.onFilter}>
                                     <li><input name="list-filter" type="radio" id="filter-all" /><label for="filter-all">Toutes</label></li>
-                                    <li><input name="list-filter" type="radio" id="filter-unseen" /><label for="filter-unseen">Non vues</label></li>
-                                    <li><input name="list-filter" type="radio" id="filter-seen" /><label for="filter-seen">Vues</label></li>
+                                    <li><input name="list-filter" type="radio" id="filter-treated" /><label for="filter-treated">Réparées</label></li>
+                                    <li><input name="list-filter" type="radio" id="filter-untreated" /><label for="filter-untreated">Non réparées</label></li>
                                 </ul>
                             </div>
                             <button className="pannes-list-sort-btn" onClick={() => {

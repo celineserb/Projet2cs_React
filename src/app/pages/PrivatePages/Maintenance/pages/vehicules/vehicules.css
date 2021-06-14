@@ -50,11 +50,11 @@
   }
 
 .vehicule-header-title{
-    min-width: max-content;
+    width:70%;
     font-family: 'Montserrat';
+    text-align: center;
     font-size: 0.9em;
     color: #CCC;
     margin: 1px;
     margin-top: 15px;
-    margin-right: 20%;
 }

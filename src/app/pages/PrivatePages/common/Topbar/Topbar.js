@@ -2,8 +2,7 @@ import React, { Component, useState, useEffect } from 'react'
 import axios from 'axios';
 import { useDispatch} from 'react-redux'
 
-import {Button, Dropdown, Menu, Avatar} from 'antd';
-import { AntDesignOutlined } from '@ant-design/icons';
+import {Button, Dropdown, Menu, Avatar, List} from 'antd';
 import 'antd/dist/antd.css';
 import './style.scss'
 
@@ -11,14 +10,18 @@ import {ReactComponent as BellIcon } from '../../../../../assets/svg/bell.svg'
 import {ReactComponent as UserIcon } from '../../../../../assets/svg/user.svg'
 
 
+
+
+
 import {actions} from '../../../../../modules'
 import { useLocation } from 'react-router';
 import Notifications, {notify} from 'react-notify-toast';
 import socketIOClient from "socket.io-client";
 
-
 export default function TopBar(props) {
     const [notifications, setNotifications] = useState();
+
+    const [show, setShow] = useState(true)
 
     const menu = (
         <Menu>
@@ -46,7 +49,6 @@ export default function TopBar(props) {
                                 }}
                              />
                            {"   "+item.read} 
-                           
                         </Menu.Item>
                     )
                 }
@@ -140,14 +142,7 @@ export default function TopBar(props) {
                         >
                             <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                             <Avatar
-                                size={{
-                                xs: 24,
-                                sm: 32,
-                                md: 40,
-                                lg: 40,
-                                xl: 40,
-                                xxl: 40,
-                                }}
+                                size= {40}
                                 icon={<UserIcon />}
                             />
                             </a>
@@ -160,6 +155,7 @@ export default function TopBar(props) {
                         <Dropdown 
                         overlay={menu}
                             placement="bottomRight"
+                            arrow='true'
                         >
                             <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                                 <BellIcon />

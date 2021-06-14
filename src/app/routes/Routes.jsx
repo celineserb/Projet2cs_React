@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 
 
@@ -33,6 +32,20 @@ import TopBar from '../pages/PrivatePages/common/Topbar/Topbar';
 import SideBar from '../pages/PrivatePages/common/Sidebar/Sidebar';
 
 const { Content} = Layout;
+
+var margin = true;
+function changeStyle() { 
+    const layout = document.getElementById("surv_cont");
+    if (margin) {
+        layout.classList.remove("marginleft");
+        layout.classList.add("nomarginleft");
+    } else {
+        layout.classList.add("marginleft");
+        layout.classList.remove("nomarginleft");
+    }
+    margin = !margin;
+}
+
 export const Routes = () => {
     const [loading, setLoading] = useState(true)
     const dispatch = useDispatch();
@@ -68,8 +81,8 @@ export const Routes = () => {
                 {
                    user.userType === "technical_admin" &&
                    <Layout>
-                    <SideBar items={SurveillanceSidebar}></SideBar>
-                    <Layout style={{marginLeft:200}}>
+                    <SideBar items={SurveillanceSidebar} changeStyle={changeStyle}></SideBar>
+                    <Layout id="surv_cont" className="marginleft">
                         <Content style={{backgroundColor:'white'}}>
                         <TopBar user={user}></TopBar>
                                     <Switch>
@@ -88,10 +101,9 @@ export const Routes = () => {
             </> : <>
                 {/* Write all routes for the authentification */}
                 <Route path="/login" component={Login} />
-                <Redirect from="*" to="/login"></Redirect>
+                <Redirect from="*" to="/login" />
 
             </>
         }</Switch>
     )
 }
-
