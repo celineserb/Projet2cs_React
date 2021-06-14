@@ -31,6 +31,7 @@
 
 .list-container div:first-child > p:last-child {
   position: relative;
+  cursor: pointer;
 }
 
 .list-container div:first-child > p:last-child::before {
@@ -43,6 +44,53 @@
   top: 5px;
   background-repeat: no-repeat;
 }
+
+.filter-modal {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  height: 95px;
+  width: 150px;
+  position: absolute;
+  right: 80px;
+  top: 160px;
+  box-shadow: 3px 8px 20px #c0c0c0;
+  border-radius: 25px;
+}
+
+.filter-state {
+  margin-left: 15px;
+  margin-top: 5px;
+}
+
+#ready {
+  margin-top: 10px;
+  color: green;
+}
+
+#waiting {
+  color: orange;
+}
+
+#in-progress {
+  color: red;
+}
+
+input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+/* checkboxes for the filter*/
+
+/* list of vehicles */
 
 .vehicle-list {
   list-style: none;
@@ -57,8 +105,8 @@
   justify-content: space-evenly;
 }
 
-.vehicle-list .headers p{
-    margin-left: 40px;
+.vehicle-list .headers p {
+  margin-left: 40px;
 }
 
 .vehicle-list .headers p:last-child {
