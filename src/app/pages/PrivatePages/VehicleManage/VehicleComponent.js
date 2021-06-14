@@ -9,6 +9,7 @@ import "./style/VehicleComponent.css";
 import {Row} from 'antd'
 
 const VehicleComponent = ({ vehicle }) => {
+
   const renderSwitch = (status) => {
     switch (status) {
       case "available":
@@ -21,14 +22,14 @@ const VehicleComponent = ({ vehicle }) => {
         return <p className="status default">Maintenance</p>;
     }
   };
+
   let link;
   vehicle.idRental
     ? (link = `/tracking/${vehicle.idVehicle}/${vehicle.idRental}`)
     : (link = null);
-  console.log(link);
+
   return (
     <>
-
       {link ? (
         <Link to={link} className="">
           <li className="vehicle-elem">
@@ -100,7 +101,6 @@ const VehicleComponent = ({ vehicle }) => {
           {renderSwitch(vehicle.availibility)}
         </li>
       )}
-
     </>
   );
 };

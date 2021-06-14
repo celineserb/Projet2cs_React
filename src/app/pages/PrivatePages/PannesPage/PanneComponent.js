@@ -42,7 +42,21 @@ class PanneComponent extends Component {
                     <Row  justify='start'>
                         <Col xs={3} lg={1} xl={1} sm={2} md={1}>
                         {
-                            
+                            this.state.item.treated?
+                            <Avatar 
+                            size={{
+                                xs: 40,
+                                sm: 40,
+                                md: 40,
+                                lg: 40,
+                                xl: 40,
+                                xxl: 40,
+                            }}
+                            style={{
+                                backgroundColor:"#C5C7CD"
+                            }}
+                        /> 
+                            :
                                 <Avatar 
                                     size={{
                                         xs: 40,
@@ -237,7 +251,7 @@ class PanneComponent extends Component {
                                         <div className="info-container">
                                             <Col>
                                                 <label className="info-title">Etat :</label> 
-                                                <span className="info">{this.state.item.treated? "Traitée" : "Non traitée"}</span>
+                                                <span className="info">{this.state.item.treated? "Réparée" : "Non réparée"}</span>
                                             </Col>
                                         </div>
                                     </Row>
