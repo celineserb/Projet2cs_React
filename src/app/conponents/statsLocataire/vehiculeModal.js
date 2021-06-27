@@ -1,73 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import {
-  CButton,
   CCol,
   CFormGroup,
-  CTextarea,
   CLabel,
   CModal,
   CModalHeader,
   CModalTitle,
   CModalBody,
   CModalFooter,
-  CSpinner,
 } from "@coreui/react";
 
-import { getVehicule } from "../../../modules/Vehicules/vehicules.curd";
-
 function VehiculeModal({ visible, setVisible, vehicule }) {
-  //const [user, setUser] = useState({});
-  const [entries, setEntries] = useState({});
-  //const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    //let vehicule = getVehicule(vehicule.idVehicle);
-    /*Promise.all([user, tenant])
-        .then(([user, tenant]) => {
-          let payload = { ...user.data, ...tenant.data };
-          console.log(payload);
-          setUser(payload);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });*/
-  }, [vehicule]);
-
-  const handleInputChange = (e) => {
-    setEntries({ ...entries, [e.target.name]: e.target.value });
-  };
-  // const handleValidate = (e) => {
-  //   if (!loading) {
-  //     let d = new Date();
-  //     updateTenantStatus(user.idUser, {
-  //       ...user,
-  //       ...entries,
-  //       accountState: "validated",
-  //       validationDate:
-  //         d.toISOString().split("T")[0] + " " + d.toTimeString().split(" ")[0],
-  //     })
-  //       .then((e) => setVisible(false))
-  //       .catch((e) => {
-  //         alert(e.message);
-  //       });
-  //   }
-  // };
-
-  // const handleRefused = () => {
-  //   if (!loading) {
-  //     updateTenantStatus(user.idUser, {
-  //       ...user,
-  //       ...entries,
-  //       accountState: "refused",
-  //     })
-  //       .then((e) => setVisible(false))
-  //       .catch((e) => {
-  //         alert(e.message);
-  //       });
-  //   }
-  // };
   return (
     <>
       <CModal

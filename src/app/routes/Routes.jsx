@@ -18,7 +18,6 @@ import { CrudService } from '../../services'
 import { actions } from '../../modules'
 
 import Login from "../pages/AuthPages/login/Login";
-import { TheLayout } from "../containers";
 import { TheLayout as DecideurLayout } from '../containers/decideur'
 import { TheLayout as AccountLayout } from '../containers/adminCompte'
 import Page404 from "../pages/AuthPages/page404/Page404";
@@ -83,8 +82,6 @@ export const Routes = () => {
                 </Layout>
                    
                 }
-                {user.userType === "tenant" && <Route path="/" component={TheLayout} />}
-                {user.userType === "agent" && <Route path="/" component={TheLayout} />}
             </> : <>
                 {/* Write all routes for the authentification */}
                 <Route path="/login" component={Login} />

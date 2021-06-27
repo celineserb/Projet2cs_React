@@ -11,8 +11,6 @@ import {
   CListGroupItem,
   CRow,
 } from "@coreui/react";
-
-import StatsTables from "../StatsLocataire/index";
 import {
   getBornes,
   getVehicles,

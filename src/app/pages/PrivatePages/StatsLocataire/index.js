@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  CButton,
-  CButtonGroup,
   CCard,
   CCardBody,
   CCol,
@@ -37,7 +35,7 @@ function StatsTables() {
   const [vehiculesBorne, setVehiculesByBorne] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedVehicule, setSelectedVehicule] = useState([]);
-  const [borne, setBorne] = useState("");
+  const [borne, setBorne] = useState(0);
   const [bornes, setBornes] = useState([]);
 
   useEffect(() => {
@@ -59,15 +57,13 @@ function StatsTables() {
   }
 
   const handleChange = async (e) => {
-    if (borne != e.idBorne) {
+    if (borne !== e.idBorne) {
       await setBorne(e.idBorne);
       getVehiculesById(e.idBorne).then((res) => {
         setVehiculesByBorne(res.data);
       });
     }
   };
-
-  console.log("Stats Page");
 
   return (
     <>
@@ -93,9 +89,10 @@ function StatsTables() {
         <div className="vehicule-list-container">
           <div className="vehicule-header-promo">
             {vehicules.map((vehicule) => {
-              if (borne == vehicule.idBorne) {
+              if (borne === vehicule.idBorne) {
                 return <VehiculeGridView vehicule={vehicule} />;
               }
+              return (<></>)
             })}
           </div>
         </div>

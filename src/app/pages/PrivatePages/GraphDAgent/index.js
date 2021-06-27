@@ -4,6 +4,7 @@ import { getStyle, hexToRgba } from '@coreui/utils'
 import StyledChart from '../../../conponents/charts/StyledChart'
 import { CCard, CCardBody, CCardHeader, CCol, CListGroup, CListGroupItem, CRow } from '@coreui/react'
 import { getAgents } from '../../../../modules/Agent/agent.crud'
+import { getUserById } from '../../../../modules/Auth/auth.crud'
 import {  getAgentUsagePerDay, getAgentUsagePerMonth, getAgentUsagePerYear } from '../../../../modules/Stats/stats.crud'
 
 import "../../../../assets/scss/graphLocation.scss"
@@ -25,8 +26,15 @@ export default function GrapheLocation ()  {
 
   useEffect(() => {
     getAgents()
-    .then(({data}) => {
-      setAgents(data)
+    .then(async ({data}) => {
+      let agent = [];
+      for (let i in data) {
+        let test = await getUserById(data[i].idUser)
+        console.log(test.data)
+        agent.push(test.data)
+
+      }
+      setAgents(agent)
     })
     .catch(e => {
       console.log(e)
@@ -107,7 +115,7 @@ export default function GrapheLocation ()  {
             <CCardBody>
               <CListGroup>
                 {agents.map((e, i) => (
-                  <CListGroupItem key={i} action active={activeAgents[e.idAgent]} onClick={() => selectAgent(e.idAgent)}>{`${e.nom} ${e.prenom}`}</CListGroupItem>
+                  <CListGroupItem key={i} action active={activeAgents[e.idUser]} onClick={() => selectAgent(e.idUser)}>{`${e.lastName} ${e.firstName}`}</CListGroupItem>
                 ))}
               </CListGroup>
             </CCardBody>

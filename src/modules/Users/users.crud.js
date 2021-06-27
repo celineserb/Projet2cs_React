@@ -13,3 +13,6 @@ export function updateTenantStatus(id, data) {
     return axios.put(Services.USER_URL + `/locataires/${id}`, data)
 }
 
+export function getUsers() {
+    return axios.get(Services.USER_URL + "/users")
+}
