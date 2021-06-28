@@ -8,7 +8,8 @@ export const Services = {
     GEOLOC_URL: `${URL_ROOT}:8002`,
     VEHICLE_URL: `${URL_ROOT}:8200`,
     STAT_URL: `${URL_ROOT}:8089`,
-    LOG_URL: `${URL_ROOT}:8004`
+    LOG_URL: `${URL_ROOT}:8004`,
+    FACTURATION_ENDPOINT:'http://54.37.87.85:7000/'
 }
 
 export const CrudService = {
