@@ -15,7 +15,7 @@ const VehicleComponent = ({ vehicle }) => {
       case "available":
         return <p className="status available">Prete</p>;
       case "allocated":
-        return <p className="status allocated">En cours</p>;
+        return <p className="status allocated" style={{backgroundColor: 'blue'}}>En cours</p>;
       case "stopped":
         return <p className="status unavailable">Hors service</p>;
       default:
