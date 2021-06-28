@@ -8,7 +8,7 @@ import { CContainer, CFade } from '@coreui/react'
 
 // routes config
 import routes from '../../../routes'
-  
+import {AbonnementPage,PromotionPage,FacturationPage} from '../../pages/PrivatePages/FacturationsAbonement'
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
@@ -35,6 +35,9 @@ const TheContent = () => {
                   )} />
               )
             })}
+            <Route path="/facturation/facture" component={FacturationPage} />
+            <Route path="/facturation/abonne" component={AbonnementPage} />
+            <Route path="/facturation/promotion" component={PromotionPage} />
             <Redirect from="/" to="/GrapheLocation" />
           </Switch>
         </Suspense>
