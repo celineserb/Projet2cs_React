@@ -15,14 +15,14 @@ export default function NotificationView(props){
     const [selectedAgent,setSelectedAgent] = useState(100)
 
     useEffect(async ()=>{
-        const result = await axios("https://service-tasks.herokuapp.com/taskModel")
+        const result = await axios("https://volet-maintenance.herokuapp.com/service-task/taskModel")
         setTaskModels(result.data)
     }, [])
 
 
     async function importNotif(){
         if(selectedTaskModel !== 0 && selectedAgent !== 0){
-            const result = await axios.post("https://service-tasks.herokuapp.com/task"
+            const result = await axios.post("https://volet-maintenance.herokuapp.com/service-task/task"
             ,{
                 "idAgent": 100,
                 "idVehicle": panne.idVehicle,

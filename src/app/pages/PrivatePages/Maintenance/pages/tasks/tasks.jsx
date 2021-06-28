@@ -13,7 +13,7 @@ const Tasks = (props) => {
   const [isAddModalOpen, setAddModalOpen] = useState(false);
 
   useEffect(async () => {
-    const result = await axios("https://service-tasks.herokuapp.com/task");
+    const result = await axios("https://volet-maintenance.herokuapp.com/service-task/task");
     setTasks(result);
     return result;
   }, []);
