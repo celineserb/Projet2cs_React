@@ -29,7 +29,7 @@ const StatsTables = React.lazy(() =>
 );
 const AgentStat = React.lazy(() => import('./app/pages/PrivatePages/GraphDAgent'))
 const Users = React.lazy(() => import("./app/pages/PrivatePages/Comptes"))
-// const LogPage = React.lazy(() => import('./app/pages/PrivatePages/LogPage'))
+const LogPage = React.lazy(() => import('./app/pages/PrivatePages/LogPage'))
 
 
 const routes = [
@@ -64,7 +64,7 @@ const routes = [
   { path: "/tracking/:vehicleId/:rentalId", name: "Gestion des Vehicules", component: TrackingPage},
   { path: "/enlevements", name: "Gestion des Vehicules", component: SignalsPage},
   { path: "/pannes", name: "Gestion des Vehicules", component: PannesPage},
-  // { path: "/Log", name: "Log", component: LogPage}
+  { path: "/Log", name: "Log", component: LogPage}
 ];
 
 export default routes;
