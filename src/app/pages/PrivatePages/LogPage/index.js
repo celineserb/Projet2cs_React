@@ -51,7 +51,7 @@ const LogPage = () => {
                 scopedSlots = {{
                   'etat':
                     (item)=>(
-                      <div className={item.idErreur!=null ? "error-log" : "success-log"}></div>
+                      <td><div className={item.idErreur!=null ? "error-log" : "success-log"}></div></td>
                     ),
                   'application':
                     (item)=>(<td>{item.idApp.nomApp}</td>)
