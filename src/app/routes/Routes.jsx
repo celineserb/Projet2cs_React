@@ -30,6 +30,8 @@ import 'antd/dist/antd.css';
 
 import TopBar from '../pages/PrivatePages/common/Topbar/Topbar';
 import SideBar from '../pages/PrivatePages/common/Sidebar/Sidebar';
+import SuperAdminSidebar from "./SuperAdminSidebar";
+import SuperAdmin from "../pages/PrivatePages/SuperAdmin/SuperAdmin";
 
 const { Content} = Layout;
 
@@ -90,6 +92,21 @@ export const Routes = () => {
                                         <Route exact path="/pannes" component={PannesPage} />
                                         <Route exact path="/enlevements" component={SignalsPage} />
                                         <Route path="/"  component={ ManagePage }  />         
+                                    </Switch>
+                        </Content>
+                    </Layout>
+                </Layout>
+                   
+                }
+                {
+                   user.userType === "super_admin" &&
+                   <Layout>
+                    <SideBar items={SuperAdminSidebar} changeStyle={changeStyle}></SideBar>
+                    <Layout id="surv_cont" className="marginleft">
+                        <Content style={{backgroundColor:'white'}}>
+                        <TopBar user={user}></TopBar>
+                                    <Switch>
+                                        <Route path="/"  component={ SuperAdmin }  />         
                                     </Switch>
                         </Content>
                     </Layout>
