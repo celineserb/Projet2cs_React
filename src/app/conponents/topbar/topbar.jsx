@@ -4,10 +4,10 @@ import {NavLink} from 'react-router-dom'
 import Modal from 'react-modal'
 import Button from '../button/button'
 import { useDispatch} from 'react-redux'
-import {actions} from '../../../../../../modules'
+import {actions} from '../../../modules'
 
-import profilePic from '../../assets/profile_pic.png'
-import notificationIcon from '../../assets/notification_icon.png'
+import profilePic from '../../../assets/icons/profile_pic.png'
+import notificationIcon from '../../../assets/icons/notification_icon.png'
 import './topbar.css'
 
 

@@ -1,15 +1,15 @@
-import axios from "axios";
-const URL_ROOT = "http://localhost";
+import axios from 'axios';
+const URL_ROOT="http://localhost";
 
 export const Services = {
-  AUTH_URL: `${URL_ROOT}:8005`,
-  USER_URL: `${URL_ROOT}:8100`,
-  TRACKING_URL: `${URL_ROOT}:8001`,
-  GEOLOC_URL: `${URL_ROOT}:8002`,
-  VEHICLE_URL: `${URL_ROOT}:8200`,
-  STAT_URL: `${URL_ROOT}:8089`,
-  CAR_URL: `${URL_ROOT}:8200`,
-};
+    AUTH_URL: `${URL_ROOT}:8005`,
+    USER_URL: `${URL_ROOT}:8100`,
+    TRACKING_URL: `${URL_ROOT}:8003`,
+    GEOLOC_URL: `${URL_ROOT}:8002`,
+    VEHICLE_URL: `${URL_ROOT}:8200`,
+    STAT_URL: `${URL_ROOT}:8089`,
+    LOG_URL: `${URL_ROOT}:8004`
+}
 
 export const CrudService = {
   Put,

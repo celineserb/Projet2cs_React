@@ -11,7 +11,6 @@ import {
   CPagination
 } from '@coreui/react'
 
-import usersData from './UsersData'
 import { getUsers } from '../../../../modules/Users/users.crud'
 
 const getBadge = status => {

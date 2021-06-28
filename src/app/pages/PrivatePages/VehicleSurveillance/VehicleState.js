@@ -21,7 +21,7 @@ class VehicleState extends Component {
             oilPressure: 0, 
             batteryCharge: 0, 
             brakeFluid: 0, 
-            generalHealthIndicator:30,
+            generalHealthIndicator:55.5,
 
          }
 
@@ -36,7 +36,6 @@ class VehicleState extends Component {
             .then(res => {
                 if (res ) {
                     vehicule = res.data;
-                    console.log(res.data);
                     this.setState({
                         kilos: vehicule.kilos,
                         speed : vehicule.speed,
@@ -45,6 +44,7 @@ class VehicleState extends Component {
                         oilPressure: vehicule.oilPressure, 
                         batteryCharge: vehicule.batteryCharge, 
                         brakeFluid: vehicule.brakeFluid  
+                        //generalHealthIndicator: generalIndicator(vehicule.fuelLevel, vehicule.engineTemp, vehicule.oilPressure, vehicule.batteryCharge)
                     });
                     
                 }
@@ -80,7 +80,7 @@ class VehicleState extends Component {
 
                 </Col>
                 <Col push={3}>
-                    <h1  className="vehicle-status-title" >Vehicle Status</h1>
+                    <h3  className="vehicle-status-title" >Vehicle Status</h3>
                 <Tooltip title="Engine Temperture">
                     <Progress
                     strokeColor={{
@@ -131,7 +131,7 @@ class VehicleState extends Component {
                             '0%': '#108ee9',
                             '100%': '#87d068',
                         }}
-                        percent={55.5}
+                        percent={this.state.generalHealthIndicator}
                     />
                 </Tooltip>
                 
@@ -206,7 +206,11 @@ function brakeFluid(fluid) {
     var num = fluid *100/2;
     return num.toFixed(2);
 }
-
+function generalIndicator(fuel, temp, pressure, charge) {
+    var resultat = 0
+    resultat= (fuelLevel(fuel) + oilPressure(pressure) + batteryCharge(charge) + engineTemp(temp))/4;
+    return resultat ;
+}
 
 
 

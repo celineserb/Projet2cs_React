@@ -1,5 +1,5 @@
 import React from 'react'
-import image from '../../assets/car_model.png'
+import image from '../../../assets/icons/car_model.png'
 import './vehiculView.css'
 
 export default function VehiculeGridView(props){
