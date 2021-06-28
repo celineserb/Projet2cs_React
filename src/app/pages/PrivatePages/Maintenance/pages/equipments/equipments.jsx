@@ -22,7 +22,7 @@ export default function Equipments(props){
     async function addEquipment(){
         if(equipmentName !== '' && equipmentCategory !== '' && equipmentPrice !== 0){
             const result = await axios
-                .post("https://service-equipment.herokuapp.com/equipment",
+                .post("https://volet-maintenance.herokuapp.com/service-materiel/equipment",
                 {"equipmentName": equipmentName,
                 "unitPrice": equipmentPrice,
                 "category": equipmentCategory}) 
