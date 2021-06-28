@@ -15,18 +15,35 @@ const Tasks = (props) => {
   const [stepDescription, setStepDescription] = useState("");
   const [steps, setSteps] = useState([]);
   const [taskModel, setTaskModel] = useState("");
+  const [taskModels,setTaskModels] = useState([]);
+  const [selectedTaskModel, setSelectedModel] = useState(1);
+  const [selectedAgent, setSelectedAgent] = useState(100);
+  const [selectedVehicule, setSelectedVehicule] = useState(3);
+  const [taskTitle, setTaskTitle] = useState('');
+  const [taskDescription, setTaskDescription] = useState('');
 
   useEffect(async () => {
-    const result = await axios("https://volet-maintenance.herokuapp.com/service-task/task");
-    setTasks(result);
-    return result;
+      const result = await axios("https://volet-maintenance.herokuapp.com/service-task/task");
+      setTasks(result);
   }, []);
+
+  
+  useEffect(async ()=>{
+    const result = await axios("https://volet-maintenance.herokuapp.com/service-task/taskModel")
+    setTaskModels(result.data)
+}, []);
 
   useEffect(async () => {
     const result = await axios("http://localhost:8000/vehicle");
-    setVehicules(result.data.listVehicles);
-    return result;
+    setVehicules(result.data.listVehicles)
   }, []);
+
+  const [agentsList,setAgentList] = useState([])
+
+  useEffect(async ()=>{
+    const result = await axios("http://127.0.0.1:8100/users")
+    setAgentList(result?.data.filter(item => item.userType === "agent"))
+  },[])
 
   const addTaskModel = async () => {
     let myHeaders = new Headers();
@@ -46,7 +63,7 @@ const Tasks = (props) => {
 
     console.log(raw);
 
-    await fetch("https://service-tasks.herokuapp.com/taskModel", requestOptions)
+    await fetch("https://volet-maintenance.herokuapp.com/service-task/taskModel", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(JSON.parse(result)))
       .catch((error) => console.log("error", error));
@@ -56,25 +73,20 @@ const Tasks = (props) => {
   };
 
   async function addTask() {
-    /*const result = await axios
-      .post("https://service-tasks.herokuapp.com/task"
-      ,{
-        "idAgent": 1,
-        "idVehicle": 3,
-        "taskTitle": "une tache ordinaire xx",
-        "description": "ça est une tache ordinaire pour l'agent créé par ladmin",
-        "idTaskState": 1,
-        "assignmentDate": "2021-05-28T19:57:13.887Z",
-        "endDate": null,
-        "idTaskModel": 1,
-        "usedEquipments": {
-          "description": "J ai utiliser 20 litres d huile Quoi !",
-          "quantity": 20,
-          "equipment": "282d4458-aaeb-4e92-a674-12320b1de36a",
-          "taskUUID": "282d4458-aaeb-4e92-a674-12320b1de46a"
-        }
-      })
-      console.log(result)*/
+    console.log()
+    const result = await axios
+      .post("https://volet-maintenance.herokuapp.com/service-task/task/"
+      ,{"idAgent": selectedAgent,
+      "idVehicle": selectedVehicule,
+      "taskTitle": taskTitle,
+      "description": taskDescription,
+      "idTaskState": 1,
+      "assignmentDate": new Date(Date.now()).toISOString(),
+      "endDate": null,
+      "idTaskModel": selectedTaskModel,
+      "usedEquipments": null
+    })
+      console.log(result)
   }
 
   return (
@@ -125,6 +137,7 @@ const Tasks = (props) => {
               name="task-title"
               id="task-title"
               placeholder="Titre de tache"
+              onChange={event => setTaskTitle(event.target.value)}
             />
             <br />
             <input
@@ -133,16 +146,18 @@ const Tasks = (props) => {
               name="task-description"
               id="task-description"
               placeholder="Description"
+              onChange={event => setTaskDescription(event.target.value)}
             />
             <br />
             <select
               className="modal-form-input"
-              name="select-agent"
-              id="select-agent"
-              placeholder="Agent"
+              name="select-vehicule"
+              id="select-vehicule"
+              placeholder="Vehicule"
+              onChange={event => setSelectedVehicule(event.target.value)}
             >
               {vehicules?.map((vehicule) => (
-                <option key={vehicule.idVehicle} value={vehicule.vehiclebrand}>
+                <option key={vehicule.idVehicle} value={vehicule.idVehicle}>
                   {vehicule.vehiclebrand}
                 </option>
               ))}
@@ -153,8 +168,23 @@ const Tasks = (props) => {
               name="select-vehicule"
               id="select-vehicule"
               placeholder="Véhicule"
-            ></select>
+              onChange={event => setSelectedAgent(event.target.value)}
+            >
+              {agentsList?.map((agent) => (
+                <option key={agent.idUser} value={agent.idUser}>
+                  {agent.firstName + ' ' + agent.lastName}
+                </option>
+              ))}
+            </select>
             <br />
+            <select name="notif-task-model" id="notif-task-model" 
+                    className="modal-form-input" 
+                    placeholder="modèl de tache"
+                    onChange={event => setSelectedModel(event.target.value)}>
+                {taskModels.map(model => (
+                    <option key={model.id} value={model.id}>{model.taskModelName}</option>
+                ))}
+            </select>
             <br />
             <div className="modal-buttons-holder">
               <Button

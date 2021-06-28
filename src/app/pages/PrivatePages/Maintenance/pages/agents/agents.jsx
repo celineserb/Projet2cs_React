@@ -11,57 +11,6 @@ import "./agents.css"
 
 Modal.setAppElement("#root");
 export default function agents(props) {
-  const Agents = [
-    {
-        id: "1",
-        name: "aaron",
-        surename: "nerostarx",
-        currentTask: "this is a task",
-        taskDate: "20-20-2020"
-    },
-    {
-        id: "2",
-        name: "muhammed",
-        surename: "klili",
-        currentTask: "this is a task",
-        taskDate: "20-20-2020"
-    },
-    {
-        id: "3",
-        name: "amine",
-        surename: "ferui",
-        currentTask: "this is a task",
-        taskDate: "20-20-2020"
-    },
-    {
-        id: "4",
-        name: "lamine",
-        surename: "slimani",
-        currentTask: "this is a task",
-        taskDate: "20-20-2020"
-    },
-    {
-        id: "5",
-        name: "karim",
-        surename: "boulahi",
-        currentTask: "this is a task",
-        taskDate: "20-20-2020"
-    },
-    {
-        id: "6",
-        name: "mouh",
-        surename: "cappuchinou",
-        currentTask: "this is a task",
-        taskDate: "20-20-2020"
-    },
-    {
-        id: "7",
-        name: "riad",
-        surename: "flouzi",
-        currentTask: "this is a task",
-        taskDate: "20-20-2020"
-    },
-  ]
 
   const [query, setQuery] = useState('')
   const [agentsList,setAgentList] = useState([])
@@ -101,7 +50,7 @@ export default function agents(props) {
         <p className="header-title">informations d'agent</p>
       </div>
       
-      {agentList.map(item => <AgentView key={item.id} agent={item}/>)}
+      {agentList.map(item => <AgentView key={item.idUser} agent={item}/>)}
     </div>
   );
 }
