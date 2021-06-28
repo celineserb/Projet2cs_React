@@ -15,7 +15,7 @@ export default function Equipments(props){
     const [equipmentPrice,setEquipmentPrice] = useState(0)
 
     useEffect(async ()=>{
-        const result = await axios("https://service-equipment.herokuapp.com/equipment")
+        const result = await axios("https://volet-maintenance.herokuapp.com/service-materiel/equipment")
         setEquipments(result.data)
     },[])
 
