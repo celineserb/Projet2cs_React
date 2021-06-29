@@ -11,3 +11,11 @@ export const deleteSubscription = idSub =>{
     return subscriptionRequests
         .deleteSubscription(idSub)
 }
+export const fetchSubscriptionType = QueryParams =>{
+    return subscriptionRequests
+        .fetchSubscriptionType(QueryParams)
+}
+export const addSubscriptionType = typeSub =>{
+    return subscriptionRequests
+        .addSubscriptionType(typeSub)
+}
