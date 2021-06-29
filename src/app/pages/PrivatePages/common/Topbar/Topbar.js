@@ -37,18 +37,19 @@ export default function TopBar(props) {
                         }}>
                             <Avatar 
                                   size={{
-                                    xs:8,
-                                    sm: 8,
-                                    md: 12,
-                                    lg: 12,
-                                    xl: 12,
-                                    xxl: 12,
+                                    xs: 12,
+                                    sm: 12,
+                                    md: 16,
+                                    lg: 16,
+                                    xl: 16,
+                                    xxl: 16,
                                 }}
                                 style={{
-                                    backgroundColor:"red"
+                                    marginRight: "5px",
+                                    backgroundColor:"green"
                                 }}
                              />
-                           {"   "+item.read} 
+                           {item.description ? item.description : item.message} 
                         </Menu.Item>
                     )
                 }
@@ -61,11 +62,11 @@ export default function TopBar(props) {
     useEffect(() =>{
         axios.get('http://localhost:8004/breakdown')
             .then((res) => {
-                console.log(res);
                 const unreadNotif = res.data.filter((notification) => notification.read == false);
-                console.log(unreadNotif);
+                
                 setNotifications(unreadNotif);
-            });
+
+            })
 
         // listen to notifications events
 
@@ -74,7 +75,7 @@ export default function TopBar(props) {
             notify.show(message.message, "success", 5000);
         });
 
-    }, []);
+    });
 
      
     

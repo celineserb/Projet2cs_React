@@ -17,6 +17,7 @@ import { CrudService } from '../../services'
 import { actions } from '../../modules'
 
 import Login from "../pages/AuthPages/login/Login";
+import { TheLayout } from "../containers";
 import { TheLayout as DecideurLayout } from '../containers/decideur'
 import { TheLayout as AccountLayout } from '../containers/adminCompte'
 import Page404 from "../pages/AuthPages/page404/Page404";
@@ -29,6 +30,8 @@ import 'antd/dist/antd.css';
 
 import TopBar from '../pages/PrivatePages/common/Topbar/Topbar';
 import SideBar from '../pages/PrivatePages/common/Sidebar/Sidebar';
+import SuperAdminSidebar from "./SuperAdminSidebar";
+import SuperAdmin from "../pages/PrivatePages/SuperAdmin/SuperAdmin";
 
 const { Content} = Layout;
 
@@ -95,6 +98,23 @@ export const Routes = () => {
                 </Layout>
                    
                 }
+                {
+                   user.userType === "super_admin" &&
+                   <Layout>
+                    <SideBar items={SuperAdminSidebar} changeStyle={changeStyle}></SideBar>
+                    <Layout id="surv_cont" className="marginleft">
+                        <Content style={{backgroundColor:'white'}}>
+                        <TopBar user={user}></TopBar>
+                                    <Switch>
+                                        <Route path="/"  component={ SuperAdmin }  />         
+                                    </Switch>
+                        </Content>
+                    </Layout>
+                </Layout>
+                   
+                }
+                {user.userType === "tenant" && <Route path="/" component={TheLayout} />}
+                {user.userType === "agent" && <Route path="/" component={TheLayout} />}
             </> : <>
                 {/* Write all routes for the authentification */}
                 <Route path="/login" component={Login} />

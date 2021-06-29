@@ -66,6 +66,7 @@ const routes = [
   { path: "/facturation/facture", name: "Facturation" }, 
   { path: "/facturation/abonne", name: "Gestion des abonnements" },
   { path: "/facturation/promotion", name: "Codes Promos" }
+
 ];
 
 export default routes;
