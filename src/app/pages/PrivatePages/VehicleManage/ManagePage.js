@@ -137,7 +137,7 @@ const ManagePage = () => {
     console.log(values);
     values.availibility= values.availibility[0];
 
-    axios.get(`http://localhost:8200/vehicules`, values)
+    axios.post(`http://localhost:8200/vehicules`, values)
         .then(res => {
           console.log(values);
         })
