@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { Component, useRef, useState, useEffect } from 'react'
 import axios from 'axios';
 import { useDispatch} from 'react-redux'
 
@@ -9,17 +9,13 @@ import './style.scss'
 import {ReactComponent as BellIcon } from '../../../../../assets/svg/bell.svg'
 import {ReactComponent as UserIcon } from '../../../../../assets/svg/user.svg'
 
-
-
-
-
 import {actions} from '../../../../../modules'
 import { useLocation } from 'react-router';
 import Notifications, {notify} from 'react-notify-toast';
 import socketIOClient from "socket.io-client";
 
 export default function TopBar(props) {
-    const [notifications, setNotifications] = useState();
+    const [notifications, setNotifications] = useState([]);
 
     const [show, setShow] = useState(true)
 
@@ -28,7 +24,7 @@ export default function TopBar(props) {
             {
                 notifications?.map((item, key) =>{
                     return(
-                        <Menu.Item key={key}
+                        <Menu.Item key={key} 
                         style={{
                             maxWidth:250,
                             whiteSpace: "nowrap",
@@ -46,7 +42,7 @@ export default function TopBar(props) {
                                 }}
                                 style={{
                                     marginRight: "5px",
-                                    backgroundColor:"green"
+                                    backgroundColor: item.signalType == 'theft' ? 'red' : 'green'
                                 }}
                              />
                            {item.description ? item.description : item.message} 
@@ -60,12 +56,9 @@ export default function TopBar(props) {
 
 
     useEffect(() =>{
-        axios.get('http://localhost:8004/breakdown')
+        axios.get('http://localhost:8004/notifications')
             .then((res) => {
-                const unreadNotif = res.data.filter((notification) => notification.read == false);
-                
-                setNotifications(unreadNotif);
-
+                setNotifications(res.data);
             })
 
         // listen to notifications events
