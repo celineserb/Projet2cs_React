@@ -4,7 +4,7 @@ import { Modal, Button } from 'antd';
 export const AddPromoCodePage = (props) => {
     return (
         <div>
-            <Modal title={<strong style={{ fontSize: 19 }}>Code promotionnel</strong>} visible={true} onCancel={props.onCancel} footer={null} width={"45%"} style={{ borderRadius: 10, overflow: "hidden" }} centered={true}>
+            <Modal title={<strong style={{ fontSize: 19 }}>Code promotionnel</strong>} visible={true} onCancel={props.onCancel} footer={null} style={{ borderRadius: 10, overflow: "hidden" }} width='60%' centered={true}>
                 {props.inLoad && <div className="position-absolute w-100 h-100 d-flex align-items-center justify-content-center" style={{ background: "#00000020", top: 0, left: 0 }}>
                     <div class="spinner-border text-warning" role="status">
                         <span class="sr-only">Loading...</span>
