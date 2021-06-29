@@ -49,7 +49,7 @@ export function* saga() {
             const {
                 user: {id}
             } = getIdByToken(token);
-            
+
             const { data: user } = yield getUserById(id);
 
             if (user === "" || user === undefined)

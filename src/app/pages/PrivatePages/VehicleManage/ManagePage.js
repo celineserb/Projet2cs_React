@@ -7,10 +7,18 @@ import axios from "axios";
 import VehicleComponent from "./VehicleComponent";
 import "./style/VehicleList.css";
 
-import { Row } from "antd";
+import { Row, Button, Col, Modal, Form, Input, Select, Checkbox } from "antd";
 import "antd/dist/antd.css";
 
+
 const ManagePage = () => {
+
+  const plainOptions = ['Alger, Zone 3', 'parking ESI', 'parking USTHB'];
+  const defaultCheckedList = ['parking ESI']
+
+  const plainOptions2 = ['allocated', 'maintained', 'available', 'stopped'];
+
+
   const [nbPage, setNbPage] = useState(0);
   const [nbOfPages, setNbOfPages] = useState(0);
   const [nbVehiculesPerPage, setNbVehiculesPerPage] = useState(5);
@@ -19,6 +27,58 @@ const ManagePage = () => {
   const [show, setShow] = useState(false);
   const [status, setStatus] = useState("");
 
+  const [visibleB, setVisibleB] = useState(false);
+  const [visibleV, setVisibleV] = useState(false);
+
+  const [formB] = Form.useForm();
+  const [formV] = Form.useForm();
+
+
+
+  const [checkedList, setCheckedList] = React.useState(defaultCheckedList);
+  const [indeterminate, setIndeterminate] = React.useState(true);
+  const CheckboxGroup = Checkbox.Group;
+
+  const { Option } = Select;
+
+  const onChange = list => {
+    setCheckedList(list);
+    setIndeterminate(!!list.length && list.length < plainOptions.length);
+  };
+
+  const onCheckAllChange = e => {
+    setCheckedList(e.target.checked ? plainOptions : []);
+    setIndeterminate(false);
+  };
+
+  const layout = {
+    labelCol: {
+      span: 8,
+    },
+    wrapperCol: {
+      span: 16,
+    },
+  };
+  const tailLayout = {
+    wrapperCol: {
+      offset: 8,
+      span: 16,
+    },
+  };
+  const bornes = [
+    {
+      "city": "Parking ESI",
+       "id" : 15
+    },
+    {
+      "city": "parking USTHB", 
+      "id": 14
+    },
+    {
+      "city": "Alger ,Zone 3",
+      "id": 1
+    }
+  ]
   // fetch data on mount component
   useEffect(() => {
     // just fetch the data inside the vehicles state initially with page = 0
@@ -42,7 +102,361 @@ const ManagePage = () => {
     }
   };
 
+  const onFinishB = (values) => {
+    //console.log(values);
+    values.nbOccupiedPlaces=0;
+    values.nbMaintenanceAgents=0;
+    let p = 0;
+    console.log("something");
+    const val = JSON.stringify(values)
+    console.log(values);
+    //console.log(val);
+    axios.post(`http://localhost:8200/bornes`, values)
+        .then(res => {
+          console.log(values);
+          console.log(res);
+        })
+  };
+
+  const onResetB = () => {
+    formB.resetFields();
+  };
+
+  const onFillB = () => {
+    formB.setFieldsValue({
+      city:"parking ESI",
+      nbTotalPlaces:6,
+      longitude: 36.7045697, 
+      latitude: 3.1745471
+    });
+  };
+
+
+  const onFinishV = (values) => {
+   
+    if (values.borne==='Alger, Zone 3') {
+      values.idBorne = 1;
+      
+    }
+    else if (values.borne==='parking ESI'){
+      values.idBorne = 15;
+    }
+    else if  (values.borne==='parking USTHB'){
+      values.idBorne = 14;
+    }
+    else values.idBorne =0 ;
+    values.longitude = 0;
+    values.latitude = 0;
+    values.unitPricePerDay = "0";
+    values.image = "https://www.motortrend.com/uploads/sites/10/2020/04/2018-fiat-500-pop-3door-hatchback-angular-front.png?fit=around%7C875:492.1875"
+    console.log(values);
+    values.availibility= values.availibility[0];
+
+    axios.get(`http://localhost:8200/vehicules`, values)
+        .then(res => {
+          console.log(values);
+        })
+  };
+
+  const onResetV = () => {
+    formV.resetFields();
+  };
+  
+  const onFillV = () => {
+    formV.setFieldsValue({
+      vehiclemodel:"Accent",
+      vehiclebrand:"Hyundai",
+      unitPricePerHour:300,
+      registrationNumber: "123 4526 67",
+      places: 6,
+      vehicleColor: "Grise",
+      fuelType:"Essence",
+      availibility: "available",
+      vehicleType: "Hybride",
+      idBorne: 0, 
+      chassisNumber: "CH0030501"
+    });
+  };
+
+  
+
   return (
+    <>
+    <Row justify="end" style={{marginTop:50}}>
+        <Col  style={{marginRight:10}}  >
+          <Button
+          shape='round'
+          onClick={() => setVisibleB(true)}
+          style={{
+            backgroundColor: '#212121', 
+            borderColor: 'white', 
+            color: 'white'     
+            }}>Ajouter Borne</Button>
+          <Modal
+            title={"Ajouter une Borne"}
+            centered
+            visible={visibleB}
+            onOk={() => {setVisibleB(false)}}
+            onCancel={() => setVisibleB(false)}
+            footer={[
+            <Button 
+              key="back" 
+              onClick={() => setVisibleB(false)}
+              shape='round'
+              size ='middle'
+              style={{
+      
+                backgroundColor: '#F9C31B', 
+                borderColor: 'white', 
+                color: 'black',  
+                paddingRight:25,
+                paddingLeft:25,    
+              }}>
+              Cancel
+            </Button>,  
+        ]}>
+        <Form {...layout} form={formB} name="control-hooks" onFinish={onFinishB}>
+          <Form.Item
+            name="city"
+            label="Nom de Borne"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="nbTotalPlaces"
+            label="Nombre de places"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="longitude"
+            label="longitude"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="latitude"
+            label="latitude"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          
+          <Form.Item {...tailLayout}>
+            <Button htmlType="submit" 
+                    style={{
+                      marginRight:5,
+                      backgroundColor:'#212121',
+                      color: 'white'
+                      }} >
+              Submit
+            </Button>
+            <Button htmlType="button" onClick={onResetB}>
+              Reset
+            </Button>
+            <Button type="link" htmlType="button" onClick={onFillB}>
+              Fill form
+            </Button>
+          </Form.Item>
+        </Form>
+          </Modal>
+          </Col>
+
+          <Col style={{marginRight:48}} >
+            <Button
+            shape='round'
+            onClick={() => setVisibleV(true)}
+            style={{
+              backgroundColor: '#F9C31B', 
+              borderColor: 'white', 
+              color: 'black'     
+              }}>Ajouter Véhicule</Button>
+            <Modal
+              title={"Ajouter un Véhicule"}
+              centered
+              visible={visibleV}
+              onOk={() => {setVisibleV(false)}}
+              onCancel={() => setVisibleV(false)}
+              footer={[
+              <Button 
+                key="back" 
+                onClick={() => setVisibleV(false)}
+                shape='round'
+                size ='middle'
+                style={{
+        
+                  backgroundColor: '#F9C31B', 
+                  borderColor: 'white', 
+                  color: 'black',      
+                }}>
+                Cancel
+              </Button>,  
+          ]}>
+              <Form {...layout} form={formV} name="control-hooks" onFinish={onFinishV}>
+          <Form.Item
+            name="chassisNumber"
+            label="Numéro de châssis"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="registrationNumber"
+            label="Matricule"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="unitPricePerHour"
+            label="Tarif"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="vehiclebrand"
+            label="Marque"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="vehiclemodel"
+            label="Modèle"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="places"
+            label="Nombre de places"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="vehicleColor"
+            label="Couleur"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="fuelType"
+            label="Motorisation"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="idBorne"
+            label="Borne"
+            rules={[
+              {
+                required: false,
+              },
+            ]}
+          >
+
+             <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChange} />
+          </Form.Item>
+          <Form.Item
+            name="availibility"
+            label="Disponibilité"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <CheckboxGroup options={plainOptions2} value={checkedList} onChange={onChange} />
+          </Form.Item>
+          <Form.Item
+            name="vehicleType"
+            label="Type de véhicule"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item {...tailLayout}>
+            <Button htmlType="submit" 
+                    style={{
+                      marginRight:5,
+                      backgroundColor:'#212121',
+                      color: 'white'
+                      }} >
+              Submit
+            </Button>
+            <Button htmlType="button" onClick={onResetV}>
+              Reset
+            </Button>
+            <Button type="link" htmlType="button" onClick={onFillV}>
+              Fill form
+            </Button>
+          </Form.Item>
+        </Form>
+          </Modal>
+        </Col>
+       
+        
+
+      </Row>
     <Row justify="start">
       <div className="list-container">
         <div>
@@ -101,6 +515,7 @@ const ManagePage = () => {
         </div>
       </div>
     </Row>
+    </>
   );
 };
 export default ManagePage;

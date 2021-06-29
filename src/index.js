@@ -11,7 +11,6 @@ import { Routes } from "./app/routes";
 import { persistor, store } from "./config";
 import "./assets/scss/style.scss";
 import './index.scss'
-
 import * as serviceWorker from './serviceWorker';
 import { icons } from './assets/icons'
 
