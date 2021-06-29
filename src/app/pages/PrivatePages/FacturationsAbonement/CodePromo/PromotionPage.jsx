@@ -105,9 +105,9 @@ class PromotionPage extends Component {
         return (
             <div className="px-2">
                 <div className="d-flex justify-content-between align-items-center px-4 pb-4">
-                    <div className="position-relative">
+                    <div className="position-relative w-100 mr-3">
                         <img className="position-absolute" style={{ top: 13, left: 13 }} src="/media/search.svg" />
-                        <input type="text" placeholder="Recherche..." style={{ width: 600, paddingLeft: 40 }} className="custom-input py-2 pr-3 rounded" />
+                        <input type="text" placeholder="Recherche..." style={{ width: '100%',maxWidth:600, paddingLeft: 40 }} className="custom-input py-2 pr-3 rounded" />
                     </div>
                     <div className="d-flex align-items-center">
                         <span className="d-flex px-2 cursor-pointer">
@@ -120,7 +120,7 @@ class PromotionPage extends Component {
                         </span>
                         <div className="ml-4">
                             <CButton className="btn-custom px-4 font-weight-bold" active tabIndex={-1} onClick={this.handleModelAdd}>
-                                + Ajouter un code promo
+                                + Code promo
                             </CButton>
                         </div>
 

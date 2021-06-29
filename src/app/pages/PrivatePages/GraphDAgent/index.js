@@ -57,6 +57,7 @@ export default function GrapheLocation ()  {
         if (agentPeriod === "Jour") {
           const periods = ["Dim", "Lun", "Mar", "Mer", "Je", "Ven", "Sa"]
           const { data } = await getAgentUsagePerDay(j)
+          console.log(data)
           let days = data.slice(-31)
           for (let i of days) {
             const date = new Date(i.day.split('T')[0])
