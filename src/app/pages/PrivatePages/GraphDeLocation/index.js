@@ -76,6 +76,7 @@ export default function GrapheLocation() {
         if (vehiculePeriod === "Jour") {
           const periods = ["Dim", "Lun", "Mar", "Mer", "Je", "Ven", "Sa"];
           const { data } = await getVehicleUsagePerDay(j);
+         
           let days = data.slice(-31);
           for (let i of days) {
             const date = new Date(i.day.split("T")[0]);
@@ -126,6 +127,7 @@ export default function GrapheLocation() {
         if (bornePeriod === "Jour") {
           const periods = ["Dim", "Lun", "Mar", "Mer", "Je", "Ven", "Sa"];
           const { data } = await getBorneUsagePerDay(j);
+          
           let days = data.slice(-31);
           for (let i of days) {
             const date = new Date(i.day.split("T")[0]);

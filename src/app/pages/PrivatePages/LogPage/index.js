@@ -7,12 +7,7 @@ import {
   CCardBody,
   CCol,
   CRow,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
+  CDataTable,
 } from '@coreui/react'
 
 const LogPage = () => {
@@ -30,6 +25,12 @@ const LogPage = () => {
     }).catch(error => console.error('Erreur GET'))
   }
 
+  const fields = [
+    { key: 'etat', _style: { width: '20%'} },
+    { key: 'details', _style: { width: '40%'} },
+    { key: 'application', _style: { width: '20%'} },
+    { key: 'date', _style: { width: '20%'} }]
+
   return (
     <>
       <CRow>
@@ -37,36 +38,26 @@ const LogPage = () => {
           <CCard className="mb-4">
             <h1 className="title">Logs</h1>
             <CCardBody>
-              <CTable hover responsive align="middle" className="mb-0 border">
-                <CTableHead color="light">
-                  <CTableRow>
-                    <CTableHeaderCell className="text-center"></CTableHeaderCell>
-                    <CTableHeaderCell>Details de log</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Service/Application</CTableHeaderCell>
-                    <CTableHeaderCell>Date de log</CTableHeaderCell>
-                  </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                  {logs?.map((item, index) => (
-                    <CTableRow key={item.id}>
-                    <CTableDataCell className="text-center">
-                      <div className={item.idErreur!=null ? "success-log" : "error-log"}></div>
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      <div>{item.details}</div>
-                      <div className="small text-medium-emphasis">
-                        {item.idErreur!=null ? item.idErreur.message : ""}
-                      </div>
-                    </CTableDataCell>
-                    <CTableDataCell className="text-center">{item.idApp.nomApp}</CTableDataCell>
-                    <CTableDataCell>
-                      <strong>{new Date(item.date).toLocaleDateString()}</strong>
-                      <div className="small text-medium-emphasis">{new Date(item.date).toLocaleTimeString()}</div>
-                    </CTableDataCell>
-                  </CTableRow>
-                  ))}
-                </CTableBody>
-              </CTable>
+            <CDataTable
+                items={logs}
+                fields={fields}
+                hover
+                striped
+                bordered
+                size="md"
+                itemsPerPage={10}
+                pagination
+                clickableRows
+                scopedSlots = {{
+                  'etat':
+                    (item)=>(
+                      <td><div className={item.idErreur!=null ? "error-log" : "success-log"}></div></td>
+                    ),
+                  'application':
+                    (item)=>(<td>{item.idApp.nomApp}</td>)
+                }}
+                // onRowClick={(vehicule) => handleClick(vehicule)}
+              />
             </CCardBody>
           </CCard>
         </CCol>
