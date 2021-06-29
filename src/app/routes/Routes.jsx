@@ -104,7 +104,7 @@ export const Routes = () => {
                     <SideBar items={SuperAdminSidebar} changeStyle={changeStyle}></SideBar>
                     <Layout id="surv_cont" className="marginleft">
                         <Content style={{backgroundColor:'white'}}>
-                        <TopBar user={user}></TopBar>
+                        <TopBar user={user} super={0}></TopBar>
                                     <Switch>
                                         <Route path="/"  component={ SuperAdmin }  />         
                                     </Switch>

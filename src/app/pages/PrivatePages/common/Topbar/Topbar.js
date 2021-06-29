@@ -122,7 +122,7 @@ export default function TopBar(props) {
                         location.pathname.includes('/enlevements')? <label>Enlèvements</label>:
                             location.pathname.includes('/pannes')? <label>Pannes</label>: 
                                 location.pathname.includes('/tracking/')? <label>Tracking</label>: 
-                                    location.pathname.includes('/super')? <label>Add Admins</label>: <label>Gestion des véhicules</label> 
+                                    (props.super==0)? <label>Ajouter Admin</label>: <label>Gestion des véhicules</label> 
                 }
                     
                 </div>

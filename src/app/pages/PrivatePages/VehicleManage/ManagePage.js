@@ -65,20 +65,7 @@ const ManagePage = () => {
       span: 16,
     },
   };
-  const bornes = [
-    {
-      "city": "Parking ESI",
-       "id" : 15
-    },
-    {
-      "city": "parking USTHB", 
-      "id": 14
-    },
-    {
-      "city": "Alger ,Zone 3",
-      "id": 1
-    }
-  ]
+
   // fetch data on mount component
   useEffect(() => {
     // just fetch the data inside the vehicles state initially with page = 0
@@ -107,9 +94,6 @@ const ManagePage = () => {
     //console.log(values);
     values.nbOccupiedPlaces=0;
     values.nbMaintenanceAgents=0;
-    let p = 0;
-    console.log("something");
-    const val = JSON.stringify(values)
     console.log(values);
     //console.log(val);
     axios.post(`http://localhost:8200/bornes`, values)
