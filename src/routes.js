@@ -4,7 +4,7 @@ const Toaster = React.lazy(() => import('./app/conponents/notifications/toaster/
 const Tables = React.lazy(() => import('./app/conponents/base/tables/Tables'));
 
 const UsersTable =React.lazy(()=> import('./app/conponents/gestionUtil/compteLocataire'));
-
+const AdminDecideurTable =React.lazy(()=> import('./app/conponents/gestionUtil/gestionCompte'));
 const Breadcrumbs = React.lazy(() => import('./app/conponents/base/breadcrumbs/Breadcrumbs'));
 const Cards = React.lazy(() => import('./app/conponents/base/cards/Cards'));
 const Carousels = React.lazy(() => import('./app/conponents/base/carousels/Carousels'));
@@ -91,7 +91,7 @@ const routes = [
   { path: '/comptes', name: 'GestionUtil', component: UsersTable, exact: true },
   // { path: '/gestionUtil', name: 'gestionUtil', component: Cards, exact: true },
   { path: '/compteLocataire', name: 'TableLocataire', component: UsersTable },
-
+  { path: '/gestionCompte', name: 'GestionCompte', component: AdminDecideurTable },
   { path: "/login", exact: true, name: "Login Page", component: Login },
   { path: "/p404", name: "Page not found", component: Page404 },
   { path: "/p500", name: "Page not found", component: Page500 },
