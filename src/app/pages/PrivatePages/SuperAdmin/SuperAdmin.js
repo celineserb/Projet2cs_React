@@ -26,6 +26,19 @@ const SuperAdmin = () => {
 
     const [form] = Form.useForm();
 
+    const fillForm = () => {
+      form.setFieldsValue({
+        nom: "Yahiaoui",
+        prenom: "Farid",
+        numeroTelephone: 540335614,
+        address: "17, rue Mustapha Allouche, Bab El Oued, Alger",
+        userName: "f.yahiaoui",
+        type: "technical_admin",
+        email: "f.yahiaoui@autolib.dz",
+        password: "adm"
+      });
+  } 
+
     const onFinish = (values) => {
         const loading = document.getElementsByClassName("loading")[0];
         const sumbitBtn = document.getElementById("submitBtn");
@@ -107,6 +120,7 @@ const SuperAdmin = () => {
       <Form.Item
         label="Nom"
         name="nom"
+        id="form_nom"
         rules={[
           {
             required: true,
@@ -120,6 +134,7 @@ const SuperAdmin = () => {
       <Form.Item
         label="Prénom"
         name="prenom"
+        id="form_prenom"
         rules={[
           {
             required: true,
@@ -133,6 +148,7 @@ const SuperAdmin = () => {
       <Form.Item
         label="Téléphone"
         name="numeroTelephone"
+        id="form_phone"
         rules={[
           {
             type: 'number',
@@ -147,6 +163,7 @@ const SuperAdmin = () => {
       <Form.Item
         label="Adresse"
         name="address"
+        id="form_addr"
         rules={[
           {
             required: true,
@@ -160,6 +177,7 @@ const SuperAdmin = () => {
       <Form.Item
         label="Nom utilisateur"
         name="userName"
+        id="form_user"
         rules={[
           {
             required: true,
@@ -173,6 +191,7 @@ const SuperAdmin = () => {
       <Form.Item
         label="Type"
         name="type"
+        id="form_type"
         rules={[
           {
             required: true,
@@ -199,6 +218,7 @@ const SuperAdmin = () => {
       <Form.Item
         label="Email"
         name="email"
+        id="form_email"
         rules={[
           {
             type: 'email',
@@ -213,6 +233,7 @@ const SuperAdmin = () => {
       <Form.Item
         label="Mot de passe"
         name="password"
+        id="form_pass"
         rules={[
           {
             required: true,
@@ -239,6 +260,14 @@ const SuperAdmin = () => {
            
           }}>
             Ajouter
+        </Button>
+
+        <br/><br/><br/>
+        <Button id="submitBtn" htmlType="button" shape='round' onClick={fillForm}
+          style={{
+            marginLeft: 15
+          }}>
+            Fill form
         </Button>
 
       </Form.Item>
