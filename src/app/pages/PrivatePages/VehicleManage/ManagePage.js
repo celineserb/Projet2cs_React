@@ -89,7 +89,8 @@ const ManagePage = () => {
       .then((response) => response.data)
       .then(({ nbVehicles, nbPages, listVehicles }) => {
         setVehicles(listVehicles);
-        setNbOfPages(nbPages);
+        console.log(listVehicles);
+        setNbOfPages(nbPages);  
         setNbVehicles(nbVehicles);
       });
   }, [nbPage, status]);
@@ -124,7 +125,7 @@ const ManagePage = () => {
 
   const onFillB = () => {
     formB.setFieldsValue({
-      city:"parking ESI",
+      city:"parking ",
       nbTotalPlaces:6,
       longitude: 36.7045697, 
       latitude: 3.1745471
