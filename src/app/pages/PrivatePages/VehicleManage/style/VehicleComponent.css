@@ -62,7 +62,7 @@
 }
 
 .allocated {
-    background-color: var(--status-color-allocated);
+    background-color: blue;
 }
 
 .default {

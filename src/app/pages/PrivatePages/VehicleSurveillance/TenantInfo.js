@@ -4,8 +4,6 @@ import { withRouter } from "react-router"
 import 'antd/dist/antd.css';
 import { Avatar, Row, Col, Tooltip } from 'antd';
 
-import { AntDesignOutlined } from '@ant-design/icons';
-
 import {ReactComponent as MapIcon} from '../../../../assets/svg/tabler-icon-map-2.svg';
 import {ReactComponent as CalendarIcon} from '../../../../assets/svg/tabler-icon-calendar-event.svg';
 import {ReactComponent as ContactIcon} from '../../../../assets/svg/tabler-icon-user.svg';
@@ -55,8 +53,8 @@ class TenantInfo extends Component {
                         <Row>
                             <Col push={5}>
                             <Avatar
-                                size={{ xs: 56, sm: 56, md: 56, lg: 56, xl: 70,xxl: 100,}}
-                                icon={<UserIcon />}
+                                size={100}
+                                icon={<img src="../../../../assets/img/user.jpg" ></img>}
                             />
                             </Col>
                         </Row>
