@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import { Card, Row , Col, Button, Modal, Avatar, Badge, Input, Divider,} from "antd";
-import { InfoCircleOutlined, MailOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import './style/style.css'
 
 const { TextArea } = Input;

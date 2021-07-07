@@ -6,7 +6,7 @@ import React from "react";
 import Truncate from "./helpers/Truncate";
 import { Link } from "react-router-dom";
 import "./style/VehicleComponent.css";
-import {Row} from 'antd'
+
 
 const VehicleComponent = ({ vehicle }) => {
 
@@ -31,14 +31,16 @@ const VehicleComponent = ({ vehicle }) => {
   return (
     <>
       {link ? (
-        <Link to={link} className="">
+        <Link to={link} style={{
+            textDecoration:"none"
+        }}>
           <li className="vehicle-elem">
             <div>
               <img id="vehicle-img" src={vehicle.image} />
               <div className="custom-elem vehicle-type">
                 <p>
-                  {vehicle.vehiclebrand
-                    ? Truncate(vehicle.vehiclebrand, 10)
+                  {vehicle.vehiclemodel
+                    ? Truncate(vehicle.vehiclemodel, 10)
                     : "-"}
                 </p>
                 <p>
@@ -72,7 +74,7 @@ const VehicleComponent = ({ vehicle }) => {
       ) : (
         <li className="vehicle-elem">
           <div>
-            <img id="vehicle-img" src={vehicle.image} />
+            <img id="vehicle-img" src={vehicle.image} alt="broken link" />
             <div className="custom-elem vehicle-type">
               <p>
                 {vehicle.vehiclebrand
@@ -80,7 +82,7 @@ const VehicleComponent = ({ vehicle }) => {
                   : "-"}
               </p>
               <p>
-                {vehicle.vehiclebrand ? Truncate(vehicle.vehicletype, 10) : "-"}
+                {vehicle.vehiclebrand ? Truncate(vehicle.vehicleType, 10) : "-"}
               </p>
             </div>
           </div>

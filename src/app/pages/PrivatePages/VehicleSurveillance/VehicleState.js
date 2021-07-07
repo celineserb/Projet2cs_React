@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import ReactSpeedometer from "react-d3-speedometer"
 import { withRouter } from "react-router";
 import { fetchVehicleState } from '../../../../modules/Tracking/tracking.actions'
+import axios from 'axios';
 
 
 var vehicule ={};
@@ -30,9 +31,10 @@ class VehicleState extends Component {
     
     componentDidMount(){
         setInterval(() => {
-            fetchVehicleState({
+            axios.get("http://localhost:8003/vehicle_state?idVehicle="+this.props.match.params.vehicleId)
+             /*fetchVehicleState({
                 idVehicle: this.props.match.params.vehicleId
-            })
+            })*/
             .then(res => {
                 if (res ) {
                     vehicule = res.data;
@@ -50,9 +52,9 @@ class VehicleState extends Component {
                 }
             })
             .catch(err=> {
-                console.log("No state");
+                console.log("No state ");
             });
-        }, 5000);
+        }, 2000);
         
         
     }
@@ -131,7 +133,7 @@ class VehicleState extends Component {
                             '0%': '#108ee9',
                             '100%': '#87d068',
                         }}
-                        percent={this.state.generalHealthIndicator}
+                        percent={generalIndicator(this.state.fuel,this.state.engineTemp, this.state.oilPressure,this.state.batteryCharge)}
                     />
                 </Tooltip>
                 
@@ -188,7 +190,6 @@ function batteryCharge(charge) {
 
 
 //calculates the fuel level value according to the minimal value needed to run a car 
-//min value = 
 function fuelLevel(level) {
     var num = level* 56 /100;
     var result = 0;
@@ -206,9 +207,9 @@ function brakeFluid(fluid) {
     var num = fluid *100/2;
     return num.toFixed(2);
 }
+
 function generalIndicator(fuel, temp, pressure, charge) {
-    var resultat = 0
-    resultat= (fuelLevel(fuel) + oilPressure(pressure) + batteryCharge(charge) + engineTemp(temp))/4;
+    let resultat= (fuelLevel(fuel) + oilPressure(pressure) + batteryCharge(charge) + engineTemp(temp))/4;
     return resultat ;
 }
 

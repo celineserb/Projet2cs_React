@@ -7,18 +7,14 @@ import axios from "axios";
 import VehicleComponent from "./VehicleComponent";
 import "./style/VehicleList.css";
 
-import { Row, Button, Col, Modal, Form, Input, Select, Checkbox } from "antd";
+import { Row, Button, Col, Modal, Form, Input, Checkbox } from "antd";
 import "antd/dist/antd.css";
 
 
 const ManagePage = () => {
 
-  const plainOptions = ['Alger, Zone 3', 'parking ESI', 'parking USTHB'];
-  const defaultCheckedList = ['parking ESI']
-
-  const plainOptions2 = ['allocated', 'maintained', 'available', 'stopped'];
-
-
+  const plainOptionsA = ['allocated', 'maintained', 'available', 'stopped'];
+ 
   const [nbPage, setNbPage] = useState(0);
   const [nbOfPages, setNbOfPages] = useState(0);
   const [nbVehiculesPerPage, setNbVehiculesPerPage] = useState(5);
@@ -27,29 +23,52 @@ const ManagePage = () => {
   const [show, setShow] = useState(false);
   const [status, setStatus] = useState("");
 
+/**
+ * Forms related state variables  => Add vehicle and Add Borne Forms  
+ */
+
+  const [idOpt, setidOpt] = useState([])
+
+  const [plainOptions, setOptions] = useState([])
+  const [defaultCheckedList, setdefaultCheckedList] = useState([])
+  const [defaultCheckedListA, setdefaultCheckedListA] = useState([])
+
   const [visibleB, setVisibleB] = useState(false);
   const [visibleV, setVisibleV] = useState(false);
 
   const [formB] = Form.useForm();
   const [formV] = Form.useForm();
 
-
-
-  const [checkedList, setCheckedList] = React.useState(defaultCheckedList);
+  const [checkedList, setCheckedList] = React.useState(defaultCheckedListA);
   const [indeterminate, setIndeterminate] = React.useState(true);
+
+  const [checkedListB, setCheckedListB] = React.useState(defaultCheckedList);
+  const [indeterminateB, setIndeterminateB] = React.useState(true);
+
   const CheckboxGroup = Checkbox.Group;
 
-  const { Option } = Select;
-
+  
   const onChange = list => {
     setCheckedList(list);
-    setIndeterminate(!!list.length && list.length < plainOptions.length);
+    setIndeterminate(!!list.length && list.length < plainOptionsA.length);
   };
 
   const onCheckAllChange = e => {
-    setCheckedList(e.target.checked ? plainOptions : []);
+    setCheckedList(e.target.checked ? plainOptionsA : []);
     setIndeterminate(false);
   };
+
+
+  const onChangeB= list => {
+    setCheckedListB(list);
+    setIndeterminateB(!!list.length && list.length < plainOptions.length);
+  };
+
+  const onCheckAllChangeB = e => {
+    setCheckedListB(e.target.checked ? plainOptions : []);
+    setIndeterminateB(false);
+  };
+
 
   const layout = {
     labelCol: {
@@ -68,7 +87,27 @@ const ManagePage = () => {
 
   // fetch data on mount component
   useEffect(() => {
+    //fetch all bornes from db 
+    axios.get(`http://localhost:8200/bornes`)
+    .then(res => {
+      console.log(res.data);
+      let bornesArray = res.data
+      let i = 0
+      let opt = []
+      let ids = []
+      bornesArray.map((borne) =>{
+            opt[i] = borne.city
+            ids[i] = borne.idBorne
+            i++
+      })
+      setOptions(opt);
+      setdefaultCheckedList(plainOptions[0])
+      setidOpt(ids)
+      console.log(plainOptions)
+    })
+
     // just fetch the data inside the vehicles state initially with page = 0
+
     axios
       .get(
         `http://localhost:8000/vehicle${status}?page=${nbPage}&limit=${nbVehiculesPerPage}`
@@ -82,6 +121,7 @@ const ManagePage = () => {
       });
   }, [nbPage, status]);
 
+  
   const handleChange = (e, status) => {
     if (e.target.checked) {
       setStatus(`/${status}`);
@@ -101,6 +141,7 @@ const ManagePage = () => {
           console.log(values);
           console.log(res);
         })
+    setVisibleB(false)
   };
 
   const onResetB = () => {
@@ -118,29 +159,16 @@ const ManagePage = () => {
 
 
   const onFinishV = (values) => {
-   
-    if (values.borne==='Alger, Zone 3') {
-      values.idBorne = 1;
-      
-    }
-    else if (values.borne==='parking ESI'){
-      values.idBorne = 15;
-    }
-    else if  (values.borne==='parking USTHB'){
-      values.idBorne = 14;
-    }
-    else values.idBorne =0 ;
+    values.idBorne =idOpt[plainOptions.indexOf(values.idBorne[0])]
     values.longitude = 0;
     values.latitude = 0;
     values.unitPricePerDay = "0";
     values.image = "https://www.motortrend.com/uploads/sites/10/2020/04/2018-fiat-500-pop-3door-hatchback-angular-front.png?fit=around%7C875:492.1875"
-    console.log(values);
-    values.availibility= values.availibility[0];
-
     axios.post(`http://localhost:8200/vehicules`, values)
         .then(res => {
           console.log(values);
         })
+    setVisibleV(false)
   };
 
   const onResetV = () => {
@@ -395,7 +423,7 @@ const ManagePage = () => {
             ]}
           >
 
-             <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChange} />
+             <CheckboxGroup options={plainOptions} value={checkedListB} onChange={onChangeB} />
           </Form.Item>
           <Form.Item
             name="availibility"
@@ -406,7 +434,7 @@ const ManagePage = () => {
               },
             ]}
           >
-            <CheckboxGroup options={plainOptions2} value={checkedList} onChange={onChange} />
+            <CheckboxGroup options={plainOptionsA} value={checkedList} onChange={onChange} />
           </Form.Item>
           <Form.Item
             name="vehicleType"
