@@ -1,8 +1,8 @@
-import React, { Component, useRef, useState, useEffect } from 'react'
+import React, {  useState, useEffect } from 'react'
 import axios from 'axios';
 import { useDispatch} from 'react-redux'
 
-import {Button, Dropdown, Menu, Avatar, List} from 'antd';
+import {Button, Dropdown, Menu, Avatar, Badge} from 'antd';
 import 'antd/dist/antd.css';
 import './style.scss'
 
@@ -14,11 +14,11 @@ import { useLocation } from 'react-router';
 import Notifications, {notify} from 'react-notify-toast';
 import socketIOClient from "socket.io-client";
 
+
 export default function TopBar(props) {
     const [notifications, setNotifications] = useState([]);
-
-    const [show, setShow] = useState(true)
-
+    const [notifs, setnotifs] = useState(false)
+    
     const menu = (
         <Menu>
             {
@@ -59,6 +59,7 @@ export default function TopBar(props) {
         axios.get('http://localhost:8004/notifications')
             .then((res) => {
                 setNotifications(res.data);
+                setnotifs(true)
             })
 
         // listen to notifications events
@@ -76,9 +77,6 @@ export default function TopBar(props) {
         <Menu>
             <Menu.Item key="0">
                     {props.user.lastName+" "+props.user.firstName}
-            </Menu.Item>
-            <Menu.Item key="0">
-                   Alger, Zone 3
             </Menu.Item>
             <Menu.Item key="0">
                    Technical Admin
@@ -156,10 +154,16 @@ export default function TopBar(props) {
                             <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                                 <BellIcon />
                             </a>
-                        </Dropdown>     
+                        </Dropdown> 
+                       
                             <div className="notifs-alert-icon">
-                                <img src="media/circle.svg" alt="" />
+                            {
+                                notifs? <Badge color="#f50" />: <div></div>
+                            }
+                               
                             </div>
+                         
+                           
                         </div>
                     </div>
                     <div className="vl"></div>

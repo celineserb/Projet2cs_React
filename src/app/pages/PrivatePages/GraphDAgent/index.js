@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { getStyle, hexToRgba } from '@coreui/utils'
-import StyledChart from '../../../conponents/charts/StyledChart'
+import StyledAgentsChart from '../../../conponents/charts/StyledAgentsChart'
 import { CCard, CCardBody, CCardHeader, CCol, CListGroup, CListGroupItem, CRow } from '@coreui/react'
 import { getAgents } from '../../../../modules/Agent/agent.crud'
 import { getUserById } from '../../../../modules/Auth/auth.crud'
@@ -106,7 +106,7 @@ export default function GrapheLocation ()  {
   return (
     <>
       
-
+      <StyledAgentsChart dataset={agentDatasets} period={agentPeriod} setPeriod={setAgentPeriod} /> 
       <CRow>
         <CCol sm="12" xl="6">
           <CCard>
@@ -124,7 +124,7 @@ export default function GrapheLocation ()  {
 
         </CCol>
       </CRow>
-       <StyledChart dataset={agentDatasets} period={agentPeriod} setPeriod={setAgentPeriod} /> 
+      
     </>
   )
 

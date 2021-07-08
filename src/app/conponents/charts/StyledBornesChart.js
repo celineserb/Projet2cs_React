@@ -36,7 +36,7 @@ const defaultOptions = {
   }
 }
 
-export default function StyledChart(props) {
+export default function StyledBornesChart(props) {
 
     const { dataset, period, setPeriod } = props;
 
@@ -48,7 +48,7 @@ export default function StyledChart(props) {
         <CCardBody>
           <CRow>
             <CCol sm="5">
-              <h4 id="traffic" className="card-title mb-0">Graphe de location par Véhicule</h4>
+              <h4 id="traffic" className="card-title mb-0">Graphe de location par borne</h4>
               <div className="small text-muted">Par {period}</div>
             </CCol>
             <CCol sm="7" className="d-none d-md-block">

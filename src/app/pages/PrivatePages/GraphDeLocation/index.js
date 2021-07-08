@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { getStyle, hexToRgba } from "@coreui/utils";
 import StyledChart from "../../../conponents/charts/StyledChart";
+import StyledBornesChart from "../../../conponents/charts/StyledBornesChart";
 import {
   CCard,
   CCardBody,
@@ -175,6 +176,19 @@ export default function GrapheLocation() {
 
   return (
     <>
+    
+      <StyledChart
+        dataset={vehiculeDatasets}
+        period={vehiculePeriod}
+        setPeriod={setVehiculePeriod}
+      />
+
+      
+      <StyledBornesChart
+        dataset={borneDatasets}
+        period={bornePeriod}
+        setPeriod={setBornePeriod}
+      />
       <CRow>
         <CCol sm="12" xl="6">
           <CCard>
@@ -193,16 +207,9 @@ export default function GrapheLocation() {
             </CCardBody>
           </CCard>
         </CCol>
-      </CRow>
-      <StyledChart
-        dataset={borneDatasets}
-        period={bornePeriod}
-        setPeriod={setBornePeriod}
-      />
 
-      <CRow>
-        <CCol sm="12" xl="6">
-          <CCard>
+        <CCol>
+        <CCard>
             <CCardHeader>Liste des vehicules</CCardHeader>
             <CCardBody>
               <CListGroup>
@@ -219,11 +226,7 @@ export default function GrapheLocation() {
           </CCard>
         </CCol>
       </CRow>
-      <StyledChart
-        dataset={vehiculeDatasets}
-        period={vehiculePeriod}
-        setPeriod={setVehiculePeriod}
-      />
+
     </>
   );
 }
