@@ -63,9 +63,10 @@ const TheHeader = (props) => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <TheHeaderDropdownMssg/>
-        <TheHeaderDropdownNotif/>
-        <p>{user}</p>
+        <h5 style={{
+          marginTop: "10px"
+        }}
+            >{user}</h5>
         <TheHeaderDropdown />
       </CHeaderNav>
     </CHeader>
