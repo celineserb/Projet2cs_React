@@ -67,34 +67,15 @@ function StatsTables() {
 
   return (
     <>
-      <CRow>
-        <CCol sm="12" xl="6">
-          <CCard>
-            <CCardHeader>Liste des bornes</CCardHeader>
-            <CCardBody>
-              <CListGroup>
-                {bornes.map((e, i) => (
-                  <CListGroupItem
-                    key={i}
-                    action
-                    onClick={() => handleChange(e)}
-                  >{`${e.idBorne}: ${e.city}`}</CListGroupItem>
-                ))}
-              </CListGroup>
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
-      <CRow>
+    <CRow>
         <div className="vehicule-list-container">
-          <div className="vehicule-header-promo">
+         
             {vehicules.map((vehicule) => {
               if (borne === vehicule.idBorne) {
                 return <VehiculeGridView vehicule={vehicule} />;
               }
               return (<></>)
             })}
-          </div>
         </div>
       </CRow>
 
@@ -124,6 +105,25 @@ function StatsTables() {
         setVisible={setModalVisible}
         vehicule={selectedVehicule}
       />
+      <CRow>
+        <CCol sm="12" xl="6">
+          <CCard>
+            <CCardHeader>Liste des bornes</CCardHeader>
+            <CCardBody>
+              <CListGroup>
+                {bornes.map((e, i) => (
+                  <CListGroupItem
+                    key={i}
+                    action
+                    onClick={() => handleChange(e)}
+                  >{`${e.idBorne}: ${e.city}`}</CListGroupItem>
+                ))}
+              </CListGroup>
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+      
     </>
   );
 }
