@@ -10,3 +10,10 @@ export function getUserById(id) {
 export function getIdByToken(token) {
   return JSON.parse(atob(token.split(".")[1]))
 }
+export function deleteAuth(id){
+  return axios.delete( authUrls.LOGIN_URL+"/"+id)
+}
+export function postAccount(data){
+    
+    return axios.post(authUrls.LOGIN_URL+"/signup",data)
+}
