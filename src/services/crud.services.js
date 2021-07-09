@@ -2,13 +2,13 @@ import axios from 'axios';
 const URL_ROOT="http://localhost";
 
 export const Services = {
-    AUTH_URL: `${URL_ROOT}:8005`,
-    USER_URL: `${URL_ROOT}:8100`,
+    AUTH_URL: `http://54.37.87.85:7000/auth`,
+    USER_URL: `https://project2cs2021.herokuapp.com/user`,
     TRACKING_URL: `${URL_ROOT}:8004`,
     GEOLOC_URL: `${URL_ROOT}:8002`,
-    VEHICLE_URL: `${URL_ROOT}:8200`,
-    STAT_URL: `${URL_ROOT}:8089`,
-    LOG_URL: `${URL_ROOT}:8003`,
+    VEHICLE_URL: `http://54.37.87.85:7000/bornes`,
+    STAT_URL: `https://project2cs2021.herokuapp.com/stats`,
+    LOG_URL: `https://project2cs2021.herokuapp.com/log`,
     FACTURATION_ENDPOINT:'http://54.37.87.85:7000/'
 }
 

@@ -65,7 +65,11 @@ const TheHeader = (props) => {
       <CHeaderNav className="px-3">
         <TheHeaderDropdownMssg/>
         <TheHeaderDropdownNotif/>
-        <p>{user}</p>
+        <CHeaderNav className="d-md-down-none mr-auto">
+          <CHeaderNavItem className="px-2">
+            <em><b>{user}</b></em>
+          </CHeaderNavItem>
+        </CHeaderNav>
         <TheHeaderDropdown />
       </CHeaderNav>
     </CHeader>
