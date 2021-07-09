@@ -63,6 +63,11 @@ const TheSidebar = () => {
             CSidebarNavTitle
           }}
         />
+        <CSidebarNavDropdown icon="cil-list-rich" name="Facturation service">
+          <CSidebarNavItem icon="cil-list" name="Facturation" to="/facturation/facture"/>
+          <CSidebarNavItem icon="cil-notes" name="Gestion des abonnements" to="/facturation/abonne"/>
+          <CSidebarNavItem icon="cil-code" name="Codes Promos" to="/facturation/promotion"/>
+        </CSidebarNavDropdown>
         <CSidebarNavDivider style={{
           flex: 1
         }} />

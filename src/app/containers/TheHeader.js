@@ -10,6 +10,7 @@ import {
   CBreadcrumbRouter,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import logos from "../../assets/images/logo-jaune.png";
 
 import { withRouter } from "react-router-dom";
 
@@ -39,11 +40,9 @@ const TheHeader = (props) => {
       : "responsive";
     dispatch({ type: "set", sidebarShow: val });
   };
-
+  let activeRoute=routes.find(route=>route.path==window.location.pathname)
   return (
-    <CHeader withSubheader style={{
-      border: "unset"
-    }}>
+    <CHeader>
       <CToggler
         inHeader
         className="ml-md-3 d-lg-none"
@@ -55,30 +54,24 @@ const TheHeader = (props) => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <CIcon name="logo" height="48" alt="Logo" />
+        <CIcon name="logo" height="48" alt="Logo" src={logos} />
       </CHeaderBrand>
-
       <CHeaderNav className="d-md-down-none mr-auto">
         <CHeaderNavItem className="px-3">
-          <strong><em>page name</em></strong>
+          <strong style={{fontSize:20}}>{activeRoute &&activeRoute.name}</strong>
         </CHeaderNavItem>
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
         <TheHeaderDropdownMssg/>
         <TheHeaderDropdownNotif/>
-        <p>{user}</p>
+        <CHeaderNav className="d-md-down-none mr-auto">
+          <CHeaderNavItem className="px-2">
+            <em><b>{user}</b></em>
+          </CHeaderNavItem>
+        </CHeaderNav>
         <TheHeaderDropdown />
       </CHeaderNav>
-
-      <CSubheader className="px-3 justify-content-between" style={{
-        border: "unset"
-      }}>
-        <CBreadcrumbRouter 
-          className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
-          routes={routes} 
-        />
-      </CSubheader>
     </CHeader>
   );
 };

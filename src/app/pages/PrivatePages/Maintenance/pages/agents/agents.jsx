@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react"
-import AgentView from "../../components/agentview/agentview"
+import AgentView from "../../../../../conponents/agentview/agentview"
 import Fuse from 'fuse.js'
 import Modal from 'react-modal'
 import "./agents.css"

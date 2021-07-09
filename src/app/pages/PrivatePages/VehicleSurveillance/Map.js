@@ -35,6 +35,7 @@ route = {
     }
 }, 
 
+
 pos = 0;
 
 /**
@@ -87,8 +88,12 @@ async function loadData(_callback, props) {
     })
     .then(res => {
         if (res && res.data && res.data.ok) {
-            current.data.geometry.coordinates = res.data.position;
-            route.data.geometry.coordinates.push(res.data.position);
+            /*current.data.geometry.coordinates = res.data.position;
+            route.data.geometry.coordinates.push(res.data.position);*/
+            current.data.geometry.coordinates = sim[pos];
+            route.data.geometry.coordinates.push(sim[pos]);
+            pos = (pos + 1) % sim.length;
+            if (pos === 0) route.data.geometry.coordinates = []
         }
     })
     .catch(err => {
@@ -148,7 +153,7 @@ class Mappe extends Component {
                             zoom: map.getZoom()
                         });
                     }, rentalId);
-                }, 3000);
+                }, 1000);
             }, rentalId);
         });  
         document.getElementById("full-route-btn").addEventListener("click", function(){

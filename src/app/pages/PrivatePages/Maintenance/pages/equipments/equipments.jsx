@@ -2,8 +2,8 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
-import EquipmentView from '../../components/equipmentview/equipmentView'
-import Button from '../../components/button/button'
+import EquipmentView from '../../../../../conponents/equipmentview/equipmentView'
+import Button from '../../../../../conponents/button/button'
 import './equipments.css'
 
 Modal.setAppElement("#root")
