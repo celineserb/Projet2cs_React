@@ -25,7 +25,7 @@ export function updateAdmin(id,data){
 export function deleteUser(id){
     return axios.delete(Services.USER_URL + `/users/${id}`)
 }
-export function postUser(data){
+export  function postUser(data){
     return axios.post(Services.USER_URL+"/users" ,data)
 
 }

@@ -12,7 +12,7 @@ import {
   CModalBody,
   CModalFooter,
   CSpinner,
-  CSelect,CInput,
+  CSelect,CInput,CInputRadio,
 
 } from '@coreui/react'
 
@@ -26,6 +26,7 @@ function CreateAccount ({visible, setVisible})  {
    
     let initialInputState={userName:"",email:"", phoneNumber:"",lastName:"",password:"",type:"",firstName:"",address:""}
     const [eachEntry, setEachEntry]=useState(initialInputState);
+    const[user,setUser]=useState({});
      let {userName,email,phoneNumber,password,lastName,address,type,firstName}=eachEntry;
     const handleInputChange= e=>{
       
@@ -34,27 +35,26 @@ function CreateAccount ({visible, setVisible})  {
 
     };
     const handleValidate= e=>{
-        console.log("here")
          const nom=lastName
          const prenom = firstName
-        console.log("nom",nom)
-         console.log("tyyyyyype",type)
-         type="decision_maker"
          const numeroTelephone=phoneNumber
         const  data={userName,numeroTelephone,type,nom,prenom,address}
-        console.log("data:",data)
-        const idUser=17
         
+        postUser(data)
+        .then(res => { 
+          setUser({...res.data}); 
+         
+        }).catch(err => {
+          console.log(err)
+        })
+        //change idUser later
+        const idUser=205
         const authData={email,idUser,password}
         console.log("auth data ",authData)
+        console.log("idUser",user)
       
-        //  console.log("dataaaa",data) 
-          postUser(data)
-         
-          .then(e =>  console.log("id user"))
-          .catch(e => {
-            alert(e.message)
-          })
+       
+      //Create account:
           postAccount(authData)
           .then(e => 
             setVisible(false)
@@ -121,15 +121,28 @@ function CreateAccount ({visible, setVisible})  {
                   </CCol>
               
                   <CFormGroup>
-                  <CCol md="3">
-                    <CLabel >Type utilisateur</CLabel> </CCol>
+                  <CCol md="9">
+                      <CFormGroup variant="custom-radio" inline>
+                        <CInputRadio custom id="inline-radio1" name="inline-radios" name="type" value="Decision_maker" 
+                        onChange={handleInputChange} />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-radio1">Décideur</CLabel>
+                      </CFormGroup>
+                      <CFormGroup variant="custom-radio" inline>
+                        <CInputRadio custom id="inline-radio2" name="inline-radios"  name="type" value="Technical_admin"
+                        onChange={handleInputChange} />
+                        <CLabel variant="custom-checkbox" htmlFor="inline-radio2">Administrateur technique</CLabel>
+                      </CFormGroup>
+                     
+                    </CCol>
+                  {/* <CCol md="3">
+                    {/* <CLabel >Type utilisateur</CLabel> </CCol>
                     <CCol xs="5" md="9">
-                    <CSelect  name="type" onChange={handleInputChange} required value={type}>
-                      <option    value="decision_maker">Décideur</option>
-                      <option   value="technical_admin">Administrateur technique</option>
+                    <CSelect    required >
+                      <option  name="type" onChange={handleInputChange} value="decision_maker">Décideur</option>
+                      <option name="type" onChange={handleInputChange} value="technical_admin">Administrateur technique</option>
 
-                      <option    value="account_admin">Administrateur Compte</option>
-                    </CSelect></CCol>
+                      <option name="type" onChange={handleInputChange}   value="account_admin">Administrateur Compte</option>
+                    </CSelect></CCol> */} 
                   </CFormGroup>
          
                 </CFormGroup>
