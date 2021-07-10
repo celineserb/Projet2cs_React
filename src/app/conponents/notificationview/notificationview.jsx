@@ -12,7 +12,7 @@ export default function NotificationView(props){
     const [isModalOpen, setModalOpen] = useState(false)
     const [taskModels,setTaskModels] = useState([])
     const [selectedTaskModel, setSelectedModel] = useState(0)
-    const [selectedAgent,setSelectedAgent] = useState(100)
+    const [selectedAgent,setSelectedAgent] = useState(3)
 
     const [agentsList,setAgentList] = useState([])
 
@@ -30,7 +30,7 @@ export default function NotificationView(props){
         if(selectedTaskModel !== 0 && selectedAgent !== 0){
             const result = await axios.post("https://volet-maintenance.herokuapp.com/service-task/task"
             ,{
-                "idAgent": 100,
+                "idAgent": selectedAgent,
                 "idVehicle": panne.idVehicle,
                 "taskTitle": "Panne : "+panne.description,
                 "description": panne.description,

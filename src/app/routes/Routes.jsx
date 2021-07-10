@@ -93,7 +93,7 @@ export const Routes = () => {
       ) : (
         <>
           {/* Write all routes for the authentification */}
-          <Route path="/" component={MaintenancePage} />
+          <Route path="/" component={Login} />
           <Redirect from="*" to="/login" />
         </>
       )}
