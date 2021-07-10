@@ -7,10 +7,15 @@
   }
   
   .info-title{
-    margin-left: 25px;
-    font-weight:450;
-    text-align: right;
+    margin-left: 30px;
+    width:150px;
+    text-align: left;
+    font-size: medium;
   
+  }
+  .info-description{
+    display: inline;
+
   }
   .info-box{
     border: 1px solid #ccc;
@@ -26,8 +31,14 @@
   }
   
   .info-container{
-      display: flex;
+    display: inline;
+    font-size: medium;
+
       
+  }
+  .info{
+    font-size: medium;
+
   }
   .signal-list-item{
     border-radius: 35px; 
@@ -49,7 +60,7 @@
   color: #9FA2B4;
   position: absolute;
   bottom: 12px;
-  left: 40px;
+  left: 48px;
 }
 .signals-list-sort-btn {
   cursor: pointer;
@@ -115,4 +126,9 @@
 }
 .signals-list-sort > ul > li > input[type="checkbox"]:checked + label {
   font-weight: bold;
+}
+
+
+input.ant-input.ant-input-borderless::-webkit-input-placeholder{
+  color : blue;
 }

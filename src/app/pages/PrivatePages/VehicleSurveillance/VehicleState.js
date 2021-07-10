@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import ReactSpeedometer from "react-d3-speedometer"
 import { withRouter } from "react-router";
 import { fetchVehicleState } from '../../../../modules/Tracking/tracking.actions'
+import axios from 'axios';
 
 
 var vehicule ={};
@@ -21,7 +22,7 @@ class VehicleState extends Component {
             oilPressure: 0, 
             batteryCharge: 0, 
             brakeFluid: 0, 
-            generalHealthIndicator:30,
+            generalHealthIndicator:55.5,
 
          }
 
@@ -30,13 +31,13 @@ class VehicleState extends Component {
     
     componentDidMount(){
         setInterval(() => {
-            fetchVehicleState({
+            axios.get("http://localhost:8003/vehicle_state?idVehicle="+this.props.match.params.vehicleId)
+             /*fetchVehicleState({
                 idVehicle: this.props.match.params.vehicleId
-            })
+            })*/
             .then(res => {
                 if (res ) {
                     vehicule = res.data;
-                    console.log(res.data);
                     this.setState({
                         kilos: vehicule.kilos,
                         speed : vehicule.speed,
@@ -45,14 +46,15 @@ class VehicleState extends Component {
                         oilPressure: vehicule.oilPressure, 
                         batteryCharge: vehicule.batteryCharge, 
                         brakeFluid: vehicule.brakeFluid  
+                        //generalHealthIndicator: generalIndicator(vehicule.fuelLevel, vehicule.engineTemp, vehicule.oilPressure, vehicule.batteryCharge)
                     });
                     
                 }
             })
             .catch(err=> {
-                console.log("No state");
+                console.log("No state ");
             });
-        }, 5000);
+        }, 2000);
         
         
     }
@@ -80,7 +82,7 @@ class VehicleState extends Component {
 
                 </Col>
                 <Col push={3}>
-                    <h1  className="vehicle-status-title" >Vehicle Status</h1>
+                    <h3  className="vehicle-status-title" >Vehicle Status</h3>
                 <Tooltip title="Engine Temperture">
                     <Progress
                     strokeColor={{
@@ -131,7 +133,7 @@ class VehicleState extends Component {
                             '0%': '#108ee9',
                             '100%': '#87d068',
                         }}
-                        percent={55.5}
+                        percent={generalIndicator(this.state.fuel,this.state.engineTemp, this.state.oilPressure,this.state.batteryCharge)}
                     />
                 </Tooltip>
                 
@@ -188,7 +190,6 @@ function batteryCharge(charge) {
 
 
 //calculates the fuel level value according to the minimal value needed to run a car 
-//min value = 
 function fuelLevel(level) {
     var num = level* 56 /100;
     var result = 0;
@@ -207,6 +208,10 @@ function brakeFluid(fluid) {
     return num.toFixed(2);
 }
 
+function generalIndicator(fuel, temp, pressure, charge) {
+    let resultat= (fuelLevel(fuel) + oilPressure(pressure) + batteryCharge(charge) + engineTemp(temp))/4;
+    return resultat ;
+}
 
 
 

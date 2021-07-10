@@ -22,10 +22,26 @@ import SurveillanceSidebar from "./SurveillanceSidebar";
 import { Layout } from "antd";
 import "antd/dist/antd.css";
 
-import TopBar from "../pages/PrivatePages/common/Topbar/Topbar";
-import SideBar from "../pages/PrivatePages/common/Sidebar/Sidebar";
+import TopBar from '../pages/PrivatePages/common/Topbar/Topbar';
+import SideBar from '../pages/PrivatePages/common/Sidebar/Sidebar';
+import SuperAdminSidebar from "./SuperAdminSidebar";
+import SuperAdmin from "../pages/PrivatePages/SuperAdmin/SuperAdmin";
 
-const { Content } = Layout;
+const { Content} = Layout;
+
+var margin = true;
+function changeStyle() { 
+    const layout = document.getElementById("surv_cont");
+    if (margin) {
+        layout.classList.remove("marginleft");
+        layout.classList.add("nomarginleft");
+    } else {
+        layout.classList.add("marginleft");
+        layout.classList.remove("nomarginleft");
+    }
+    margin = !margin;
+}
+
 export const Routes = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
@@ -47,56 +63,56 @@ export const Routes = () => {
     }
   }
 
-  return (
-    <Switch>
-      <Route path="/404" component={Page404} />
-      <Route path="/500" component={Page500} />
-      {isAuthorized ? (
-        <>
-          {/* Write all routes need an authentified user */}
-          {user.userType === "decision_maker" && (
-            <Route path="/" component={DecideurLayout} />
-          )}
-          {user.userType === "agent_admin" && (
-            <Route path="/" component={MaintenancePage} />
-          )}
-          {user.userType === "account_admin" && (
-            <Route path="/" component={AccountLayout} />
-          )}
-          {user.userType === "technical_admin" && (
-            <Layout>
-              <SideBar items={SurveillanceSidebar}></SideBar>
-              <Layout style={{ marginLeft: 200 }}>
-                <Content style={{ backgroundColor: "white" }}>
-                  <TopBar user={user}></TopBar>
-                  <Switch>
-                    <Route
-                      exact
-                      path="/tracking/:vehicleId/:rentalId"
-                      component={TrackingPage}
-                    />
-                    <Route exact path="/pannes" component={PannesPage} />
-                    <Route exact path="/enlevements" component={SignalsPage} />
-                    <Route path="/" component={ManagePage} />
-                  </Switch>
-                </Content>
-              </Layout>
-            </Layout>
-          )}
-          {user.userType === "tenant" && (
-            <Route path="/" component={TheLayout} />
-          )}
-          {user.userType === "agent" && (
-            <Route path="/" component={TheLayout} />
-          )}
-        </>
-      ) : (
-        <>
-          {/* Write all routes for the authentification */}
-          <Route path="/" component={Login} />
-          <Redirect from="*" to="/login" />
-        </>
-      )}
-    </Switch>
-  );
-};
+    return (
+        <Switch>
+            <Route path="/404" component={Page404} />
+            <Route path="/500" component={Page500} />
+            {
+            isAuthorized ? <>
+                {/* Write all routes need an authentified user */}
+                {user.userType === "decision_maker" && <Route path="/" component={DecideurLayout} />}
+                {user.userType === "agent_admin" && <Route path="/" component={MaintenancePage} />}
+                {user.userType === "account_admin" && <Route path="/" component={AccountLayout} />}
+                {
+                   user.userType === "technical_admin" &&
+                   <Layout >
+                    <SideBar items={SurveillanceSidebar} changeStyle={changeStyle}></SideBar>
+                    <Layout id="surv_cont" className="marginleft" >
+                        <Content style={{backgroundColor:'white'}}>
+                        <TopBar user={user}></TopBar>
+                                    <Switch>
+                                        <Route exact path="/tracking/:vehicleId/:rentalId" component={TrackingPage} />
+                                        <Route exact path="/pannes" component={PannesPage} />
+                                        <Route exact path="/enlevements" component={SignalsPage} />
+                                        <Route path="/"  component={ ManagePage }  />         
+                                    </Switch>
+                        </Content>
+                    </Layout>
+                </Layout>
+                   
+                }
+                {
+                   user.userType === "super_admin" &&
+                   <Layout>
+                    <SideBar items={SuperAdminSidebar} changeStyle={changeStyle}></SideBar>
+                    <Layout id="surv_cont" className="marginleft">
+                        <Content style={{backgroundColor:'white'}}>
+                        <TopBar user={user} super={0}></TopBar>
+                                    <Switch>
+                                        <Route path="/"  component={ SuperAdmin }  />         
+                                    </Switch>
+                        </Content>
+                    </Layout>
+                </Layout>
+                   
+                }
+                {user.userType === "tenant" && <Route path="/" component={TheLayout} />}
+                {user.userType === "agent" && <Route path="/" component={TheLayout} />}
+            </> : <>
+                {/* Write all routes for the authentification */}
+                <Route path="/login" component={Login} />
+                <Redirect from="*" to="/login"  />
+            </>
+        }</Switch>
+    )
+}

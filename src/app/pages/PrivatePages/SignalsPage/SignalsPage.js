@@ -4,9 +4,6 @@ import axios from 'axios';
 import SignalComponent from './SignalComponent';
 
 
-
-const data =[{"name":"123"},{"name":"456"}, {"name":"678"}, {"name":"935"}, {"name":"398"}, {"name":"999"}] ;
-
 class SignalsPage extends Component {
     constructor(props) {
         super(props);

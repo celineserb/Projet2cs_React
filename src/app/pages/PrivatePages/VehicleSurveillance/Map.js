@@ -5,6 +5,7 @@ import './style/style.scss';
 import { Row} from "antd";
 import { withRouter } from 'react-router';
 import sim from './sim';
+import axios from "axios";
 
 mapboxgl.accessToken="pk.eyJ1IjoieW91Y2Vmb3VhcmFiIiwiYSI6ImNrb2UyajhibzAwbGsycW9nNXpzdm12YnIifQ.iJ9vA18ZaX__1vwZo0iRiA";
 
@@ -34,6 +35,7 @@ route = {
         }
     }
 }, 
+
 
 pos = 0;
 
@@ -85,10 +87,15 @@ async function loadData(_callback, props) {
     await fetchVehicleLatestPosition({
         idRental: rentalId
     })
+    //axios.get("http://localhost:8002/vehicleLatestPosition?idRental=17")
     .then(res => {
         if (res && res.data && res.data.ok) {
             current.data.geometry.coordinates = res.data.position;
             route.data.geometry.coordinates.push(res.data.position);
+            /*current.data.geometry.coordinates = sim[pos];
+            route.data.geometry.coordinates.push(sim[pos]);
+            pos = (pos + 1) % sim.length;
+            if (pos === 0) route.data.geometry.coordinates = []*/
         }
     })
     .catch(err => {

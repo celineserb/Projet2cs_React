@@ -29,3 +29,7 @@ body {
   height: 100vh;
   font-family: "Mulish", Helvetica, sans-serif;
 }
+
+input::placeholder{
+color: rgba(170, 170, 170, 1) !important;
+}
