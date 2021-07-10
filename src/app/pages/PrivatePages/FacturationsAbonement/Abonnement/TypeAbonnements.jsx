@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CButton } from "@coreui/react";
 import { CustomTable } from '../utils'
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 import { fetchSubscriptionType, addSubscriptionType } from '../../../../../modules/Abonnement/abonnement.actions'
 export const TypeAbonnements = (props) => {
     const [listType, setListType] = useState(null)

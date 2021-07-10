@@ -12,6 +12,8 @@ import {
 } from '@coreui/react'
 
 import { getUsers } from '../../../../modules/Users/users.crud'
+import { Button, Modal } from 'antd'
+import axios from 'axios'
 
 const getBadge = status => {
   switch (status) {
@@ -23,6 +25,8 @@ const getBadge = status => {
   }
 }
 
+
+
 const Users = () => {
   const history = useHistory()
   const queryPage = useLocation().search.match(/page=([0-9]+)/, '')
@@ -31,8 +35,25 @@ const Users = () => {
   const [page, setPage] = useState(currentPage)
   const [users, setUsers] = useState([])
 
+  const [showModal, setshowModal] = useState(false)
+  const [currentItem, setcurrentItem] = useState({})
+
   const pageChange = newPage => {
     currentPage !== newPage && history.push(`/comptes?page=${newPage}`)
+  }
+  const banirUser = (item) => {
+      setshowModal(true)
+      setcurrentItem(item)
+      console.log(currentItem);
+
+  }
+  const banir = () => {
+    let idUser = currentItem.idUser
+    axios.put(`http://localhost:8564/banTenantAccount?idUser=${idUser}`)
+    .then((response) => 
+          console.log(response)
+    )
+    console.log("Confirmed ban");
   }
 
   useEffect(() => {
@@ -49,10 +70,12 @@ const Users = () => {
       console.log(err)
     })
   }, [])
-
+  
   return (
+    <>
+    
     <CRow>
-      <CCol xl={6}>
+      <CCol >
         <CCard>
           <CCardHeader>
             Users
@@ -69,7 +92,8 @@ const Users = () => {
             itemsPerPage={10}
             activePage={page}
             clickableRows
-            onRowClick={(item) => history.push(`/comptes/${item.idUser}`)}
+            //onRowClick={(item) => history.push(`/comptes/${item.idUser}`)}
+            onRowClick={ banirUser}
             scopedSlots = {{
               'status':
                 (item)=>(
@@ -77,7 +101,9 @@ const Users = () => {
                     <CBadge color={getBadge(item.status)}>
                       {item.status}
                     </CBadge>
+                   
                   </td>
+                  
                 )
             }}
           />
@@ -92,6 +118,37 @@ const Users = () => {
         </CCard>
       </CCol>
     </CRow>
+    <Modal            
+            title={"Banir l'utilisateur"}
+            centered
+            visible={showModal}
+            onOk={() => {setshowModal(false)}}
+            onCancel={() => setshowModal(false)}
+            footer={[
+            <Button
+              key="back" 
+              onClick={() => {
+                setshowModal(false)
+                banir()
+                }}
+              shape='round'
+              size ='middle'
+              style={{
+      
+                backgroundColor: '#F9C31B', 
+                borderColor: 'white', 
+                color: 'black',  
+                paddingRight:25,
+                paddingLeft:25,    
+              }}>
+              
+              Confirmer
+            </Button>,  
+        ]}>
+          <p>Cliquez sur confirmer pour banir cet utilisateur</p>
+        </Modal>
+    
+    </>
   )
 }
 

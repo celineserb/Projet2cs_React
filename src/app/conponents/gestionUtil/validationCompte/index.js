@@ -52,6 +52,7 @@ function ValidationForm ({visible, setVisible, locataire})  {
         alert(e.message)
       })
     }
+    
   };
 
   const handleRefused = () => {
@@ -65,9 +66,9 @@ function ValidationForm ({visible, setVisible, locataire})  {
   }
   return (
     <>
-      <CModal size="xl" centered show={visible} onClose={() => setVisible(false)}>
+      <CModal size="lg" centered show={visible} onClose={() => setVisible(false)}>
         <CModalHeader closeButton>
-          <CModalTitle>Modal title</CModalTitle>
+          <CModalTitle>Validation du Compte</CModalTitle>
         </CModalHeader>
 
         <CModalBody>
@@ -77,64 +78,63 @@ function ValidationForm ({visible, setVisible, locataire})  {
               <CCol>
                 <CFormGroup row>
                   <CCol md="3">
-                    <CLabel>Nom</CLabel>
+                    <CLabel><h5 style={{fontWeight:"bold"}}>Nom:</h5></CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <p className="form-control-static">{user.lastName}</p>
+                    <h5 className="form-control-static">{user.lastName}</h5>
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
                   <CCol md="3">
-                    <CLabel>prénom</CLabel>
+                    <CLabel><h5 style={{fontWeight:"bold"}}>Prénom:</h5></CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <p className="form-control-static">{user.firstName}</p>
+                    <h5 className="form-control-static">{user.firstName}</h5>
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
                   <CCol md="3">
-                    <CLabel>Numéro de téléphone</CLabel>
+                    <CLabel><h5 style={{fontWeight:"bold"}} >Tel: </h5></CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <p className="form-control-static">{user.phoneNumber}</p>
+                        <h5 className="form-control-static">0{user.phoneNumber}</h5>
                   </CCol>
                 </CFormGroup>
                       
                 <CFormGroup row>
                   <CCol md="3">
-                    <CLabel>Date d'inscription</CLabel>
+                    <CLabel><h5 style={{fontWeight:"bold"}} >Inscrit le:</h5></CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <p className="form-control-static">{user.creationDate}</p>
+                    <h5 className="form-control-static">{user.creationDate.toString()}</h5>
                   </CCol>
                 </CFormGroup>
                   
                 <CFormGroup row>
                   <CCol md="3">
-                    <p className="form-control-static"></p>
-                    <CLabel htmlFor="select">Permis de Conduite </CLabel>
+                    <CLabel> <h5 style={{fontWeight:"bold"}}>Permis de Conduite:</h5> </CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <img src= {user.imgpermis} height={140} width={210} alt="permis" />         
+                    <img src= {user.imgpermis} height={100} width={100} alt="permis" />         
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
                   <CCol md="3">
-                    <CLabel htmlFor="select">Carte identité</CLabel>
+                    <CLabel><h5 style={{fontWeight:"bold"}}>Identité:</h5></CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <img src= { user.imgprofil } height={140} width={210} alt="profile" />                   
+                    <img src= { user.imgprofil } height={100} width={100} alt="profil" />                   
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
                   <CCol md="3">
-                    <CLabel htmlFor="textarea-input">Message</CLabel>
+                    <CLabel htmlFor="textarea-input"><h5 style={{fontWeight:"bold"}} >Message:</h5></CLabel>
                   </CCol>
-                  <CCol xs="12" md="9">
+                  <CCol xs="12" md="8">
                       
                     <CTextarea 
                       name="stateMessage" 
-                      rows="9"
+                      rows="3"
                       placeholder="Message à afficher pour le locataire..." 
                       value={entries.stateMessage}
                       onChange={handleInputChange}

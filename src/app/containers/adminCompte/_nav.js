@@ -10,7 +10,7 @@ const _nav =  [
     name: 'Validation locataires',
     to: '/compteLocataire',
     icon: 'cil-people',
-  },
+  }
 ]
 
 export default _nav
