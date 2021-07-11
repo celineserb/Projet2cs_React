@@ -15,14 +15,14 @@ export default function Equipments(props){
     const [equipmentPrice,setEquipmentPrice] = useState(0)
 
     useEffect(async ()=>{
-        const result = await axios("https://service-equipment.herokuapp.com/equipment")
+        const result = await axios("https://volet-maintenance.herokuapp.com/service-materiel/equipment")
         setEquipments(result.data)
     },[])
 
     async function addEquipment(){
         if(equipmentName !== '' && equipmentCategory !== '' && equipmentPrice !== 0){
             const result = await axios
-                .post("https://service-equipment.herokuapp.com/equipment",
+                .post("https://volet-maintenance.herokuapp.com/service-materiel/equipment",
                 {"equipmentName": equipmentName,
                 "unitPrice": equipmentPrice,
                 "category": equipmentCategory}) 

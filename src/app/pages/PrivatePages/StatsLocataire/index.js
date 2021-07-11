@@ -18,7 +18,6 @@ import { getVehiculesById } from "../../../../modules/Vehicle/vehicle.crud";
 
 import VehiculeModal from "../VehiculeModal/vehiculeModal";
 
-import VehiculeGridView from "./vehiculeview/vehiculeGridView";
 
 import "./vehicules.css";
 
@@ -67,18 +66,6 @@ function StatsTables() {
 
   return (
     <>
-    <CRow>
-        <div className="vehicule-list-container">
-         
-            {vehicules.map((vehicule) => {
-              if (borne === vehicule.idBorne) {
-                return <VehiculeGridView vehicule={vehicule} />;
-              }
-              return (<></>)
-            })}
-        </div>
-      </CRow>
-
       <CRow>
         <CCol>
           <CCard>

@@ -55,6 +55,7 @@ const setModalIsOpenToFalse =()=>{
               <CButton
                 color="warning"
                 size="sm"
+                style={{color:"white", backgroundColor: '#F9C31B', paddingRight:15, paddingLeft:15, marginLeft:780}}
                 shape="rounded-pill"
                 position="relative"
                 active

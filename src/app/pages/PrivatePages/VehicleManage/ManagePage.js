@@ -88,7 +88,7 @@ const ManagePage = () => {
   // fetch data on mount component
   useEffect(() => {
     //fetch all bornes from db 
-    axios.get(`http://localhost:8200/bornes`)
+    axios.get(`http://54.37.87.85:7000/bornes`)
     .then(res => {
       console.log(res.data);
       let bornesArray = res.data
@@ -136,7 +136,7 @@ const ManagePage = () => {
     values.nbMaintenanceAgents=0;
     console.log(values);
     //console.log(val);
-    axios.post(`http://localhost:8200/bornes`, values)
+    axios.post(`http://54.37.87.85:7000/bornes`, values)
         .then(res => {
           console.log(values);
           console.log(res);
@@ -164,7 +164,7 @@ const ManagePage = () => {
     values.latitude = 0;
     values.unitPricePerDay = "0";
     values.image = "https://www.motortrend.com/uploads/sites/10/2020/04/2018-fiat-500-pop-3door-hatchback-angular-front.png?fit=around%7C875:492.1875"
-    axios.post(`http://localhost:8200/vehicules`, values)
+    axios.post(`http://54.37.87.85:7000/bornes/vehicules`, values)
         .then(res => {
           console.log(values);
         })

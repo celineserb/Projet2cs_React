@@ -35,6 +35,7 @@ const TheHeader = (props) => {
       ? true
       : "responsive";
     dispatch({ type: "set", sidebarShow: val });
+    
   };
   let activeRoute=routes.find(route=>route.path===window.location.pathname)
   return (

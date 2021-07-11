@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios';
-import { Card, Row , Col, Button, Modal, Avatar, Badge, Input, Divider,} from "antd";
+import { Card, Row , Col, Button, Modal, Avatar, Badge, Divider,} from "antd";
 import './style/style.scss'
 
 class PanneComponent extends Component {
@@ -100,11 +99,11 @@ class PanneComponent extends Component {
                         sm={8}
                         >
                             <Row>
-                        Source :  {this.state.item.sourceType == "Tenant"? "Locataire" : this.state.item.sourceType}
+                        Source :  {this.state.item.sourceType === "Tenant"? "Locataire" : this.state.item.sourceType}
                         </Row>
                    <Row>
                         {
-                            this.state.item.sourceType != "Auto" ? 
+                            this.state.item.sourceType !== "Auto" ? 
                             this.state.item.firstName + " " + this.state.item.lastName
                             : ""
                         }
@@ -120,7 +119,7 @@ class PanneComponent extends Component {
                         xs={24}
                         sm={8}
                         >
-                        <Row>{this.state.item.sent_at.slice(0,10)}</Row> <Row>{this.state.item.sent_at.slice(11, 19)}</Row>
+                        <Row>{this.state.item.sent_at.slice(0,10)+" "+this.state.item.sent_at.slice(11, 19)}</Row> 
                         </Col>
                         <Col xl={3} lg={3} md={3} xs={24} sm={16}>
                         {
@@ -218,55 +217,17 @@ class PanneComponent extends Component {
                                           
                                         </div>
                                     </Row>
-
-                                    <Divider orientation="left" className="info-divider"><h5 className="bolde">Informations de la panne</h5> </Divider>
-                                    <Row>
-                                        <div className="info-container">
-                                            <Col>
-                                                <label className="info-title">Numéro :</label> 
-                                                <span className="info">{this.state.item.idPanne}</span>
-                                            </Col>
-                                        </div>
-                                    </Row>
-
-                                    <Row>
-                                        <div className="info-container">
-                                            <Col>
-                                                <label className="info-title">Description :</label> 
-                                                <span className="info">{this.state.item.description}</span>
-                                            </Col>
-                                        </div>
-                                    </Row>
-
-                                    <Row>
-                                        <div className="info-container">
-                                            <Col>
-                                                <label className="info-title">Sévérité :</label> 
-                                                <span className="info">{this.state.item.severityLevel}</span>
-                                            </Col>
-                                        </div>
-                                    </Row>
-
-                                    <Row>
-                                        <div className="info-container">
-                                            <Col>
-                                                <label className="info-title">Etat :</label> 
-                                                <span className="info">{this.state.item.treated? "Réparée" : "Non réparée"}</span>
-                                            </Col>
-                                        </div>
-                                    </Row>
-                                        
                                     <Divider orientation="left" className="info-divider"> <h5 className="bolde">Signalement par</h5> </Divider>
                                     <Row>
                                         <div className="info-container">
                                             <Col>
                                                 <label className="info-title">Source :</label>
-                                                <span className="info">{this.state.item.sourceType == "Tenant"? "Locataire" : this.state.item.sourceType}</span>
+                                                <span className="info">{this.state.item.sourceType === "Tenant"? "Locataire" : this.state.item.sourceType}</span>
                                             </Col>
                                         
                                         </div>
                                     </Row>
-                                    {this.state.item.sourceType!="Auto"? 
+                                    {this.state.item.sourceType!=="Auto"? 
                                     <>
                                     <Row>
                                         <div className="info-container">
@@ -318,24 +279,11 @@ class PanneComponent extends Component {
                                            
                                         </div>
                                     </Row>
-                                    
-                                    <Divider orientation="left" className="info-divider"> <h5 className="bolde">Vérification par</h5> </Divider>
-                            
-                                    <Row>
-                                        <div className="info-container">
-                                            <Col>
-                                                <label className="info-title">Nom et Prénom :</label>
-                                                <span className="info">{this.state.item.agentSentNotif.nom+" "+this.state.item.agentSentNotif.prenom}</span>
-                                            </Col>
-                                        
-                                        </div>
-                                    </Row>
-
                                     <Row>
                                         <div className="info-container">
                                             <Col>
                                                 <label className="info-title">Vérifiée le :</label> 
-                                                <span className="info">{this.state.item.dateNotifPanne.slice(0,10)}</span>
+                                                <span className="info">{this.state.item.dateNotifPanne.slice(0,10)+this.state.item.dateNotifPanne.slice(12,16)}</span>
                                             </Col>
                                            
                                         </div>

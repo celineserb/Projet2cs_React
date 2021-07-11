@@ -10,7 +10,7 @@ const _nav =  [
     name: 'Gestion Comptes',
     to: '/gestionCompte',
     icon: 'cil-people',
-  },
+  }
 ]
 
 export default _nav

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Layout, Row, Button, Col, Checkbox} from 'antd'
+import {Layout, Row,  Col, Checkbox} from 'antd'
 import axios from 'axios';
 import SignalComponent from './SignalComponent';
 
@@ -25,6 +25,8 @@ class SignalsPage extends Component {
               untreatedSignals : untreatedSignals,
               data : treatedSignals.concat(untreatedSignals)
             });
+            console.log(treatedSignals)
+            console.log(untreatedSignals);
         })
     }
     onSelect(changedValues, ){
@@ -32,11 +34,11 @@ class SignalsPage extends Component {
         var treated =false;
         var untreated = false ;
         changedValues.forEach(element => {
-            if (element=="T"){
+            if (element==="T"){
                 console.log("treated true");
                 treated = true;
             }
-            if (element=="U") {
+            if (element==="U") {
                 untreated = true;
             }
         });

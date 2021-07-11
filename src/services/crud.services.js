@@ -4,7 +4,7 @@ const URL_ROOT="http://localhost";
 export const Services = {
     AUTH_URL: `http://54.37.87.85:7000/auth`,
     USER_URL: `https://project2cs2021.herokuapp.com/user`,
-    TRACKING_URL: `${URL_ROOT}:8004`,
+    TRACKING_URL: `${URL_ROOT}:8003`,
     GEOLOC_URL: `${URL_ROOT}:8002`,
     VEHICLE_URL: `http://54.37.87.85:7000/bornes`,
     STAT_URL: `https://project2cs2021.herokuapp.com/stats`,
