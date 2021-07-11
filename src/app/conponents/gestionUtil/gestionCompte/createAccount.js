@@ -21,21 +21,17 @@ const types = ["tenant","agent", "decision_maker","agent_admin","account_admin",
 function CreateAccount ({visible, setVisible})  {
    
     const [eachEntry, setEachEntry]=useState({});
-    const {lastName, firstName, phoneNumber, userType, userName, address, email, password } = eachEntry
+    const { email, password } = eachEntry
 
     const handleInputChange= e=>{
       setEachEntry({...eachEntry,[e.target.name]:e.target.value});
     };
 
     const handleValidate= e=>{
-      const nom=lastName
-      const prenom = firstName
-      const numeroTelephone=phoneNumber
-      const data={userName, numeroTelephone, userType, nom, prenom, address}
         
       postUser(eachEntry)
       .then(res => { 
-        const authData={email,idUser: res.data.idUser,password}
+        const authData={email, idUser: res.data.idUser, password}
        
         //Create account:
         postAccount(authData)
