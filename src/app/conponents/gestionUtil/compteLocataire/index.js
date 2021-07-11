@@ -8,7 +8,7 @@ import {
   CRow,
   CBadge,
 } from "@coreui/react";
-import { getLocataires } from "../../../../modules/Users/users.crud";
+import { getLocataires, getUsers } from "../../../../modules/Users/users.crud";
 import ValidationForm from "../validationCompte";
 import axios from "axios";
 
@@ -29,7 +29,7 @@ function UsersTable() {
   const [selectedLocataire, setSelectedLocataire] = useState({})
 
   useEffect(() => {
-    axios.get(`http://localhost:8564/getTenants`)
+    getUsers()
     .then((res) => {
       console.log(res.data);
       setLocataires(res.data);
