@@ -84,13 +84,9 @@ function AddForm ({visible, setVisible, user})  {
 
       promise
       .then(() => {
-        deleteAuth(eachEntry.idUser)
-        .then(e => {
           deleteUser(eachEntry.idUser)
           .then(e => setVisible(false))
           .catch(console.log)
-        })
-        .catch(console.log)
       })
       .catch(console.log)
     }
