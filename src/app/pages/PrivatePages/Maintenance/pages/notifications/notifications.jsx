@@ -9,12 +9,10 @@ import './notifications.css'
 
 export default function notifications(props){
     const [pannes, setPannes] = useState([])
-    const [solvedPannes, setSolvedPannes] = useState([])
 
     useEffect(async ()=>{
-        const results = await axios("http://localhost:8111/panne_signals")
-        setPannes(results.data.signalsNotTreated)
-        setSolvedPannes(results.data.signlasTreated)
+        const results = await axios("http://localhost:8220/getPannes")
+        setPannes(results.data)
     },[])
 
     return(
@@ -23,10 +21,7 @@ export default function notifications(props){
                 <p className="notification-header-text">Notifications</p>
             </div>
             {pannes?.map(panne => (
-                <NotificationView key={panne.idSignal} panne={panne} isSolved={false}/>
-            ))}
-            {solvedPannes?.map(panne => (
-                <NotificationView key={panne.idSignal} panne={panne} isSolved={true}/>
+                <NotificationView key={panne.idPanne} panne={panne} isSolved={false}/>
             ))}
         </div>
     )

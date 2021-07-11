@@ -12,22 +12,28 @@ export default function NotificationView(props){
     const [isModalOpen, setModalOpen] = useState(false)
     const [taskModels,setTaskModels] = useState([])
     const [selectedTaskModel, setSelectedModel] = useState(0)
-    const [selectedAgent,setSelectedAgent] = useState(100)
+    const [selectedAgent,setSelectedAgent] = useState(3)
+
+    const [agentsList,setAgentList] = useState([])
 
     useEffect(async ()=>{
-        const result = await axios("https://service-tasks.herokuapp.com/taskModel")
+        const result = await axios("http://127.0.0.1:8100/users")
+        setAgentList(result?.data.filter(item => item.userType === "agent"))
+    },[])
+
+    useEffect(async ()=>{
+        const result = await axios("https://volet-maintenance.herokuapp.com/service-task/taskModel")
         setTaskModels(result.data)
     }, [])
 
-
     async function importNotif(){
         if(selectedTaskModel !== 0 && selectedAgent !== 0){
-            const result = await axios.post("https://service-tasks.herokuapp.com/task"
+            const result = await axios.post("https://volet-maintenance.herokuapp.com/service-task/task"
             ,{
-                "idAgent": 100,
+                "idAgent": selectedAgent,
                 "idVehicle": panne.idVehicle,
-                "taskTitle": panne.signalType+ " : "+panne.message,
-                "description": panne.message,
+                "taskTitle": "Panne : "+panne.description,
+                "description": panne.description,
                 "idTaskState": 2,
                 "endDate": null,
                 "idTaskModel": selectedTaskModel,
@@ -49,10 +55,10 @@ export default function NotificationView(props){
             <div className={props.isSolved+"-panne notification-indicator"}></div>
             <p className={(props.isSolved ? "fine-title" : "bold-title") 
                         + " notification-title" }>
-                {panne.message}
+                {panne.description}
             </p>
             <p className="notification-subtitle">
-                {new Date(panne.sent_at).toISOString().slice(0, 10)}
+                {new Date(panne.dateNotifPanne).toISOString().slice(0, 10)}
             </p>
             <Button text="importer" mode="light_mode" onClick={()=>{setModalOpen(!isModalOpen)}}/>
             <Modal
@@ -77,9 +83,8 @@ export default function NotificationView(props){
                 }}>
                 <div className="notif-modal-wrapper">
                     <p className="bold-title notif-modal-title">Détails de la panne</p>
-                    <p className="notif-modal-text">{"Description: "+panne.message}</p>
-                    <p className="notif-modal-text">{"Date: "+ new Date(panne.sent_at).toISOString().slice(0, 10)}</p>
-                    <p className="notif-modal-text">{"Véhicule: "+panne.vehiclebrand}</p>
+                    <p className="notif-modal-text">{"Description: "+panne.description}</p>
+                    <p className="notif-modal-text">{"Date: "+ new Date(panne.dateNotifPanne).toISOString().slice(0, 10)}</p>
                     <select name="notif-task-model" id="notif-task-model" 
                             className="modal-form-input" 
                             placeholder="modèl de tache"
@@ -92,7 +97,11 @@ export default function NotificationView(props){
                     <select name="notif-agent-model" 
                             id="notif-agent-model"
                             className="modal-form-input">
-
+                            {agentsList?.map((agent) => (
+                                <option key={agent.idUser} value={agent.idUser}>
+                                {agent.firstName + ' ' + agent.lastName}
+                                </option>
+                            ))}
                     </select>
                     <div className="notif-buttons-wrapper">
                         <Button text="Annuler" mode="dark_mode" onClick={()=>{setModalOpen(false)}}/>
