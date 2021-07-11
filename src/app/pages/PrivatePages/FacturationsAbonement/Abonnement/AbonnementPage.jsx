@@ -13,7 +13,6 @@ class AbonnementPage extends Component {
             page: 1,
             loading: true,
             actionLoading: false,
-            loading: true,
             showList: false,
         }
         this.statesSub = {
@@ -33,6 +32,7 @@ class AbonnementPage extends Component {
     fetchData(query) {
         fetchSubscriptions(query)
             .then(res => {
+                console.log(res.data);
                 if (res && res.data && res.data.ok) {
                     this.setState({
                         list: res.data.data.list,
@@ -40,14 +40,17 @@ class AbonnementPage extends Component {
                         total: res.data.data.total,
                         loading: false
                     })
+                    
                 }
+            
             })
             .catch(err => {
 
             })
+        
     }
     onPageChange(page) {
-        if (this.state.page != page) {
+        if (this.state.page !== page) {
             this.setState({ loading: true })
             this.fetchData({ page: page })
         }
@@ -97,7 +100,7 @@ class AbonnementPage extends Component {
             <div className="px-2">
                 <div className="d-flex justify-content-between align-items-center px-4 pb-4">
                     <div className="position-relative w-100 mr-3">
-                        <img className="position-absolute" style={{ top: 13, left: 13 }} src="/media/search.svg" />
+                        <img className="position-absolute" style={{ top: 13, left: 13 }} src="/media/search.svg" alt="search" />
                         <input type="text" placeholder="Recherche..." style={{ width: '100%',maxWidth:600, paddingLeft: 40 }} className="custom-input py-2 pr-3 rounded" />
                     </div>
                     <div className="d-flex align-items-center">
@@ -143,7 +146,7 @@ class AbonnementPage extends Component {
                                         <Menu.Item key="0" onClick={() => this.handleActivateSub(idSub)}>
                                             <div className="d-flex align-items-center pr-4 py-1">
                                                 <i className="d-flex mr-2">
-                                                    <img src="/media/Activate.svg" />
+                                                    <img src="/media/Activate.svg" alt="activate" />
                                                 </i>
                                                 <span>Activer</span>
                                             </div>
@@ -151,14 +154,14 @@ class AbonnementPage extends Component {
                                     <Menu.Item key="1" onClick={() => this.handleDeleteSub(idSub)}>
                                         <div className="d-flex align-items-center pr-4 py-1">
                                             <i className="d-flex mr-2">
-                                                <img src="/media/delete.svg" />
+                                                <img src="/media/delete.svg" alt="delete" />
                                             </i>
                                             <span>Supprimer</span>
                                         </div>
                                     </Menu.Item>
                                 </Menu>} trigger={['click']} >
                                     <i onClick={e => e.preventDefault()} className="d-flex" style={{ cursor: "pointer" }}>
-                                        <img src="/media/more.svg" />
+                                        <img src="/media/more.svg" alt="" />
                                     </i>
                                 </Dropdown>
                             }

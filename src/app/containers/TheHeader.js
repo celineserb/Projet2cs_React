@@ -6,8 +6,6 @@ import {
   CHeaderBrand,
   CHeaderNav,
   CHeaderNavItem,
-  CSubheader,
-  CBreadcrumbRouter,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import logos from "../../assets/images/logo-jaune.png";
@@ -19,8 +17,6 @@ import routes from "../../routes";
 
 import {
   TheHeaderDropdown,
-  TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
 } from "./index";
 
 const TheHeader = (props) => {
@@ -39,8 +35,9 @@ const TheHeader = (props) => {
       ? true
       : "responsive";
     dispatch({ type: "set", sidebarShow: val });
+    
   };
-  let activeRoute=routes.find(route=>route.path==window.location.pathname)
+  let activeRoute=routes.find(route=>route.path===window.location.pathname)
   return (
     <CHeader>
       <CToggler
@@ -67,7 +64,7 @@ const TheHeader = (props) => {
           marginTop: "10px"
         }}
             >{user}</h5>
-        <TheHeaderDropdown />
+        <TheHeaderDropdown  />
       </CHeaderNav>
     </CHeader>
   );

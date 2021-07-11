@@ -119,7 +119,7 @@ class PanneComponent extends Component {
                         xs={24}
                         sm={8}
                         >
-                        <Row>{this.state.item.sent_at.slice(0,10)}</Row> <Row>{this.state.item.sent_at.slice(11, 19)}</Row>
+                        <Row>{this.state.item.sent_at.slice(0,10)+" "+this.state.item.sent_at.slice(11, 19)}</Row> 
                         </Col>
                         <Col xl={3} lg={3} md={3} xs={24} sm={16}>
                         {
@@ -222,15 +222,6 @@ class PanneComponent extends Component {
                                     <Row>
                                         <div className="info-container">
                                             <Col>
-                                                <label className="info-title">Numéro :</label> 
-                                                <span className="info">{this.state.item.idPanne}</span>
-                                            </Col>
-                                        </div>
-                                    </Row>
-
-                                    <Row>
-                                        <div className="info-container">
-                                            <Col>
                                                 <label className="info-title">Description :</label> 
                                                 <span className="info">{this.state.item.description}</span>
                                             </Col>
@@ -317,24 +308,11 @@ class PanneComponent extends Component {
                                            
                                         </div>
                                     </Row>
-                                    
-                                    <Divider orientation="left" className="info-divider"> <h5 className="bolde">Vérification par</h5> </Divider>
-                            
-                                    <Row>
-                                        <div className="info-container">
-                                            <Col>
-                                                <label className="info-title">Nom et Prénom :</label>
-                                                <span className="info">{this.state.item.agentSentNotif.nom+" "+this.state.item.agentSentNotif.prenom}</span>
-                                            </Col>
-                                        
-                                        </div>
-                                    </Row>
-
                                     <Row>
                                         <div className="info-container">
                                             <Col>
                                                 <label className="info-title">Vérifiée le :</label> 
-                                                <span className="info">{this.state.item.dateNotifPanne.slice(0,10)}</span>
+                                                <span className="info">{this.state.item.dateNotifPanne.slice(0,10)+this.state.item.dateNotifPanne.slice(12,16)}</span>
                                             </Col>
                                            
                                         </div>
