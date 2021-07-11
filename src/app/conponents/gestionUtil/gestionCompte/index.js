@@ -6,62 +6,36 @@ import {
   CCardHeader,
   CCol,
   CRow,
-  CBadge,
   CButton,
-  CSelect,
-  CLabel,
-  CModal,
-  CModalHeader,
-  CModalTitle,
-  CModalBody,
-  CModalFooter,
-  CSpinner,CFormGroup,
 } from "@coreui/react";
-import { getDecideurs } from "../../../../modules/Users/users.crud";
-import { getTechniqueAdmins } from "../../../../modules/Users/users.crud";
+import { getUsers } from "../../../../modules/Users/users.crud";
 import AddForm from "./addUser";
 import CreateAccount from "./createAccount";
-import Modal from 'react-modal';
 
-const fields = ["idUser","type","dateCreation"];
+const fields = ["userName", "lastName", "firstName", "address", "userType"];
 
 
 function UsersTable() {
-  const [decideurs, setDecideurs] = useState([]);
-  const [techAdmins, setTechAdmins] = useState([]);
+  const [users, setUsers] = useState([])
   const [modalVisible, setModalVisible] = useState(false)
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedAdmin, setSelectedAdmin] = useState({})
   
 
   useEffect(() => {
-    getDecideurs()
-    .then((res) => {
-      res.data.map(i=>i.type="Decideur")
-      
-      setDecideurs(res.data);
+    getUsers()
+    .then(res => {
+      console.log(res.data)
+      setUsers(res.data)
     })
-    .catch((err) => {
-      console.log(err);
-    });
-  });
-  useEffect(() => {
-    getTechniqueAdmins()
-    .then((res) => {
-      res.data.map(i=>i.type="Administrateur technique")
-      
-      setTechAdmins(res.data);
+    .catch(err => {
+      console.error(err)
     })
-    .catch((err) => {
-      console.log(err);
-    });
-  });
+  }, [modalVisible, modalIsOpen]);
  
-
-   const data=decideurs.concat(techAdmins);
    function HandleClick(admin) {
       console.log("selected user: ", admin.idUser)
-      setSelectedAdmin(admin.idUser)
+      setSelectedAdmin(admin)
       setModalVisible(true)
  
    
@@ -77,33 +51,22 @@ const setModalIsOpenToFalse =()=>{
       <CRow>
         <CCol>
           <CCard>
-            <CCardHeader>Liste des Administrateurs & Décideurs
-            {/* <div class="position-relative">
-            <div class="position-absolute top-0 end-0"> */}
-            <CButton
-                          color="warning"
-                          size="sm"
-                          shape="rounded-pill"
-                          position="relative"
-                          active
-                          tabIndex={-1}
-                          onClick={setModalIsOpenToTrue}
-                          
-           
-                        //  onClick={HandleClickCreate()} 
-                         // onClick={handleSubmitClick}
-                      //    onClick={HandleClick()}
-                        >
-                          Ajouter un Compte
-                        </CButton>
-                       
+            <CCardHeader>Liste des Utilisateurs {' '}
+              <CButton
+                color="warning"
+                size="sm"
+                shape="rounded-pill"
+                position="relative"
+                active
+                tabIndex={-1}
+                onClick={setModalIsOpenToTrue}>
+                  Ajouter un Compte
+              </CButton>        
             </CCardHeader>
-            
-                       
                     
             <CCardBody>
               <CDataTable
-               items={data}
+               items={users}
                fields={fields}
                 hover
                 striped
@@ -120,12 +83,9 @@ const setModalIsOpenToFalse =()=>{
         </CCol>
 
       </CRow>
-    
-      {/* <CreateAccount visible={model} setVisible={setModal}  /> */}
-      <AddForm visible={modalVisible} setVisible={setModalVisible} admin={selectedAdmin} />
-                       {/* <Modal isOpen={modalIsOpen}>
-                        <button onClick={setModalIsOpenToFalse}>x</button> */}
-                        <CreateAccount visible={modalIsOpen} setVisible={setModalIsOpen}/>
+
+      <AddForm visible={modalVisible} setVisible={setModalVisible} user={selectedAdmin} />
+      <CreateAccount visible={modalIsOpen} setVisible={setModalIsOpenToFalse}/>
                        
     </>
   );

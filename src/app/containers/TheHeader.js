@@ -6,8 +6,6 @@ import {
   CHeaderBrand,
   CHeaderNav,
   CHeaderNavItem,
-  CSubheader,
-  CBreadcrumbRouter,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import logos from "../../assets/images/logo-jaune.png";
@@ -40,7 +38,7 @@ const TheHeader = (props) => {
       : "responsive";
     dispatch({ type: "set", sidebarShow: val });
   };
-  let activeRoute=routes.find(route=>route.path==window.location.pathname)
+  let activeRoute=routes.find(route=>route.path===window.location.pathname)
   return (
     <CHeader>
       <CToggler

@@ -4,7 +4,6 @@ import {
   CButton,
   CCol,
   CFormGroup,
-  CTextarea,
   CLabel,
   CModal,
   CModalHeader,
@@ -12,74 +11,88 @@ import {
   CModalBody,
   CModalFooter,
   CSpinner,
-  CSelect,CInput,
-
+  CInput
 } from '@coreui/react'
-import {  updateAdmin,deleteUser } from '../../../../modules/Users/users.crud';
-import { getUserById , deleteAuth} from '../../../../modules/Auth/auth.crud';
-function AddForm ({visible, setVisible,admin})  {
-  
-  const [user, setUser] = useState(1)
-  
+import {  updateAdmin,deleteUser, deleteTenant, deleteAgent, deleteAccountAdmin, deleteTechnicalAdmin, deleteDecisionMaker } from '../../../../modules/Users/users.crud';
+import { deleteAuth } from '../../../../modules/Auth/auth.crud';
+
+const types = ["tenant","agent", "decision_maker","agent_admin","account_admin", "technical_admin"]
+
+function AddForm ({visible, setVisible, user})  {
+
+  const [eachEntry, setEachEntry] = useState(user)
   // const [entries, setEntries] = useState({})
   const [loading, setLoading] = useState(true)
   // let initialInputState=NULL
 
-  useEffect(()=> {
-    
-    if (admin) {
-      getUserById(admin)
-      .then(res=>{
-        setUser(res.data)
-        setLoading(false)
-      })
-      .catch(err=>{
-        console.log(err)
-      }
-        )
- 
-    }else{console.log("no user",admin)}
-    
-  }) 
+
+  // console.log(eachEntry)
   
 
-  let initialInputState={lastName:user.lastName,firstName:user.firstName,phoneNumber:user.phoneNumber}
-  const [eachEntry, setEachEntry]=useState(initialInputState);
-   let {lastName,firstName,phoneNumber}=eachEntry;
   const handleInputChange= e=>{
-    
     setEachEntry({...eachEntry,[e.target.name]:e.target.value});
-    // console.log(eachEntry)
   };
 
+  useEffect(() => {
+    if (visible) {
+      setLoading(false)
+      setEachEntry(user)
+    }
+  }, [visible, user])
+
   const handleValidate= e=>{
-    const address=user.address
-    const userName=user.userName
-    const nom=lastName;
-    const prenom=firstName;
-    const numeroTelephone=phoneNumber
+    const nom = eachEntry.lastName;
+    const prenom = eachEntry.firstName;
+    const numeroTelephone = eachEntry.phoneNumber
  
-    const  data={nom,prenom,numeroTelephone,address,userName}
+    const  data={nom,prenom,numeroTelephone,address: eachEntry.address, userName: eachEntry.userName, userType: eachEntry.userType}
     if (!loading ) {
-  
-    //  console.log("dataaaa",data) 
-      updateAdmin(admin,data)
+      updateAdmin(eachEntry.idUser, data)
       .then(e => setVisible(false))
       .catch(e => {
-        alert(e.message)
+        console.log(e)
       })
     }else{console.log("error")}
   };
 
   const handleRefused = () => {
     if (!loading) {
-      deleteUser(admin)
-      deleteAuth(admin)
-      // updateTenantStatus(admin.idTenant, {...admin, ...entries, accountState: "refused"})
-      .then(e => setVisible(false))
-      .catch(e => {
-        alert(e.message)
+
+      let promise
+
+      switch (eachEntry.userType) {
+        case "tenant":
+          promise = deleteTenant(eachEntry.idUser)
+          break
+        case "agent":
+          promise = deleteAgent(eachEntry.idUser)
+          break
+        case "decision_maker":
+          promise = deleteDecisionMaker(eachEntry.idUser)
+          break
+        case "account_admin":
+          promise = deleteAccountAdmin(eachEntry.idUser)
+          break
+        case "technical_admin":
+          promise = deleteTechnicalAdmin(eachEntry.idUser)
+          break
+        default:
+          promise = new Promise((res) => {
+            res()
+          })
+      }
+
+      promise
+      .then(() => {
+        deleteAuth(eachEntry.idUser)
+        .then(e => {
+          deleteUser(eachEntry.idUser)
+          .then(e => setVisible(false))
+          .catch(console.log)
+        })
+        .catch(console.log)
       })
+      .catch(console.log)
     }
   }
 
@@ -87,7 +100,7 @@ function AddForm ({visible, setVisible,admin})  {
  
   return (
     <>
-      <CModal size="md" centered show={visible} onClose={() => setVisible(false)}>
+      <CModal size="lg" centered show={visible} onClose={() => setVisible(false)}>
         <CModalHeader closeButton>
           <CModalTitle>Details</CModalTitle>
         </CModalHeader>
@@ -99,37 +112,54 @@ function AddForm ({visible, setVisible,admin})  {
               <CCol>
                 <CFormGroup row>
                   <CCol md="3">
-                    <CLabel>{user.lastName}</CLabel>
+                    <CLabel>nom</CLabel>
                   </CCol>
                   <CCol xs="5" md="9">
-                  <CInput id="lastName" name="lastName" onChange={handleInputChange}  required value={lastName} />
-                    {/* <p className="form-control-static">{user.lastName}</p> */}
+                  <CInput id="lastName" name="lastName" onChange={handleInputChange}  required value={eachEntry.lastName} />
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
                   <CCol md="3">
-                    <CLabel>{user.firstName}</CLabel>
+                    <CLabel>prenom</CLabel>
                   </CCol>
                   <CCol xs="5" md="9">
-                  <CInput id="firstName" name="firstName" onChange={handleInputChange} required value={firstName} />
-                    {/* <p className="form-control-static">{user.firstName}</p> */}
+                  <CInput id="firstName" name="firstName" onChange={handleInputChange} required value={eachEntry.firstName} />
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
                   <CCol md="3">
-                    <CLabel>{user.phoneNumber}</CLabel>
+                    <CLabel>username</CLabel>
                   </CCol>
                   <CCol xs="5" md="9">
-                  <CInput id="phoneNumber"  name="phoneNumber" onChange={handleInputChange} required value={phoneNumber}  />
-                    
+                    <CInput id="userName" name="userName" onChange={handleInputChange} required value={eachEntry.userName} />
                   </CCol>
                 </CFormGroup>
-                      
-             
-                  
-               
-               
-                
+                <CFormGroup row>
+                  <CCol md="3">
+                    <CLabel>numero telephone</CLabel>
+                  </CCol>
+                  <CCol xs="5" md="9">
+                    <CInput id="phoneNumber"  name="phoneNumber" onChange={handleInputChange} required value={eachEntry.phoneNumber}  />
+                  </CCol>
+                </CFormGroup>
+                <CFormGroup row>
+                  <CCol md="3">
+                    <CLabel>adresse</CLabel>
+                  </CCol>
+                  <CCol xs="5" md="9">
+                    <CInput id="address"  name="address" onChange={handleInputChange} required value={eachEntry.address}  />
+                  </CCol>
+                </CFormGroup>
+                <CFormGroup row>
+                  <CCol md="3">
+                    <CLabel>user type</CLabel>
+                  </CCol>
+                  <CCol xs="5" md="9">
+                    <select id="userType" name="userType" onChange={handleInputChange} required value={eachEntry.userType}>
+                      {types.map((e, i) => (<option key={i} value={e}>{e.split('_').join(' ')}</option>))}
+                    </select>
+                  </CCol>
+                </CFormGroup>
               </CCol>
           }
           
