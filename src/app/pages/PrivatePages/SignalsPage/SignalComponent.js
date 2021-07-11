@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import { Card, Row , Col, Button, Modal, Avatar, Badge, Input, Divider,} from "antd";
-import { InfoCircleOutlined, MailOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import './style/style.css'
 
 const { TextArea } = Input;
@@ -240,7 +239,7 @@ class SignalComponent extends Component {
                                             <div className="info-container">
                                                 <Col>
                                                     <label className="info-title">Details:</label>
-                                                    <span className="info">{this.state.item.treatmentDescription}</span>
+                                                    <span className="info-description" >{this.state.item.treatmentDescription}</span>
                                                 </Col>
                                                 
                                             </div>

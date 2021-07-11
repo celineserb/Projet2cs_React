@@ -10,22 +10,22 @@ const _nav = [
     _tag: "CSidebarNavItem",
     name: "Liste Vehicules",
     to: "/VehiculesLocation",
-    icon: "cil-graph",
+    icon: "cil-speedometer",
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Agents',
     to: '/GrapheAgent',
-    icon: 'cil-graph',
+    icon: 'cil-people',
     color: 'yellow'
   },
-  {
+ /* {
     _tag: 'CSidebarNavItem',
     name: 'Logs',
     to: '/Log',
     icon: 'cil-graph',
     color: 'yellow'
-  }
+  }*/
 ];
 
 export default _nav;

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Avatar, Menu, Dropdown } from 'antd';
+import { CButton } from "@coreui/react";
 import { CustomTable } from '../utils'
+import {TypeAbonnements} from './TypeAbonnements'
 import { fetchSubscriptions, activateSubscription, deleteSubscription } from '../../../../../modules/Abonnement/abonnement.actions'
 class AbonnementPage extends Component {
     constructor(props) {
@@ -11,7 +13,8 @@ class AbonnementPage extends Component {
             page: 1,
             loading: true,
             actionLoading: false,
-            inQueueAction: null
+            loading: true,
+            showList: false,
         }
         this.statesSub = {
             pending: "warning",
@@ -24,6 +27,7 @@ class AbonnementPage extends Component {
             active: "En cours"
         }
         this.onPageChange = this.onPageChange.bind(this)
+        this.showModelList=this.showModelList.bind(this)
         this.fetchData({ page: 1 })
     }
     fetchData(query) {
@@ -83,15 +87,20 @@ class AbonnementPage extends Component {
                 })
             })
     }
+    showModelList(){
+        this.setState({
+            showList:!this.state.showList
+        })
+    }
     render() {
         return (
             <div className="px-2">
                 <div className="d-flex justify-content-between align-items-center px-4 pb-4">
-                    <div className="position-relative">
+                    <div className="position-relative w-100 mr-3">
                         <img className="position-absolute" style={{ top: 13, left: 13 }} src="/media/search.svg" />
-                        <input type="text" placeholder="Recherche..." style={{ width: 600, paddingLeft: 40 }} className="custom-input py-2 pr-3 rounded" />
+                        <input type="text" placeholder="Recherche..." style={{ width: '100%',maxWidth:600, paddingLeft: 40 }} className="custom-input py-2 pr-3 rounded" />
                     </div>
-                    <div className="d-flex">
+                    <div className="d-flex align-items-center">
                         <span className="d-flex px-2 cursor-pointer">
                             <img className="sort-svg" alt="" />
                             <strong className="px-2">Ordonner</strong>
@@ -100,6 +109,11 @@ class AbonnementPage extends Component {
                             <img className="filter-svg" alt="" />
                             <strong className="px-2">Filtrer</strong>
                         </span>
+                        <div className="ml-4">
+                            <CButton className="btn-custom px-4 font-weight-bold" active tabIndex={-1} onClick={this.showModelList}>
+                                Type d'abonnements
+                            </CButton>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -155,6 +169,7 @@ class AbonnementPage extends Component {
                         loadingAction={this.state.actionLoading}
                     />
                 </div>
+                {this.state.showList && <TypeAbonnements onCancel={this.showModelList} />}
             </div>
         )
     }

@@ -17,8 +17,6 @@ import routes from "../../routes";
 
 import {
   TheHeaderDropdown,
-  TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
 } from "./index";
 
 const TheHeader = (props) => {
