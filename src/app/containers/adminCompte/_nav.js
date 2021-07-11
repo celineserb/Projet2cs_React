@@ -1,14 +1,14 @@
 const _nav =  [
   {
     _tag: 'CSidebarNavItem',
-    name: 'Comptes users',
-    to: '/comptes',
+    name: 'Validation locataires',
+    to: '/compteLocataire',
     icon: 'cil-people',
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Validation locataires',
-    to: '/compteLocataire',
+    name: 'Gestion Comptes',
+    to: '/gestionCompte',
     icon: 'cil-people',
   }
 ]

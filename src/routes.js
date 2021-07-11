@@ -29,7 +29,8 @@ const StatsTables = React.lazy(() =>
 );
 const AgentStat = React.lazy(() => import('./app/pages/PrivatePages/GraphDAgent'))
 const Users = React.lazy(() => import("./app/pages/PrivatePages/Comptes"))
-
+const LogPage = React.lazy(() => import('./app/pages/PrivatePages/LogPage'))
+const AdminDecideurTable =React.lazy(()=> import('./app/conponents/gestionUtil/gestionCompte'));
 
 const routes = [
   { path: "/", exact: true, name: "Home" },
@@ -59,6 +60,8 @@ const routes = [
   },
   { path: "/GrapheAgent", name: "Statistiques Agent", component: AgentStat},
   { path: "/comptes", name: "Comptes users", component: Users },
+  { path: '/gestionCompte', name: 'Gestion Compte', component: AdminDecideurTable },
+  { path: "/Log", name: "Logs page", component: LogPage},
 
   { path: "/tracking/:vehicleId/:rentalId", name: "Gestion des Vehicules", component: TrackingPage},
   { path: "/enlevements", name: "Gestion des Vehicules", component: SignalsPage},
