@@ -60,11 +60,12 @@ const TheHeader = (props) => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <h5 style={{
-          marginTop: "10px"
-        }}
-            >{user}</h5>
-        <TheHeaderDropdown  />
+        <CHeaderNav className="d-md-down-none mr-auto">
+          <CHeaderNavItem className="px-2">
+            <em><b>{user}</b></em>
+          </CHeaderNavItem>
+        </CHeaderNav>
+        <TheHeaderDropdown />
       </CHeaderNav>
     </CHeader>
   );

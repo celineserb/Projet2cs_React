@@ -217,35 +217,6 @@ class PanneComponent extends Component {
                                           
                                         </div>
                                     </Row>
-
-                                    <Divider orientation="left" className="info-divider"><h5 className="bolde">Informations de la panne</h5> </Divider>
-                                    <Row>
-                                        <div className="info-container">
-                                            <Col>
-                                                <label className="info-title">Description :</label> 
-                                                <span className="info">{this.state.item.description}</span>
-                                            </Col>
-                                        </div>
-                                    </Row>
-
-                                    <Row>
-                                        <div className="info-container">
-                                            <Col>
-                                                <label className="info-title">Sévérité :</label> 
-                                                <span className="info">{this.state.item.severityLevel}</span>
-                                            </Col>
-                                        </div>
-                                    </Row>
-
-                                    <Row>
-                                        <div className="info-container">
-                                            <Col>
-                                                <label className="info-title">Etat :</label> 
-                                                <span className="info">{this.state.item.treated? "Réparée" : "Non réparée"}</span>
-                                            </Col>
-                                        </div>
-                                    </Row>
-                                        
                                     <Divider orientation="left" className="info-divider"> <h5 className="bolde">Signalement par</h5> </Divider>
                                     <Row>
                                         <div className="info-container">

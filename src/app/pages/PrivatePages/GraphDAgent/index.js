@@ -34,6 +34,7 @@ export default function GrapheLocation ()  {
         agent.push(test.data)
 
       }
+
       setAgents(agent)
     })
     .catch(e => {
