@@ -99,10 +99,10 @@ function CreateAccount ({visible, setVisible})  {
           </CFormGroup>
           <CFormGroup row className="mb-2">
             <CCol md="3">
-              <CLabel>user Type</CLabel>
+              <CLabel>Type d'utilisateur</CLabel>
             </CCol>
             <CCol xs="5" md="9">
-              <select name="userType" onChange={handleInputChange} value={eachEntry.userType}>
+              <select class="form-select"  name="userType" onChange={handleInputChange} value={eachEntry.userType}>
                 {
                   types.map((e, i) => (
                     <option key={i} value={e}>{e.split("_").join(" ")}</option>
