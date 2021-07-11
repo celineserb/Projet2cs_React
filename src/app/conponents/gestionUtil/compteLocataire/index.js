@@ -12,7 +12,7 @@ import { getLocataires, getUsers } from "../../../../modules/Users/users.crud";
 import ValidationForm from "../validationCompte";
 import axios from "axios";
 
-const fields = ["idUser", "firstName","lastName", "address", "accountState"];
+const fields = ["idUser", "accountState"];
 
 function getBadge(status) {
   switch(status?.toLowerCase()) {
@@ -29,7 +29,7 @@ function UsersTable() {
   const [selectedLocataire, setSelectedLocataire] = useState({})
 
   useEffect(() => {
-    getUsers()
+    getLocataires()
     .then((res) => {
       console.log(res.data);
       setLocataires(res.data);

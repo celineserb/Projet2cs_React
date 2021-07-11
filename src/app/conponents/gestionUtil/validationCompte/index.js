@@ -123,7 +123,7 @@ function ValidationForm ({visible, setVisible, locataire})  {
                     <CLabel><h5 style={{fontWeight:"bold"}}>Identité:</h5></CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <img src= { user.imgprofil } height={100} width={100} alt="profil" />                   
+                    <img src={user.imgprofil} height={100} width={100} alt="profil" />                   
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
