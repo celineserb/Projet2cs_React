@@ -10,8 +10,9 @@ import {
 } from "@coreui/react";
 import { getLocataires } from "../../../../modules/Users/users.crud";
 import ValidationForm from "../validationCompte";
+import axios from "axios";
 
-const fields = ["idUser", "accountState"];
+const fields = ["idUser", "firstName","lastName", "address", "accountState"];
 
 function getBadge(status) {
   switch(status?.toLowerCase()) {
@@ -28,13 +29,11 @@ function UsersTable() {
   const [selectedLocataire, setSelectedLocataire] = useState({})
 
   useEffect(() => {
-    getLocataires()
+    axios.get(`http://localhost:8564/getTenants`)
     .then((res) => {
+      console.log(res.data);
       setLocataires(res.data);
     })
-    .catch((err) => {
-      console.log(err);
-    });
   }, [modalVisible]);
 
   function HandleClick(locataire) {
@@ -66,7 +65,15 @@ function UsersTable() {
                   'accountState':
                     (item)=>(
                       <td>
-                        <CBadge color={getBadge(item.accountState)}>
+                        <CBadge  style={{
+                          width:75,
+                          paddingRight: 10,
+                          paddingLeft:10,
+                          paddingTop:5,
+                          paddingBottom:5,
+                          color:"white"
+                        }}
+                        color={getBadge(item.accountState)}>
                           {item.accountState}
                         </CBadge>
                       </td>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios';
-import { Card, Row , Col, Button, Modal, Avatar, Badge, Input, Divider,} from "antd";
+import { Card, Row , Col, Button, Modal, Avatar, Badge, Divider,} from "antd";
 import './style/style.scss'
 
 class PanneComponent extends Component {
@@ -100,11 +99,11 @@ class PanneComponent extends Component {
                         sm={8}
                         >
                             <Row>
-                        Source :  {this.state.item.sourceType == "Tenant"? "Locataire" : this.state.item.sourceType}
+                        Source :  {this.state.item.sourceType === "Tenant"? "Locataire" : this.state.item.sourceType}
                         </Row>
                    <Row>
                         {
-                            this.state.item.sourceType != "Auto" ? 
+                            this.state.item.sourceType !== "Auto" ? 
                             this.state.item.firstName + " " + this.state.item.lastName
                             : ""
                         }
@@ -261,12 +260,12 @@ class PanneComponent extends Component {
                                         <div className="info-container">
                                             <Col>
                                                 <label className="info-title">Source :</label>
-                                                <span className="info">{this.state.item.sourceType == "Tenant"? "Locataire" : this.state.item.sourceType}</span>
+                                                <span className="info">{this.state.item.sourceType === "Tenant"? "Locataire" : this.state.item.sourceType}</span>
                                             </Col>
                                         
                                         </div>
                                     </Row>
-                                    {this.state.item.sourceType!="Auto"? 
+                                    {this.state.item.sourceType!=="Auto"? 
                                     <>
                                     <Row>
                                         <div className="info-container">

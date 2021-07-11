@@ -41,7 +41,7 @@ const routes = [
   //---------- new routes : gestion utilisteurs ::
   // { path: "/comptes", name: "GestionUtil", component: UsersTable, exact: true },
   // { path: '/gestionUtil', name: 'gestionUtil', component: Cards, exact: true },
-  { path: "/compteLocataire", name: "TableLocataire", component: UsersTable },
+  { path: "/compteLocataire", name: "Table des locataires", component: UsersTable },
 
   { path: "/login", exact: true, name: "Login Page", component: Login },
   { path: "/p404", name: "Page not found", component: Page404 },
