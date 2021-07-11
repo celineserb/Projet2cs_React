@@ -38,7 +38,7 @@ export default function GrapheLocation() {
     labels: [],
     datasets: [],
   });
-  const [vehiculePeriod, setVehiculePeriod] = useState("Jour");
+  const [vehiculePeriod, setVehiculePeriod] = useState("Mois");
 
   const [bornes, setBornes] = useState([]);
   const [activeBornes, setActiveBornes] = useState({});
@@ -46,7 +46,7 @@ export default function GrapheLocation() {
     labels: [],
     datasets: [],
   });
-  const [bornePeriod, setBornePeriod] = useState("Jour");
+  const [bornePeriod, setBornePeriod] = useState("Mois");
 
   useEffect(() => {
     getVehicles()
@@ -129,7 +129,8 @@ export default function GrapheLocation() {
           const periods = ["Dim", "Lun", "Mar", "Mer", "Je", "Ven", "Sa"];
           const { data } = await getBorneUsagePerDay(j);
           
-          let days = data.slice(-31);
+          let days = data.slice(-31)
+
           for (let i of days) {
             const date = new Date(i.day.split("T")[0]);
             dataset.push(parseInt(i.rents));

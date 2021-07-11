@@ -19,13 +19,13 @@ const _nav = [
     icon: 'cil-people',
     color: 'yellow'
   },
- /* {
+  {
     _tag: 'CSidebarNavItem',
-    name: 'Logs',
+    name: 'Logs Page',
     to: '/Log',
     icon: 'cil-graph',
     color: 'yellow'
-  }*/
+  }
 ];
 
 export default _nav;
