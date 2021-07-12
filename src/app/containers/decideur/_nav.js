@@ -18,6 +18,13 @@ const _nav = [
     to: '/GrapheAgent',
     icon: 'cil-people',
     color: 'yellow'
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Logs Page',
+    to: '/Log',
+    icon: 'cil-graph',
+    color: 'yellow'
   }
 ];
 
